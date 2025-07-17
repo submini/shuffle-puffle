@@ -3,13 +3,13 @@
   "name": "ShufflePuffle",
   "display_name": "Shuffle-Puffle",
   "author": ["The Subminimals"],
-  "description": "Test",
-  "prefix": "sj",
+  "description": "Adds a bunch of stuff to the game.",
+  "prefix": "sp",
   "prefixcomment":"ABOVE PREFIX IS ADDED TO E.G. LOCALIZATION!",
   "main_file": "shufflepuffle.lua",
   "priority": 0,
-  "badge_colour": "1de619",
-  "badge_text_colour": "",
-  "version": "1.0.1",
+  "badge_colour": "#E67E22",
+  "badge_text_colour": "#FFFFFF",
+  "version": "1.0.0",
   "dependencies": ["Steamodded (>=1.0.0~BETA-0614a)"]
 }
