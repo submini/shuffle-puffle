@@ -1,0 +1,15 @@
+{
+  "id": "ShufflePuffleMod",
+  "name": "ShufflePuffle",
+  "display_name": "Shuffle-Puffle",
+  "author": ["The Subminimals"],
+  "description": "Test",
+  "prefix": "sj",
+  "prefixcomment":"ABOVE PREFIX IS ADDED TO E.G. LOCALIZATION!",
+  "main_file": "shufflepuffle.lua",
+  "priority": 0,
+  "badge_colour": "1de619",
+  "badge_text_colour": "",
+  "version": "1.0.1",
+  "dependencies": ["Steamodded (>=1.0.0~BETA-0614a)"]
+}
