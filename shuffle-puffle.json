@@ -7,9 +7,12 @@
   "prefix": "sp",
   "prefixcomment":"ABOVE PREFIX IS ADDED TO E.G. LOCALIZATION!",
   "main_file": "shufflepuffle.lua",
-  "priority": 0,
+  "priority": 9999,
   "badge_colour": "#E67E22",
   "badge_text_colour": "#000000",
   "version": "1",
-  "dependencies": ["Steamodded (>=1.0.0~BETA-0614a)"]
+  "dependencies": [
+    "Steamodded (>=1.0.0~BETA-0614a)",
+    "Talisman"
+]
 }
