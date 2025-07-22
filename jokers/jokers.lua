@@ -30,7 +30,6 @@ local function count_face_cards()
     return count
 end
 
-
 SMODS.Atlas({
     key = "deckhugger",
     path = "deckhugger1x.png",
@@ -124,7 +123,7 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "jackboys",
-    path = "placeholder1x.png",
+    path = "jackboys1x.png",
     px = 71,
     py = 95
 })
@@ -138,14 +137,14 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "entanglement",
-    path = "placeholder1x.png",
+    path = "entanglement1x.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "measurement",
-    path = "placeholder1x.png",
+    path = "measurement1x.png",
     px = 71,
     py = 95
 })
@@ -157,7 +156,26 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "alchemist",
+    path = "alchemist1x.png",
+    px = 71,
+    py = 95
+})
 
+SMODS.Atlas({
+    key = "topup",
+    path = "topup1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "virus",
+    path = "virus1x.png",
+    px = 71,
+    py = 95
+})
 
 
 SMODS.Joker{ --Deckhugger
@@ -1314,8 +1332,8 @@ SMODS.Joker{ --Measurement
         x = 0,
         y = 0
     },
-    cost = 4,
-    rarity = 1,
+    cost = 5,
+    rarity = 2,
     blueprint_compat = true,
     eternal_compat = true,
     unlocked = true,
@@ -1397,6 +1415,7 @@ SMODS.Joker{ --Checkpoint
         if context.end_of_round and context.game_over and context.main_eval and not context.blueprint then
                 return {
                     saved = true,
+                    saved = localize('shufflepuffle_saved_checkpoint'),
                     message = "Wahoo!",
                     extra = {
                         func = function()
@@ -1419,4 +1438,218 @@ SMODS.Joker{ --Checkpoint
     end
 }
 
+SMODS.Joker{ --Alchemist
+    name = "Alchemist",
+    key = "alchemist",
+    config = {
+        extra = {
+            chips = 0,
+            mult = 0,
+            sell_value = 1
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Alchemist',
+        ['text'] = {
+            [1] = 'This joker gains {C:blue}+50{} Chips, {C:red}+5{} Mult,',
+            [2] = 'and {C:money}+$1{} sell value for each joker',
+            [3] = 'sold this run',
+            [4] = '{C:inactive}(Currently{} {C:blue}+#1#{} {C:inactive}Chips and{} {C:red}+#2#{} {C:inactive}Mult){}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 7,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'alchemist',
 
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.chips, card.ability.extra.mult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.selling_card and not context.blueprint then
+                return {
+                    func = function()
+                    card.ability.extra.chips = (card.ability.extra.chips) + 50
+                    return true
+                end,
+                    message = "Al",
+                    colour = G.C.GREEN,
+                    extra = {
+                        func = function()
+                    card.ability.extra.mult = (card.ability.extra.mult) + 5
+                    return true
+                end,
+                            message = "che",
+                        colour = G.C.GREEN,
+                        extra = {
+                            func = function()
+            card.ability.extra_value = (card.ability.extra_value or 0) + card.ability.extra.sell_value
+            card:set_cost()
+                    return true
+                end,
+                            message = "mist!",
+                            colour = G.C.GREEN
+                        }
+                        }
+                }
+        end
+        if context.cardarea == G.jokers and context.joker_main then
+                return {
+                    chips = card.ability.extra.chips,
+                    extra = {
+                        mult = card.ability.extra.mult
+                        }
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Top-up
+    name = "Top-up",
+    key = "topup",
+    config = {
+        extra = {
+            dollars = 3
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Top-up',
+        ['text'] = {
+            [1] = 'At the {C:attention}start{} of each round,',
+            [2] = 'if you have {C:money}$15{} or less, {C:money}+$3{}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 3,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'topup',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.setting_blind and not context.blueprint then
+            -- MODIFIED LOGIC: Safely extract the numerical value of G.GAME.dollars.
+            -- This explicitly handles omeganum tables (which have a .n field)
+            -- and regular numbers, defaulting to 0 for any unexpected types.
+            local current_dollars_value
+            if type(G.GAME.dollars) == 'table' and G.GAME.dollars.n ~= nil then
+                current_dollars_value = G.GAME.dollars.n
+            elseif type(G.GAME.dollars) == 'number' then
+                current_dollars_value = G.GAME.dollars
+            else
+                -- Fallback for cases where G.GAME.dollars is nil or an unexpected type
+                current_dollars_value = 0
+            end
+
+            if current_dollars_value <= 15 then
+                return {
+                    dollars = card.ability.extra.dollars
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Virus
+    name = "Virus",
+    key = "virus",
+    config = {
+        extra = {
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Virus',
+        ['text'] = {
+            [1] = 'If {C:blue}first hand{} of round has',
+            [2] = '{C:attention}exactly{} 2 cards, {C:attention}copy{} the left',
+            [3] = 'card {C:attention}twice{}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 12,
+    rarity = 3,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'virus',
+
+   loc_vars = function(self, info_queue, card)
+        return {vars = {}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+            if (G.GAME.current_round.hands_played == 0 and #context.scoring_hand == 2) then
+                local cards_to_copy = {}
+                local target_index = 1
+                if context.full_hand[target_index] then
+                    table.insert(cards_to_copy, context.full_hand[target_index])
+                end
+                
+                for i, source_card in ipairs(cards_to_copy) do
+                    G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+                    local copied_card = copy_card(source_card, nil, nil, G.playing_card)
+                    copied_card:add_to_deck()
+                    G.deck.config.card_limit = G.deck.config.card_limit + 1
+                    table.insert(G.playing_cards, copied_card)
+                    G.hand:emplace(copied_card)
+                    copied_card.states.visible = nil
+                    
+                    G.E_MANAGER:add_event(Event({
+                        func = function() 
+                            copied_card:start_materialize()
+                            return true
+                        end
+                    }))
+                end
+                local cards_to_copy = {}
+                local target_index = 1
+                if context.full_hand[target_index] then
+                    table.insert(cards_to_copy, context.full_hand[target_index])
+                end
+                
+                for i, source_card in ipairs(cards_to_copy) do
+                    G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+                    local copied_card = copy_card(source_card, nil, nil, G.playing_card)
+                    copied_card:add_to_deck()
+                    G.deck.config.card_limit = G.deck.config.card_limit + 1
+                    table.insert(G.playing_cards, copied_card)
+                    G.hand:emplace(copied_card)
+                    copied_card.states.visible = nil
+                    
+                    G.E_MANAGER:add_event(Event({
+                        func = function() 
+                            copied_card:start_materialize()
+                            return true
+                        end
+                    }))
+                end
+                return {
+                    message = "Copied!",
+                    colour = G.C.GREEN
+                }
+            end
+        end
+    end
+}

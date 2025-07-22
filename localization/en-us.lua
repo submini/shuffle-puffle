@@ -164,9 +164,38 @@ return {
             j_sp_checkpoint = {
             name = "Checkpoint",
             text = {
-            '{C:attention}Prevents death{} but',
-            '{C:red}self destructs{}, {C:attention}-1 Ante{}'
+                '{C:attention}Prevents death{} but',
+                '{C:red}self destructs{}, {C:attention}-1 Ante{}'
             }
+        },
+
+            j_sp_alchemist = {
+            name = "Alchemist",
+            text = {
+                'This joker gains {C:blue}+50{} Chips, {C:red}+5{} Mult,',
+                'and {C:money}+$1{} sell value for each joker',
+                'sold this run',
+                '{C:inactive}(Currently{} {C:blue}+#1#{} {C:inactive}Chips and{} {C:red}+#2#{} {C:inactive}Mult){}'
+            }
+        },
+
+            j_sp_topup = {
+            name = "Top-up",
+            text = {
+                'At the {C:attention}start{} of each round,',
+                'if you have {C:money}$15{} or less, {C:money}+$3{}'
+            }
+        },
+
+            j_sp_virus = {
+            name = "Virus",
+            text = {
+                'If {C:blue}first hand{} of round has',
+                '{C:attention}exactly{} 2 cards, {C:attention}copy{} the left',
+                'card {C:attention}twice{}'
+            }
+        }
+        
         }
 
     },
@@ -185,8 +214,9 @@ return {
                 a_xmult = "X#1# Mult",
                 a_xmult_minus = "-X#1# Mult",
                 a_dollars = "$#1#",
-                a_sellboost = "+$#1# Sell"
+                a_sellboost = "+$#1# Sell",
+                shufflepuffle_saved_checkpoint = "Saved by Checkpoint",
             }
         }
     }
-}
+

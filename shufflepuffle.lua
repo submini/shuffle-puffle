@@ -11,6 +11,7 @@ ShufflePuffle.ENABLED_JOKERS = {
     "woodenruler",
     -- Rare
     "skyline",
+    "checkpoint",
     -- Legendary
     "tamerlane"
 }
