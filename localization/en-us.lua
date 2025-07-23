@@ -194,11 +194,105 @@ return {
                 '{C:attention}exactly{} 2 cards, {C:attention}copy{} the left',
                 'card {C:attention}twice{}'
             }
-        }
+        },
+
+            j_sp_triangular = {
+            name = "Triangular Joker",
+            text = {
+                'This Joker gains {C:red}+2{} Mult',
+                'for each scoring {C:attention}Ace{}, {C:attention}3{}, {C:attention}6{} or {C:attention}10{}',
+                '{C:inactive}(Currently{} {C:red}+#1#{} {C:inactive}Mult){}'
+            }
+        },
+
+            j_sp_resonance = {
+            name = "Resonance",
+            text = {
+                'When a hand is played, if {C:attention}all cards{} scored',
+                'are of the {C:attention}same rank{}, this joker gains',
+                '{X:red,C:white}+X0.05{} Mult for each card scored',
+                '{C:inactive}(Currently{} {X:red,C:white}X#1#{} {C:inactive}Mult){}'
+            }
+        },
+
+            j_sp_frog = {
+            name = "Frog",
+            text = {
+                '{C:purple}+^0.05{} Mult for each Blind',
+                '{C:attention}skipped{} this run',
+                '{C:inactive}(Currently{} {C:purple}^#1#{} {C:inactive}Mult){}'
+            }
+        },
         
+            j_sp_encore = {
+            name = "Encore",
+            text = {
+                'Creates a random {C:uncommon}Uncommon{} Joker',
+                'when played poker hand is the',
+                '{C:attention}most played hand{}',
+                '{C:inactive}(Must have room){}'
+            }
+        },
+
+            j_sp_scrapheap = {
+            name = "Scrap Heap",
+            text = {
+                'This joker gains {C:blue}+5{} Chips',
+                'for {C:attention}every card in the discard pile{},',
+                '{C:attention}resets{} after round ends',
+                '{C:inactive}(Currently{} {C:blue}+#2#{} {C:inactive}Chips){}'
+            }
+        },
+
+            j_sp_lonewolf = {
+            name = "Lone Wolf",
+            text = {
+                '{X:red,C:white}X7{} Mult if there are',
+                'no other jokers owned'
+            }
+        },
+
+            j_sp_coinflip = {
+            name = "Coin Flip",
+            text = {
+                '{C:green}1 in 2{} chance to earn',
+                '{C:attention}$5{} at start of round'
+            }
+        },
+
+            j_sp_blackcat = {
+            name = "Black Cat",
+            text = {
+                'At the {C:attention}start{} of each round,',
+                'this cat adds a random {C:attention}Glass{}',
+                'card to deck'
+            }
+        },
+
+        j_sp_luckybreak = {
+            name = "Lucky Break",
+            text = {
+                '{C:green}1 in 10{} chance for a',
+                'scoring card to be',
+                'turned into a {C:attention}Lucky{} card'
+            }
         }
 
+    }
+
     },
+
+
+Enhanced = {
+    m_glass={
+    name="Glass Card",
+    text={
+        "{X:mult,C:white} X#1# {} Mult",
+        "{C:green}#2# in #3#{} chance to",
+        "destroy card",
+        },
+    },
+},
 
         misc = {
             dictionary = {
@@ -219,4 +313,3 @@ return {
             }
         }
     }
-

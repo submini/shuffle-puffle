@@ -6,12 +6,33 @@ ShufflePuffle.ENABLED_JOKERS = {
     "cowboyfromhell",
     "moodring",
     "juler",
+    "sparechange",
+    "entanglement",
+    "topup",
+    "triangular",
+    "scrapheap",
+    "coinflip",
+    "luckybreak",
     -- Uncommon
     "landlord",
     "woodenruler",
+    "symmetry",
+    "sparedollars",
+    "jackboys",
+    "measurement",
+    "alchemist",
+    "resonance",
+    "encore",
     -- Rare
     "skyline",
     "checkpoint",
+    "ragazzo",
+    "finisher",
+    "placeholder",
+    "virus",
+    "frog",
+    "lonewolf",
+    "blackcat",
     -- Legendary
     "tamerlane"
 }
