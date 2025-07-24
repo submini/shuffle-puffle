@@ -1910,7 +1910,7 @@ SMODS.Joker{ --Resonance
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
-            if (context.scoring_name == "Pair" or next(context.poker_hands["Three of a Kind"]) or next(context.poker_hands["Four of a Kind"]) or next(context.poker_hands["Five of a Kind"]) or next(context.poker_hands["Flush Five"])) then
+            if context.scoring_name == "Pair" or context.scoring_name == "Three of a Kind" or context.scoring_name == "Four of a Kind" or context.scoring_name == "Five of a Kind" or context.scoring_name == "Flush Five" then
                 card.ability.extra.xmult = (card.ability.extra.xmult) + 0.05
                 return {
                     message = "Resonance!"
