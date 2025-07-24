@@ -23,6 +23,7 @@ ShufflePuffle.ENABLED_JOKERS = {
     "alchemist",
     "resonance",
     "encore",
+    "onetimeuse",
     -- Rare
     "skyline",
     "checkpoint",
@@ -33,6 +34,8 @@ ShufflePuffle.ENABLED_JOKERS = {
     "frog",
     "lonewolf",
     "blackcat",
+    "apex",
+    "speedramp",
     -- Legendary
     "tamerlane"
 }

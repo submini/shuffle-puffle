@@ -276,11 +276,132 @@ return {
                 'scoring card to be',
                 'turned into a {C:attention}Lucky{} card'
             }
+        },
+
+        j_sp_apex = {
+            name = "Apex Joker",
+            text = {
+                'When {C:attention}Boss Blind{} is defeated,',
+                'this joker gains {X:red,C:white}+X1{} Mult',
+                '{C:inactive}(Currently{} {X:red,C:white}X#1#{}{C:inactive} Mult){}'
+            }
+        },
+
+        j_sp_onetimeuse = {
+            name = "One-Time Use",
+            text = {
+                '{X:red,C:white}X5{} Mult and {X:blue,C:white} X5{} Chips for',
+                'one hand, then {C:red}self destructs{}'
+            }
+        },
+
+        j_sp_speedramp = {
+            name = "Speed Ramp",
+            text = {
+                'This joker gains {C:blue}Chips{} at the',
+                'end of {C:attention}each round{}, but {C:blue}the number{}',
+                '{C:blue}of Chips gained{} keeps doubling.',
+                'Chips value start at {C:blue}+1{}',
+                '{C:inactive}(Currently {}{C:blue}+#1#{} {C:inactive}Chips){}'
+            }
+        },
+
+        j_sp_sacrifice = {
+            name = "Sacrifice",
+            text = {
+                '{C:attention}+2{} Joker slots,',
+                '{C:red}-2{} Consumable slots'
+            }
+        },
+
+        j_sp_sirbaudelaire = {
+            name = "Sir Baudelaire",
+            text = {
+                '{C:blue}+400000{} Chips,',
+                '{C:red}-4{} Joker slots'
+            }
+        },
+
+        j_sp_igor = {
+            name = "IGOR",
+            text = {
+                'This joker gains {C:red}+4{} Mult',
+                'for every {C:attention}4{} scored.',
+                '{C:inactive}(Currently{} {C:red}+#1#{} {C:inactive}Mult){}'
+            }
+        },
+
+        j_sp_ritualist = {
+            name = "Ritualist",
+            text = {
+                'This joker gains {C:red}+5{} Mult every',
+                'two {C:attention}consumables{} used',
+                '{C:inactive}(Currently{} {C:red}+#2# {}{C:inactive}Mult){}'
+            }
+        },
+
+        j_sp_straightbroidery = {
+            name = "Straightbroidery",
+            text = {
+                'When played hand contains a',
+                '{C:attention}Straight{}, {C:green}1 in 4{} chance to',
+                'create a {C:attention}Double Tag{}'
+            }
+        },
+
+        j_sp_stonesentinel = {
+            name = "Stone Sentinel",
+            text = {
+                'Every scored {C:attention}Stone{} card gives {C:red}+5{} Mult'
+            }
+        },
+
+        j_sp_glassglimmer = {
+            name = "Glass Glimmer",
+            text = {
+                'Every scored {C:attention}Glass{} card gives {C:red}+5{} Mult'
+            }
+        },
+
+        j_sp_steelspark = {
+            name = "Steel Spark",
+            text = {
+                'Every scored {C:attention}Steel{} card gives {C:red}+5{} Mult'
+            }
+        },
+
+        j_sp_goldenglean = {
+            name = "Golden Glean",
+            text = {
+                'Every scored {C:attention}Gold{} card gives {C:red}+5{} Mult'
+            }
+        },
+
+        j_sp_luckylode = {
+            name = "Lucky Lode",
+            text = {
+                'Every scored {C:attention}Lucky{} card gives {C:red}+5{} Mult'
+            }
+        },
+
+        j_sp_auraamp = {
+            name = "Aura Amp",
+            text = {
+                'Every scored {C:attention}enhanced{}',
+                'card gives {X:red,C:white}X1.5{} Mult'
+            }
+        },
+
+        j_sp_maximumload = {
+            name = "Maximum Load",
+            text = {
+                'If there are {C:red}no{} free',
+                'joker slots left, {X:red,C:white}X2{} Mult'
+            }
         }
 
-    }
-
     },
+
 
 
 Enhanced = {
@@ -313,3 +434,5 @@ Enhanced = {
             }
         }
     }
+
+}

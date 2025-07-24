@@ -179,14 +179,14 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "triangular",
-    path = "placeholder1x.png",
+    path = "triangularjoker1x.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "resonance",
-    path = "placeholder1x.png",
+    path = "resonance1x.png",
     px = 71,
     py = 95
 })
@@ -221,14 +221,14 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "coinflip",
-    path = "placeholder1x.png",
+    path = "coinflip1x.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "blackcat",
-    path = "placeholder1x.png",
+    path = "blackcat1x.png",
     px = 71,
     py = 95
 })
@@ -240,6 +240,115 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "apex",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "onetimeuse",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "speedramp",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "sacrifice",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "sirbaudelaire",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "igor",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "ritualist",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "straightbroidery",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "stonesentinel",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "glassglimmer",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "steelspark",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "goldenglean",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "luckylode",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "auraamp",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "maximumload",
+    path = "placeholder1x.png",
+    px = 71,
+    py = 95
+})
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------
 
 SMODS.Joker{ --Deckhugger
     name = "Deckhugger",
@@ -697,7 +806,7 @@ SMODS.Joker {
     cost = 3,
     rarity = 1, -- Common
     unlocked = true,
-    discovered = true,
+    discovered = false,
     blueprint_compat = true,
     eternal_compat = true,
     atlas = "juler", -- Replace with your atlas name if needed
@@ -2125,6 +2234,10 @@ SMODS.Joker{ --Black Cat
         x = 0,
         y = 0
     },
+    soul_pos = {
+        x = 1,
+        y = 0
+    },
     cost = 10,
     rarity = 3,
     blueprint_compat = true,
@@ -2208,6 +2321,744 @@ SMODS.Joker{ --Lucky Break
                         context.other_card:set_ability(G.P_CENTERS.m_lucky)
                         card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Luckified!", colour = G.C.BLUE})
                     end
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Apex Joker
+    name = "Apex Joker",
+    key = "apex",
+    config = {
+        extra = {
+            xmult = 1
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Apex Joker',
+        ['text'] = {
+            [1] = 'When {C:attention}Boss Blind{} is defeated,',
+            [2] = 'this joker gains {X:red,C:white}+X1{} Mult',
+            [3] = '{C:inactive}(Currently{} {X:red,C:white}X#1#{}{C:inactive} Mult){}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 9,
+    rarity = 3,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'apex',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.xmult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.end_of_round and context.main_eval and G.GAME.blind.boss and not context.blueprint then
+                return {
+                    func = function()
+                    card.ability.extra.xmult = (card.ability.extra.xmult) + 1
+                    return true
+                end,
+                    message = "Apex!"
+                }
+        end
+        if context.cardarea == G.jokers and context.joker_main then
+                return {
+                    Xmult = card.ability.extra.xmult
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --One-Time Use
+    name = "One-Time Use",
+    key = "onetimeuse",
+    config = {
+        extra = {
+            xchips = 5,
+            Xmult = 5,
+            j_onetimeuse = 0,
+            var1 = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'One-Time Use',
+        ['text'] = {
+            [1] = '{X:red,C:white}X5{} Mult and {X:blue,C:white} X5{} Chips,',
+            [2] = 'then {C:red}self destructs{}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 7,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'onetimeuse',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+                local target_joker = nil
+                for i, joker in ipairs(G.jokers.cards) do
+                    if joker.config.center.key == "j_sp_onetimeuse" and not joker.ability.eternal and not joker.getting_sliced then
+                        target_joker = joker
+                        break
+                    end
+                end
+                
+                if target_joker then
+                    target_joker.getting_sliced = true
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            target_joker:start_dissolve({G.C.RED}, nil, 1.6)
+                            return true
+                        end
+                    }))
+                    card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "One-Time!", colour = G.C.RED})
+                end
+                return {
+                    x_chips = card.ability.extra.xchips,
+                    extra = {
+                        Xmult = card.ability.extra.Xmult
+                        }
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Speed Ramp
+    name = "Speed Ramp",
+    key = "speedramp",
+    config = {
+        extra = {
+            chips = 1
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Speed Ramp',
+        ['text'] = {
+            [1] = 'This joker gains {C:blue}Chips{} at the',
+            [2] = 'end of {C:attention}each round{}, but {C:blue}the number{}',
+            [3] = '{C:blue}of Chips gained{} keeps doubling.',
+            [4] = 'Chips value start at {C:blue}+1{}',
+            [5] = '{C:inactive}(Currently {}{C:blue}+#1#{} {C:inactive}Chips){}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 12,
+    rarity = 3,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'speedramp',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.chips}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
+                return {
+                    func = function()
+                    card.ability.extra.chips = (card.ability.extra.chips) * 2
+                    return true
+                end,
+                    message = "Double!"
+                }
+        end
+        if context.cardarea == G.jokers and context.joker_main then
+                return {
+                    chips = card.ability.extra.chips
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Sacrifice
+    name = "Sacrifice",
+    key = "sacrifice",
+    config = {
+        extra = {
+            slot_change = 2
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Sacrifice',
+        ['text'] = {
+            [1] = '{C:attention}+2{} Joker slots,',
+            [2] = '{C:red}-2{} Consumable slots'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 5,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'sacrifice',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {}}
+    end,
+
+    add_to_deck = function(self, card, from_debuff)
+        G.jokers.config.card_limit = G.jokers.config.card_limit + 2
+        G.E_MANAGER:add_event(Event({func = function()
+            G.consumeables.config.card_limit = math.max(0, G.consumeables.config.card_limit - card.ability.extra.slot_change)
+            return true
+        end }))
+    end,
+
+    remove_from_deck = function(self, card, from_debuff)
+        G.jokers.config.card_limit = G.jokers.config.card_limit - 2
+        G.E_MANAGER:add_event(Event({func = function()
+            G.consumeables.config.card_limit = G.consumeables.config.card_limit + card.ability.extra.slot_change
+            return true
+        end }))
+    end
+}
+
+SMODS.Joker{ --Sir Baudelaire
+    name = "Sir Baudelaire",
+    key = "sirbaudelaire",
+    config = {
+        extra = {
+            chips = 400000
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Sir Baudelaire',
+        ['text'] = {
+            [1] = '{C:blue}+400000{} Chips,',
+            [2] = '{C:red}-4{} Joker slots'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 17,
+    rarity = 3,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'sirbaudelaire',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+                return {
+                    chips = card.ability.extra.chips
+                }
+        end
+    end,
+
+    add_to_deck = function(self, card, from_debuff)
+        G.jokers.config.card_limit = math.max(1, G.jokers.config.card_limit - 4)
+    end,
+
+    remove_from_deck = function(self, card, from_debuff)
+        G.jokers.config.card_limit = G.jokers.config.card_limit + 4
+    end
+}
+
+SMODS.Joker{ --IGOR
+    name = "IGOR",
+    key = "igor",
+    config = {
+        extra = {
+            mult = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'IGOR',
+        ['text'] = {
+            [1] = 'This joker gains {C:red}+4{} Mult',
+            [2] = 'for every {C:attention}4{} scored.',
+            [3] = '{C:inactive}(Currently{} {C:red}+#1#{} {C:inactive}Mult){}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 6,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'igor',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.mult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and not context.blueprint then
+            if context.other_card:get_id() == 4 then
+                card.ability.extra.mult = (card.ability.extra.mult) + 4
+                return {
+                    message = "Four!",
+                    colour = G.C.PURPLE,
+                }
+            end
+        end
+        if context.cardarea == G.jokers and context.joker_main then
+                return {
+                    mult = card.ability.extra.mult
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Ritualist
+    name = "Ritualist",
+    key = "ritualist",
+    config = {
+        extra = {
+            cons = 1,
+            mult = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Ritualist',
+        ['text'] = {
+            [1] = 'This joker gains {C:red}+5{} Mult every',
+            [2] = 'two {C:attention}consumables{} used',
+            [3] = '{C:inactive}(Currently{} {C:red}+#2# {}{C:inactive}Mult){}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 5,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'ritualist',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.cons, card.ability.extra.mult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.using_consumeable and not context.blueprint then
+            if (card.ability.extra.cons or 0) == 2 then
+                return {
+                    func = function()
+                    card.ability.extra.cons = 1
+                    return true
+                end,
+                    extra = {
+                        func = function()
+                    card.ability.extra.mult = (card.ability.extra.mult) + 5
+                    return true
+                end,
+                            message = "2/2!",
+                            colour = G.C.PURPLE
+                        }
+                }
+            elseif not (card.ability.extra.cons == 2) then
+                return {
+                    func = function()
+                    card.ability.extra.cons = (card.ability.extra.cons) + 1
+                    return true
+                end,
+                    message = "1/2!",
+                    colour = G.C.PURPLE
+                }
+            end
+        end
+        if context.cardarea == G.jokers and context.joker_main then
+                return {
+                    mult = card.ability.extra.mult
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Straightbroidery
+    name = "Straightbroidery",
+    key = "straightbroidery",
+    config = {
+        extra = {
+            odds = 4,
+            double = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Straightbroidery',
+        ['text'] = {
+            [1] = 'When played hand contains a',
+            [2] = '{C:attention}Straight{}, {C:green}1 in 4{} chance to',
+            [3] = 'create a {C:attention}Double Tag{}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 7,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'straightbroidery',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+            if next(context.poker_hands["Straight"]) then
+                if SMODS.pseudorandom_probability(card, 'group_0_953c9bf9', 1, card.ability.extra.odds, 'group_0_953c9bf9') then
+                      G.E_MANAGER:add_event(Event({
+                func = function()
+                    local tag = Tag("tag_double")
+                    tag:set_ability()
+                    add_tag(tag)
+                    play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+                    return true
+                end
+            }))
+                        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Tag!", colour = G.C.GREEN})
+                  end
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Stone Sentinel
+    name = "Stone Sentinel",
+    key = "stonesentinel",
+    config = {
+        extra = {
+            mult = 5
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Stone Sentinel',
+        ['text'] = {
+            [1] = 'Every scored {C:attention}Stone{} card gives {C:red}+5{} Mult'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 5,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'stonesentinel',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and not context.blueprint then
+            if SMODS.get_enhancements(context.other_card)["m_stone"] == true then
+                return {
+                    mult = card.ability.extra.mult,
+                    message = "Stone!"
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Glass Glimmer
+    name = "Glass Glimmer",
+    key = "glassglimmer",
+    config = {
+        extra = {
+            mult = 5
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Glass Glimmer',
+        ['text'] = {
+            [1] = 'Every scored {C:attention}Glass{} card gives {C:red}+5{} Mult'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 5,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'glassglimmer',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and not context.blueprint then
+            if SMODS.get_enhancements(context.other_card)["m_glass"] == true then
+                return {
+                    mult = card.ability.extra.mult,
+                    message = "Glass!"
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Steel Spark
+    name = "Steel Spark",
+    key = "steelspark",
+    config = {
+        extra = {
+            mult = 5
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Steel Spark',
+        ['text'] = {
+            [1] = 'Every scored {C:attention}Steel{} card gives {C:red}+5{} Mult'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 5,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'steelspark',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and not context.blueprint then
+            if SMODS.get_enhancements(context.other_card)["m_steel"] == true then
+                return {
+                    mult = card.ability.extra.mult,
+                    message = "Steel!"
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Golden Glean
+    name = "Golden Glean",
+    key = "goldenglean",
+    config = {
+        extra = {
+            mult = 5
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Golden Glean',
+        ['text'] = {
+            [1] = 'Every scored {C:attention}Gold{} card gives {C:red}+5{} Mult'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 5,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'goldenglean',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and not context.blueprint then
+            if SMODS.get_enhancements(context.other_card)["m_gold"] == true then
+                return {
+                    mult = card.ability.extra.mult,
+                    message = "Gold!"
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Lucky Lode
+    name = "Lucky Lode",
+    key = "luckylode",
+    config = {
+        extra = {
+            mult = 5
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Lucky Lode',
+        ['text'] = {
+            [1] = 'Every scored {C:attention}Lucky{} card gives {C:red}+5{} Mult'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 5,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'luckylode',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and not context.blueprint then
+            if SMODS.get_enhancements(context.other_card)["m_lucky"] == true then
+                return {
+                    mult = card.ability.extra.mult,
+                    message = "Lucky!"
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Aura Amp
+    name = "Aura Amp",
+    key = "auraamp",
+    config = {
+        extra = {
+            Xmult = 1.5
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Aura Amp',
+        ['text'] = {
+            [1] = 'Every scored {C:attention}enhanced{}',
+            [2] = 'card gives {X:red,C:white}X1.5{} Mult'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 10,
+    rarity = 3,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'auraamp',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and not context.blueprint then
+            if (function()
+        local enhancements = SMODS.get_enhancements(context.other_card)
+        for k, v in pairs(enhancements) do
+            if v then
+                return true
+            end
+        end
+        return false
+    end)() then
+                return {
+                    Xmult = card.ability.extra.Xmult,
+                    message = "Enhanced!"
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Maximum Load
+    name = "Maximum Load",
+    key = "maximumload",
+    config = {
+        extra = {
+            freejokerslots = 0,
+            Xmult = 2
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Maximum Load',
+        ['text'] = {
+            [1] = 'If there are {C:red}no{} free',
+            [2] = 'joker slots left, {X:red,C:white}X2{} Mult'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 8,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'maximumload',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+            if 0 == (G.jokers.config.card_limit - #G.jokers.cards) then
+                return {
+                    Xmult = card.ability.extra.Xmult
+                }
             end
         end
     end
