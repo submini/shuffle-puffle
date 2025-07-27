@@ -56,6 +56,13 @@ for _, file in ipairs(joker_src) do
     end
 end
 
+ local booster_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "/packs")
+ for _, file in ipairs(booster_src) do
+    if file:match("%.lua$") then -- Only load .lua files
+        assert(SMODS.load_file("packs/" .. file))()
+    end
+end
+
 SMODS._MOD_SAVE_FACE_CARD_COUNT = "face_cards_played"
 
 function SMODS.on_load()

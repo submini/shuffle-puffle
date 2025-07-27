@@ -402,12 +402,10 @@ return {
 
     },
 
-
-
-Enhanced = {
-    m_glass={
-    name="Glass Card",
-    text={
+    Enhanced = {
+        m_glass={
+        name="Glass Card",
+        text={
         "{X:mult,C:white} X#1# {} Mult",
         "{C:green}#2# in #3#{} chance to",
         "destroy card",

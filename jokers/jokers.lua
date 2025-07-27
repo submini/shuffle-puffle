@@ -193,28 +193,28 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "frog",
-    path = "placeholder.png",
+    path = "frog.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "encore",
-    path = "placeholder.png",
+    path = "encore.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "scrapheap",
-    path = "placeholder.png",
+    path = "scrapheap.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "lonewolf",
-    path = "placeholder.png",
+    path = "lonewolf.png",
     px = 71,
     py = 95
 })
@@ -235,98 +235,98 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "luckybreak",
-    path = "placeholder.png",
+    path = "luckybreak.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "apex",
-    path = "placeholder.png",
+    path = "apexjoker.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "onetimeuse",
-    path = "placeholder.png",
+    path = "onetimeuse.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "speedramp",
-    path = "placeholder.png",
+    path = "speedramp.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "sacrifice",
-    path = "placeholder.png",
+    path = "sacrifice.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "sirbaudelaire",
-    path = "placeholder.png",
+    path = "sirbaudelaire.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "igor",
-    path = "placeholder.png",
+    path = "igor.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "ritualist",
-    path = "placeholder.png",
+    path = "ritualist.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "straightbroidery",
-    path = "placeholder.png",
+    path = "straightbroidery.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "stonesentinel",
-    path = "placeholder.png",
+    path = "stonesentinel.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "glassglimmer",
-    path = "placeholder.png",
+    path = "glassglimmer.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "steelspark",
-    path = "placeholder.png",
+    path = "steelspark.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "goldenglean",
-    path = "placeholder.png",
+    path = "goldenglean.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "luckylode",
-    path = "placeholder.png",
+    path = "luckylode.png",
     px = 71,
     py = 95
 })
@@ -340,7 +340,7 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "maximumload",
-    path = "placeholder.png",
+    path = "maximumload.png",
     px = 71,
     py = 95
 })
@@ -534,7 +534,7 @@ SMODS.Joker{
     rarity = 2,
     blueprint_compat = true,
     eternal_compat = true,
-    unlocked = false,
+    unlocked = true,
     discovered = false,
     atlas = 'woodenruler',
 
