@@ -279,7 +279,7 @@ SMODS.Atlas({
     key = "igor",
     path = "igor.png",
     px = 71,
-    py = 95
+    py = 95 
 })
 
 SMODS.Atlas({
@@ -333,7 +333,7 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "auraamp",
-    path = "placeholder.png",
+    path = "auraamp.png",
     px = 71,
     py = 95
 })
