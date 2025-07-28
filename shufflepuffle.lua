@@ -63,6 +63,14 @@ end
     end
 end
 
+ local rarity_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "/rarities")
+ for _, file in ipairs(rarity_src) do
+    if file:match("%.lua$") then -- Only load .lua files
+        assert(SMODS.load_file("rarities/" .. file))()
+    end
+end
+
+
 SMODS._MOD_SAVE_FACE_CARD_COUNT = "face_cards_played"
 
 function SMODS.on_load()
@@ -70,3 +78,4 @@ function SMODS.on_load()
         SMODS.SAVE[SMODS._MOD_SAVE_FACE_CARD_COUNT] = 0
     end
 end
+

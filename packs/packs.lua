@@ -39,7 +39,10 @@ SMODS.Booster({
             'j_sp_coinflip', 'j_sp_blackcat', 'j_sp_luckybreak', 'j_sp_apex', 'j_sp_onetimeuse',
             'j_sp_speedramp', 'j_sp_sacrifice', 'j_sp_sirbaudelaire', 'j_sp_igor', 'j_sp_ritualist',
             'j_sp_straightbroidery', 'j_sp_stonesentinel', 'j_sp_glassglimmer', 'j_sp_steelspark',
-            'j_sp_goldenglean', 'j_sp_luckylode', 'j_sp_auraamp', 'j_sp_maximumload'
+            'j_sp_goldenglean', 'j_sp_luckylode', 'j_sp_auraamp', 'j_sp_maximumload', 'j_sp_lejokerjames', 
+            'j_sp_nikolajokic','j_sp_handfulfortune', 'handfulmultiply', 'j_sp_pacer', 'j_sp_openinggambit',
+            'j_sp_twosides', 'j_sp_cosmicdust', 'j_sp_quintetreward', 'j_sp_straighttobusiness', 'j_sp_pointguard',
+            'j_sp_allwild', 'j_sp_numberline', 'j_sp_lukadoncic', 'j_sp_beringstrait'
         }
 
         local chosen_key = pseudorandom_element(jokers_pool)

@@ -182,8 +182,8 @@ return {
             j_sp_topup = {
             name = "Top-up",
             text = {
-                'At the {C:attention}start{} of each round,',
-                'if you have {C:money}$15{} or less, {C:money}+$3{}'
+                'Earn {C:money}$2{} at the {C:attention}start{}',
+                'of each round'
             }
         },
 
@@ -397,6 +397,145 @@ return {
             text = {
                 'If there are {C:red}no{} free',
                 'joker slots left, {X:red,C:white}X2{} Mult'
+            }
+        },
+
+        j_sp_lejokerjames = {
+            name = "LeJoker James",
+            text = {
+                'If scored card is a {C:attention}6{},',
+                '{X:red,C:white}X2.3{} Mult and {C:blue}+32 {}Chips'
+            }
+        },
+
+        j_sp_nikolajokic = {
+            name = "Nikola Jokić",
+            text = {
+                '{C:red}+15{} Mult {C:attention}most of the time{},',
+                '{C:green}1 in 5{} chance to give',
+                '{X:red,C:white}X1.5{} Mult also'
+            }
+        },
+
+        j_sp_handfulfortune = {
+            name = "Handful Fortune",
+            text = {
+                '{C:blue}+20{} Chips for every',
+                'card in hand',
+                '{C:inactive}(Currently{} {C:blue}+#2#{} {C:inactive}Chips){}'
+            }
+        },
+
+        j_sp_handfulmultiply = {
+            name = "Handful Multiply",
+            text = {
+                '{C:red}+2{} Mult for every',
+                'card in hand',
+                '{C:inactive}(Currently{} {C:red}+#2#{} {C:inactive}Mult){}'
+            }
+        },
+
+        j_sp_pacer = {
+            name = "Pacer",
+            text = {
+                '{C:red}+1{} Mult per hand played',
+                '{C:inactive}(Currently {}{C:red}+#1#{} {C:inactive}Mult){}'
+            }
+        },
+
+        j_sp_openinggambit = {
+            name = "Opening Gambit",
+            text = {
+                'First scored card of round gives',
+                '{C:blue}+50{} Chips and {C:red}+3{} Mult'
+            }
+        },
+
+        j_sp_twosides = {
+            name = "Two Sides",
+            text = {
+                'Gains {C:blue}+1{} Chip if scored card',
+                'is a {C:spades}Spade{} or {C:clubs}Club{} suit,',
+                'gains {C:red}+0.5{} Mult if scored card',
+                'is a {C:hearts}Heart{} or {C:diamonds}Diamond{} suit',
+                '{C:inactive}(Currently {}{C:blue}+#1#{} {C:inactive}Chips{} {C:inactive}and{} {C:red}+#2#{} {C:inactive}Mult){}'
+            }
+        },
+
+        j_sp_cosmicdust = {
+            name = "Cosmic Dust",
+            text = {
+                'Each time a card is',
+                '{C:attention}destroyed{} or {C:attention}sold{}, this',
+                'joker gains {X:red,C:white}+X0.75{} Mult',
+                '{C:inactive}(Currently{} {X:red,C:white}X#1#{} {C:inactive}Mult){}'
+            }
+        },
+
+        j_sp_quintetreward = {
+            name = "Quintet Reward",
+            text = {
+                'This joker gains {C:blue}+40{} Chips',
+                'and a {C:green}1 in 6{} chance to give',
+                '{X:red,C:white}X1.5{} Mult if played hand',
+                'has {C:attention}5{} scoring cards',
+                '{C:inactive}(Currently{} {C:blue}+#1#{} {C:inactive}Chips){}'
+            }
+        },
+
+        j_sp_straighttobusiness = {
+            name = "Straight to Business",
+            text = {
+                'If hand played contains',
+                'a {C:attention}Straight{}, earn {C:money}$5{}'
+            }
+        },
+
+        j_sp_pointguard = {
+            name = "Point Guard",
+            text = {
+                'If hand played is a',
+                '{C:attention}High Card{}, this joker',
+                'gains {C:red}+10{} Mult',
+                '{C:inactive}(Currently{} {C:red}+#1#{} {C:inactive}Mult){}'
+            }
+        },
+
+        j_sp_allwild = {
+            name = "All Wild",
+            text = {
+                'Every scored card is',
+                'turned into a {C:attention}Wild{} card,',
+                '{C:green}1 in 4{} chance it will',
+                'also have a {C:attention}Red{} Seal'
+            }
+        },
+
+        j_sp_numberline = {
+            name = "Number Line",
+            text = {
+                'This joker gives {X:red,C:white}X1.5{}',
+                'Mult and {X:blue,C:white}X2{} Chips if',
+                'the highest rank in hand',
+                'is an {C:attention}Ace{} and the lowest',
+                'rank in hand is a {C:attention}2{}'
+            }
+        },
+
+        j_sp_lukadoncic = {
+            name = "Luka Doncic",
+            text = {
+                'This joker gains {X:blue,C:white}+X0.5{} Chips',
+                'if only two {C:attention}7{}s are scored',
+                '{C:inactive}(Currently{} {X:blue,C:white}X#1#{} {C:inactive}Chips){}'
+            }
+        },
+
+        j_sp_beringstrait = {
+            name = "Bering Strait",
+            text = {
+                'If played hand is a',
+                '{C:attention}Straight{}, {C:attention}+1{} Hand size'
             }
         }
 

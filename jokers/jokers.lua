@@ -345,6 +345,110 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "lejokerjames",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "nikolajokic",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "handfulfortune",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "handfulmultiply",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "pacer",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "openinggambit",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "twosides",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "cosmicdust",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "quintetreward",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "straighttobusiness",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "pointguard",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "allwild",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "numberline",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lukadoncic",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "beringstrait",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
 
 
 
@@ -1689,21 +1793,21 @@ SMODS.Joker{ --Top-up
     key = "topup",
     config = {
         extra = {
-            dollars = 3
+            dollars = 2
         }
     },
     loc_txt = {
         ['name'] = 'Top-up',
         ['text'] = {
-            [1] = 'At the {C:attention}start{} of each round,',
-            [2] = 'if you have {C:money}$15{} or less, {C:money}+$3{}'
+            [1] = 'Earn {C:money}$2{} at the {C:attention}start{}',
+            [2] = 'of each round'
         }
     },
     pos = {
         x = 0,
         y = 0
     },
-    cost = 3,
+    cost = 4,
     rarity = 1,
     blueprint_compat = true,
     eternal_compat = true,
@@ -1711,30 +1815,11 @@ SMODS.Joker{ --Top-up
     discovered = false,
     atlas = 'topup',
 
-    loc_vars = function(self, info_queue, card)
-        return {vars = {}}
-    end,
-
     calculate = function(self, card, context)
         if context.setting_blind and not context.blueprint then
-            -- MODIFIED LOGIC: Safely extract the numerical value of G.GAME.dollars.
-            -- This explicitly handles omeganum tables (which have a .n field)
-            -- and regular numbers, defaulting to 0 for any unexpected types.
-            local current_dollars_value
-            if type(G.GAME.dollars) == 'table' and G.GAME.dollars.n ~= nil then
-                current_dollars_value = G.GAME.dollars.n
-            elseif type(G.GAME.dollars) == 'number' then
-                current_dollars_value = G.GAME.dollars
-            else
-                -- Fallback for cases where G.GAME.dollars is nil or an unexpected type
-                current_dollars_value = 0
-            end
-
-            if current_dollars_value <= 15 then
                 return {
                     dollars = card.ability.extra.dollars
                 }
-            end
         end
     end
 }
@@ -3058,6 +3143,819 @@ SMODS.Joker{ --Maximum Load
             if 0 == (G.jokers.config.card_limit - #G.jokers.cards) then
                 return {
                     Xmult = card.ability.extra.Xmult
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --LeJoker James
+    name = "LeJoker James",
+    key = "lejokerjames",
+    config = {
+        extra = {
+            Xmult = 2.3,
+            chips = 32
+        }
+    },
+    loc_txt = {
+        ['name'] = 'LeJoker James',
+        ['text'] = {
+            [1] = 'If scored card is a {C:attention}6{},',
+            [2] = '{X:red,C:white}X2.3{} Mult and {C:blue}+32 {}Chips'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 12,
+    rarity = 3,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'lejokerjames',
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and not context.blueprint then
+            if context.other_card:get_id() == 6 then
+                return {
+                    Xmult = card.ability.extra.Xmult,
+                    extra = {
+                        chips = card.ability.extra.chips,
+                        colour = G.C.CHIPS
+                        }
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Nikola Jokić
+    name = "Nikola Jokić",
+    key = "nikolajokic",
+    config = {
+        extra = {
+            mult = 15,
+            odds = 5,
+            Xmult = 1.5
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Nikola Jokić',
+        ['text'] = {
+            [1] = '{C:red}+15{} Mult {C:attention}most of the time{},',
+            [2] = '{C:green}1 in 5{} chance to give',
+            [3] = '{X:red,C:white}X1.5{} Mult also'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 6,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'nikolajokic',
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+            if true then
+                return {
+                    mult = card.ability.extra.mult
+                ,
+                    func = function()
+                        if SMODS.pseudorandom_probability(card, 'group_0_70383874', 1, card.ability.extra.odds, 'j_modprefix_nikolajokic') then
+                      SMODS.calculate_effect({Xmult = card.ability.extra.Xmult}, card)
+                  end
+                        return true
+                    end
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Handful Fortune
+    name = "Handful Fortune",
+    key = "handfulfortune",
+    config = {
+        extra = {
+            constant = 20,
+            chips = 0,
+            cardsinhand = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Handful Fortune',
+        ['text'] = {
+            [1] = '{C:blue}+20{} Chips for every',
+            [2] = 'card in hand',
+            [3] = '{C:inactive}(Currently{} {C:blue}+#2#{} {C:inactive}Chips){}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 4,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'handfulfortune',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.constant, card.ability.extra.chips}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+                local constant_value = card.ability.extra.constant
+                card.ability.extra.constant = 20
+                card.ability.extra.constant = (card.ability.extra.constant) * #(G.hand and G.hand.cards or {})
+                card.ability.extra.chips = card.ability.extra.constant
+                return {
+                    chips = card.ability.extra.chips
+                }
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
+                return {
+                    func = function()
+                    card.ability.extra.constant = 20
+                    return true
+                end,
+                    extra = {
+                        func = function()
+                    card.ability.extra.chips = 0
+                    return true
+                end,
+                        colour = G.C.BLUE
+                        }
+                }
+        end
+        if context.hand_drawn and not context.blueprint then
+                local constant_value = card.ability.extra.constant
+                return {
+                    func = function()
+                    card.ability.extra.constant = 20
+                    return true
+                end,
+                    extra = {
+                        func = function()
+                    card.ability.extra.constant = (card.ability.extra.constant) * #(G.hand and G.hand.cards or {})
+                    return true
+                end,
+                        colour = G.C.MULT,
+                        extra = {
+                            func = function()
+                    card.ability.extra.chips = card.ability.extra.constant
+                    return true
+                end,
+                            colour = G.C.BLUE
+                        }
+                        }
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Handful Multiply
+    name = "Handful Multiply",
+    key = "handfulmultiply",
+    config = {
+        extra = {
+            constant = 20,
+            mult = 0,
+            cardsinhand = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Handful Multiply',
+        ['text'] = {
+            [1] = '{C:red}+2{} Mult for every',
+            [2] = 'card in hand',
+            [3] = '{C:inactive}(Currently{} {C:red}+#2#{} {C:inactive}Mult){}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 4,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'handfulmultiply',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.constant, card.ability.extra.mult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+                local constant_value = card.ability.extra.constant
+                card.ability.extra.constant = 2
+                card.ability.extra.constant = (card.ability.extra.constant) * #(G.hand and G.hand.cards or {})
+                card.ability.extra.mult = card.ability.extra.constant
+                return {
+                    mult = card.ability.extra.mult
+                }
+        end
+        if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
+                return {
+                    func = function()
+                    card.ability.extra.constant = 2
+                    return true
+                end,
+                    extra = {
+                        func = function()
+                    card.ability.extra.mult = 0
+                    return true
+                end,
+                        colour = G.C.BLUE
+                        }
+                }
+        end
+        if context.hand_drawn and not context.blueprint then
+                local constant_value = card.ability.extra.constant
+                return {
+                    func = function()
+                    card.ability.extra.constant = 2
+                    return true
+                end,
+                    extra = {
+                        func = function()
+                    card.ability.extra.constant = (card.ability.extra.constant) * #(G.hand and G.hand.cards or {})
+                    return true
+                end,
+                        colour = G.C.MULT,
+                        extra = {
+                            func = function()
+                    card.ability.extra.mult = card.ability.extra.constant
+                    return true
+                end,
+                            colour = G.C.BLUE
+                        }
+                        }
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Pacer
+    name = "Pacer",
+    key = "pacer",
+    config = {
+        extra = {
+            mult = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Pacer',
+        ['text'] = {
+            [1] = '{C:red}+1{} Mult per hand played',
+            [2] = '{C:inactive}(Currently {}{C:red}+#1#{} {C:inactive}Mult){}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 3,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'pacer',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.mult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+                card.ability.extra.mult = (card.ability.extra.mult) + 1
+                return {
+                    message = "Indiana!",
+                    extra = {
+                        mult = card.ability.extra.mult
+                        }
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Opening Gambit
+    name = "Opening Gambit",
+    key = "openinggambit",
+    config = {
+        extra = {
+            chips = 50,
+            mult = 3
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Opening Gambit',
+        ['text'] = {
+            [1] = 'First scored card of round gives',
+            [2] = '{C:blue}+50{} Chips and {C:red}+3{} Mult'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 4,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'openinggambit',
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and not context.blueprint then
+            if (G.GAME.current_round.hands_played == 0 and context.other_card == context.scoring_hand[1]) then
+                return {
+                    chips = card.ability.extra.chips,
+                    extra = {
+                        mult = card.ability.extra.mult
+                        }
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Two Sides
+    name = "Two Sides",
+    key = "twosides",
+    config = {
+        extra = {
+            chips = 0,
+            mult = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Two Sides',
+        ['text'] = {
+            [1] = 'Gains {C:blue}+1{} Chip if scored card',
+            [2] = 'is a {C:spades}Spade{} or {C:clubs}Club{} suit,',
+            [3] = 'gains {C:red}+0.5{} Mult if scored card',
+            [4] = 'is a {C:hearts}Heart{} or {C:diamonds}Diamond{} suit',
+            [5] = '{C:inactive}(Currently {}{C:blue}+#1#{} {C:inactive}Chips{} {C:inactive}and{} {C:red}+#2#{} {C:inactive}Mult){}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 6,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'twosides',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.chips, card.ability.extra.mult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and not context.blueprint then
+            if context.other_card:is_suit("Spades") or context.other_card:is_suit("Clubs") then
+                card.ability.extra.chips = (card.ability.extra.chips) + 1
+                return {
+                    message = "Black!"
+                }
+            elseif context.other_card:is_suit("Hearts") or context.other_card:is_suit("Diamonds") then
+                card.ability.extra.mult = (card.ability.extra.mult) + 0.5
+                return {
+                    message = "Red!"
+                }
+            end
+        end
+        if context.cardarea == G.jokers and context.joker_main then
+                return {
+                    chips = card.ability.extra.chips,
+                    extra = {
+                        mult = card.ability.extra.mult
+                        }
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Cosmic Dust
+    name = "Cosmic Dust",
+    key = "cosmicdust",
+    config = {
+        extra = {
+            xmult = 1
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Cosmic Dust',
+        ['text'] = {
+            [1] = 'Each time a card is',
+            [2] = '{C:attention}destroyed{} or {C:attention}sold{}, this',
+            [3] = 'joker gains {X:red,C:white}+X0.75{} Mult',
+            [4] = '{C:inactive}(Currently{} {X:red,C:white}X#1#{} {C:inactive}Mult){}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 9,
+    rarity = 3,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'cosmicdust',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.xmult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.selling_card and not context.blueprint then
+                return {
+                    func = function()
+                    card.ability.extra.xmult = (card.ability.extra.xmult) + 0.75
+                    return true
+                end,
+                    message = "Cosmic!"
+                }
+        end
+        if context.remove_playing_cards and not context.blueprint then
+                return {
+                    func = function()
+                    card.ability.extra.xmult = (card.ability.extra.xmult) + 0.75
+                    return true
+                end,
+                    message = "Cosmic!"
+                }
+        end
+        if context.cardarea == G.jokers and context.joker_main then
+                return {
+                    Xmult = card.ability.extra.xmult
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Quintet Reward
+    name = "Quintet Reward",
+    key = "quintetreward",
+    config = {
+        extra = {
+            chips = 0,
+            odds = 6,
+            Xmult = 1.5
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Quintet Reward',
+        ['text'] = {
+            [1] = 'This joker gains {C:blue}+40{} Chips',
+            [2] = 'and a {C:green}1 in 6{} chance to give',
+            [3] = '{X:red,C:white}X1.5{} Mult if played hand',
+            [4] = 'has {C:attention}5{} scoring cards',
+            [5] = '{C:inactive}(Currently{} {C:blue}+#1#{} {C:inactive}Chips){}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 7,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'quintetreward',
+
+    loc_vars = function(self, info_queue, card)
+        local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'j_modprefix_quintetreward') --Please-work
+        return {vars = {card.ability.extra.chips, new_numerator, new_denominator}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+            if #context.scoring_hand == 5 then
+                card.ability.extra.chips = (card.ability.extra.chips) + 40
+                return {
+                    chips = card.ability.extra.chips
+                ,
+                    func = function()
+                        if SMODS.pseudorandom_probability(card, 'group_0_3a72250c', 1, card.ability.extra.odds, 'j_modprefix_quintetreward') then
+                      SMODS.calculate_effect({Xmult = card.ability.extra.Xmult}, card)
+                  end
+                        return true
+                    end
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Straight to Business
+    name = "Straight to Business",
+    key = "straighttobusiness",
+    config = {
+        extra = {
+            dollars = 5
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Straight to Business',
+        ['text'] = {
+            [1] = 'If hand played contains',
+            [2] = 'a {C:attention}Straight{}, earn {C:money}$5{}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 3,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'straighttobusiness',
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+            if next(context.poker_hands["Straight"]) then
+                return {
+                    dollars = card.ability.extra.dollars
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Point Guard
+    name = "Point Guard",
+    key = "pointguard",
+    config = {
+        extra = {
+            mult = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Point Guard',
+        ['text'] = {
+            [1] = 'If hand played is a',
+            [2] = '{C:attention}High Card{}, this joker',
+            [3] = 'gains {C:red}+10{} Mult',
+            [4] = '{C:inactive}(Currently{} {C:red}+#1#{} {C:inactive}Mult){}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 8,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'pointguard',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.mult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+            if context.scoring_name == "High Card" then
+                card.ability.extra.mult = (card.ability.extra.mult) + 10
+                return {
+                    message = "The One!",
+                    extra = {
+                        mult = card.ability.extra.mult
+                        }
+                }
+            else
+                return {
+                    mult = card.ability.extra.mult
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --All Wild
+    name = "All Wild",
+    key = "allwild",
+    config = {
+        extra = {
+            odds = 4
+        }
+    },
+    loc_txt = {
+        ['name'] = 'All Wild',
+        ['text'] = {
+            [1] = 'Every scored card is',
+            [2] = 'turned into a {C:attention}Wild{} card,',
+            [3] = '{C:green}1 in 4{} chance it will',
+            [4] = 'also have a {C:attention}Red{} Seal'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 12,
+    rarity = 3,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'allwild',
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and not context.blueprint then
+            if true then
+                context.other_card:set_ability(G.P_CENTERS.m_wild)
+                return {
+                    message = "Card Modified!"
+                ,
+                    func = function()
+                        if SMODS.pseudorandom_probability(card, 'group_0_da5caf1a', 1, card.ability.extra.odds, 'j_modprefix_allwild') then
+                      context.other_card:set_seal("Red", true)
+                        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Card Modified!", colour = G.C.BLUE})
+                  end
+                        return true
+                    end
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Number Line
+    name = "Number Line",
+    key = "numberline",
+    config = {
+        extra = {
+            highestrankinhand = 0,
+            lowestrankinhand = 0,
+            Xmult = 1.5,
+            xchips = 2
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Number Line',
+        ['text'] = {
+            [1] = 'This joker gives {X:red,C:white}X1.5{}',
+            [2] = 'Mult and {X:blue,C:white}X2{} Chips if',
+            [3] = 'the highest rank in hand',
+            [4] = 'is an {C:attention}Ace{} and the lowest',
+            [5] = 'rank in hand is a {C:attention}2{}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 8,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'numberline',
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+            if (14 == (function() local max = 0; for _, card in ipairs(G.hand and G.hand.cards or {}) do if card.base.id > max then max = card.base.id end end; return max end)() and 2 == (function() local min = 14; for _, card in ipairs(G.hand and G.hand.cards or {}) do if card.base.id < min then min = card.base.id end end; return min end)()) then
+                return {
+                    Xmult = card.ability.extra.Xmult,
+                    extra = {
+                        x_chips = card.ability.extra.xchips,
+                        colour = G.C.DARK_EDITION
+                        }
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Luka Dončić
+    name = "Luka Dončić",
+    key = "lukadoncic",
+    config = {
+        extra = {
+            xchips = 1
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Luka Dončić',
+        ['text'] = {
+            [1] = 'This joker gains {X:blue,C:white}+X0.5{} Chips',
+            [2] = 'if only two {C:attention}7{}s are scored',
+            [3] = '{C:inactive}(Currently{} {X:blue,C:white}X#1#{} {C:inactive}Chips){}'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 10,
+    rarity = 3,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'lukadoncic',
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.xchips}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+            if (#context.scoring_hand == 2 and (function()
+    local rankCount = 0
+    for i, c in ipairs(context.scoring_hand) do
+        if c:get_id() == 7 then
+            rankCount = rankCount + 1
+        end
+    end
+    
+    return rankCount == 2
+end)()) then
+                card.ability.extra.xchips = (card.ability.extra.xchips) + 0.5
+                return {
+                    message = "Luka!",
+                    extra = {
+                        x_chips = card.ability.extra.xchips,
+                        colour = G.C.YELLOW
+                        }
+                }
+            else
+                return {
+                    x_chips = card.ability.extra.xchips
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Bering Strait
+    name = "Bering Strait",
+    key = "beringstrait",
+    config = {
+        extra = {
+            hand_size = 1
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Bering Strait',
+        ['text'] = {
+            [1] = 'If played hand is a',
+            [2] = '{C:attention}Straight{}, {C:attention}+1{} Hand size'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    cost = 23,
+    rarity = "sp_unfair",
+    blueprint_compat = false,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'beringstrait',
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main then
+            if context.scoring_name == "Straight" then
+                return {
+                    func = function()
+                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "+"..tostring(card.ability.extra.hand_size).." Hand Size", colour = G.C.BLUE})
+                G.hand:change_size(card.ability.extra.hand_size)
+                return true
+            end
                 }
             end
         end
