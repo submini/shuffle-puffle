@@ -347,105 +347,105 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "lejokerjames",
-    path = "placeholder.png",
+    path = "lejokerjames.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "nikolajokic",
-    path = "placeholder.png",
+    path = "nikolajokic.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "handfulfortune",
-    path = "placeholder.png",
+    path = "handfulfortune.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "handfulmultiply",
-    path = "placeholder.png",
+    path = "handfulmult.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "pacer",
-    path = "placeholder.png",
+    path = "pacer.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "openinggambit",
-    path = "placeholder.png",
+    path = "openinggambit.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "twosides",
-    path = "placeholder.png",
+    path = "twosides.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "cosmicdust",
-    path = "placeholder.png",
+    path = "cosmicdust.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "quintetreward",
-    path = "placeholder.png",
+    path = "quintent.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "straighttobusiness",
-    path = "placeholder.png",
+    path = "stb.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "pointguard",
-    path = "placeholder.png",
+    path = "pointguard.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "allwild",
-    path = "placeholder.png",
+    path = "allwild.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "numberline",
-    path = "placeholder.png",
+    path = "numberline.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "lukadoncic",
-    path = "placeholder.png",
+    path = "lukadoncic.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "beringstrait",
-    path = "placeholder.png",
+    path = "beringstrait.png",
     px = 71,
     py = 95
 })

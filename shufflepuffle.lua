@@ -56,15 +56,15 @@ for _, file in ipairs(joker_src) do
     end
 end
 
- local booster_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "/packs")
- for _, file in ipairs(booster_src) do
+local booster_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "/packs")
+for _, file in ipairs(booster_src) do
     if file:match("%.lua$") then -- Only load .lua files
         assert(SMODS.load_file("packs/" .. file))()
     end
 end
 
- local rarity_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "/rarities")
- for _, file in ipairs(rarity_src) do
+local rarity_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "/rarities")
+for _, file in ipairs(rarity_src) do
     if file:match("%.lua$") then -- Only load .lua files
         assert(SMODS.load_file("rarities/" .. file))()
     end

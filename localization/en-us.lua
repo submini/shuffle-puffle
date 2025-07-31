@@ -550,7 +550,19 @@ return {
         "destroy card",
         },
     },
-},
+    },
+
+    Other = {
+        p_sp_shufflepack1 = {
+            name = "Shuffle Pack",
+            text = {
+                'Contains {C:attention}3{}',
+                '{X:attention,C:black}shuffle-puffle{} Jokers,',
+                'select one of three'
+                }
+        }
+    },
+
 
         misc = {
             dictionary = {

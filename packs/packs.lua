@@ -1,32 +1,26 @@
 -- Register the atlas (MUST match the key)
 SMODS.Atlas({
-    key = 'shufflepack1',
+    key = 'p_shufflepack1',
     path = 'blankpack.png',
     px = 71,
     py = 95
 })
 
 SMODS.Booster({
+    name = "Shuffle Pack",
     object_type = "Booster",
-    key = 'shufflepack1',
-    atlas = 'shufflepack1',
+    key = "sp_shufflepack1",
+    atlas = 'p_shufflepack1',
     pos = { x = 0, y = 0 },
-    loc_txt = {
-        name = 'Shuffle Pack',
-        text = { 
-        'Contains {C:attention}3{}',
-        '{X:attention,C:black}shuffle-puffle{} Jokers,',
-        'select one of three'
-         }
-    },
-    config = { extra = 3, choose = 1 },
-    weight = 1,
+    config = { extra = 3, choose = 1, name = "Shuffle Pack"},
+    kind = 'Buffoon',
+    weight = 100, -- for testing purposes
     cost = 4,
-    order = 46,
+    order = 1,
     group_key = 'sp_shufflepack1',
     draw_hand = false,
     unlocked = true,
-    discovered = true,
+    discovered = false,
 
     create_card = function(self, booster_card)
         local jokers_pool = {
@@ -40,7 +34,7 @@ SMODS.Booster({
             'j_sp_speedramp', 'j_sp_sacrifice', 'j_sp_sirbaudelaire', 'j_sp_igor', 'j_sp_ritualist',
             'j_sp_straightbroidery', 'j_sp_stonesentinel', 'j_sp_glassglimmer', 'j_sp_steelspark',
             'j_sp_goldenglean', 'j_sp_luckylode', 'j_sp_auraamp', 'j_sp_maximumload', 'j_sp_lejokerjames', 
-            'j_sp_nikolajokic','j_sp_handfulfortune', 'handfulmultiply', 'j_sp_pacer', 'j_sp_openinggambit',
+            'j_sp_nikolajokic','j_sp_handfulfortune', 'j_sp_handfulmultiply', 'j_sp_pacer', 'j_sp_openinggambit',
             'j_sp_twosides', 'j_sp_cosmicdust', 'j_sp_quintetreward', 'j_sp_straighttobusiness', 'j_sp_pointguard',
             'j_sp_allwild', 'j_sp_numberline', 'j_sp_lukadoncic', 'j_sp_beringstrait'
         }
