@@ -8,6 +8,7 @@ G.C.SJ = {
     WHITE = HEX("FFFFFF"),
     TRANSPARENT = HEX("00000000"),
     ORANGE = HEX("E67E22"),
+    PURPLE = HEX("AA5BB5")
 }
 
 -- Hooks
@@ -24,5 +25,6 @@ function loc_colour(_c, _default)
     G.ARGS.LOC_COLOURS.sj_white = G.C.SJ.WHITE
     G.ARGS.LOC_COLOURS.sj_transparent = G.C.SJ.TRANSPARENT
     G.ARGS.LOC_COLOURS.sj_orange = G.C.SJ.ORANGE
+    G.ARGS.LOC_COLOURS.sj_purple = G.C.SJ.PURPLE
     return loc_colour_ref(_c, _default)
 end

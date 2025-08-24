@@ -36,10 +36,16 @@ SMODS.Booster({
             'j_sp_goldenglean', 'j_sp_luckylode', 'j_sp_auraamp', 'j_sp_maximumload', 'j_sp_lejokerjames', 
             'j_sp_nikolajokic','j_sp_handfulfortune', 'j_sp_handfulmultiply', 'j_sp_pacer', 'j_sp_openinggambit',
             'j_sp_twosides', 'j_sp_cosmicdust', 'j_sp_quintetreward', 'j_sp_straighttobusiness', 'j_sp_pointguard',
-            'j_sp_allwild', 'j_sp_numberline', 'j_sp_lukadoncic', 'j_sp_beringstrait'
+            'j_sp_allwild', 'j_sp_numberline', 'j_sp_lukadoncic', 'j_sp_beringstrait', 'j_sp_lemniscate', 'j_sp_toad',
+            'j_sp_jimbro', 'j_sp_unfairruler', 'j_sp_jackfruit', 'j_sp_doublebongcloud', 'j_sp_freddyfazbear', 'j_sp_bonniebunny',
+            'j_sp_chicachicken', 'j_sp_foxy', 'j_sp_noisyjoker', 'j_sp_speedrunner', 'j_sp_cantaloupe', 'j_sp_crazyhamburger'
         }
 
         local chosen_key = pseudorandom_element(jokers_pool)
+        if not G.P_CENTERS[chosen_key] then
+        print("WARNING: Missing Joker center for", chosen_key)
+        chosen_key = "j_joker" -- fallback to default
+        end
 
         -- fallback if G.pack_cards is nil
         local target_area = G.pack_cards or {
@@ -51,7 +57,9 @@ SMODS.Booster({
             enabled = true,
         }
 
+        local target_area = G.pack_cards or G.jokers
         return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
+
     end,
 
     loc_vars = function(self, info_queue, booster_card)

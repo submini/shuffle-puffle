@@ -70,6 +70,13 @@ for _, file in ipairs(rarity_src) do
     end
 end
 
+-- local rank_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "/ranks")
+--for _, file in ipairs(rank_src) do
+  --  if file:match("%.lua$") then -- Only load .lua files
+    --    assert(SMODS.load_file("ranks/" .. file))()
+    --end
+--end
+
 
 SMODS._MOD_SAVE_FACE_CARD_COUNT = "face_cards_played"
 

@@ -537,7 +537,145 @@ return {
                 'If played hand is a',
                 '{C:attention}Straight{}, {C:attention}+1{} Hand size'
             }
-        }
+        },
+
+        j_sp_lemniscate = {
+            name = "Lemniscate",
+            text = {
+                'This joker gains {X:red,C:white}XX2.622{}',
+                'Mult for every scored',
+                '{C:attention}8{}, {C:attention}3{}, {C:attention}4{}, and {C:attention}6{}',
+                '{C:inactive}(Currently{} {X:red,C:white}X#1#{} {C:inactive}Mult){}'
+            }
+        },
+
+        j_sp_toad = {
+            name = "Toad",
+            text = {
+                '{X:edition,C:white}+^^^1{} Mult for each Blind',
+                '{C:attention}skipped{} this run',
+                '{C:inactive}(Currently{} {X:edition,C:white}^^^#1#{} {C:inactive}Mult){}',
+                '{X:edition,C:white,s:0.8}^^^{} {s:0.8}is pentation, the fifth hyperoperation{}'
+            }
+        },
+
+        j_sp_jimbro = {
+            name = "Jimbro",
+            text = {
+                '{C:red}+7625597484987{} Mult'
+            }
+        },
+
+        j_sp_unfairruler = {
+            name = "Unfair Ruler",
+            text = {
+                'This Joker gains {C:purple}+^2{} Mult',
+                'if played hand contains',
+                'a {C:attention}Straight{}',
+                '{C:inactive}(Currently{} {C:purple}^#1#{} {C:inactive}Mult){}'
+            }
+        },
+
+        j_sp_jackfruit = {
+            name = "Jackfruit",
+            text = {
+                '{C:attention}Retriggers{} the next',
+                '{C:attention}#1#{} scored Jacks'
+            }
+        },
+
+        j_sp_doublebongcloud = {
+            name = "Double Bongcloud",
+            text = {
+                'This Joker gains {C:edition}+^^4{} Mult',
+                'if the {C:blue}first hand{} of round',
+                'has {C:attention}only two scoring Kings{}',
+                '{C:inactive}(Currently{} {C:edition}^^#1#{}{C:edition}{} {C:inactive}Mult){}',
+                '{C:edition,s:0.8}^^{} {s:0.8}is tetration, the fourth hyperoperation{}'
+            }
+        },        
+
+        j_sp_freddyfazbear = {
+            name = "Freddy Fazbear",
+            text = {
+                'Retriggers {C:attention}Aces{}, {C:attention}9{}s, {C:attention}8{}s,',
+                'and {C:attention}7{}s five times'
+            }
+        },
+
+        j_sp_bonniebunny = {
+            name = "Bonnie the Bunny",
+            text = {
+                'This joker gains {X:blue,C:white}+X0.5{} Chips',
+                'every time a {C:attention}leftmost card{}',
+                'is triggered in a {C:attention}five-card',
+                'hand{}',
+                '{C:inactive}(Currently{} {X:blue,C:white}X#1#{} {C:inactive}Chips){}'
+            }
+        },
+
+        j_sp_chicachicken = {
+            name = "Chica the Chicken",
+            text = {
+                'This joker gains {X:red,C:white}+X0.5{} Mult',
+                'every time a {C:attention}rightmost card{}',
+                'is triggered in a {C:attention}five-card',
+                'hand{}',
+                '{C:inactive}(Currently{} {X:red,C:white}X#1#{} {C:inactive}Mult){}'
+            }
+        },
+
+        j_sp_foxy = {
+            name = "Foxy the Pirate Fox",
+            text = {
+                'This joker gains {C:money}+$5{}',
+                'if played hand contains',
+                'a {C:attention}Straight{}, total money',
+                'will be given at {C:attention}payout{}',
+                '{C:inactive}(Currently{} {C:money}$#1#{}{C:inactive}){}'
+            }
+        },
+
+        j_sp_noisyjoker = {
+            name = "Noisy Joker",
+            text = {
+                '{C:green}1 in 2{} chance to gain {C:red}+2{} Mult for',
+                'every scored card, {C:green}1 in 4{} chance to',
+                'lose {C:red}-1{} Mult for every scored card,',
+                '{C:green}1 in 10{} chance to gain {C:red}+10{} Mult for',
+                'every scored card',
+                '{C:inactive}(Currently{} {C:red}+#1#{} {C:inactive}Mult){}'
+            }
+        },
+
+        j_sp_speedrunner = {
+            name = "Speedrunner",
+            text = {
+                'This Joker gains {C:purple}^(^12){} Mult',
+                'if played hand contains a {C:attention}Straight{}.',
+                '{C:inactive}(Currently{} {C:purple}^#1#{} {C:inactive}Mult){}'
+            }
+        },
+
+        j_sp_cantaloupe = {
+            name = "Cantaloupe",
+            text = {
+                'This joker gains {C:purple}^(+7){}',
+                'Mult if played hand',
+                'contains a {C:attention}Full House{}',
+                '{C:inactive}(Currently {}{C:purple}^#1#{} {C:inactive}Mult){}'
+            }
+        },
+
+        j_sp_crazyhamburger = {
+            name = "Crazy Hamburger",
+            text = {
+                'This burger gains {C:purple}^+12{}',
+                'Mult every round if {C:attention}Crazy{}',
+                '{C:attention}Joker{} is present',
+                '{C:inactive}(Currently{} {C:purple}^#1#{} {C:inactive}Mult){}'
+            }
+        },
 
     },
 
