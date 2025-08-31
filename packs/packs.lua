@@ -1,23 +1,20 @@
 -- Register the atlas (MUST match the key)
 SMODS.Atlas({
-    key = 'p_shufflepack1',
+    key = 'shufflepack1',
     path = 'blankpack.png',
     px = 71,
     py = 95
 })
 
-SMODS.Booster({
-    name = "Shuffle Pack",
-    object_type = "Booster",
-    key = "sp_shufflepack1",
-    atlas = 'p_shufflepack1',
+SMODS.Booster {
+    key = "shufflepack1",
+    atlas = 'shufflepack1',
     pos = { x = 0, y = 0 },
-    config = { extra = 3, choose = 1, name = "Shuffle Pack"},
+    config = { extra = 3, choose = 1},
     kind = 'Buffoon',
-    weight = 100, -- for testing purposes
+    weight = 1000.0, 
     cost = 4,
-    order = 1,
-    group_key = 'sp_shufflepack1',
+    group_key = "k_sp_shuffle_pack",
     draw_hand = false,
     unlocked = true,
     discovered = false,
@@ -75,4 +72,4 @@ SMODS.Booster({
         ease_colour(G.C.DYN_UI.MAIN, G.C.ORANGE)
         ease_background_colour{new_colour = G.C.ORANGE, special_colour = G.C.BLACK, contrast = 2}
     end,
-})
+}

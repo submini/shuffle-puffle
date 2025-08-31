@@ -1,5 +1,8 @@
 ShufflePuffle = {}
 
+-- ensure mod localization file is loaded (no-op if already loaded)
+pcall(function() require("localization.en-us") end)
+
 ShufflePuffle.ENABLED_JOKERS = {
     -- Common
     "deckhugger",
@@ -69,6 +72,21 @@ for _, file in ipairs(rarity_src) do
         assert(SMODS.load_file("rarities/" .. file))()
     end
 end
+
+local consumable_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "/consumables")
+for _, file in ipairs(consumable_src) do
+    if file:match("%.lua$") then -- Only load .lua files
+        assert(SMODS.load_file("consumables/" .. file))()
+    end
+end
+
+local enhancement_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "/enhancements")
+for _, file in ipairs(enhancement_src) do
+    if file:match("%.lua$") then -- Only load .lua files
+        assert(SMODS.load_file("enhancements/" .. file))()
+    end
+end
+
 
 -- local rank_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "/ranks")
 --for _, file in ipairs(rank_src) do

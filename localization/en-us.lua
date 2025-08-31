@@ -691,6 +691,15 @@ return {
     },
 
     Other = {
+        undiscovered_sp_catarot = {
+            name = "Not Discovered",
+            text = {
+                "Purchase or use",
+                "this card in an",
+                "unseeded run to",
+                "learn what it does",
+                },
+        },
         p_sp_shufflepack1 = {
             name = "Shuffle Pack",
             text = {
@@ -704,6 +713,13 @@ return {
 
         misc = {
             dictionary = {
+                sp_saved_checkpoint = "Saved by Checkpoint",
+
+                k_catarot = "Catarot",
+                b_catarot_cards = "Catarot Cards",
+                k_sp_shuffle_pack = "Shuffle Pack",
+            },
+            v_dictionary = {
                 a_chips = "+#1#",
                 a_chips_minus = "-#1#",
                 a_hands = "+#1# Hands",
@@ -717,7 +733,10 @@ return {
                 a_xmult_minus = "-X#1# Mult",
                 a_dollars = "$#1#",
                 a_sellboost = "+$#1# Sell",
-                shufflepuffle_saved_checkpoint = "Saved by Checkpoint",
+            },
+            labels = {
+                catarot = "Catarot",
+                sp_shufflepack = "Shuffle Pack",
             }
         }
     }

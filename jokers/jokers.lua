@@ -1806,7 +1806,7 @@ SMODS.Joker{ --Checkpoint
         if context.end_of_round and context.game_over and context.main_eval and not context.blueprint then
                 return {
                     saved = true,
-                    saved = localize('shufflepuffle_saved_checkpoint'),
+                    saved = localize('sp_saved_checkpoint'),
                     message = "Wahoo!",
                     extra = {
                         func = function()
