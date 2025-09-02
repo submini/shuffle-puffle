@@ -1,19 +1,22 @@
--- Register the atlas (MUST match the key)
-SMODS.Atlas({
-    key = 'shufflepack1',
-    path = 'blankpack.png',
-    px = 71,
-    py = 95
-})
 
 SMODS.Booster {
     key = "shufflepack1",
+    name = "Shuffle Pack",
     atlas = 'shufflepack1',
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1},
     kind = 'Buffoon',
-    weight = 1000.0, 
+    weight = 1000.0,
     cost = 4,
+    loc_txt = { group_name = 'Shuffle Pack', },
+    loc_vars = function(self, info_queue, booster_card)
+        return {
+            vars = {
+                self.config.choose or 1,
+                self.config.extra or 3
+            },
+        }
+    end,
     group_key = "k_sp_shuffle_pack",
     draw_hand = false,
     unlocked = true,
@@ -33,9 +36,8 @@ SMODS.Booster {
             'j_sp_goldenglean', 'j_sp_luckylode', 'j_sp_auraamp', 'j_sp_maximumload', 'j_sp_lejokerjames', 
             'j_sp_nikolajokic','j_sp_handfulfortune', 'j_sp_handfulmultiply', 'j_sp_pacer', 'j_sp_openinggambit',
             'j_sp_twosides', 'j_sp_cosmicdust', 'j_sp_quintetreward', 'j_sp_straighttobusiness', 'j_sp_pointguard',
-            'j_sp_allwild', 'j_sp_numberline', 'j_sp_lukadoncic', 'j_sp_beringstrait', 'j_sp_lemniscate', 'j_sp_toad',
-            'j_sp_jimbro', 'j_sp_unfairruler', 'j_sp_jackfruit', 'j_sp_doublebongcloud', 'j_sp_freddyfazbear', 'j_sp_bonniebunny',
-            'j_sp_chicachicken', 'j_sp_foxy', 'j_sp_noisyjoker', 'j_sp_speedrunner', 'j_sp_cantaloupe', 'j_sp_crazyhamburger'
+            'j_sp_allwild', 'j_sp_numberline', 'j_sp_lukadoncic', 'j_sp_jackfruit', 'j_sp_freddyfazbear', 'j_sp_bonniebunny',
+            'j_sp_chicachicken', 'j_sp_foxy', 'j_sp_noisyjoker', 'j_sp_cantaloupe'
         }
 
         local chosen_key = pseudorandom_element(jokers_pool)
@@ -57,15 +59,6 @@ SMODS.Booster {
         local target_area = G.pack_cards or G.jokers
         return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
 
-    end,
-
-    loc_vars = function(self, info_queue, booster_card)
-        return {
-            vars = {
-                self.config.choose or 1,
-                self.config.extra or 3
-            }
-        }
     end,
 
     ease_background_colour = function(self)

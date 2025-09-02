@@ -10,7 +10,7 @@
 ],
   "description": "Adds a bunch of stuff to the game.",
   "prefix": "sp",
-  "prefixcomment":"ABOVE PREFIX IS ADDED TO E.G. LOCALIZATION!",
+  "prefixcomment":"ryrtyrty",
   "main_file": "shufflepuffle.lua",
   "priority": 9999,
   "badge_colour": "E67E22",
@@ -19,8 +19,8 @@
   "requires-steamodded": true,
   "requires-talisman": true,
   "dependencies" : [
-    "Steamodded (>=1.0.0~ALPHA-1423h)",
-    "Lovely (>=0.7.1)",
+    "Lovely",
+    "Steamodded",
     "Talisman"
   ]
 }

@@ -690,6 +690,16 @@ return {
     },
     },
 
+    Catarot = {
+        c_sp_sacredbirman = {
+            name = "Sacred Birman",
+            text = {
+                'Enhances 2 selected cards',
+                'to {C:attention}Cartes Françaises{}'
+            }
+        },
+    },
+
     Other = {
         undiscovered_sp_catarot = {
             name = "Not Discovered",
@@ -715,9 +725,16 @@ return {
             dictionary = {
                 sp_saved_checkpoint = "Saved by Checkpoint",
 
+                k_sp_unfair = "Unfair",
+
                 k_catarot = "Catarot",
                 b_catarot_cards = "Catarot Cards",
+
                 k_sp_shuffle_pack = "Shuffle Pack",
+            },
+            labels = {
+                catarot = "Catarot",
+                sp_shufflepack1 = "Shuffle Pack",
             },
             v_dictionary = {
                 a_chips = "+#1#",
@@ -734,10 +751,6 @@ return {
                 a_dollars = "$#1#",
                 a_sellboost = "+$#1# Sell",
             },
-            labels = {
-                catarot = "Catarot",
-                sp_shufflepack = "Shuffle Pack",
-            }
         }
     }
 

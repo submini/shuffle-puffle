@@ -6,14 +6,13 @@ SMODS.Atlas({
 })
 
 SMODS.ConsumableType {
-    --object_type = "ConsumableType",
     key = 'Catarot',
-    default = 'c_sp_sacredbirman',
-    primary_colour = G.C.EDITION,
-    secondary_colour = G.C.DARK_EDITION,
+    primary_colour = { 1, 1, 1, 1 },
+    secondary_colour = {0.91, 0.65, 0.74, 1},
     collection_rows = { 4, 4 },
     shop_rate = 4,
     loc_txt = { name = "Catarot" },
+    default = 'c_sp_sacredbirman',
 	can_stack = true,
 	can_divide = true,
 }
@@ -21,15 +20,9 @@ SMODS.ConsumableType {
 SMODS.Consumable {
     --object_type = "Consumable",
     key = 'sacredbirman',
+    name = 'Sacred Birman',
     set = 'Catarot',
     pos = { x = 0, y = 0 },
-    loc_txt = {
-        name = 'Sacred Birman',
-        text = {
-            [1] = 'Enhances 2 selected cards',
-            [2] = 'to {C:attention}Cartes Françaises{}'
-        }
-    },
     cost = 3,
     unlocked = true,
     discovered = false,
@@ -122,19 +115,4 @@ SMODS.Consumable {
     can_use = function(self, card)
         return (#G.hand.highlighted == 2)
     end
-}
-
-local catarot_cards = {
-    sacredbirman,
-
-}
-return {
-    name = "Catarot Cards",
-    init = function()
-        -- no special init required for now
-    end,
-    items = {
-        catarot,        -- ConsumableType
-        sacredbirman,   -- Consumable
-    },
 }

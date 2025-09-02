@@ -1,9 +1,3 @@
-SMODS.Atlas({
-    key = "fractionranks",
-    path = "fractionranks.png",
-    px = 71,
-    py = 95,
-})
 
 SMODS.Rank {
     hc_atlas = "fractionranks",
