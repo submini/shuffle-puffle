@@ -677,10 +677,61 @@ return {
             }
         },
 
+        j_sp_bigh = {
+            name = "H",
+            text = {
+                '{X:red,C:white}X12{} Mult if played hand',
+                'contains a {C:attention}Straight{}'
+            }
+        },
+
+        j_sp_smallh = {
+            name = "h",
+            text = {
+                '{X:blue,C:white}X4.5{} Chips if played hand',
+                'contains a {C:attention}Straight{}'
+            }
+        },
+
+        j_sp_hbuilding = {
+            name = "H Building",
+            text = {
+                'This Joker gains {C:blue}+#1#{} Chips',
+                'if played hand contains a',
+                '{C:attention}Straight{}, chip gain increases',
+                'by {C:blue}+35{} Chips every time the',
+                '{C:attention}Saturn{} {C:planet}planet card{} is used',
+                '{C:inactive}(Currently{} {C:blue}+#2#{} {C:inactive}Chips){}'
+            }
+        },
+
+        j_sp_dancingh = {
+            name = "Dancing H",
+            text = {
+                '{C:green}#1# in #2#{} chance{} to',
+                '{C:attention}level up played poker',
+                'hand{}, probability increases',
+                'by {C:attention}1{} for every other Joker',
+                'owned'
+            }
+        },
+
+        j_sp_gordonramsayh = {
+            name = "Gordon Ramsay H",
+            text = {
+                'This Joker gains {C:red}+#1#{}',
+                 'Mult when round starts,',
+                'mult gain increases by',
+                '{C:red}+24{} Mult for every card',
+                'eaten',
+                '{C:inactive}(Currently{} {C:red}+#2#{} {C:inactive}Mult){}',
+                '{C:inactive,s:0.8}(eaten = destroyed){}'
+            }
+        },
     },
 
     Enhanced = {
-        m_glass={
+        m_sp_glass={
         name="Glass Card",
         text={
         "{X:mult,C:white} X#1# {} Mult",

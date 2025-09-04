@@ -429,7 +429,7 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "toad",
-    path = "placeholder.png",
+    path = "toad.png",
     px = 71,
     py = 95
 })
@@ -443,7 +443,7 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "unfairruler",
-    path = "placeholder.png",
+    path = "unfairruler.png",
     px = 71,
     py = 95
 })
@@ -492,7 +492,7 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "noisyjoker",
-    path = "placeholder.png",
+    path = "noisyjoker.png",
     px = 71,
     py = 95
 })
@@ -506,7 +506,7 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "cantaloupe",
-    path = "placeholder.png",
+    path = "cantaloupe.png",
     px = 71,
     py = 95
 })
@@ -517,6 +517,56 @@ SMODS.Atlas({
     px = 71,
     py = 95
 })
+
+SMODS.Atlas({
+    key = "bigh",
+    path = "bigh.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "smallh",
+    path = "smallh.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "hbuilding",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "dancingh",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "gordonramsayh",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lavalamph",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "hoftheh",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
 
 -- boosters
 SMODS.Atlas({
