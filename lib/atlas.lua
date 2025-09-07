@@ -640,6 +640,13 @@ SMODS.Atlas({
     py = 95,
 })
 
+SMODS.Atlas {
+key = 'devonrex',
+    path = 'devonrex.png',
+    px = 71,
+    py = 95,
+}
+
 SMODS.Atlas({
     key = 'birman',
     path = 'birman.png',

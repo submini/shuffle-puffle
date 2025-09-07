@@ -100,3 +100,42 @@ SMODS.Enhancement {
     end
 }
 
+SMODS.Enhancement {
+    key = 'stripedcard',
+    pos = { x = 0, y = 0 },
+    config = {
+        extra = {
+            turn = 1,
+            chips = 10,
+            mult = 10
+        }
+    },
+    loc_txt = {
+        name = 'Striped Card',
+        text = {
+        [1] = 'Alternatingly switches',
+        [2] = 'the card\'s effect to',
+        [3] = '{C:blue}+10{} extra Chips or {C:red}+10{} Mult'
+    }
+    },
+    atlas = 'Enhancement',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 5,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play and (card.ability.extra.turn or 0) == 2 then
+            card.ability.extra.turn = 1
+            SMODS.calculate_effect({chips = card.ability.extra.chips}, card)
+        end
+        if context.main_scoring and context.cardarea == G.play and (card.ability.extra.turn or 0) == 1 then
+            card.ability.extra.turn = 2
+            SMODS.calculate_effect({mult = card.ability.extra.mult}, card)
+        end
+    end
+}
