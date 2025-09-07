@@ -567,6 +567,19 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "hegative",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "hhhhh",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
 
 -- boosters
 SMODS.Atlas({
@@ -585,11 +598,67 @@ SMODS.Atlas({
 })
 
 -- catarots
+SMODS.Atlas({
+    key = 'ragdoll',
+    path = 'ragdoll.png',
+    px = 71,
+    py = 95,
+})
+
+SMODS.Atlas({
+    key = 'siamese',
+    path = 'siamese.png',
+    px = 71,
+    py = 95,
+})
+
+SMODS.Atlas({
+    key = 'bengal',
+    path = 'bengal.png',
+    px = 71,
+    py = 95,
+})
+
+SMODS.Atlas({
+    key = 'russianblue',
+    path = 'russianblue.png',
+    px = 71,
+    py = 95,
+})
+
+SMODS.Atlas({
+    key = 'abyssinian',
+    path = 'abyssinian.png',
+    px = 71,
+    py = 95,
+})
+
+SMODS.Atlas({
+    key = 'chartreux',
+    path = 'chartreux.png',
+    px = 71,
+    py = 95,
+})
+
+SMODS.Atlas({
+    key = 'birman',
+    path = 'birman.png',
+    px = 71,
+    py = 95,
+})
 
 -- enhancements
 SMODS.Atlas({
     key = 'francaise',
     path = 'francaise.png',
+    px = 71,
+    py = 95
+})
+
+-- seals
+SMODS.Atlas({
+    key = 'chartreuseseal',
+    path = 'chartreuseseal.png',
     px = 71,
     py = 95
 })

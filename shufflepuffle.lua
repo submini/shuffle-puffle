@@ -9,10 +9,14 @@ end
 local files = {
     --"config",
     "lib/atlas",
+    "lib/init",
+    "lib/music",
     -- ight bro
     "items/jokers",
     "items/consumables/catarot",
+    "items/consumables/exoplanet",
     "items/enhancements",
+    "items/seals",
     "items/packs",
     "items/planets",
     "items/ranks",

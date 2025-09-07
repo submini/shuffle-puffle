@@ -18,22 +18,21 @@ local jokers_pool = {
 SMODS.Booster {
     key = "shufflepack1",
     name = "Shuffle Pack",
+
     atlas = 'shufflepack1',
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1},
     kind = 'Buffoon',
-    weight = 1000.0,
+    weight = 2,
     cost = 4,
-    loc_txt = { group_name = 'Shuffle Pack', },
-    loc_vars = function(self, info_queue, booster_card)
-        return {
-            vars = {
-                self.config.choose or 1,
-                self.config.extra or 3
-            },
-        }
-    end,
-    group_key = "k_sp_shuffle_pack",
+    loc_txt = { 
+        name = "Shuffle Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Shuffle Pack', 
+    },
+    --group_key = "k_sp_shuffle_pack",
     draw_hand = false,
     unlocked = true,
     discovered = false,
@@ -61,7 +60,66 @@ SMODS.Booster {
     end,
 
     ease_background_colour = function(self)
-        ease_colour(G.C.DYN_UI.MAIN, G.C.RED)
-        ease_background_colour{new_colour = G.C.RED, special_colour = G.C.BLACK, contrast = 2}
+        ease_colour(G.C.DYN_UI.MAIN, HEX("E67E22"))
+        ease_background_colour{new_colour = HEX("E67E22"), special_colour = G.C.BLACK, contrast = 2}
+    end,
+}
+
+SMODS.Booster {
+    key = "carcanapack1",
+    name = "Carcana Pack",
+
+    atlas = 'shufflepack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 3, choose = 1},
+    kind = 'Arcana',
+    weight = 2,
+    cost = 4,
+    loc_txt = { 
+        name = "Carcana Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Carcana Pack', 
+    },
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = true,
+    unlocked = true,
+    discovered = false,
+
+create_card = function(self, booster_card)
+    -- build Catarot pool fresh
+    local pool = {}
+    for k, v in pairs(G.P_CENTERS) do
+        if v.set == 'Catarot' then
+            table.insert(pool, k)
+        end
+    end
+
+    -- fall back if empty
+    if #pool == 0 then
+        return create_card("Consumable", G.consumeables, "c", nil, true, true, "c_fool", nil)
+    end
+
+    -- persistent pool for this booster
+    booster_card.local_pool = booster_card.local_pool or {unpack(pool)}
+
+    -- choose one (safe integer)
+    local chosen_idx = math.floor(pseudorandom(pseudoseed("carcana")) * #booster_card.local_pool) + 1
+    local chosen_key = booster_card.local_pool[chosen_idx]
+
+    -- remove so it won’t repeat
+    table.remove(booster_card.local_pool, chosen_idx)
+
+    -- spawn
+    local chosen_rarity = (G.P_CENTERS[chosen_key] and G.P_CENTERS[chosen_key].rarity) or "c"
+    local target_area = G.pack_cards or G.consumeables
+    return create_card("Consumable", target_area, chosen_rarity, nil, true, true, chosen_key, nil)
+end,
+
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("E8A6BD"))
+        ease_background_colour{new_colour = HEX("E8A6BD"), special_colour = HEX("FFFFFF"), contrast = 2}
     end,
 }

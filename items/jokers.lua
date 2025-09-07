@@ -75,10 +75,20 @@ SMODS.Joker{ --Deckhugger
     unlocked = true,
     discovered = false,
     atlas = 'deckhugger',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -130,10 +140,20 @@ SMODS.Joker{ --Landlord
     unlocked = false,
     discovered = false,
     atlas = 'landlord',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     set_ability = function(self, card, initial)
         G.GAME.current_round.level_hand = 'Full House'
@@ -191,10 +211,20 @@ SMODS.Joker{ --Cowboy From Hell
     unlocked = true,
     discovered = false,
     atlas = 'cowboyfromhell',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -236,6 +266,7 @@ SMODS.Joker{
     unlocked = true,
     discovered = false,
     atlas = 'woodenruler',
+    pools = { ["Shuffle"] = true },
 
     -- inject current mult into loc_vars
     loc_vars = function(self, info_queue, card)
@@ -245,6 +276,15 @@ SMODS.Joker{
             }
         }
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
     if context.cardarea == G.jokers and context.joker_main then
@@ -294,6 +334,7 @@ SMODS.Joker{ -- Skyline
     unlocked = true,
     discovered = false,
     atlas = "skyline",
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         local rank = card.ability.extra.rank
@@ -312,6 +353,15 @@ SMODS.Joker{ -- Skyline
             }
         }
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     set_ability = function(self, card, initial)
         card.ability.extra.rank = pseudorandom("skyline_init", 2, 14)
@@ -415,6 +465,15 @@ SMODS.Joker{
         }
     end,
 
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
+
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
             local face_count = count_face_cards()
@@ -459,10 +518,20 @@ SMODS.Joker{ --Mood Ring
     unlocked = true,
     discovered = false,
     atlas = 'moodring',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -518,10 +587,20 @@ SMODS.Joker {
             "Retriggers every {C:attention}2{}, {C:attention}7{}, {C:attention}Ace{} and {C:attention}8{}"
         }
     },
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play then
@@ -567,10 +646,20 @@ SMODS.Joker{ --Ragazzo
     unlocked = true,
     discovered = false,
     atlas = 'ragazzo',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.chips, card.ability.extra.xmult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -648,10 +737,20 @@ SMODS.Joker{ --Symmetry
     unlocked = true,
     discovered = false,
     atlas = 'symmetry',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.xmult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -827,10 +926,20 @@ SMODS.Joker{ --Finisher
     unlocked = true,
     discovered = false,
     atlas = 'finisher',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -908,10 +1017,20 @@ SMODS.Joker{ --Spare Change
     unlocked = true,
     discovered = false,
     atlas = 'sparechange',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.chips}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.discard and not context.blueprint then
@@ -959,10 +1078,20 @@ SMODS.Joker{ --Spare Dollars
     unlocked = true,
     discovered = false,
     atlas = 'sparedollars',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.mult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.discard and not context.blueprint then
@@ -1010,10 +1139,20 @@ SMODS.Joker{ --JACKBOYS
     unlocked = true,
     discovered = false,
     atlas = 'jackboys',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.xmult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -1059,10 +1198,20 @@ SMODS.Joker{ --Placeholder
     unlocked = true,
     discovered = false,
     atlas = 'placeholder',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
 calculate = function(self, card, context)
     local left_joker = nil
@@ -1142,10 +1291,20 @@ SMODS.Joker{ --Entanglement
     unlocked = true,
     discovered = false,
     atlas = 'entanglement',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -1210,10 +1369,20 @@ SMODS.Joker{ --Measurement
     unlocked = true,
     discovered = false,
     atlas = 'measurement',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -1277,10 +1446,20 @@ SMODS.Joker{ --Checkpoint
     unlocked = true,
     discovered = false,
     atlas = 'checkpoint',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.end_of_round and context.game_over and context.main_eval and not context.blueprint then
@@ -1339,10 +1518,20 @@ SMODS.Joker{ --Alchemist
     unlocked = true,
     discovered = false,
     atlas = 'alchemist',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.chips, card.ability.extra.mult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.selling_card and not context.blueprint then
@@ -1409,6 +1598,16 @@ SMODS.Joker{ --Top-up
     unlocked = true,
     discovered = false,
     atlas = 'topup',
+    pools = { ["Shuffle"] = true },
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.setting_blind and not context.blueprint then
@@ -1445,10 +1644,19 @@ SMODS.Joker{ --Virus
     unlocked = true,
     discovered = false,
     atlas = 'virus',
+    pools = { ["Shuffle"] = true },
 
    loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -1533,10 +1741,20 @@ SMODS.Joker{ --Triangular Joker
     unlocked = true,
     discovered = false,
     atlas = 'triangular',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.mult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -1583,10 +1801,19 @@ SMODS.Joker{ --Resonance
     unlocked = true,
     discovered = false,
     atlas = 'resonance',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.xmult}}
     end,
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -1632,10 +1859,19 @@ SMODS.Joker{ --Frog
     unlocked = true,
     discovered = false,
     atlas = 'frog',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.expmult}}
     end,
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.skip_blind and not context.blueprint then
@@ -1684,10 +1920,20 @@ SMODS.Joker{ --Encore
     unlocked = true,
     discovered = false,
     atlas = 'encore',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -1754,10 +2000,20 @@ SMODS.Joker{ --Scrap Heap
     unlocked = true,
     discovered = false,
     atlas = 'scrapheap',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.constant, card.ability.extra.chips}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -1836,10 +2092,20 @@ SMODS.Joker{ --Lone Wolf
     unlocked = true,
     discovered = false,
     atlas = 'lonewolf',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -1879,10 +2145,20 @@ SMODS.Joker{ --Coin Flip
     unlocked = true,
     discovered = false,
     atlas = 'coinflip',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.setting_blind and not context.blueprint then
@@ -1925,10 +2201,20 @@ SMODS.Joker{ --Black Cat
     unlocked = true,
     discovered = false,
     atlas = 'blackcat',
+    pools = { ["Shuffle"] = true },
 
 	loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_glass
 	end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.setting_blind and not context.blueprint then
@@ -1989,10 +2275,20 @@ SMODS.Joker{ --Lucky Break
     unlocked = true,
     discovered = false,
     atlas = 'luckybreak',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_lucky
 	end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -2033,10 +2329,20 @@ SMODS.Joker{ --Apex Joker
     unlocked = true,
     discovered = false,
     atlas = 'apex',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.xmult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.end_of_round and context.main_eval and G.GAME.blind.boss and not context.blueprint then
@@ -2085,10 +2391,20 @@ SMODS.Joker{ --One-Time Use
     unlocked = true,
     discovered = false,
     atlas = 'onetimeuse',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -2149,10 +2465,20 @@ SMODS.Joker{ --Speed Ramp
     unlocked = true,
     discovered = false,
     atlas = 'speedramp',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.chips}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.end_of_round and context.game_over == false and context.main_eval and not context.blueprint then
@@ -2198,10 +2524,20 @@ SMODS.Joker{ --Sacrifice
     unlocked = true,
     discovered = false,
     atlas = 'sacrifice',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     add_to_deck = function(self, card, from_debuff)
         G.jokers.config.card_limit = G.jokers.config.card_limit + 2
@@ -2246,10 +2582,20 @@ SMODS.Joker{ --Sir Baudelaire
     unlocked = true,
     discovered = false,
     atlas = 'sirbaudelaire',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -2295,10 +2641,20 @@ SMODS.Joker{ --IGOR
     unlocked = true,
     discovered = false,
     atlas = 'igor',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.mult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -2346,10 +2702,20 @@ SMODS.Joker{ --Ritualist
     unlocked = true,
     discovered = false,
     atlas = 'ritualist',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.cons, card.ability.extra.mult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.using_consumeable and not context.blueprint then
@@ -2415,11 +2781,21 @@ SMODS.Joker{ --Straightbroidery
     unlocked = true,
     discovered = false,
     atlas = 'straightbroidery',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, center)
     info_queue[#info_queue + 1] = { key = 'tag_double', set = 'Tag' }
     return { vars = {} }
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -2466,10 +2842,20 @@ SMODS.Joker{ --Stone Sentinel
     unlocked = true,
     discovered = false,
     atlas = 'stonesentinel',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, center)
 	info_queue[#info_queue + 1] = G.P_CENTERS.m_stone
 	end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -2508,10 +2894,19 @@ SMODS.Joker{ --Glass Glimmer
     unlocked = true,
     discovered = false,
     atlas = 'glassglimmer',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, center)
 	info_queue[#info_queue + 1] = G.P_CENTERS.m_glass
 	end,
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -2550,10 +2945,20 @@ SMODS.Joker{ --Steel Spark
     unlocked = true,
     discovered = false,
     atlas = 'steelspark',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, center)
 	info_queue[#info_queue + 1] = G.P_CENTERS.m_steel
 	end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -2592,10 +2997,20 @@ SMODS.Joker{ --Golden Glean
     unlocked = true,
     discovered = false,
     atlas = 'goldenglean',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, center)
 	info_queue[#info_queue + 1] = G.P_CENTERS.m_gold
 	end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -2634,10 +3049,20 @@ SMODS.Joker{ --Lucky Lode
     unlocked = true,
     discovered = false,
     atlas = 'luckylode',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, center)
 	info_queue[#info_queue + 1] = G.P_CENTERS.m_lucky
 	end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -2677,10 +3102,20 @@ SMODS.Joker{ --Aura Amp
     unlocked = true,
     discovered = false,
     atlas = 'auraamp',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -2729,10 +3164,20 @@ SMODS.Joker{ --Maximum Load
     unlocked = true,
     discovered = false,
     atlas = 'maximumload',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -2772,6 +3217,7 @@ SMODS.Joker{ --LeJoker James
     unlocked = true,
     discovered = false,
     atlas = 'lejokerjames',
+    pools = { ["Shuffle"] = true },
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -2817,6 +3263,7 @@ SMODS.Joker{ --Nikola Jokić
     unlocked = true,
     discovered = false,
     atlas = 'nikolajokic',
+    pools = { ["Shuffle"] = true },
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -2865,10 +3312,20 @@ SMODS.Joker{ --Handful Fortune
     unlocked = true,
     discovered = false,
     atlas = 'handfulfortune',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.constant, card.ability.extra.chips}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -2950,10 +3407,20 @@ SMODS.Joker{ --Handful Multiply
     unlocked = true,
     discovered = false,
     atlas = 'handfulmultiply',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.constant, card.ability.extra.mult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -3032,10 +3499,20 @@ SMODS.Joker{ --Pacer
     unlocked = true,
     discovered = false,
     atlas = 'pacer',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.mult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -3077,6 +3554,7 @@ SMODS.Joker{ --Opening Gambit
     unlocked = true,
     discovered = false,
     atlas = 'openinggambit',
+    pools = { ["Shuffle"] = true },
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -3122,10 +3600,20 @@ SMODS.Joker{ --Two Sides
     unlocked = true,
     discovered = false,
     atlas = 'twosides',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.chips, card.ability.extra.mult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
@@ -3180,10 +3668,20 @@ SMODS.Joker{ --Cosmic Dust
     unlocked = true,
     discovered = false,
     atlas = 'cosmicdust',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.xmult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.selling_card and not context.blueprint then
@@ -3243,11 +3741,21 @@ SMODS.Joker{ --Quintet Reward
     unlocked = true,
     discovered = false,
     atlas = 'quintetreward',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'j_modprefix_quintetreward') --Please-work
         return {vars = {card.ability.extra.chips, new_numerator, new_denominator}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -3294,6 +3802,7 @@ SMODS.Joker{ --Straight to Business
     unlocked = true,
     discovered = false,
     atlas = 'straighttobusiness',
+    pools = { ["Shuffle"] = true },
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -3334,10 +3843,20 @@ SMODS.Joker{ --Point Guard
     unlocked = true,
     discovered = false,
     atlas = 'pointguard',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.mult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -3386,11 +3905,21 @@ SMODS.Joker{ --All Wild
     unlocked = true,
     discovered = false,
     atlas = 'allwild',
+    pools = { ["Shuffle"] = true },
 
     	loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_wild
-        --info_queue[#info_queue + 1] = G.P_CENTERS.red_seal
+        info_queue[#info_queue + 1] = G.P_CENTERS.red_seal
 	end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
 
     calculate = function(self, card, context)
@@ -3445,6 +3974,7 @@ SMODS.Joker{ --Number Line
     unlocked = true,
     discovered = false,
     atlas = 'numberline',
+    pools = { ["Shuffle"] = true },
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -3488,10 +4018,20 @@ SMODS.Joker{ --Luka Dončić
     unlocked = true,
     discovered = false,
     atlas = 'lukadoncic',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.xchips}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -3596,6 +4136,15 @@ SMODS.Joker{ --Lemniscate
         return {vars = {card.ability.extra.xmult}}
     end,
 
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
+
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play  then
             if (context.other_card:get_id() == 8 or context.other_card:get_id() == 3 or context.other_card:get_id() == 4 or context.other_card:get_id() == 6) then
@@ -3642,6 +4191,15 @@ SMODS.Joker{ --Toad
     loc_vars = function(self, info_queue, card)
         return { vars = { lenient_bignum(card.ability.extra.eeemult) } }
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.skip_blind and not context.blueprint then
@@ -3739,6 +4297,15 @@ SMODS.Joker{ --Unfair Ruler
         return {vars = {card.ability.extra.expmult}}
     end,
 
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
+
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             if next(context.poker_hands["Straight"]) then
@@ -3789,10 +4356,20 @@ SMODS.Joker{ --Jackfruit
     unlocked = true,
     discovered = false,
     atlas = 'jackfruit',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.retriggersleft}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play  then
@@ -3856,6 +4433,15 @@ SMODS.Joker{ -- Double Bongcloud
         return { vars = { lenient_bignum(card.ability.extra.eemult) } }
     end,
 
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
+
     calculate = function(self, card, context)
         -- First hand condition
         if context.before and G.GAME.current_round.hands_played == 0 and context.full_hand then
@@ -3916,6 +4502,16 @@ SMODS.Joker{ --Freddy Fazbear
     unlocked = true,
     discovered = false,
     atlas = 'freddyfazbear',
+    pools = { ["Shuffle"] = true },
+
+        in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.repetition and context.cardarea == G.play  then
@@ -3961,10 +4557,20 @@ SMODS.Joker{ --Bonnie the Bunny
     unlocked = true,
     discovered = false,
     atlas = 'bonniebunny',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.xchips}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play  then
@@ -4015,10 +4621,20 @@ SMODS.Joker{ --Chica the Chicken
     unlocked = true,
     discovered = false,
     atlas = 'chicachicken',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.xmult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play  then
@@ -4069,10 +4685,20 @@ SMODS.Joker{ --Foxy the Pirate Fox
     unlocked = true,
     discovered = false,
     atlas = 'foxy',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.money}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
@@ -4127,6 +4753,7 @@ SMODS.Joker{ --Noisy Joker
     unlocked = true,
     discovered = false,
     atlas = 'noisyjoker',
+    pools = { ["Shuffle"] = true },
 
     loc_vars = function(self, info_queue, card)
         local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'j_modprefix_noisyjoker')
@@ -4134,6 +4761,15 @@ SMODS.Joker{ --Noisy Joker
         local new_numerator3, new_denominator3 = SMODS.get_probability_vars(card, 1, card.ability.extra.odds3, 'j_modprefix_noisyjoker')
         return {vars = {card.ability.extra.mult, new_numerator, new_denominator, new_numerator2, new_denominator2, new_numerator3, new_denominator3}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play  then
@@ -4197,6 +4833,15 @@ SMODS.Joker{ --Speedrunner
     loc_vars = function(self, info_queue, card)
         return { vars = { string.format("%.6g", card.ability.extra.emult) } }
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -4263,6 +4908,15 @@ SMODS.Joker{ --Cantaloupe
         return {vars = {card.ability.extra.emult}}
     end,
 
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
+
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             if next(context.poker_hands["Full House"]) then
@@ -4321,9 +4975,26 @@ SMODS.Joker{ --Crazy Hamburger
     discovered = false,
     atlas = 'crazyhamburger',
 
-    loc_vars = function(self, info_queue, card)
-        return {vars = {card.ability.extra.mult}}
-    end,
+loc_vars = function(self, info_queue, card)
+    -- add crazy joker text to tooltip
+    info_queue[#info_queue + 1] = G.P_CENTERS.j_crazy
+    
+    -- return your custom vars
+    return {
+        vars = {
+            card.ability.extra.mult
+        }
+    }
+end,
+
+in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.setting_blind  then
@@ -4385,6 +5056,7 @@ SMODS.Joker{ --H
     unlocked = true,
     discovered = false,
     atlas = 'bigh',
+    pools = { ["H"] = true },
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
@@ -4430,6 +5102,7 @@ SMODS.Joker{ --h
     unlocked = true,
     discovered = false,
     atlas = 'smallh',
+    pools = { ["H"] = true },
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
@@ -4480,6 +5153,20 @@ SMODS.Joker{ --H Building
     unlocked = true,
     discovered = false,
     atlas = 'hbuilding',
+    pools = { ["H"] = true },
+
+    loc_vars = function(self, info_queue, center)
+    info_queue[#info_queue + 1] = G.P_CENTERS.c_saturn
+    end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.gainvalue, card.ability.extra.chips}}
@@ -4538,6 +5225,7 @@ SMODS.Joker {
             [1] = 'Unlocked by default.'
         }
     },
+    pools = { ["H"] = true },
     pos = {x = 0, y = 0},
     display_size = {w = 71, h = 95},
     cost = 8,
@@ -4565,6 +5253,15 @@ SMODS.Joker {
 
         return {vars = {numerator, denominator}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     -- main effect
     calculate = function(self, card, context)
@@ -4643,10 +5340,20 @@ SMODS.Joker{ --Gordon Ramsay H
     unlocked = true,
     discovered = false,
     atlas = 'gordonramsayh',
+    pools = { ["H"] = true },
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.multgain, card.ability.extra.mult}}
     end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
@@ -4715,6 +5422,7 @@ SMODS.Joker{ --Lava Lamp H
     unlocked = true,
     discovered = false,
     atlas = 'lavalamph',
+    pools = { ["H"] = true },
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
@@ -4767,11 +5475,21 @@ SMODS.Joker{ --H of The H
     unlocked = true,
     discovered = false,
     atlas = 'hoftheh',
+    pools = { ["H"] = true },
 
 	loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.j_crazy
+        info_queue[#info_queue + 2] = G.P_CENTERS.e_negative
 	end,
 
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
     calculate = function(self, card, context)
         if context.setting_blind  then
                 return {
@@ -4798,3 +5516,83 @@ SMODS.Joker{ --H of The H
         end
     end
 }
+
+SMODS.Joker{ --Hegative
+    key = "hegative",
+    config = {
+        extra = {
+            respect = 0
+        }
+    },
+    loc_txt = {
+        name = 'Hegative',
+        text = {
+            [1] = 'Creates a random {C:attention}Negative',
+            [2] = 'Joker{} when Boss Blind is',
+            [3] = 'defeated',
+            [4] = '{C:inactive}(only{} {C:common}Common{} {C:inactive}and {}{C:uncommon}Uncommon{}{C:inactive}){}'
+        },
+        unlock = {'Unlocked by default.'}
+    },
+    pos = {x = 0, y = 0},
+    display_size = {w = 71, h = 95},
+    cost = 16,
+    rarity = "sp_h_rare",
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'hegative',
+    pools = { ["H"] = true },
+
+    loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
+	end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
+
+    calculate = function(self, card, context)
+        if context.end_of_round and context.main_eval and G.GAME.blind.boss then
+            return {
+                func = function()
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            -- roll rarity: 50% common, 50% uncommon
+                            local rarities = {"Common", "Uncommon"}
+                            local rarity = pseudorandom_element(rarities, pseudoseed("hegative_roll"))
+
+                            local joker_card = SMODS.add_card({
+                                set = 'Joker',
+                                rarity = rarity
+                            })
+
+                            if joker_card then
+                                joker_card:set_edition("e_negative", true)
+                            end
+
+                            return true
+                        end
+                    }))
+
+                    card_eval_status_text(
+                        context.blueprint_card or card,
+                        'extra',
+                        nil, nil, nil,
+                        {message = 'H!', colour = G.C.DARK_EDITION}
+                    )
+
+                    return true
+                end
+            }
+        end
+    end
+}
+

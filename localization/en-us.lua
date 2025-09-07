@@ -728,6 +728,43 @@ return {
                 '{C:inactive,s:0.8}(eaten = destroyed){}'
             }
         },
+
+        j_sp_lavalamph = {
+            name = "Lava Lamp H",
+            text = {
+                '{C:green}1 in 2{} chance for {X:red,C:white}X1.6{} Mult,',
+                '{C:green}1 in 4{} chance for {X:red,C:white}X0.8{} Mult,',
+                '{C:green}1 in 6{} chance to give {C:money}$12{}',
+                'if played hand contains a {C:attention}Straight{}'
+            }
+        },
+
+        j_sp_hoftheh = {
+            name = "H of the H",
+            text = {
+                'Creates a Negative',
+                '{C:attention}Crazy Joker{}',
+                'when {C:attention}Blind{} is selected'
+            }
+        },
+
+        j_sp_hegative = {
+            name = "Hegative",
+            text = {
+                'Creates a random {C:attention}Negative',
+                'Joker{} when Boss Blind is',
+                'defeated',
+                '{C:inactive}(only{} {C:common}Common{} {C:inactive}and {}{C:uncommon}Uncommon{}{C:inactive}){}'
+            }
+        },
+
+        j_sp_hhhhh = {
+            name = "HHHHH",
+            text = {
+                "All hands count",
+                "as containing a {C:attention}Straight{}"
+            }
+        },
     },
 
     Enhanced = {
@@ -742,11 +779,55 @@ return {
     },
 
     Catarot = {
-        c_sp_sacredbirman = {
-            name = "Sacred Birman",
+        c_sp_birman = {
+            name = "Birman",
             text = {
-                'Enhances 2 selected cards',
+                'Enhances up to 2', 
+                'selected cards',
                 'to {C:attention}Cartes Françaises{}'
+            }
+        },
+        c_sp_ragdoll = {
+            name = "Ragdoll",
+            text = {
+                'Enhances 1',
+                'selected card',
+                'to a {C:attention}Trading Card{}'
+            }
+        },
+        c_sp_siamese = {
+            name = "Siamese",
+            text = {
+                'Enhances up to 2',
+                'selected cards',
+                'to {C:attention}Corner Cards{}'
+            }
+        },
+        c_sp_bengal = {
+            name = "Bengal",
+            text = {
+                'Enhances up to 7',
+                'selected cards into',
+                'either {C:diamonds}Diamonds{} or',
+                '{C:spades}Spades{}',
+                '{C:inactive,s:0.75}(randomly selected for each card){}'
+            }
+        },
+        c_sp_russianblue = {
+            name = "Russian Blue",
+            text = {
+                'Enhances up to 7',
+                'selected cards into',
+                'either {C:hearts}Hearts{} or',
+                '{C:clubs}Clubs{}',
+                '{C:inactive,s:0.75}(randomly selected for each card){}'
+            }
+        },
+        c_sp_abyssinian = {
+            name = "Abyssinian",
+            text = {
+            'Sets money to the',
+            'next multiple of {C:money}$26{}'
             }
         },
     },
@@ -768,7 +849,18 @@ return {
                 '{X:attention,C:black}shuffle-puffle{} Jokers,',
                 'select one of three'
                 }
-        }
+        },
+        p_sp_carcanapack1 = {
+            name = "Carcana Pack",
+            text = {
+                'Choose {C:attention}1{}',
+                'of up to {C:attention}3{}',
+                'Catarot cards',
+                'to be used',
+                'immediately'
+                }
+        },
+
     },
 
 
@@ -781,11 +873,9 @@ return {
                 k_catarot = "Catarot",
                 b_catarot_cards = "Catarot Cards",
 
-                k_sp_shuffle_pack = "Shuffle Pack",
             },
             labels = {
                 catarot = "Catarot",
-                sp_shufflepack1 = "Shuffle Pack",
             },
             v_dictionary = {
                 a_chips = "+#1#",
