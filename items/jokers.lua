@@ -3909,7 +3909,7 @@ SMODS.Joker{ --All Wild
 
     	loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.m_wild
-        info_queue[#info_queue + 1] = G.P_CENTERS.red_seal
+        info_queue[#info_queue + 1] = G.P_SEALS.Red
 	end,
 
     in_pool = function(self, args)

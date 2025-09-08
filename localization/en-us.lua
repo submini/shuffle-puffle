@@ -768,13 +768,40 @@ return {
     },
 
     Enhanced = {
-        m_sp_glass={
-        name="Glass Card",
+    m_sp_francaise={
+        name="Carte Française",
         text={
-        "{X:mult,C:white} X#1# {} Mult",
-        "{C:green}#2# in #3#{} chance to",
-        "destroy card",
+            '{C:blue}+70{} extra chips, {C:red}+7{} Mult'
         },
+    },
+    m_sp_trading={
+        name="Trading Card",
+        text={
+            '{X:red,C:white}X3{} Mult, {C:green}1 in 5{} chance',
+            'this card is {C:red}destroyed{}'
+        },
+    },
+    m_sp_corner={
+        name="Corner Card",
+        text={
+            '{C:blue}+75{} extra chips, {C:green}1 in 4{}',
+            'chance {X:blue,C:white}X2{} Chips'
+        },
+    },
+    m_sp_striped = {
+        name = 'Striped Card',
+        text = {
+            'This card either gives',
+            '{C:blue}+10{} extra chips or',
+            '{C:red}+10{} Mult when scored'
+        }
+    },
+    m_sp_random = {
+        name = 'Random Card',
+        text = {
+            '{C:red}+0-28{} Mult, {C:green}1 in 5{}',
+            'chance {X:red,C:white}X1.5-X3{} Mult'
+        }
     },
     },
 
@@ -828,6 +855,35 @@ return {
             text = {
             'Sets money to the',
             'next multiple of {C:money}$26{}'
+            }
+        },
+        c_sp_chartreux = {
+            name = "Chartreux",
+            text = {
+                'Adds a {C:attention}Chartreuse Seal{}',
+                'to 1 selected card'
+            }
+        },
+        c_sp_devonrex = {
+            name = "Devon Rex",
+            text = {
+                'Enhances up to',
+                '2 selected cards to',
+                '{C:attention}Striped Cards{}'
+            }
+        },
+        c_sp_norwegianforest = {
+            name = "Norwegian Forest Cat",
+            text = {
+            'Enhances 1 selected',
+            'card into a {C:attention}Random Card{}'
+            }
+        },
+        c_sp_mainecoon = {
+            name = "Maine Coon",
+            text = {
+            'Enhances 1 selected',
+            'card into a {C:attention}Random Card{}'
             }
         },
     },

@@ -3,7 +3,7 @@ SMODS.ConsumableType {
     primary_colour = { 1, 1, 1, 1 },
     secondary_colour = {0.91, 0.65, 0.74, 1},
     collection_rows = { 8, 2 },
-    shop_rate = 4,
+    shop_rate = 1000,
     loc_txt = {
  		name = 'Catarot', 
  		collection = 'Catarot Cards', 
@@ -30,6 +30,7 @@ SMODS.Consumable {
     key = 'ragdoll',
     set = 'Catarot',
     pos = { x = 0, y = 0 },
+    config = { max_highlighted = 1, mod_conv = 'm_sp_trading' },
     loc_txt = {
         name = 'Ragdoll',
         text = {
@@ -37,78 +38,74 @@ SMODS.Consumable {
             [2] = 'card into a {C:attention}Trading Card{}'
         }
     },
+    loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_sp_trading
+	end,
     cost = 3,
     unlocked = true,
     discovered = false,
     hidden = false,
     can_repeat_soul = false,
     atlas = 'ragdoll',
-    use = function(self, card, area, copier)
-        local used_card = copier or card
-        if #G.hand.highlighted == 1 then
+        use = function(self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #G.hand.highlighted do
+            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
-                delay = 0.4,
+                delay = 0.15,
                 func = function()
-                    play_sound('tarot1')
-                    used_card:juice_up(0.3, 0.5)
+                    G.hand.highlighted[i]:flip()
+                    play_sound('card1', percent)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
                     return true
                 end
             }))
-            for i = 1, #G.hand.highlighted do
-                local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.15,
-                    func = function()
-                        G.hand.highlighted[i]:flip()
-                        play_sound('card1', percent)
-                        G.hand.highlighted[i]:juice_up(0.3, 0.3)
-                        return true
-                    end
-                }))
-            end
-            delay(0.2)
-            for i = 1, #G.hand.highlighted do
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.1,
-                    func = function()
-                        G.hand.highlighted[i]:set_ability(G.P_CENTERS['m_sp_trading'])
-                        return true
-                    end
-                }))
-            end
-            for i = 1, #G.hand.highlighted do
-                local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.15,
-                    func = function()
-                        G.hand.highlighted[i]:flip()
-                        play_sound('tarot2', percent, 0.6)
-                        G.hand.highlighted[i]:juice_up(0.3, 0.3)
-                        return true
-                    end
-                }))
-            end
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.2,
-                func = function()
-                    G.hand:unhighlight_all()
-                    return true
-                end
-            }))
-            delay(0.5)
         end
+        delay(0.2)
+        for i = 1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    G.hand.highlighted[i]:set_ability(G.P_CENTERS[card.ability.mod_conv])
+                    return true
+                end
+            }))
+        end
+        for i = 1, #G.hand.highlighted do
+            local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('tarot2', percent, 0.6)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+        delay(0.5)
     end,
     can_use = function(self, card)
-        if #G.hand.highlighted == 0 or #G.hand.highlighted ~= 1 then return false end
-        for _, shop_card in ipairs(G.shop_jokers) do
-            if card == shop_card then return false end
-        end
-        return true
+        return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted == card.ability.max_highlighted
     end
 }
 
@@ -117,6 +114,7 @@ SMODS.Consumable {
     key = 'siamese',
     set = 'Catarot',
     pos = { x = 0, y = 0 },
+        config = { max_highlighted = 2, mod_conv = 'm_sp_corner' },
     loc_txt = {
         name = 'Siamese',
         text = {
@@ -125,78 +123,74 @@ SMODS.Consumable {
             [3] = '{C:attention}Corner Cards{}'
         }
     },
+    loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_sp_corner
+	end,
     cost = 3,
     unlocked = true,
     discovered = false,
     hidden = false,
     can_repeat_soul = false,
     atlas = 'siamese',
-    use = function(self, card, area, copier)
-        local used_card = copier or card
-        if #G.hand.highlighted <= 2 then
+        use = function(self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #G.hand.highlighted do
+            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
-                delay = 0.4,
+                delay = 0.15,
                 func = function()
-                    play_sound('tarot1')
-                    used_card:juice_up(0.3, 0.5)
+                    G.hand.highlighted[i]:flip()
+                    play_sound('card1', percent)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
                     return true
                 end
             }))
-            for i = 1, #G.hand.highlighted do
-                local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.15,
-                    func = function()
-                        G.hand.highlighted[i]:flip()
-                        play_sound('card1', percent)
-                        G.hand.highlighted[i]:juice_up(0.3, 0.3)
-                        return true
-                    end
-                }))
-            end
-            delay(0.2)
-            for i = 1, #G.hand.highlighted do
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.1,
-                    func = function()
-                        G.hand.highlighted[i]:set_ability(G.P_CENTERS['m_sp_corner'])
-                        return true
-                    end
-                }))
-            end
-            for i = 1, #G.hand.highlighted do
-                local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.15,
-                    func = function()
-                        G.hand.highlighted[i]:flip()
-                        play_sound('tarot2', percent, 0.6)
-                        G.hand.highlighted[i]:juice_up(0.3, 0.3)
-                        return true
-                    end
-                }))
-            end
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.2,
-                func = function()
-                    G.hand:unhighlight_all()
-                    return true
-                end
-            }))
-            delay(0.5)
         end
+        delay(0.2)
+        for i = 1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    G.hand.highlighted[i]:set_ability(G.P_CENTERS[card.ability.mod_conv])
+                    return true
+                end
+            }))
+        end
+        for i = 1, #G.hand.highlighted do
+            local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('tarot2', percent, 0.6)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+        delay(0.5)
     end,
     can_use = function(self, card)
-        if #G.hand.highlighted == 0 or #G.hand.highlighted > 2 then return false end
-        for _, shop_card in ipairs(G.shop_jokers) do
-            if card == shop_card then return false end
-        end
-        return true
+        return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.max_highlighted
     end
 }
 
@@ -205,7 +199,7 @@ SMODS.Consumable {
     key = 'bengal',
     set = 'Catarot',
     pos = { x = 0, y = 0 },
-    config = { extra = { odds = 2 } },
+    config = { extra = { odds = 2 }, max_highlighted = 7 },
     loc_txt = {
         name = 'Bengal',
         text = {
@@ -287,11 +281,7 @@ SMODS.Consumable {
         end
     end,
     can_use = function(self, card)
-        if #G.hand.highlighted == 0 or #G.hand.highlighted > 7 then return false end
-        for _, shop_card in ipairs(G.shop_jokers) do
-            if card == shop_card then return false end
-        end
-        return true
+        return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.max_highlighted
     end
 }
 
@@ -299,7 +289,7 @@ SMODS.Consumable {
     key = 'russianblue',
     set = 'Catarot',
     pos = { x = 0, y = 0 },
-    config = { extra = { odds = 2 } },
+    config = { extra = { odds = 2 }, max_highlighted = 7 },
     loc_txt = {
         name = 'Russian Blue',
         text = {
@@ -347,7 +337,7 @@ SMODS.Consumable {
                     trigger = 'after',
                     delay = 0.1,
                     func = function()
-                        if pseudorandom('bengal_coinflip') < 0.5 then
+                        if pseudorandom('russainblue_coinflip') < 0.5 then
                             SMODS.change_base(G.hand.highlighted[i], 'Hearts')
                         else
                             SMODS.change_base(G.hand.highlighted[i], 'Clubs')
@@ -381,11 +371,7 @@ SMODS.Consumable {
         end
     end,
     can_use = function(self, card)
-        if #G.hand.highlighted == 0 or #G.hand.highlighted > 7 then return false end
-        for _, shop_card in ipairs(G.shop_jokers) do
-            if card == shop_card then return false end
-        end
-        return true
+        return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.max_highlighted
     end
 }
 
@@ -440,6 +426,7 @@ SMODS.Consumable {
     key = 'chartreux',
     set = 'Catarot',
     pos = { x = 0, y = 0 },
+    config = { max_highlighted = 1 },
     loc_txt = {
         name = 'Chartreux',
         text = {
@@ -453,6 +440,9 @@ SMODS.Consumable {
     hidden = false,
     can_repeat_soul = false,
     atlas = 'chartreux',
+    loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_SEALS.sp_chartreuseseal
+	end,
     use = function(self, card, area, copier)
         local used_card = copier or card
         if #G.hand.highlighted == 1 then
@@ -514,26 +504,18 @@ SMODS.Consumable {
         end
     end,
     can_use = function(self, card)
-        if #G.hand.highlighted == 0 or #G.hand.highlighted ~= 1 then return false end
-        for _, shop_card in ipairs(G.shop_jokers) do
-            if card == shop_card then return false end
-        end
-        return true
+        return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted == card.ability.max_highlighted
     end
 }
--- Rex
+
 SMODS.Consumable {
     key = 'devonrex',
     set = 'Catarot',
     pos = { x = 0, y = 0 },
-    loc_txt = {
-        name = 'Devon Rex',
-        text = {
-        [1] = 'Enhances up to',
-        [2] = '2 selected cards to',
-        [3] = '{C:attention}Striped Cards{}'
-    }
-    },
+    config = { max_highlighted = 2, mod_conv = 'm_sp_striped' },
+    loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_sp_striped
+	end,
     cost = 3,
     unlocked = true,
     discovered = false,
@@ -541,70 +523,225 @@ SMODS.Consumable {
     can_repeat_soul = false,
     atlas = 'devonrex',
     use = function(self, card, area, copier)
-        local used_card = copier or card
-        if #G.hand.highlighted <= 2 then
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #G.hand.highlighted do
+            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
-                delay = 0.4,
+                delay = 0.15,
                 func = function()
-                    play_sound('tarot1')
-                    used_card:juice_up(0.3, 0.5)
+                    G.hand.highlighted[i]:flip()
+                    play_sound('card1', percent)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
                     return true
                 end
             }))
-            for i = 1, #G.hand.highlighted do
-                local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.15,
-                    func = function()
-                        G.hand.highlighted[i]:flip()
-                        play_sound('card1', percent)
-                        G.hand.highlighted[i]:juice_up(0.3, 0.3)
-                        return true
-                    end
-                }))
-            end
-            delay(0.2)
-            for i = 1, #G.hand.highlighted do
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.1,
-                    func = function()
-                        G.hand.highlighted[i]:set_ability(G.P_CENTERS['m_sp_striped'])
-                        return true
-                    end
-                }))
-            end
-            for i = 1, #G.hand.highlighted do
-                local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.15,
-                    func = function()
-                        G.hand.highlighted[i]:flip()
-                        play_sound('tarot2', percent, 0.6)
-                        G.hand.highlighted[i]:juice_up(0.3, 0.3)
-                        return true
-                    end
-                }))
-            end
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.2,
-                func = function()
-                    G.hand:unhighlight_all()
-                    return true
-                end
-            }))
-            delay(0.5)
         end
+        delay(0.2)
+        for i = 1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    G.hand.highlighted[i]:set_ability(G.P_CENTERS[card.ability.mod_conv])
+                    return true
+                end
+            }))
+        end
+        for i = 1, #G.hand.highlighted do
+            local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('tarot2', percent, 0.6)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+        delay(0.5)
     end,
     can_use = function(self, card)
-        return (#G.hand.highlighted <= 2)
+        return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.max_highlighted
     end
 }
 
+SMODS.Consumable {
+    key = 'norwegianforest',
+    set = 'Catarot',
+    pos = { x = 0, y = 0 },
+    config = { max_highlighted = 1, mod_conv = 'm_sp_random' },
+    loc_txt = {
+        name = 'Norwegian Forest Cat',
+        text = {
+        [1] = 'Enhances 1 selected',
+        [2] = 'card into a {C:attention}Random Card{}'
+    }
+    },
+    loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_sp_random
+	end,
+    cost = 3,
+    unlocked = true,
+    discovered = false,
+    hidden = false,
+    can_repeat_soul = false,
+    atlas = 'norwegianforest',
+           use = function(self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #G.hand.highlighted do
+            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('card1', percent)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        delay(0.2)
+        for i = 1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    G.hand.highlighted[i]:set_ability(G.P_CENTERS[card.ability.mod_conv])
+                    return true
+                end
+            }))
+        end
+        for i = 1, #G.hand.highlighted do
+            local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('tarot2', percent, 0.6)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+        delay(0.5)
+    end,
+    can_use = function(self, card)
+        return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted == card.ability.max_highlighted
+    end
+}
+
+SMODS.Consumable {
+    key = 'mainecoon',
+    set = 'Catarot',
+    pos = { x = 0, y = 0 },
+    config = { max_highlighted = 1, mod_conv = 'm_sp_lebronned' },
+    loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_sp_lebronned
+	end,
+    cost = 3,
+    unlocked = true,
+    discovered = false,
+    hidden = false,
+    can_repeat_soul = false,
+    atlas = 'mainecoon',
+           use = function(self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #G.hand.highlighted do
+            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('card1', percent)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        delay(0.2)
+        for i = 1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    G.hand.highlighted[i]:set_ability(G.P_CENTERS[card.ability.mod_conv])
+                    return true
+                end
+            }))
+        end
+        for i = 1, #G.hand.highlighted do
+            local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('tarot2', percent, 0.6)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+        delay(0.5)
+    end,
+    can_use = function(self, card)
+        return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted == card.ability.max_highlighted
+    end
+}
 
 -- Birman
 SMODS.Consumable {
@@ -612,86 +749,75 @@ SMODS.Consumable {
     name = 'Birman',
     set = 'Catarot',
     pos = { x = 0, y = 0 },
+    config = { max_highlighted = 2, mod_conv = 'm_sp_francaise' },
     cost = 3,
     unlocked = true,
     discovered = false,
     hidden = false,
     can_repeat_soul = false,
     atlas = 'birman',
-    use = function(self, card, area, copier)
-        local used_card = copier or card
-        if #G.hand.highlighted <= 2 then
+    loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_sp_francaise
+	end,
+            use = function(self, card, area, copier)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.4,
+            func = function()
+                play_sound('tarot1')
+                card:juice_up(0.3, 0.5)
+                return true
+            end
+        }))
+        for i = 1, #G.hand.highlighted do
+            local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
-                delay = 0.4,
+                delay = 0.15,
                 func = function()
-                    play_sound('tarot1')
-                    used_card:juice_up(0.3, 0.5)
+                    G.hand.highlighted[i]:flip()
+                    play_sound('card1', percent)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
                     return true
                 end
-            }))
-            for i, c in ipairs(G.hand.highlighted) do
-                local percent = 1.15 - (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.15,
-                    func = function()
-                        c:flip()
-                        play_sound('card1', percent)
-                        c:juice_up(0.3, 0.3)
-                        return true
-                    end
-                }))
-            end
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.2,
-                func = function() return true end
-            }))
-            for _, c in ipairs(G.hand.highlighted) do
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.1,
-                    func = function()
-                        c:set_ability(G.P_CENTERS.m_sp_francaise, nil, true)
-                        return true
-                    end
-                }))
-            end
-            for i, c in ipairs(G.hand.highlighted) do
-                local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.15,
-                    func = function()
-                        c:flip()
-                        play_sound('tarot2', percent, 0.6)
-                        c:juice_up(0.3, 0.3)
-                        return true
-                    end
-                }))
-            end
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.2,
-                func = function()
-                    G.hand:unhighlight_all()
-                    return true
-                end
-            }))
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.5,
-                func = function() return true end
             }))
         end
+        delay(0.2)
+        for i = 1, #G.hand.highlighted do
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.1,
+                func = function()
+                    G.hand.highlighted[i]:set_ability(G.P_CENTERS[card.ability.mod_conv])
+                    return true
+                end
+            }))
+        end
+        for i = 1, #G.hand.highlighted do
+            local percent = 0.85 + (i - 0.999) / (#G.hand.highlighted - 0.998) * 0.3
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.15,
+                func = function()
+                    G.hand.highlighted[i]:flip()
+                    play_sound('tarot2', percent, 0.6)
+                    G.hand.highlighted[i]:juice_up(0.3, 0.3)
+                    return true
+                end
+            }))
+        end
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            delay = 0.2,
+            func = function()
+                G.hand:unhighlight_all()
+                return true
+            end
+        }))
+        delay(0.5)
     end,
     can_use = function(self, card)
-        if #G.hand.highlighted == 0 or #G.hand.highlighted > 2 then return false end
-        for _, shop_card in ipairs(G.shop_jokers) do
-            if card == shop_card then return false end
-        end
-        return true
+        return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.max_highlighted
     end
 }
 

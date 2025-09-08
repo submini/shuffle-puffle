@@ -648,6 +648,27 @@ key = 'devonrex',
 }
 
 SMODS.Atlas({
+    key = 'devonrex',
+    path = 'placeholder.png',
+    px = 71,
+    py = 95,
+})
+
+SMODS.Atlas({
+    key = 'norwegianforest',
+    path = 'norwegianforest.png',
+    px = 71,
+    py = 95,
+})
+
+SMODS.Atlas({
+    key = 'mainecoon',
+    path = 'mainecoon.png',
+    px = 71,
+    py = 95,
+})
+
+SMODS.Atlas({
     key = 'birman',
     path = 'birman.png',
     px = 71,
@@ -658,6 +679,34 @@ SMODS.Atlas({
 SMODS.Atlas({
     key = 'francaise',
     path = 'francaise.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'trading',
+    path = 'trading.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'striped',
+    path = 'striped.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'corner',
+    path = 'corner.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'random',
+    path = 'random.png',
     px = 71,
     py = 95
 })
