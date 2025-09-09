@@ -193,3 +193,54 @@ SMODS.PokerHand {
     end
 }
 
+-- PokerHandPart: 4 numbers + 1 face
+SMODS.PokerHandPart {
+    key = 'antumbra_base',
+    func = function(hand)
+        local faces, numbers, chosen = 0, 0, {}
+        for i = 1, #hand do
+            local card = hand[i]
+            if card:is_face() then
+                faces = faces + 1
+                table.insert(chosen, card)
+            else
+                numbers = numbers + 1
+                table.insert(chosen, card)
+            end
+        end
+
+        -- must be exactly 4 numbers + 1 face
+        if numbers == 4 and faces == 1 then
+            return { chosen }
+        end
+        return {}
+    end
+}
+
+-- PokerHand: Antumbra
+SMODS.PokerHand {
+    key = "antumbra",
+    loc_txt = {
+        name = "Antumbra",
+        description = {
+            "Consists of exactly four numbered cards",
+            "and one face card"
+        }
+    },
+    visible = false,
+    mult = 2.5,
+    chips = 25,
+    l_mult = 1,
+    l_chips = 10,
+    example = {
+        { 'D_K', true },
+        { 'C_9', true },
+        { 'H_7', true },
+        { 'H_5', true },
+        { 'S_3', true },
+    },
+    evaluate = function(parts, hand)
+        return parts.sp_antumbra_base
+    end
+}
+
