@@ -199,7 +199,7 @@ SMODS.Enhancement {
         [3] = '{X:red,C:white}X6{} Mult'
     }
     },
-    atlas = 'lebronned',
+    atlas = 'mainecoon',
     any_suit = false,
     replace_base_card = false,
     no_rank = false,
