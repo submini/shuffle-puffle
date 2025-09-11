@@ -73,7 +73,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1},
     kind = 'Arcana',
-    weight = 2,
+    weight = 100000,
     cost = 4,
     loc_txt = { 
         name = "Carcana Pack",
@@ -86,6 +86,22 @@ SMODS.Booster {
     draw_hand = true,
     unlocked = true,
     discovered = false,
+
+        particles = function(self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.2,
+            initialize = true,
+            lifespan = 1,
+            speed = 1.1,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.WHITE, lighten(G.C.PURPLE, 0.4), lighten(G.C.PURPLE, 0.2), lighten(G.C.GOLD, 0.2) },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
 
 create_card = function(self, booster_card)
     -- build Catarot pool fresh
@@ -132,7 +148,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1},
     kind = 'Celestial',
-    weight = 100000,
+    weight = 4,
     cost = 4,
     loc_txt = { 
         name = "Exocelestial Pack",
@@ -142,9 +158,32 @@ SMODS.Booster {
         group_name = 'Exocelestial Pack', 
     },
     --group_key = "k_sp_shuffle_pack",
-    draw_hand = true,
+    draw_hand = false,
     unlocked = true,
     discovered = false,
+
+    particles = function(self)
+        G.booster_pack_stars = Particles(1, 1, 0, 0, {
+            timer = 0.07,
+            scale = 0.1,
+            initialize = true,
+            lifespan = 15,
+            speed = 0.1,
+            padding = -4,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.WHITE, HEX('a7d6e0'), HEX('fddca0') },
+            fill = true
+        })
+        G.booster_pack_meteors = Particles(1, 1, 0, 0, {
+            timer = 2,
+            scale = 0.05,
+            lifespan = 1.5,
+            speed = 4,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.WHITE },
+            fill = true
+        })
+    end,
 
 create_card = function(self, booster_card)
     -- build Catarot pool fresh

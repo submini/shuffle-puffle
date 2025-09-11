@@ -199,7 +199,7 @@ SMODS.Enhancement {
         [3] = '{X:red,C:white}X6{} Mult'
     }
     },
-    atlas = 'mainecoon',
+    atlas = 'lebronned',
     any_suit = false,
     replace_base_card = false,
     no_rank = false,
@@ -212,6 +212,51 @@ SMODS.Enhancement {
     calculate = function(self, card, context)
         if context.main_scoring and context.cardarea == G.play then
             if SMODS.pseudorandom_probability(card, 'group_0_a2667417', 1, card.ability.extra.odds, 'm_sp_lebronned') then
+                SMODS.calculate_effect({x_mult = card.ability.extra.x_mult}, card)
+            end
+        end
+    end
+}
+
+SMODS.Enhancement {
+    key = 'nature',
+    pos = { x = 0, y = 0 },
+    config = {
+        bonus = 50,
+        mult = 20,
+        p_dollars = 5,
+        extra = {
+            odds = 10,
+            odds2 = 20,
+            x_chips = 3,
+            x_mult = 2.5
+        }
+    },
+    loc_txt = {
+        name = 'Nature Card',
+        text = {
+        [1] = '{C:blue}+50{} extra chips,',
+        [2] = '{C:red}+20{} Mult, {C:money}+$5{}, {C:green}1 in 10{}',
+        [3] = 'chance {X:blue,C:white}X3{} Chips, {C:green}1 in',
+        [4] = '20{} chance {X:red,C:white}X2.5{} Mult'
+    }
+    },
+    atlas = 'nature',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 1,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            if SMODS.pseudorandom_probability(card, 'group_0_befa0212', 1, card.ability.extra.odds, 'm_sp_nature') then
+                SMODS.calculate_effect({x_chips = card.ability.extra.x_chips}, card)
+            end
+            if SMODS.pseudorandom_probability(card, 'group_1_4e1bc192', 1, card.ability.extra.odds2, 'm_sp_nature') then
                 SMODS.calculate_effect({x_mult = card.ability.extra.x_mult}, card)
             end
         end

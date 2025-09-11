@@ -886,6 +886,13 @@ return {
             'card into a {C:attention}LeBronned Card{}'
             }
         },
+        c_sp_rustyspotted = {
+            name = "Rusty-spotted",
+            text = {
+            'Enhances 1 selected',
+            'card into a {C:attention}Nature Card{}'
+            }
+        },
     },
 
     Exoplanet = {

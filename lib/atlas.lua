@@ -669,6 +669,20 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+    key = 'rustyspotted',
+    path = 'rustyspotted.png',
+    px = 71,
+    py = 95,
+})
+
+SMODS.Atlas({
+    key = 'grumpy',
+    path = 'grumpy.png',
+    px = 71,
+    py = 95,
+})
+
+SMODS.Atlas({
     key = 'birman',
     path = 'birman.png',
     px = 71,
@@ -711,10 +725,32 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = 'lebronned',
+    path = 'lebronned.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'nature',
+    path = 'nature.png',
+    px = 71,
+    py = 95
+})
+
 -- seals
 SMODS.Atlas({
     key = 'chartreuseseal',
     path = 'chartreuseseal.png',
+    px = 71,
+    py = 95
+})
+
+-- exoplanets
+SMODS.Atlas({
+    key = 'j1407b',
+    path = 'j1407b.png',
     px = 71,
     py = 95
 })

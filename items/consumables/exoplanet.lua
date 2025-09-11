@@ -2,7 +2,7 @@ SMODS.ConsumableType {
     key = 'Exoplanet',
     primary_colour = {0.749, 0.878, 0.965, 1},
     secondary_colour = {0.039, 0.325, 0.659, 1},
-    collection_rows = { 4, 4 },
+    collection_rows = { 4, 4, 4, 4 },
     shop_rate = 4,
     loc_txt = {
  		name = 'Exoplanet', 
@@ -35,7 +35,7 @@ SMODS.Consumable {
     discovered = false,
     hidden = false,
     can_repeat_soul = false,
-    atlas = 'placeholder',
+    atlas = 'j1407b',
 use = function(self, card, area, copier)
     local used_card = copier or card
 
