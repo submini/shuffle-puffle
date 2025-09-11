@@ -883,7 +883,82 @@ return {
             name = "Maine Coon",
             text = {
             'Enhances 1 selected',
-            'card into a {C:attention}Random Card{}'
+            'card into a {C:attention}LeBronned Card{}'
+            }
+        },
+    },
+
+    Exoplanet = {
+        c_sp_j1407b = {
+            name = "J1407b",
+            text = {
+        'Levels up {C:attention}Plateau{}',
+        '{C:blue}+25{} Chips and',
+        '{C:red}+4{} Mult'
+            }
+        },
+        c_sp_toi5573_b = {
+            name = "TOI-5573 b",
+            text = {
+        'Levels up {C:attention}Plateau Flush{}',
+        '{C:blue}+35{} Chips and',
+        '{C:red}+5{} Mult'
+            }
+        },
+        c_sp_noifasui = {
+            name = "Noifasui",
+            text = {
+        'Levels up {C:attention}Umbra{}',
+        '{C:blue}+20{} Chips and',
+        '{C:red}+2{} Mult'
+            }
+        },
+        c_sp_fortiduo = {
+            name = "Fortiduo",
+            text = {
+        'Levels up {C:attention}Antumbra{}',
+        '{C:blue}+10{} Chips and',
+        '{C:red}+1{} Mult'
+            }
+        },
+        c_sp_awasis = {
+            name = "Awasis",
+            text = {
+        'Levels up {C:attention}Two Three{}',
+        '{C:blue}+25{} Chips and',
+        '{C:red}+3{} Mult'
+            }
+        },
+        c_sp_kepler120c = {
+            name = "Kepler-120 c",
+            text = {
+        'Levels up {C:attention}Triangle{}',
+        '{C:blue}+37.5{} Chips and',
+        '{C:red}+2.5{} Mult'
+            }
+        },
+        c_sp_kereru = {
+            name = "Kererū",
+            text = {
+        'Levels up {C:attention}Decagon{}',
+        '{C:blue}+15{} Chips and',
+        '{C:red}+2{} Mult'
+            }
+        },
+        c_sp_pcd = {
+            name = "Proxima Centauri d",
+            text = {
+        'Levels up {C:attention}Archipelago{}',
+        '{C:blue}+20{} Chips and',
+        '{C:red}+1{} Mult'
+            }
+        },
+        c_sp_dagon = {
+            name = "Dagon",
+            text = {
+        'Levels up {C:attention}Twace{}',
+        '{C:blue}+20{} Chips and',
+        '{C:red}+2{} Mult'
             }
         },
     },

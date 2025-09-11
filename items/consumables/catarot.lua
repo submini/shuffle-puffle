@@ -820,4 +820,3 @@ SMODS.Consumable {
         return G.hand and #G.hand.highlighted > 0 and #G.hand.highlighted <= card.ability.max_highlighted
     end
 }
-

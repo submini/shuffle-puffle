@@ -2,7 +2,7 @@ SMODS.ConsumableType {
     key = 'Exoplanet',
     primary_colour = {0.749, 0.878, 0.965, 1},
     secondary_colour = {0.039, 0.325, 0.659, 1},
-    collection_rows = { 6, 2 },
+    collection_rows = { 4, 4 },
     shop_rate = 4,
     loc_txt = {
  		name = 'Exoplanet', 
@@ -28,69 +28,788 @@ SMODS.Consumable {
     set = 'Exoplanet',
     pos = { x = 0, y = 0 },
     config = { extra = {
-        planetcardsused = 0,
-        hand_type = "Straight"
+        hand_type = "Plateau"
     } },
-    loc_txt = {
-        name = 'J1407b',
-        text = {
-        [1] = 'A {C:purple}custom{} consumable with {C:blue}unique{} effects.'
-    }
-    },
-    cost = 5,
+    cost = 3,
     unlocked = true,
     discovered = false,
     hidden = false,
     can_repeat_soul = false,
     atlas = 'placeholder',
-    use = function(self, card, area, copier)
-        local used_card = copier or card
-            update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3 },
-                { handname = localize('Straight', 'poker_hands'), 
-                  chips = G.GAME.hands['Straight'].chips, 
-                  mult = G.GAME.hands['Straight'].mult, 
-                  level = G.GAME.hands['Straight'].level })
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.2,
-                func = function()
-                    play_sound('tarot1')
-                    card:juice_up(0.8, 0.5)
-                    G.TAROT_INTERRUPT_PULSE = true
-                    return true
-                end
-            }))
-            update_hand_text({ delay = 0 }, { mult = '+', StatusText = true })
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.9,
-                func = function()
-                    play_sound('tarot1')
-                    card:juice_up(0.8, 0.5)
-                    return true
-                end
-            }))
-            update_hand_text({ delay = 0 }, { chips = '+', StatusText = true })
-            G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.9,
-                func = function()
-                    play_sound('tarot1')
-                    card:juice_up(0.8, 0.5)
-                    G.TAROT_INTERRUPT_PULSE = nil
-                    return true
-                end
-            }))
-            update_hand_text({ sound = 'button', volume = 0.7, pitch = 0.9, delay = 0 }, { level = '+'..tostring((G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.planet or 0)) })
-            delay(1.3)
-            level_up_hand(card, "Straight", true, (G.GAME.consumeable_usage_total and G.GAME.consumeable_usage_total.planet or 0))
-            update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, 
-                {handname=localize('Straight', 'poker_hands'), 
-                 chips = G.GAME.hands['Straight'].chips, 
-                 mult = G.GAME.hands['Straight'].mult, 
-                 level=G.GAME.hands['Straight'].level})
-            delay(1.3)
-    end,
+use = function(self, card, area, copier)
+    local used_card = copier or card
+
+    -- 1. Display hand name and original level before upgrade
+    local target_hand = "sp_plateau"
+    if G.GAME.hands[target_hand] then
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    -- 2. Pulse + effect animations with +chips/+mult/+level increment
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.2,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = true
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { mult = '+4', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { chips = '+25', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = nil
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { level = G.GAME.hands[target_hand].level, StatusText = true })
+
+    delay(1.3)
+
+    -- 3. Actually level up the hand
+    if G.GAME.hands[target_hand] then
+        level_up_hand(card, target_hand, true, 1)
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    delay(1.3)
+
+    -- 4. Clear hand text completely
+    update_hand_text({ delay = 0 }, { handname = '', chips = '0', mult = '0', level = '' })
+end,
+    can_use = function(self, card)
+        return true
+    end
+}
+
+SMODS.Consumable {
+    key = 'toi5573_b',
+    set = 'Exoplanet',
+    pos = { x = 0, y = 0 },
+    config = { extra = {
+        hand_type = "Plateau Flush"
+    } },
+    cost = 3,
+    unlocked = true,
+    discovered = false,
+    hidden = false,
+    can_repeat_soul = false,
+    atlas = 'placeholder',
+use = function(self, card, area, copier)
+    local used_card = copier or card
+
+    -- 1. Display hand name and original level before upgrade
+    local target_hand = "sp_plateau_flush"
+    if G.GAME.hands[target_hand] then
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    -- 2. Pulse + effect animations with +chips/+mult/+level increment
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.2,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = true
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { mult = '+5', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { chips = '+35', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = nil
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { level = G.GAME.hands[target_hand].level, StatusText = true })
+
+    delay(1.3)
+
+    -- 3. Actually level up the hand
+    if G.GAME.hands[target_hand] then
+        level_up_hand(card, target_hand, true, 1)
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    delay(1.3)
+
+    -- 4. Clear hand text completely
+    update_hand_text({ delay = 0 }, { handname = '', chips = '0', mult = '0', level = '' })
+end,
+    can_use = function(self, card)
+        return true
+    end
+}
+
+SMODS.Consumable {
+    key = 'noifasui',
+    set = 'Exoplanet',
+    pos = { x = 0, y = 0 },
+    config = { extra = {
+        hand_type = "Umbra"
+    } },
+    cost = 3,
+    unlocked = true,
+    discovered = false,
+    hidden = false,
+    can_repeat_soul = false,
+    atlas = 'placeholder',
+use = function(self, card, area, copier)
+    local used_card = copier or card
+
+    -- 1. Display hand name and original level before upgrade
+    local target_hand = "sp_umbra"
+    if G.GAME.hands[target_hand] then
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    -- 2. Pulse + effect animations with +chips/+mult/+level increment
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.2,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = true
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { mult = '+2', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { chips = '+20', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = nil
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { level = G.GAME.hands[target_hand].level, StatusText = true })
+
+    delay(1.3)
+
+    -- 3. Actually level up the hand
+    if G.GAME.hands[target_hand] then
+        level_up_hand(card, target_hand, true, 1)
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    delay(1.3)
+
+    -- 4. Clear hand text completely
+    update_hand_text({ delay = 0 }, { handname = '', chips = '0', mult = '0', level = '' })
+end,
+    can_use = function(self, card)
+        return true
+    end
+}
+
+SMODS.Consumable {
+    key = 'fortiduo',
+    set = 'Exoplanet',
+    pos = { x = 0, y = 0 },
+    config = { extra = {
+        hand_type = "Antumbra"
+    } },
+    cost = 3,
+    unlocked = true,
+    discovered = false,
+    hidden = false,
+    can_repeat_soul = false,
+    atlas = 'placeholder',
+use = function(self, card, area, copier)
+    local used_card = copier or card
+
+    -- 1. Display hand name and original level before upgrade
+    local target_hand = "sp_antumbra"
+    if G.GAME.hands[target_hand] then
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    -- 2. Pulse + effect animations with +chips/+mult/+level increment
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.2,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = true
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { mult = '+1', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { chips = '+10', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = nil
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { level = G.GAME.hands[target_hand].level, StatusText = true })
+
+    delay(1.3)
+
+    -- 3. Actually level up the hand
+    if G.GAME.hands[target_hand] then
+        level_up_hand(card, target_hand, true, 1)
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    delay(1.3)
+
+    -- 4. Clear hand text completely
+    update_hand_text({ delay = 0 }, { handname = '', chips = '0', mult = '0', level = '' })
+end,
+    can_use = function(self, card)
+        return true
+    end
+}
+
+SMODS.Consumable {
+    key = 'awasis',
+    set = 'Exoplanet',
+    pos = { x = 0, y = 0 },
+    config = { extra = {
+        hand_type = "Two Three"
+    } },
+    cost = 3,
+    unlocked = true,
+    discovered = false,
+    hidden = false,
+    can_repeat_soul = false,
+    atlas = 'placeholder',
+use = function(self, card, area, copier)
+    local used_card = copier or card
+
+    -- 1. Display hand name and original level before upgrade
+    local target_hand = "sp_two_three"
+    if G.GAME.hands[target_hand] then
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    -- 2. Pulse + effect animations with +chips/+mult/+level increment
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.2,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = true
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { mult = '+3', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { chips = '+25', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = nil
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { level = G.GAME.hands[target_hand].level, StatusText = true })
+
+    delay(1.3)
+
+    -- 3. Actually level up the hand
+    if G.GAME.hands[target_hand] then
+        level_up_hand(card, target_hand, true, 1)
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    delay(1.3)
+
+    -- 4. Clear hand text completely
+    update_hand_text({ delay = 0 }, { handname = '', chips = '0', mult = '0', level = '' })
+end,
+    can_use = function(self, card)
+        return true
+    end
+}
+
+SMODS.Consumable {
+    key = 'kepler120c',
+    set = 'Exoplanet',
+    pos = { x = 0, y = 0 },
+    config = { extra = {
+        hand_type = "Triangle"
+    } },
+    cost = 3,
+    unlocked = true,
+    discovered = false,
+    hidden = false,
+    can_repeat_soul = false,
+    atlas = 'placeholder',
+use = function(self, card, area, copier)
+    local used_card = copier or card
+
+    -- 1. Display hand name and original level before upgrade
+    local target_hand = "sp_triangle"
+    if G.GAME.hands[target_hand] then
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    -- 2. Pulse + effect animations with +chips/+mult/+level increment
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.2,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = true
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { mult = '+2.5', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { chips = '+37.5', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = nil
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { level = G.GAME.hands[target_hand].level, StatusText = true })
+
+    delay(1.3)
+
+    -- 3. Actually level up the hand
+    if G.GAME.hands[target_hand] then
+        level_up_hand(card, target_hand, true, 1)
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    delay(1.3)
+
+    -- 4. Clear hand text completely
+    update_hand_text({ delay = 0 }, { handname = '', chips = '0', mult = '0', level = '' })
+end,
+    can_use = function(self, card)
+        return true
+    end
+}
+
+SMODS.Consumable {
+    key = 'kereru',
+    set = 'Exoplanet',
+    pos = { x = 0, y = 0 },
+    config = { extra = {
+        hand_type = "Decagon"
+    } },
+    cost = 3,
+    unlocked = true,
+    discovered = false,
+    hidden = false,
+    can_repeat_soul = false,
+    atlas = 'placeholder',
+use = function(self, card, area, copier)
+    local used_card = copier or card
+
+    -- 1. Display hand name and original level before upgrade
+    local target_hand = "sp_decagon"
+    if G.GAME.hands[target_hand] then
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    -- 2. Pulse + effect animations with +chips/+mult/+level increment
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.2,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = true
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { mult = '+2', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { chips = '+15', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = nil
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { level = G.GAME.hands[target_hand].level, StatusText = true })
+
+    delay(1.3)
+
+    -- 3. Actually level up the hand
+    if G.GAME.hands[target_hand] then
+        level_up_hand(card, target_hand, true, 1)
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    delay(1.3)
+
+    -- 4. Clear hand text completely
+    update_hand_text({ delay = 0 }, { handname = '', chips = '0', mult = '0', level = '' })
+end,
+    can_use = function(self, card)
+        return true
+    end
+}
+
+SMODS.Consumable {
+    key = 'pcd',
+    set = 'Exoplanet',
+    pos = { x = 0, y = 0 },
+    config = { extra = {
+        hand_type = "Archipelago"
+    } },
+    cost = 3,
+    unlocked = true,
+    discovered = false,
+    hidden = false,
+    can_repeat_soul = false,
+    atlas = 'placeholder',
+use = function(self, card, area, copier)
+    local used_card = copier or card
+
+    -- 1. Display hand name and original level before upgrade
+    local target_hand = "sp_archipelago"
+    if G.GAME.hands[target_hand] then
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    -- 2. Pulse + effect animations with +chips/+mult/+level increment
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.2,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = true
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { mult = '+1', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { chips = '+20', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = nil
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { level = G.GAME.hands[target_hand].level, StatusText = true })
+
+    delay(1.3)
+
+    -- 3. Actually level up the hand
+    if G.GAME.hands[target_hand] then
+        level_up_hand(card, target_hand, true, 1)
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    delay(1.3)
+
+    -- 4. Clear hand text completely
+    update_hand_text({ delay = 0 }, { handname = '', chips = '0', mult = '0', level = '' })
+end,
+    can_use = function(self, card)
+        return true
+    end
+}
+
+SMODS.Consumable {
+    key = 'dagon',
+    set = 'Exoplanet',
+    pos = { x = 0, y = 0 },
+    config = { extra = {
+        hand_type = "Twace"
+    } },
+    cost = 3,
+    unlocked = true,
+    discovered = false,
+    hidden = false,
+    can_repeat_soul = false,
+    atlas = 'placeholder',
+use = function(self, card, area, copier)
+    local used_card = copier or card
+
+    -- 1. Display hand name and original level before upgrade
+    local target_hand = "sp_twace"
+    if G.GAME.hands[target_hand] then
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    -- 2. Pulse + effect animations with +chips/+mult/+level increment
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.2,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = true
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { mult = '+2', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { chips = '+20', StatusText = true })
+
+    G.E_MANAGER:add_event(Event({
+        trigger = 'after',
+        delay = 0.9,
+        func = function()
+            play_sound('tarot1')
+            card:juice_up(0.8, 0.5)
+            G.TAROT_INTERRUPT_PULSE = nil
+            return true
+        end
+    }))
+    update_hand_text({ delay = 0 }, { level = G.GAME.hands[target_hand].level, StatusText = true })
+
+    delay(1.3)
+
+    -- 3. Actually level up the hand
+    if G.GAME.hands[target_hand] then
+        level_up_hand(card, target_hand, true, 1)
+        update_hand_text(
+            { sound = 'button', volume = 0.7, pitch = 1.1, delay = 0 }, 
+            { handname = localize(target_hand, 'poker_hands'),
+              chips = G.GAME.hands[target_hand].chips, 
+              mult = G.GAME.hands[target_hand].mult, 
+              level = G.GAME.hands[target_hand].level }
+        )
+    end
+
+    delay(1.3)
+
+    -- 4. Clear hand text completely
+    update_hand_text({ delay = 0 }, { handname = '', chips = '0', mult = '0', level = '' })
+end,
     can_use = function(self, card)
         return true
     end

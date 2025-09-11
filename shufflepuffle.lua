@@ -18,8 +18,7 @@ local files = {
     "items/enhancements",
     "items/seals",
     "items/packs",
-    "items/planets",
-    "items/ranks",
+    "items/pokerhands",
     "items/rarities",
     "lib/misc",
 }
