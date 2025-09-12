@@ -146,14 +146,14 @@ SMODS.Joker{ --Landlord
         return {vars = {}}
     end,
 
-    in_pool = function(self, args)
-    for _, j in ipairs(G.jokers.cards) do
-        if j.config.center.key == self.key then
-            return false
-        end
-    end
-    return true
-end,
+    --in_pool = function(self, args)
+    --for _, j in ipairs(G.jokers.cards) do
+        --if j.config.center.key == self.key then
+            --return false
+        --end
+    --end
+    --return true
+--end,
 
     set_ability = function(self, card, initial)
         G.GAME.current_round.level_hand = 'Full House'
