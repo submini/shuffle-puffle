@@ -803,6 +803,29 @@ return {
             'chance {X:red,C:white}X1.5-X3{} Mult'
         }
     },
+    m_sp_nature = {
+        name = 'Nature Card',
+        text = {
+            '{C:blue}+50{} extra chips,',
+            '{C:red}+20{} Mult, {C:money}+$5{}, {C:green}1 in 10{}',
+            'chance {X:blue,C:white}X3{} Chips, {C:green}1 in',
+            '20{} chance {X:red,C:white}X2.5{} Mult'
+    }
+    },
+    m_sp_patriotic = {
+        name = 'Patriotic Card',
+        text = {
+            '{C:red}+17{} Mult, {C:blue}+76{} extra',
+            'chips, {C:green}1 in 2{} chance',
+            '{X:red,C:white}X1.5{} Mult'
+    }
+    },
+    m_sp_baudelaire = {
+        name = "Baudelaire Card",
+        text = {
+            '{C:blue}+100{} extra chips'
+        }
+    }
     },
 
     Catarot = {
@@ -893,81 +916,120 @@ return {
             'card into a {C:attention}Nature Card{}'
             }
         },
+        c_sp_americanshorthair = {
+            name = "American Shorthair",
+            text = {
+            'Enhances 1 selected',
+            'card into a {C:attention}Patriotic Card{}'
+            }
+        },
+        c_sp_grumpy = {
+            name = "Grumpy Cat",
+            text = {
+            'Enhances 1 selected',
+            'card into a {C:attention}Baudelaire Card{}'
+            }
+        },
     },
 
     Exoplanet = {
-        c_sp_j1407b = {
-            name = "J1407b",
-            text = {
-        'Levels up {C:attention}Plateau{}',
-        '{C:blue}+25{} Chips and',
-        '{C:red}+4{} Mult'
-            }
-        },
-        c_sp_toi5573_b = {
-            name = "TOI-5573 b",
-            text = {
-        'Levels up {C:attention}Plateau Flush{}',
-        '{C:blue}+35{} Chips and',
-        '{C:red}+5{} Mult'
-            }
-        },
-        c_sp_noifasui = {
-            name = "Noifasui",
-            text = {
-        'Levels up {C:attention}Umbra{}',
-        '{C:blue}+20{} Chips and',
-        '{C:red}+2{} Mult'
-            }
-        },
-        c_sp_fortiduo = {
-            name = "Fortiduo",
-            text = {
-        'Levels up {C:attention}Antumbra{}',
-        '{C:blue}+10{} Chips and',
-        '{C:red}+1{} Mult'
-            }
-        },
-        c_sp_awasis = {
-            name = "Awasis",
-            text = {
-        'Levels up {C:attention}Two Three{}',
-        '{C:blue}+25{} Chips and',
-        '{C:red}+3{} Mult'
-            }
-        },
-        c_sp_kepler120c = {
-            name = "Kepler-120 c",
-            text = {
-        'Levels up {C:attention}Triangle{}',
-        '{C:blue}+37.5{} Chips and',
-        '{C:red}+2.5{} Mult'
-            }
-        },
-        c_sp_kereru = {
-            name = "Kererū",
-            text = {
-        'Levels up {C:attention}Decagon{}',
-        '{C:blue}+15{} Chips and',
-        '{C:red}+2{} Mult'
-            }
-        },
-        c_sp_pcd = {
-            name = "Proxima Centauri d",
-            text = {
-        'Levels up {C:attention}Archipelago{}',
-        '{C:blue}+20{} Chips and',
-        '{C:red}+1{} Mult'
-            }
-        },
-        c_sp_dagon = {
-            name = "Dagon",
-            text = {
-        'Levels up {C:attention}Twace{}',
-        '{C:blue}+20{} Chips and',
-        '{C:red}+2{} Mult'
-            }
-        },
+c_sp_j1407b = {
+    name = "J1407b",
+    text = {
+        '(lvl.#1#) Levels up {C:attention}#2#{}',
+        '{C:blue}+#4#{} Chips and',
+        '{C:red}+#3#{} Mult'
+    }
+},
+c_sp_toi5573_b = {
+    name = "TOI-5573 b",
+    text = {
+        '(lvl.#1#) Levels up {C:attention}#2#{}',
+        '{C:blue}+#4#{} Chips and',
+        '{C:red}+#3#{} Mult'
+    }
+},
+c_sp_noifasui = {
+    name = "Noifasui",
+    text = {
+        '(lvl.#1#) Levels up {C:attention}#2#{}',
+        '{C:blue}+#4#{} Chips and',
+        '{C:red}+#3#{} Mult'
+    }
+},
+c_sp_fortiduo = {
+    name = "Fortiduo",
+    text = {
+        '(lvl.#1#) Levels up {C:attention}#2#{}',
+        '{C:blue}+#4#{} Chips and',
+        '{C:red}+#3#{} Mult'
+    }
+},
+c_sp_awasis = {
+    name = "Awasis",
+    text = {
+        '(lvl.#1#) Levels up {C:attention}#2#{}',
+        '{C:blue}+#4#{} Chips and',
+        '{C:red}+#3#{} Mult'
+    }
+},
+c_sp_kepler120c = {
+    name = "Kepler-120 c",
+    text = {
+        '(lvl.#1#) Levels up {C:attention}#2#{}',
+        '{C:blue}+#4#{} Chips and',
+        '{C:red}+#3#{} Mult'
+    }
+},
+c_sp_kereru = {
+    name = "Kererū",
+    text = {
+        '(lvl.#1#) Levels up {C:attention}#2#{}',
+        '{C:blue}+#4#{} Chips and',
+        '{C:red}+#3#{} Mult'
+    }
+},
+c_sp_pcd = {
+    name = "Proxima Centauri d",
+    text = {
+        '(lvl.#1#) Levels up {C:attention}#2#{}',
+        '{C:blue}+#4#{} Chips and',
+        '{C:red}+#3#{} Mult'
+    }
+},
+c_sp_dagon = {
+    name = "Dagon",
+    text = {
+        '(lvl.#1#) Levels up {C:attention}#2#{}',
+        '{C:blue}+#4#{} Chips and',
+        '{C:red}+#3#{} Mult'
+    }
+},
+c_sp_cuptor = {
+    name = "Cuptor",
+    text = {
+        '(lvl.#1#) Levels up {C:attention}#2#{}',
+        '{C:blue}+#4#{} Chips and',
+        '{C:red}+#3#{} Mult'
+    }
+},
+c_sp_toge = {
+    name = "Toge",
+    text = {
+        '(lvl.#1#) Levels up {C:attention}#2#{}',
+        '{C:blue}+#4#{} Chips and',
+        '{C:red}+#3#{} Mult'
+    }
+},
+c_sp_xolotlan = {
+    name = "Xolotlan",
+    text = {
+        '(lvl.#1#) Levels up {C:attention}#2#{}',
+        '{C:blue}+#4#{} Chips and',
+        '{C:red}+#3#{} Mult'
+    }
+},
+
     },
 
     Other = {
@@ -983,19 +1045,24 @@ return {
         p_sp_shufflepack1 = {
             name = "Shuffle Pack",
             text = {
-                'Contains {C:attention}3{}',
-                '{X:attention,C:black}shuffle-puffle{} Jokers,',
-                'select one of three'
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}2{} {X:attention,C:black}shuffle-puffle{} Jokers',
                 }
         },
         p_sp_carcanapack1 = {
             name = "Carcana Pack",
             text = {
-                'Choose {C:attention}1{}',
-                'of up to {C:attention}3{}',
-                'Catarot cards',
-                'to be used',
-                'immediately'
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}3{} Catarots to be',
+                'used immediately'
+                }
+        },
+        p_sp_exocelestialpack1 = {
+            name = "Exocelestial Pack",
+            text = {
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}3{} Exoplanets to be',
+                'used immediately'
                 }
         },
 

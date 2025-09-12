@@ -676,8 +676,8 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
-    key = 'grumpy',
-    path = 'grumpy.png',
+    key = 'americanshorthair',
+    path = 'americanshorthair.png',
     px = 71,
     py = 95,
 })
@@ -689,6 +689,12 @@ SMODS.Atlas({
     py = 95,
 })
 
+SMODS.Atlas({
+    key = 'grumpy',
+    path = 'grumpy.png',
+    px = 71,
+    py = 95,
+})
 -- enhancements
 SMODS.Atlas({
     key = 'francaise',
@@ -735,6 +741,20 @@ SMODS.Atlas({
 SMODS.Atlas({
     key = 'nature',
     path = 'nature.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'patriotic',
+    path = 'patriotic.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'baudelaire',
+    path = 'baudelaire.png',
     px = 71,
     py = 95
 })

@@ -336,8 +336,8 @@ end
 
 SMODS.PokerHand{
   key = 'triangle',
-  mult = 5, chips = 55,
-  l_mult = 2.5, l_chips = 37.5,
+  mult = 4.5, chips = 30,
+  l_mult = 2.5, l_chips = 15.5,
   visible = false,
 
   loc_txt = {
@@ -658,4 +658,54 @@ SMODS.PokerHand {
     end
     return {}
   end
+}
+
+SMODS.PokerHand{
+    key = 'euler',
+    chips = 27,
+    mult = 8,
+    l_chips = 14,
+    l_mult = 3,
+    visible = false,
+
+    loc_txt = {
+        name = 'Euler',
+        description = {
+            'A five-card hand with the ranks containing',
+            'the first five digits of Euler\'s number'
+        }
+    },
+
+    example = {
+        { 'D_2', true }, { 'D_7', true }, { 'H_A', true },
+        { 'C_8', true }, { 'C_2', true }
+    },
+
+    evaluate = function(parts, hand)
+        if #hand ~= 5 then return {} end
+
+        -- helper to normalize rank to string
+        local function rank_str(c)
+            if type(c.base.value) == "number" then
+                if c.base.value == 14 then return "A" end  -- numeric Ace
+                return tostring(c.base.value)
+            elseif type(c.base.value) == "string" then
+                if c.base.value:lower() == "ace" then return "A" end
+                return c.base.value
+            end
+            return tostring(c.base.value)
+        end
+
+        local counts = {}
+        for _, c in ipairs(hand) do
+            local r = rank_str(c)
+            counts[r] = (counts[r] or 0) + 1
+        end
+
+        if counts["2"] == 2 and counts["7"] == 1 and counts["8"] == 1 and counts["A"] == 1 then
+            return { hand } -- hand matches
+        end
+
+        return {} -- hand doesn't match
+    end
 }

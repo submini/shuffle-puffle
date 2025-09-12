@@ -262,3 +262,65 @@ SMODS.Enhancement {
         end
     end
 }
+
+SMODS.Enhancement {
+    key = 'patriotic',
+    pos = { x = 0, y = 0 },
+    config = {
+        mult = 17,
+        bonus = 76,
+        extra = {
+            odds = 2,
+            x_mult = 1.5
+        }
+    },
+    loc_txt = {
+        name = 'Patriotic Card',
+        text = {
+        [1] = '{C:red}+17{} Mult, {C:blue}+76{} extra',
+        [2] = 'chips, {C:green}1 in 2{} chance',
+        [3] = '{X:red,C:white}X1.5{} Mult'
+    }
+    },
+    atlas = 'patriotic',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 1.7,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            if SMODS.pseudorandom_probability(card, 'group_0_770bb1fd', 1, card.ability.extra.odds, 'm_sp_patriotic') then
+                SMODS.calculate_effect({x_mult = card.ability.extra.x_mult}, card)
+            end
+        end
+    end
+}
+
+SMODS.Enhancement {
+    key = 'baudelaire',
+    pos = { x = 0, y = 0 },
+    config = {
+        bonus = 100
+    },
+    loc_txt = {
+        name = 'Baudelaire Card',
+        text = {
+        [1] = '{C:blue}+100{} extra chips'
+    }
+    },
+    atlas = 'baudelaire',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 1
+}

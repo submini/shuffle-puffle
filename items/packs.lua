@@ -21,7 +21,7 @@ SMODS.Booster {
 
     atlas = 'shufflepack1',
     pos = { x = 0, y = 0 },
-    config = { extra = 3, choose = 1},
+    config = { extra = 2, choose = 1},
     kind = 'Buffoon',
     weight = 2,
     cost = 4,
@@ -73,7 +73,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1},
     kind = 'Arcana',
-    weight = 100000,
+    weight = 4,
     cost = 4,
     loc_txt = { 
         name = "Carcana Pack",
