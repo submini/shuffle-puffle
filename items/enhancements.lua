@@ -324,3 +324,106 @@ SMODS.Enhancement {
     no_collection = false,
     weight = 1
 }
+
+SMODS.Enhancement {
+    key = 'obsidized',
+    pos = { x = 0, y = 0 },
+    config = {
+        bonus = 80
+    },
+    loc_txt = {
+        name = 'Obsidized',
+        text = {
+        [1] = '{C:blue}+80{} extra chips'
+    }
+    },
+    atlas = 'obsidized',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 0
+}
+
+SMODS.Enhancement {
+    key = 'rubified',
+    pos = { x = 0, y = 0 },
+    config = {
+        mult = 15
+    },
+    loc_txt = {
+        name = 'Rubified',
+        text = {
+        [1] = '{C:red}+15{} Mult'
+    }
+    },
+    atlas = 'rubified',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 0
+}
+
+SMODS.Enhancement {
+    key = 'onyxxified',
+    pos = { x = 0, y = 0 },
+    config = {
+        extra = {
+            x_chips = 1.4
+        }
+    },
+    loc_txt = {
+        name = 'Onyxxified',
+        text = {
+        [1] = '{X:blue,C:white}X1.4{} Chips'
+    }
+    },
+    atlas = 'onyxxified',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 0,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            return { x_chips = card.ability.extra.x_chips }
+        end
+    end
+}
+
+SMODS.Enhancement {
+    key = 'topazzified',
+    pos = { x = 0, y = 0 },
+    config = {
+        p_dollars = 5
+    },
+    loc_txt = {
+        name = 'Topazzified',
+        text = {
+        [1] = '{C:money}+$5{}'
+    }
+    },
+    atlas = 'topazzified',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 0
+}

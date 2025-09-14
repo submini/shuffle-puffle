@@ -581,20 +581,47 @@ SMODS.Atlas({
     py = 95
 })
 
--- boosters
 SMODS.Atlas({
-    key = 'shufflepack1',
-    path = 'blankpack.png',
+    key = "lebronjames",
+    path = "placeholder.png",
     px = 71,
     py = 95
 })
 
--- ranks
 SMODS.Atlas({
-    key = "fractionranks",
-    path = "fractionranks.png",
+    key = "hedge",
+    path = "placeholder.png",
     px = 71,
-    py = 95,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "crazyofjoker",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "thejokeof87",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "sealedpackage",
+    path = "placeholder.png",
+    px = 71,
+    py = 95
+})
+
+-- boosters
+SMODS.Atlas({
+    key = 'minishufflepack1',
+    path = 'shufflepackfrog.png',
+    px = 71,
+    py = 95
 })
 
 -- catarots
@@ -767,10 +794,63 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = 'catseal',
+    path = 'catseal.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'navyseal',
+    path = 'navyseal.png',
+    px = 71,
+    py = 95
+})
+
+
 -- exoplanets
 SMODS.Atlas({
     key = 'j1407b',
     path = 'j1407b.png',
+    px = 71,
+    py = 95
+})
+
+
+-- mod icon
+SMODS.Atlas({
+    key = "modicon",
+    path = "spmodicon.png",
+    px = 32,
+    py = 32
+})
+
+-- gem cards
+SMODS.Atlas({
+    key = "obsidized",
+    path = "obsidized.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "rubified",
+    path = "rubified.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "onyxxified",
+    path = "onyxxified.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "topazzified",
+    path = "topazzified.png",
     px = 71,
     py = 95
 })

@@ -16,9 +16,6 @@ return {
                     'when playing a {C:attention}Full House{},',
                     'Selling removes {C:attention}2{} Full House levels',
                     '{C:inactive}(cannot go below 1){}'
-                },
-                unlock = {
-                    "Upgrade Full House to level three"
                 }
             },
 
@@ -742,7 +739,7 @@ return {
         j_sp_hoftheh = {
             name = "H of the H",
             text = {
-                'Creates a Negative',
+                'Creates a {C:dark_edition}Negative{}',
                 '{C:attention}Crazy Joker{}',
                 'when {C:attention}Blind{} is selected'
             }
@@ -751,8 +748,8 @@ return {
         j_sp_hegative = {
             name = "Hegative",
             text = {
-                'Creates a random {C:attention}Negative',
-                'Joker{} when Boss Blind is',
+                'Creates a random {C:dark_edition}Negative{}',
+                '{C:attention}Joker{} when Boss Blind is',
                 'defeated',
                 '{C:inactive}(only{} {C:common}Common{} {C:inactive}and {}{C:uncommon}Uncommon{}{C:inactive}){}'
             }
@@ -761,11 +758,56 @@ return {
         j_sp_hhhhh = {
             name = "HHHHH",
             text = {
-                "All hands count",
-                "as containing a {C:attention}Straight{}"
+                'Creates a {C:dark_edition}Negative{} {C:attention}Crazy',
+                'Joker{} every time a {C:planet}Saturn{}',
+                'is used, creates 3 if a',
+                'J1407b is used'
             }
         },
+     j_sp_lebronjames = {
+        name = 'LeBron James',
+        text = {
+                '{X:red,C:white}X23{} Mult,',
+                'Every scored {C:attention}King{}',
+                'gives {X:red,C:white}X6{} Mult'
+        }
     },
+    j_sp_hedge = {
+        name = "Hedge",
+        text = {
+            'Adds a permanent random',
+            'card with a {C:attention}Red Seal{} to',
+            'hand if played hand',
+            'contains a {C:attention}Straight{}'
+        }
+    },
+    j_sp_thecrazyofjoker = {
+        name = "The Crazy of Joker",
+        text = {
+            '{X:edition,C:white}^^^12{} Mult if played',
+            'hand contains a {C:attention}Straight{}'
+        }
+    },
+    j_sp_thejokeof87 = {
+        name = "The Joke of 87",
+        text = {
+            'If played hand contains an',
+            '{C:attention}8{} and a {C:attention}7{}, create #1#',
+            '{C:dark_edition}Negative{} {C:attention}Freddy Fazbears{}',
+            'and increase number by {C:attention}5{}'
+        }
+    },
+    j_sp_sealedpackage = {
+        name = "Sealed Package",
+        text = {
+            'When {C:attention}Boss Blind{} is selected,',
+            'creates {C:attention}5{} random playing',
+            'cards with a {C:attention}random seal{}',
+            'and draws it to hand'
+    }
+},
+
+},
 
     Enhanced = {
     m_sp_francaise={
@@ -936,7 +978,7 @@ return {
 c_sp_j1407b = {
     name = "J1407b",
     text = {
-        '(lvl.#1#) Levels up {C:attention}#2#{}',
+        '({V:1}lvl.#1#{}) Levels up {C:attention}#2#{}',
         '{C:blue}+#4#{} Chips and',
         '{C:red}+#3#{} Mult'
     }
@@ -1032,28 +1074,38 @@ c_sp_xolotlan = {
 
     },
 
+    Spectaclaw = {
+    c_sp_bombay = {
+        name = 'Bombay',
+        text = {
+                'Enhances all cards in',
+                'hand to {C:attention}Glass Cards{},',
+                '{C:green}1 in 7{} chance card has',
+                'a {C:attention}Red{} or {C:attention}Blue Seal{}'
+        }
+    },
+    },
+
     Other = {
-        undiscovered_sp_catarot = {
-            name = "Not Discovered",
-            text = {
-                "Purchase or use",
-                "this card in an",
-                "unseeded run to",
-                "learn what it does",
-                },
-        },
-        p_sp_shufflepack1 = {
-            name = "Shuffle Pack",
+        p_sp_minishufflepack1 = {
+            name = "Mini Shuffle Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
-                '{C:attention}2{} {X:attention,C:black}shuffle-puffle{} Jokers',
+                '{C:attention}2{} {B:1,V:2}shuffle-puffle{} Jokers',
+                }
+        },
+        p_sp_hpack1 = {
+            name = "H Pack",
+            text = {
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}2{} {V:1}H{} Jokers',
                 }
         },
         p_sp_carcanapack1 = {
             name = "Carcana Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
-                '{C:attention}3{} Catarots to be',
+                '{C:attention}3{} {V:1}Catarots{} to be',
                 'used immediately'
                 }
         },
@@ -1061,7 +1113,15 @@ c_sp_xolotlan = {
             name = "Exocelestial Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
-                '{C:attention}3{} Exoplanets to be',
+                '{C:attention}3{} {V:1}Exoplanets{} to be',
+                'used immediately'
+                }
+        },
+        p_sp_crystalpack1 = {
+            name = "Crystal Pack",
+            text = {
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}2{} {V:1}Gems{} to be',
                 'used immediately'
                 }
         },
@@ -1097,6 +1157,9 @@ c_sp_xolotlan = {
                 a_dollars = "$#1#",
                 a_sellboost = "+$#1# Sell",
             },
+            poker_hands = {
+                sp_plateau = "Plateau",
+            }
         }
     }
 

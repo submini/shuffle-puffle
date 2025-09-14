@@ -137,7 +137,7 @@ SMODS.Joker{ --Landlord
     rarity = 2,
     blueprint_compat = true,
     eternal_compat = true,
-    unlocked = false,
+    unlocked = true,
     discovered = false,
     atlas = 'landlord',
     pools = { ["Shuffle"] = true },
@@ -465,14 +465,7 @@ SMODS.Joker{
         }
     end,
 
-    in_pool = function(self, args)
-    for _, j in ipairs(G.jokers.cards) do
-        if j.config.center.key == self.key then
-            return false
-        end
-    end
-    return true
-end,
+
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main then
@@ -4908,15 +4901,6 @@ SMODS.Joker{ --Cantaloupe
         return {vars = {card.ability.extra.emult}}
     end,
 
-    in_pool = function(self, args)
-    for _, j in ipairs(G.jokers.cards) do
-        if j.config.center.key == self.key then
-            return false
-        end
-    end
-    return true
-end,
-
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
             if next(context.poker_hands["Full House"]) then
@@ -5023,18 +5007,20 @@ end,
     end
 }
 
-SMODS.Joker{ --H
-    key = "bigh",
+SMODS.Joker{ --LeBron James
+    key = "lebronjames",
     config = {
         extra = {
-            Xmult = 12
+            Xmult = 23,
+            Xmult2 = 6
         }
     },
     loc_txt = {
-        ['name'] = 'H',
+        ['name'] = 'LeBron James',
         ['text'] = {
-            [1] = '{X:red,C:white}X12{} Mult if played hand',
-            [2] = 'contains a {C:attention}Straight{}'
+            [1] = '{X:red,C:white}X23{} Mult,',
+            [2] = 'Every scored {C:attention}King{}',
+            [3] = 'gives {X:red,C:white}X6{} Mult'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -5048,90 +5034,52 @@ SMODS.Joker{ --H
         w = 71 * 1, 
         h = 95 * 1
     },
-    cost = 18,
-    rarity = "sp_h_rare",
+    cost = 20,
+    rarity = 4,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
     unlocked = true,
     discovered = false,
-    atlas = 'bigh',
-    pools = { ["H"] = true },
+    atlas = 'lebronjames',
+    in_pool = function(self, args)
+          return (
+          not args 
+          or args.source ~= 'sho' 
+          or args.source == 'buf' or args.source == 'jud' or args.source == 'rif' or args.source == 'rta' or args.source == 'sou' or args.source == 'uta' or args.source == 'wra'
+          )
+          and true
+      end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
-            if next(context.poker_hands["Straight"]) then
                 return {
                     Xmult = card.ability.extra.Xmult
                 }
-            end
         end
-    end
-}
-
-SMODS.Joker{ --h
-    key = "smallh",
-    config = {
-        extra = {
-            xchips = 4.5
-        }
-    },
-    loc_txt = {
-        ['name'] = 'h',
-        ['text'] = {
-            [1] = '{X:blue,C:white}X4.5{} Chips if played hand',
-            [2] = 'contains a {C:attention}Straight{}'
-        },
-        ['unlock'] = {
-            [1] = 'Unlocked by default.'
-        }
-    },
-    pos = {
-        x = 0,
-        y = 0
-    },
-    display_size = {
-        w = 71 * 1, 
-        h = 95 * 1
-    },
-    cost = 10,
-    rarity = "sp_h_uncommon",
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = true,
-    unlocked = true,
-    discovered = false,
-    atlas = 'smallh',
-    pools = { ["H"] = true },
-
-    calculate = function(self, card, context)
-        if context.cardarea == G.jokers and context.joker_main  then
-            if next(context.poker_hands["Straight"]) then
+        if context.individual and context.cardarea == G.play  then
+            if context.other_card:get_id() == 13 then
                 return {
-                    x_chips = card.ability.extra.xchips
+                    Xmult = card.ability.extra.Xmult2
                 }
             end
         end
     end
 }
 
-SMODS.Joker{ --H Building
-    key = "hbuilding",
+SMODS.Joker{ --The Crazy of Joker
+    key = "thecrazyofjoker",
     config = {
         extra = {
-            gainvalue = 7,
-            chips = 0
+            hypermult_n = 12,
+            hypermult_arrows = 3
         }
     },
     loc_txt = {
-        ['name'] = 'H Building',
+        ['name'] = 'The Crazy of Joker',
         ['text'] = {
-            [1] = 'This Joker gains {C:blue}+#1#{} Chips',
-            [2] = 'if played hand contains a',
-            [3] = '{C:attention}Straight{}, Chip gain increases',
-            [4] = 'by {C:blue}+35{} Chips every time the',
-            [5] = '{C:attention}Saturn{} {C:planet}planet card{} is used',
-            [6] = '{C:inactive}(Currently{} {C:blue}+#2#{} {C:inactive}Chips){}'
+            [1] = '{X:edition,C:white}^^^12{} Mult if played',
+            [2] = 'hand contains a {C:attention}Straight{}'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -5145,262 +5093,130 @@ SMODS.Joker{ --H Building
         w = 71 * 1, 
         h = 95 * 1
     },
-    cost = 5,
-    rarity = "sp_h_common",
+    cost = 99,
+    rarity = "sp_unfair",
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
     unlocked = true,
     discovered = false,
-    atlas = 'hbuilding',
-    pools = { ["H"] = true },
+    atlas = 'crazyofjoker',
 
-    loc_vars = function(self, info_queue, center)
-    info_queue[#info_queue + 1] = G.P_CENTERS.c_saturn
-    end,
-
-    in_pool = function(self, args)
-    for _, j in ipairs(G.jokers.cards) do
-        if j.config.center.key == self.key then
-            return false
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main  then
+            if next(context.poker_hands["Straight"]) then
+                return {
+                    hypermult = {
+    card.ability.extra.hypermult_arrows,
+    card.ability.extra.hypermult_n
+}
+                }
+            end
         end
     end
-    return true
-end,
+}
+
+SMODS.Joker{ --The Joke of 87
+    key = "thejokeof87",
+    config = {
+        extra = {
+            var1 = 5
+        }
+    },
+    loc_txt = {
+        ['name'] = 'The Joke of 87',
+        ['text'] = {
+            [1] = 'If played hand contains an',
+            [2] = '{C:attention}8{} and a {C:attention}7{}, create #1#',
+            [3] = '{C:dark_edition}Negative{} {C:attention}Freddy Fazbears{}',
+            [4] = 'and increase number by {C:attention}5{}'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
+    },
+    cost = 87,
+    rarity = "sp_unfair",
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'thejokeof87',
 
     loc_vars = function(self, info_queue, card)
-        return {vars = {card.ability.extra.gainvalue, card.ability.extra.chips}}
+        info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
+        info_queue[#info_queue + 1] = G.P_CENTERS.j_sp_freddyfazbear
+        return {vars = {card.ability.extra.var1}}
+        
     end,
 
-    calculate = function(self, card, context)
-        if context.cardarea == G.jokers and context.joker_main  then
-            if next(context.poker_hands["Straight"]) then
-                card.ability.extra.chips = (card.ability.extra.chips) + card.ability.extra.gainvalue
-                return {
-                    message = "Upgrade!",
-                    extra = {
-                        chips = card.ability.extra.chips,
-                        colour = G.C.CHIPS
-                        }
-                }
-            else
-                return {
-                    chips = card.ability.extra.chips
-                }
+   calculate = function(self, card, context)
+    if context.cardarea == G.jokers and context.joker_main then
+        if ((function()
+            local rankCount = 0
+            for _, c in ipairs(context.full_hand) do
+                if c:get_id() == 8 then
+                    rankCount = rankCount + 1
+                end
             end
-        end
-        if context.using_consumeable  then
-            if context.consumeable and context.consumeable.ability.set == 'Planet' and context.consumeable.config.center.key == 'c_saturn' then
-                return {
+            return rankCount >= 1
+        end)() and (function()
+            local rankCount = 0
+            for _, c in ipairs(context.full_hand) do
+                if c:get_id() == 7 then
+                    rankCount = rankCount + 1
+                end
+            end
+            return rankCount >= 1
+        end)()) then
+
+            -- store current value before increment
+            local to_create = card.ability.extra.var1
+
+            for i = 1, to_create do
+                local created_joker = true
+                G.E_MANAGER:add_event(Event({
                     func = function()
-                    card.ability.extra.gainvalue = (card.ability.extra.gainvalue) + 35
-                    return true
-                end,
-                    message = "Upgrade!"
-                }
+                        local joker_card = SMODS.add_card({ set = 'Joker', key = 'j_sp_freddyfazbear' })
+                        if joker_card then
+                            joker_card:set_edition("e_negative", true)
+                        end
+                        return true
+                    end
+                }))
             end
-        end
-    end
-}
 
-SMODS.Joker {
-    key = "dancingh",
-    config = {
-        extra = {
-            chance = 2,      -- base numerator
-            odds = 13,       -- denominator
-            levels = 1       -- how many levels to add
-        }
-    },
-    loc_txt = {
-        name = 'Dancing H',
-        text = {
-            [1] = '{C:green}#1# in #2#{} chance{} to',
-            [2] = '{C:attention}level up played poker',
-            [3] = 'hand{}, probability increases',
-            [4] = 'by {C:attention}1{} for every other Joker',
-            [5] = 'owned'
-        },
-        unlock = {
-            [1] = 'Unlocked by default.'
-        }
-    },
-    pools = { ["H"] = true },
-    pos = {x = 0, y = 0},
-    display_size = {w = 71, h = 95},
-    cost = 8,
-    rarity = "sp_h_uncommon",
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = true,
-    unlocked = true,
-    discovered = false,
-    atlas = 'dancingh',
-
-    -- text variables
-    loc_vars = function(self, info_queue, card)
-        local other_jokers = 0
-        if G.jokers then
-            for _, j in ipairs(G.jokers.cards) do
-                if j ~= card then
-                    other_jokers = other_jokers + 1
-                end
-            end
-        end
-
-        local numerator = (card.ability.extra.chance or 2) + other_jokers
-        local denominator = card.ability.extra.odds or 13
-
-        return {vars = {numerator, denominator}}
-    end,
-
-    in_pool = function(self, args)
-    for _, j in ipairs(G.jokers.cards) do
-        if j.config.center.key == self.key then
-            return false
-        end
-    end
-    return true
-end,
-
-    -- main effect
-    calculate = function(self, card, context)
-    -- trigger before hand scoring starts
-    if context.before and context.cardarea == G.jokers then
-        local other_jokers = 0
-        if G.jokers then
-            for _, j in ipairs(G.jokers.cards) do
-                if j ~= card then
-                    other_jokers = other_jokers + 1
-                end
-            end
-        end
-
-        local numerator = (card.ability.extra.chance or 2) + other_jokers
-        local denominator = (card.ability.extra.odds or 13)
-
-        if SMODS.pseudorandom_probability(card, 'group_dancingh', numerator, denominator, 'j_sp_dancingh', false) then
-            local target_hand = (context.scoring_name or "High Card")
-
-            -- apply the level up BEFORE scoring
-            SMODS.calculate_effect({
-                level_up = card.ability.extra.levels,
-                level_up_hand = target_hand
-            }, card)
-
-            card_eval_status_text(
-                context.blueprint_card or card,
-                'extra',
-                nil,
-                nil,
-                nil,
-                {message = localize('k_level_up_ex'), colour = G.C.RED}
-            )
+            -- now increment AFTER spawning
+            card.ability.extra.var1 = card.ability.extra.var1 + 5
         end
     end
 end
+
 }
 
-SMODS.Joker{ --Gordon Ramsay H
-    key = "gordonramsayh",
+SMODS.Joker{ --Sealed Package
+    key = "sealedpackage",
     config = {
         extra = {
-            multgain = 5.5,
-            mult = 0
+            repetitions = 5
         }
     },
     loc_txt = {
-        ['name'] = 'Gordon Ramsay H',
+        ['name'] = 'Sealed Package',
         ['text'] = {
-            [1] = 'This Joker gains {C:red}+5.5{}',
-            [2] = 'Mult when round starts,',
-            [3] = 'Mult gain increases by',
-            [4] = '{C:red}+24{} Mult for every card',
-            [5] = 'eaten',
-            [6] = '{C:inactive}(Currently{} {C:red}+#2#{} {C:inactive}Mult){}',
-            [7] = '{C:inactive,s:0.8}(eaten = destroyed){}'
-        },
-        ['unlock'] = {
-            [1] = 'Unlocked by default.'
-        }
-    },
-    pos = {
-        x = 0,
-        y = 0
-    },
-    display_size = {
-        w = 71 * 1, 
-        h = 95 * 1
-    },
-    cost = 8,
-    rarity = "sp_h_uncommon",
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = true,
-    unlocked = true,
-    discovered = false,
-    atlas = 'gordonramsayh',
-    pools = { ["H"] = true },
-
-    loc_vars = function(self, info_queue, card)
-        return {vars = {card.ability.extra.multgain, card.ability.extra.mult}}
-    end,
-
-    in_pool = function(self, args)
-    for _, j in ipairs(G.jokers.cards) do
-        if j.config.center.key == self.key then
-            return false
-        end
-    end
-    return true
-end,
-
-    calculate = function(self, card, context)
-        if context.cardarea == G.jokers and context.joker_main  then
-                return {
-                    mult = card.ability.extra.mult
-                }
-        end
-        if context.setting_blind  then
-                return {
-                    func = function()
-                    card.ability.extra.mult = (card.ability.extra.mult) + card.ability.extra.multgain
-                    return true
-                end,
-                    message = "WHERE IS THE LAMB SAUCE??"
-                }
-        end
-        if context.remove_playing_cards  then
-                return {
-                    func = function()
-                    card.ability.extra.multgain = (card.ability.extra.multgain) + 24
-                    return true
-                end,
-                    message = "WHAT ARE YOU??"
-                }
-        end
-    end
-}
-
-SMODS.Joker{ --Lava Lamp H
-    key = "lavalamph",
-    config = {
-        extra = {
-            odds = 2,
-            odds2 = 4,
-            odds3 = 6,
-            Xmult = 1.6,
-            Xmult2 = 0.8,
-            dollars = 12
-        }
-    },
-    loc_txt = {
-        ['name'] = 'Lava Lamp H',
-        ['text'] = {
-            [1] = '{C:green}1 in 2{} chance for {X:red,C:white}X1.6{} Mult,',
-            [2] = '{C:green}1 in 4{} chance for {X:red,C:white}X0.8{} Mult,',
-            [3] = '{C:green}1 in 6{} chance to give {C:money}$12{}',
-            [4] = 'if played hand contains a {C:attention}Straight{}'
+            [1] = 'When {C:attention}Boss Blind{} is selected,',
+            [2] = 'creates {C:attention}5{} random playing',
+            [3] = 'cards with a {C:attention}random seal{}',
+            [4] = 'and draws it to hand'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -5415,184 +5231,43 @@ SMODS.Joker{ --Lava Lamp H
         h = 95 * 1
     },
     cost = 7,
-    rarity = "sp_h_uncommon",
+    rarity = 2,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
     unlocked = true,
     discovered = false,
-    atlas = 'lavalamph',
-    pools = { ["H"] = true },
+    atlas = 'sealedpackage',
+    pools = { ["Shuffle"] = true },
 
-    calculate = function(self, card, context)
-        if context.cardarea == G.jokers and context.joker_main  then
-            if next(context.poker_hands["Straight"]) then
-                if SMODS.pseudorandom_probability(card, 'group_0_693c3e2e', 1, card.ability.extra.odds, 'j_modprefix_lavalamph', false) then
-              SMODS.calculate_effect({Xmult = card.ability.extra.Xmult}, card)
-          end
-                if SMODS.pseudorandom_probability(card, 'group_1_48ff97f0', 1, card.ability.extra.odds2, 'j_modprefix_lavalamph', false) then
-              SMODS.calculate_effect({Xmult = card.ability.extra.Xmult2}, card)
-          end
-                if SMODS.pseudorandom_probability(card, 'group_2_676b1888', 1, card.ability.extra.odds3, 'j_modprefix_lavalamph', false) then
-              SMODS.calculate_effect({dollars = card.ability.extra.dollars}, card)
-          end
-            end
-        end
-    end
-}
-
-SMODS.Joker{ --H of The H
-    key = "hoftheh",
-    config = {
-        extra = {
-            respect = 0
-        }
-    },
-    loc_txt = {
-        ['name'] = 'H of The H',
-        ['text'] = {
-            [1] = 'Creates a Negative',
-            [2] = '{C:attention}Crazy Joker{}',
-            [3] = 'when {C:attention}Blind{} is selected'
-        },
-        ['unlock'] = {
-            [1] = 'Unlocked by default.'
-        }
-    },
-    pos = {
-        x = 0,
-        y = 0
-    },
-    display_size = {
-        w = 71 * 1, 
-        h = 95 * 1
-    },
-    cost = 15,
-    rarity = "sp_h_rare",
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = true,
-    unlocked = true,
-    discovered = false,
-    atlas = 'hoftheh',
-    pools = { ["H"] = true },
-
-	loc_vars = function(self, info_queue, center)
-		info_queue[#info_queue + 1] = G.P_CENTERS.j_crazy
-        info_queue[#info_queue + 2] = G.P_CENTERS.e_negative
-	end,
-
-    in_pool = function(self, args)
-    for _, j in ipairs(G.jokers.cards) do
-        if j.config.center.key == self.key then
-            return false
-        end
-    end
-    return true
-end,
     calculate = function(self, card, context)
         if context.setting_blind  then
-                return {
+            if G.GAME.blind.boss then
+                for i = 1, card.ability.extra.repetitions do
+              SMODS.calculate_effect({func = function()
+                local card_front = pseudorandom_element(G.P_CARDS, pseudoseed('add_card_hand'))
+                local new_card = create_playing_card({
+                    front = card_front,
+                    center = G.P_CENTERS.c_base
+                }, G.discard, true, false, nil, true)
+            new_card:set_seal(pseudorandom_element({"Gold", "Red", "Blue", "Purple"}, pseudoseed('add_card_hand_seal')), true)
+                
+                G.playing_card = (G.playing_card and G.playing_card + 1) or 1
+                new_card.playing_card = G.playing_card
+                table.insert(G.playing_cards, new_card)
+                
+                G.E_MANAGER:add_event(Event({
                     func = function()
-            local created_joker = true
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    local joker_card = SMODS.add_card({ set = 'Joker', key = 'j_crazy' })
-                    if joker_card then
-                        joker_card:set_edition("e_negative", true)
-                        
+                        G.hand:emplace(new_card)
+                        new_card:start_materialize()
+                        SMODS.calculate_context({ playing_card_added = true, cards = { new_card } })
+                        return true
                     end
-                    
-                    return true
-                end
-            }))
-            
-            if created_joker then
-                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "CRAZY!", colour = G.C.DARK_EDITION})
+                }))
+            end}, card)
+                        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Added Card to Hand!", colour = G.C.GREEN})
+          end
             end
-            return true
-        end
-                }
         end
     end
 }
-
-SMODS.Joker{ --Hegative
-    key = "hegative",
-    config = {
-        extra = {
-            respect = 0
-        }
-    },
-    loc_txt = {
-        name = 'Hegative',
-        text = {
-            [1] = 'Creates a random {C:attention}Negative',
-            [2] = 'Joker{} when Boss Blind is',
-            [3] = 'defeated',
-            [4] = '{C:inactive}(only{} {C:common}Common{} {C:inactive}and {}{C:uncommon}Uncommon{}{C:inactive}){}'
-        },
-        unlock = {'Unlocked by default.'}
-    },
-    pos = {x = 0, y = 0},
-    display_size = {w = 71, h = 95},
-    cost = 16,
-    rarity = "sp_h_rare",
-    blueprint_compat = true,
-    eternal_compat = true,
-    perishable_compat = true,
-    unlocked = true,
-    discovered = false,
-    atlas = 'hegative',
-    pools = { ["H"] = true },
-
-    loc_vars = function(self, info_queue, center)
-		info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
-	end,
-
-    in_pool = function(self, args)
-    for _, j in ipairs(G.jokers.cards) do
-        if j.config.center.key == self.key then
-            return false
-        end
-    end
-    return true
-end,
-
-    calculate = function(self, card, context)
-        if context.end_of_round and context.main_eval and G.GAME.blind.boss then
-            return {
-                func = function()
-                    G.E_MANAGER:add_event(Event({
-                        func = function()
-                            -- roll rarity: 50% common, 50% uncommon
-                            local rarities = {"Common", "Uncommon"}
-                            local rarity = pseudorandom_element(rarities, pseudoseed("hegative_roll"))
-
-                            local joker_card = SMODS.add_card({
-                                set = 'Joker',
-                                rarity = rarity
-                            })
-
-                            if joker_card then
-                                joker_card:set_edition("e_negative", true)
-                            end
-
-                            return true
-                        end
-                    }))
-
-                    card_eval_status_text(
-                        context.blueprint_card or card,
-                        'extra',
-                        nil, nil, nil,
-                        {message = 'H!', colour = G.C.DARK_EDITION}
-                    )
-
-                    return true
-                end
-            }
-        end
-    end
-}
-

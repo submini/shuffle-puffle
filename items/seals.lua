@@ -30,3 +30,116 @@ SMODS.Seal {
         end
     end
 }
+
+SMODS.Seal {
+    key = 'catseal',
+    pos = { x = 0, y = 0 },
+    config = {
+        extra = {
+            odds = 7
+        }
+    },
+    badge_colour = HEX('E8A6BD'),
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('E8A6BD'),
+            HEX('fecb00'),
+     }
+        }
+    }
+    end,
+    loc_txt = {
+        name = 'Cat Seal',
+        label = 'Cat Seal',
+        text = {
+        [1] = 'Creates a {V:1}Catarot{} card when',
+        [2] = '{C:blue}played{} or {C:red}discarded{}, {C:green}1 in 7{}',
+        [3] = 'chance for it to be a',
+        [4] = '{V:2}Spectaclaw{} card instead',
+        [5] = '{C:inactive}(Must have room){}'
+    }
+    },
+    atlas = 'catseal',
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    
+    calculate = function(self, card, context)
+        -- trigger on play or discard
+        if (context.main_scoring and context.cardarea == G.play) or (context.discard and context.other_card == card) then
+            -- only continue if there’s room
+            if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        -- roll once: 1 in odds chance for Spectaclaw
+                        local useSpectaclaw = SMODS.pseudorandom_probability(
+                            card,
+                            'catseal_odds',
+                            1,
+                            card.ability.seal.extra.odds,
+                            'm_sp_catseal'
+                        )
+
+                        -- spawn either Catarot (default) or Spectaclaw (rare)
+                        if useSpectaclaw then
+                            SMODS.add_card{set = 'Spectaclaw', key_append = 'enhanced_card_spectaclaw'}
+                        else
+                            SMODS.add_card{set = 'Catarot', key_append = 'enhanced_card_catarot'}
+                        end
+
+                        G.GAME.consumeable_buffer = 0
+                        return true
+                    end
+                }))
+            end
+        end
+    end
+}
+
+SMODS.Seal {
+    key = 'navyseal',
+    pos = { x = 0, y = 0 },
+    badge_colour = HEX('0A53A8'), -- navy-ish blue, tweak if you want
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('0A53A8'),
+     }
+        }
+    }
+    end,
+    loc_txt = {
+        name = 'Navy Seal',
+        label = 'Navy Seal',
+        text = {
+        [1] = 'Creates an {V:1}Exoplanet{} card when',
+        [2] = '{C:blue}played{} or {C:red}discarded{},',
+        [3] = '{C:inactive}(Must have room){}'
+    }
+    },
+    atlas = 'navyseal',
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+
+    calculate = function(self, card, context)
+        -- trigger on play or discard
+        if (context.main_scoring and context.cardarea == G.play) or (context.discard and context.other_card == card) then
+            if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        -- always add Exoplanet
+                        SMODS.add_card{set = 'Exoplanet', key_append = 'enhanced_card_exoplanet'}
+                        G.GAME.consumeable_buffer = 0
+                        return true
+                    end
+                }))
+            end
+        end
+    end
+}
