@@ -786,6 +786,20 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = 'tuxedo',
+    path = 'tuxedo.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'upward',
+    path = 'upward.png',
+    px = 71,
+    py = 95
+})
+
 -- seals
 SMODS.Atlas({
     key = 'chartreuseseal',
@@ -853,4 +867,12 @@ SMODS.Atlas({
     path = "topazzified.png",
     px = 71,
     py = 95
+})
+
+-- tags
+SMODS.Atlas({
+    key = "shuffytag",
+    path = "shuffytag.png",
+    px = 32,
+    py = 32
 })

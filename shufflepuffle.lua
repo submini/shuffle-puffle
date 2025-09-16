@@ -19,6 +19,7 @@ local files = {
     "items/consumables/spectaclaw",
     "items/consumables/gem",
     "items/enhancements",
+    "items/tags",
     "items/seals",
     "items/packs",
     "items/decks",

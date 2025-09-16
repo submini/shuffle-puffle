@@ -1,3 +1,19 @@
+SMODS.ObjectType{
+    key = "H",
+    default = "j_joker_fallback", -- optional, can point to a filler card
+    cards = {
+        ["j_hbuilding"] = true,
+        -- add other H-pool jokers here
+    },
+    rarities = {
+        { key = "sp_h_common", rate = 0.8 },
+        { key = "sp_h_rare", rate = 0.2 },
+    }
+}
+
+
+
+
 SMODS.Joker{ --H
     key = "bigh",
     config = {
@@ -129,16 +145,6 @@ SMODS.Joker{ --H Building
     discovered = false,
     atlas = 'hbuilding',
     pools = { ["H"] = true },
-
-
-    in_pool = function(self, args)
-    for _, j in ipairs(G.jokers.cards) do
-        if j.config.center.key == self.key then
-            return false
-        end
-    end
-    return true
-end,
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.c_saturn

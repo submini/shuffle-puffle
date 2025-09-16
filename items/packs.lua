@@ -1,7 +1,5 @@
-
-
 SMODS.Booster {
-    key = "minishufflepack1",
+    key = "minishufflepack",
     name = "Mini Shuffle Pack",
 
     atlas = 'minishufflepack1',
@@ -9,7 +7,7 @@ SMODS.Booster {
     config = { extra = 2, choose = 1},
     kind = 'Buffoon',
     weight = 4,
-    cost = 4,
+    cost = 3,
     loc_txt = { 
         name = "Mini Shuffle Pack",
         text = {
@@ -66,14 +64,339 @@ end,
 }
 
 SMODS.Booster {
-    key = "hpack1",
+    key = "shufflepack",
+    name = "Shuffle Pack",
+
+    atlas = 'minishufflepack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 3, choose = 1},
+    kind = 'Buffoon',
+    weight = 4,
+    cost = 4,
+    loc_txt = { 
+        name = "Shuffle Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Shuffle Pack', 
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('e67e22'),
+            HEX('000000')
+     }
+        }
+    }
+    end,
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = false,
+    unlocked = true,
+    discovered = false,
+
+    create_card = function(self, booster_card)
+    -- Build a filtered pool of only jokers with pools["Shuffle"]
+    local shuffle_pool = {}
+    for key, center in pairs(G.P_CENTERS) do
+        if center.set == "Joker" and center.pools and center.pools["Shuffle"] then
+            table.insert(shuffle_pool, key)
+        end
+    end
+
+    -- safety: if empty, fallback to normal jokers_pool
+    if #shuffle_pool == 0 then
+        print("WARNING: Shuffle pool empty, falling back to jokers_pool")
+        shuffle_pool = jokers_pool
+    end
+
+    local chosen_key = pseudorandom_element(shuffle_pool)
+
+    -- extra safety
+    if not G.P_CENTERS[chosen_key] then
+        print("WARNING: Missing Joker center for", chosen_key)
+        chosen_key = "j_joker" -- fallback
+    end
+
+    local target_area = G.pack_cards or G.jokers
+    return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
+end,
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("E67E22"))
+        ease_background_colour{new_colour = HEX("E67E22"), special_colour = G.C.BLACK, contrast = 2}
+    end,
+}
+
+SMODS.Booster {
+    key = "jumboshufflepack",
+    name = "Jumbo Shuffle Pack",
+
+    atlas = 'minishufflepack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 5, choose = 1},
+    kind = 'Buffoon',
+    weight = 3.5,
+    cost = 6,
+    loc_txt = { 
+        name = "Jumbo Shuffle Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Jumbo Shuffle Pack', 
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('e67e22'),
+            HEX('000000')
+     }
+        }
+    }
+    end,
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = false,
+    unlocked = true,
+    discovered = false,
+
+    create_card = function(self, booster_card)
+    -- Build a filtered pool of only jokers with pools["Shuffle"]
+    local shuffle_pool = {}
+    for key, center in pairs(G.P_CENTERS) do
+        if center.set == "Joker" and center.pools and center.pools["Shuffle"] then
+            table.insert(shuffle_pool, key)
+        end
+    end
+
+    -- safety: if empty, fallback to normal jokers_pool
+    if #shuffle_pool == 0 then
+        print("WARNING: Shuffle pool empty, falling back to jokers_pool")
+        shuffle_pool = jokers_pool
+    end
+
+    local chosen_key = pseudorandom_element(shuffle_pool)
+
+    -- extra safety
+    if not G.P_CENTERS[chosen_key] then
+        print("WARNING: Missing Joker center for", chosen_key)
+        chosen_key = "j_joker" -- fallback
+    end
+
+    local target_area = G.pack_cards or G.jokers
+    return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
+end,
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("E67E22"))
+        ease_background_colour{new_colour = HEX("E67E22"), special_colour = G.C.BLACK, contrast = 2}
+    end,
+}
+
+SMODS.Booster {
+    key = "megashufflepack",
+    name = "Mega Shuffle Pack",
+
+    atlas = 'minishufflepack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 5, choose = 2},
+    kind = 'Buffoon',
+    weight = 3,
+    cost = 8,
+    loc_txt = { 
+        name = "Mega Shuffle Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Mega Shuffle Pack', 
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('e67e22'),
+            HEX('000000')
+     }
+        }
+    }
+    end,
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = false,
+    unlocked = true,
+    discovered = false,
+
+    create_card = function(self, booster_card)
+    -- Build a filtered pool of only jokers with pools["Shuffle"]
+    local shuffle_pool = {}
+    for key, center in pairs(G.P_CENTERS) do
+        if center.set == "Joker" and center.pools and center.pools["Shuffle"] then
+            table.insert(shuffle_pool, key)
+        end
+    end
+
+    -- safety: if empty, fallback to normal jokers_pool
+    if #shuffle_pool == 0 then
+        print("WARNING: Shuffle pool empty, falling back to jokers_pool")
+        shuffle_pool = jokers_pool
+    end
+
+    local chosen_key = pseudorandom_element(shuffle_pool)
+
+    -- extra safety
+    if not G.P_CENTERS[chosen_key] then
+        print("WARNING: Missing Joker center for", chosen_key)
+        chosen_key = "j_joker" -- fallback
+    end
+
+    local target_area = G.pack_cards or G.jokers
+    return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
+end,
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("E67E22"))
+        ease_background_colour{new_colour = HEX("E67E22"), special_colour = G.C.BLACK, contrast = 2}
+    end,
+}
+
+SMODS.Booster {
+    key = "ultrashufflepack",
+    name = "Ultra Shuffle Pack",
+
+    atlas = 'minishufflepack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 7, choose = 2},
+    kind = 'Buffoon',
+    weight = 2,
+    cost = 10,
+    loc_txt = { 
+        name = "Ultra Shuffle Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Ultra Shuffle Pack', 
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('e67e22'),
+            HEX('000000')
+     }
+        }
+    }
+    end,
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = false,
+    unlocked = true,
+    discovered = false,
+
+    create_card = function(self, booster_card)
+    -- Build a filtered pool of only jokers with pools["Shuffle"]
+    local shuffle_pool = {}
+    for key, center in pairs(G.P_CENTERS) do
+        if center.set == "Joker" and center.pools and center.pools["Shuffle"] then
+            table.insert(shuffle_pool, key)
+        end
+    end
+
+    -- safety: if empty, fallback to normal jokers_pool
+    if #shuffle_pool == 0 then
+        print("WARNING: Shuffle pool empty, falling back to jokers_pool")
+        shuffle_pool = jokers_pool
+    end
+
+    local chosen_key = pseudorandom_element(shuffle_pool)
+
+    -- extra safety
+    if not G.P_CENTERS[chosen_key] then
+        print("WARNING: Missing Joker center for", chosen_key)
+        chosen_key = "j_joker" -- fallback
+    end
+
+    local target_area = G.pack_cards or G.jokers
+    return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
+end,
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("E67E22"))
+        ease_background_colour{new_colour = HEX("E67E22"), special_colour = G.C.BLACK, contrast = 2}
+    end,
+}
+
+SMODS.Booster {
+    key = "toomuchshufflepack",
+    name = "Too-much Shuffle Pack",
+
+    atlas = 'minishufflepack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 10, choose = 3},
+    kind = 'Buffoon',
+    weight = 1.5,
+    cost = 12,
+    loc_txt = { 
+        name = "Too-much Shuffle Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Too-much Shuffle Pack', 
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('e67e22'),
+            HEX('000000')
+     }
+        }
+    }
+    end,
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = false,
+    unlocked = true,
+    discovered = false,
+
+    create_card = function(self, booster_card)
+    -- Build a filtered pool of only jokers with pools["Shuffle"]
+    local shuffle_pool = {}
+    for key, center in pairs(G.P_CENTERS) do
+        if center.set == "Joker" and center.pools and center.pools["Shuffle"] then
+            table.insert(shuffle_pool, key)
+        end
+    end
+
+    -- safety: if empty, fallback to normal jokers_pool
+    if #shuffle_pool == 0 then
+        print("WARNING: Shuffle pool empty, falling back to jokers_pool")
+        shuffle_pool = jokers_pool
+    end
+
+    local chosen_key = pseudorandom_element(shuffle_pool)
+
+    -- extra safety
+    if not G.P_CENTERS[chosen_key] then
+        print("WARNING: Missing Joker center for", chosen_key)
+        chosen_key = "j_joker" -- fallback
+    end
+
+    local target_area = G.pack_cards or G.jokers
+    return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
+end,
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("E67E22"))
+        ease_background_colour{new_colour = HEX("E67E22"), special_colour = G.C.BLACK, contrast = 2}
+    end,
+}
+
+SMODS.Booster {
+    key = "hpack",
     name = "H Pack",
 
     atlas = 'minishufflepack1',
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Buffoon',
-    weight = 2,
+    weight = 1.5,
     cost = 4,
     loc_txt = { 
         name = "H Pack",
@@ -130,7 +453,7 @@ end,
 }
 
 SMODS.Booster {
-    key = "carcanapack1",
+    key = "carcanapack",
     name = "Carcana Pack",
 
     atlas = 'minishufflepack1',
@@ -214,7 +537,7 @@ end,
 }
 
 SMODS.Booster {
-    key = "exocelestialpack1",
+    key = "exocelestialpack",
     name = "Exocelestial Pack",
 
     atlas = 'minishufflepack1',
@@ -305,14 +628,14 @@ end,
 }
 
 SMODS.Booster {
-    key = "crystalpack1",
+    key = "crystalpack",
     name = "Crystal Pack",
 
     atlas = 'minishufflepack1',
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Tarot',
-    weight = 100000,
+    weight = 2,
     cost = 4,
     loc_txt = { 
         name = "Crystal Pack",

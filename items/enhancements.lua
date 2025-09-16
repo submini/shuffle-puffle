@@ -427,3 +427,70 @@ SMODS.Enhancement {
     no_collection = false,
     weight = 0
 }
+
+SMODS.Enhancement {
+    key = 'tuxedo',
+    pos = { x = 0, y = 0 },
+    config = {
+        mult = 25,
+        extra = {
+            odds = 10,
+            x_mult = 3
+        }
+    },
+    loc_txt = {
+        name = 'Tuxedo Card',
+        text = {
+        [1] = '{C:red}+25{} Mult, {C:green}1 in 10{}',
+        [2] = 'chance {X:red,C:white}X3{} Mult'
+    }
+    },
+    atlas = 'tuxedo',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 0.555,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            if SMODS.pseudorandom_probability(card, 'group_0_04cee878', 1, card.ability.extra.odds, 'm_sp_tuxedo') then
+                SMODS.calculate_effect({x_mult = card.ability.extra.x_mult}, card)
+            end
+        end
+    end
+}
+
+SMODS.Enhancement {
+    key = 'upward',
+    pos = { x = 0, y = 0 },
+    config = {
+        extra = {
+            exp_mult = 1.2
+        }
+    },
+    loc_txt = {
+        name = 'Upward Card',
+        text = {
+        [1] = '{C:purple}^1.2{} Mult'
+    }
+    },
+    atlas = 'upward',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 0,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            return { e_mult = card.ability.extra.exp_mult }
+        end
+    end
+}

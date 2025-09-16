@@ -39,6 +39,9 @@ SMODS.Consumable {
     hidden = false,
     can_repeat_soul = false,
     atlas = 'placeholder',
+    loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_sp_obsidized
+	end,
     use = function(self, card, area, copier)
         local used_card = copier or card
         G.E_MANAGER:add_event(Event({
@@ -116,6 +119,9 @@ SMODS.Consumable {
     hidden = false,
     can_repeat_soul = false,
     atlas = 'placeholder',
+    loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_sp_rubified
+	end,
     use = function(self, card, area, copier)
         local used_card = copier or card
         G.E_MANAGER:add_event(Event({
@@ -193,6 +199,9 @@ SMODS.Consumable {
     hidden = false,
     can_repeat_soul = false,
     atlas = 'placeholder',
+    loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_sp_onyxxified
+	end,
     use = function(self, card, area, copier)
         local used_card = copier or card
         G.E_MANAGER:add_event(Event({
@@ -270,6 +279,9 @@ SMODS.Consumable {
     hidden = false,
     can_repeat_soul = false,
     atlas = 'placeholder',
+    loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_sp_topazzified
+	end,
     use = function(self, card, area, copier)
         local used_card = copier or card
         G.E_MANAGER:add_event(Event({

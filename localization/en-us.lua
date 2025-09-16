@@ -867,7 +867,20 @@ return {
         text = {
             '{C:blue}+100{} extra chips'
         }
+    },
+    m_sp_tuxedo = {
+        name = 'Tuxedo Card',
+        text = {
+            '{C:red}+25{} Mult, {C:green}1 in 10{}',
+            'chance {X:red,C:white}X3{} Mult'
     }
+    },
+    m_sp_upward = {
+        name = 'Upward Card',
+        text = {
+            '{C:purple}^1.2{} Mult'
+    }
+    },
     },
 
     Catarot = {
@@ -1084,24 +1097,109 @@ c_sp_xolotlan = {
                 'a {C:attention}Red{} or {C:attention}Blue Seal{}'
         }
     },
+    c_sp_tuxedo = {
+        name = 'Tuxedo',
+        text = {
+                'Enhances up to 3',
+                'selected cards to',
+                '{C:attention}Tuxedo Cards{}',
+        }
+    },
+    c_sp_britishshorthair = {
+        name = 'British Shorthair',
+        text = {
+                'Enhances up to 2',
+                'selected cards to',
+                '{C:attention}Upward Cards{}',
+        }
+    },
+    },
+    Gem = {
+        c_sp_obsidian = {
+            name = "Obsidian",
+            text = {
+                'Turns all cards in hand',
+                'into {C:spades}Spades{} and makes',
+                'them {C:attention}obsidized{}'
+            }
+        },
+        c_sp_ruby = {
+            name = "Ruby",
+            text = {
+                'Turns all cards in hand',
+                'into {C:hearts}Hearts{} and makes',
+                'them {C:attention}rubified{}'
+            }
+        },
+        c_sp_onyx = {
+            name = "Onyx",
+            text = {
+                'Turns all cards in hand',
+                'into {C:clubs}Clubs{} and makes',
+                'them {C:attention}onyxxified{}'
+            }
+        },
+        c_sp_topaz = {
+            name = "Topaz",
+            text = {
+                'Turns all cards in hand',
+                'into {C:diamonds}Diamonds{} and makes',
+                'them {C:attention}topazzified{}'
+            }
+        },
     },
 
     Other = {
-        p_sp_minishufflepack1 = {
+        p_sp_minishufflepack = {
             name = "Mini Shuffle Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
                 '{C:attention}2{} {B:1,V:2}shuffle-puffle{} Jokers',
                 }
         },
-        p_sp_hpack1 = {
+        p_sp_shufflepack = {
+            name = "Shuffle Pack",
+            text = {
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}3{} {B:1,V:2}shuffle-puffle{} Jokers',
+                }
+        },
+        p_sp_jumboshufflepack = {
+            name = "Jumbo Shuffle Pack",
+            text = {
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}5{} {B:1,V:2}shuffle-puffle{} Jokers',
+                }
+        },
+        p_sp_megashufflepack = {
+            name = "Mega Shuffle Pack",
+            text = {
+                'Choose {C:attention}2{} of up to',
+                '{C:attention}5{} {B:1,V:2}shuffle-puffle{} Jokers',
+                }
+        },
+        p_sp_ultrashufflepack = {
+            name = "Ultra Shuffle Pack",
+            text = {
+                'Choose {C:attention}2{} of up to',
+                '{C:attention}7{} {B:1,V:2}shuffle-puffle{} Jokers',
+                }
+        },
+        p_sp_toomuchshufflepack = {
+            name = "Too-much Shuffle Pack",
+            text = {
+                'Choose {C:attention}3{} of up to',
+                '{C:attention}10{} {B:1,V:2}shuffle-puffle{} Jokers',
+                }
+        },
+        p_sp_hpack = {
             name = "H Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
                 '{C:attention}2{} {V:1}H{} Jokers',
                 }
         },
-        p_sp_carcanapack1 = {
+        p_sp_carcanapack = {
             name = "Carcana Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
@@ -1109,7 +1207,7 @@ c_sp_xolotlan = {
                 'used immediately'
                 }
         },
-        p_sp_exocelestialpack1 = {
+        p_sp_exocelestialpack = {
             name = "Exocelestial Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
@@ -1117,7 +1215,7 @@ c_sp_xolotlan = {
                 'used immediately'
                 }
         },
-        p_sp_crystalpack1 = {
+        p_sp_crystalpack = {
             name = "Crystal Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
