@@ -876,3 +876,32 @@ SMODS.Atlas({
     px = 32,
     py = 32
 })
+
+SMODS.Atlas({
+    key = "exotag",
+    path = "exotag.png",
+    px = 32,
+    py = 32
+})
+
+SMODS.Atlas({
+    key = "carcanatag",
+    path = "carcanatag.png",
+    px = 32,
+    py = 32
+})
+
+-- suits
+SMODS.Atlas({
+    key = "slopes",
+    path = "slopes.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "slopesui",
+    path = "slopesui.png",
+    px = 18,
+    py = 18
+})

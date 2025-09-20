@@ -1,19 +1,3 @@
-SMODS.ObjectType{
-    key = "H",
-    default = "j_joker_fallback", -- optional, can point to a filler card
-    cards = {
-        ["j_hbuilding"] = true,
-        -- add other H-pool jokers here
-    },
-    rarities = {
-        { key = "sp_h_common", rate = 0.8 },
-        { key = "sp_h_rare", rate = 0.2 },
-    }
-}
-
-
-
-
 SMODS.Joker{ --H
     key = "bigh",
     config = {
@@ -40,7 +24,7 @@ SMODS.Joker{ --H
         h = 95 * 1
     },
     cost = 18,
-    rarity = "sp_h_rare",
+    rarity = 3,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
@@ -48,6 +32,10 @@ SMODS.Joker{ --H
     discovered = false,
     atlas = 'bigh',
     pools = { ["H"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("H", HEX("BC002D"), G.C.WHITE, 1)
+    end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
@@ -86,7 +74,7 @@ SMODS.Joker{ --h
         h = 95 * 1
     },
     cost = 10,
-    rarity = "sp_h_uncommon",
+    rarity = 2,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
@@ -94,6 +82,10 @@ SMODS.Joker{ --h
     discovered = false,
     atlas = 'smallh',
     pools = { ["H"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("H", HEX("BC002D"), G.C.WHITE, 1)
+    end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
@@ -137,7 +129,7 @@ SMODS.Joker{ --H Building
         h = 95 * 1
     },
     cost = 5,
-    rarity = "sp_h_common",
+    rarity = 1,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
@@ -145,6 +137,10 @@ SMODS.Joker{ --H Building
     discovered = false,
     atlas = 'hbuilding',
     pools = { ["H"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("H", HEX("BC002D"), G.C.WHITE, 1)
+    end,
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS.c_saturn
@@ -208,13 +204,17 @@ SMODS.Joker {
     pos = {x = 0, y = 0},
     display_size = {w = 71, h = 95},
     cost = 8,
-    rarity = "sp_h_uncommon",
+    rarity = 2,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
     unlocked = true,
     discovered = false,
     atlas = 'dancingh',
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("H", HEX("BC002D"), G.C.WHITE, 1)
+    end,
 
     -- text variables
     loc_vars = function(self, info_queue, card)
@@ -312,7 +312,7 @@ SMODS.Joker{ --Gordon Ramsay H
         h = 95 * 1
     },
     cost = 8,
-    rarity = "sp_h_uncommon",
+    rarity = 2,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
@@ -320,6 +320,10 @@ SMODS.Joker{ --Gordon Ramsay H
     discovered = false,
     atlas = 'gordonramsayh',
     pools = { ["H"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("H", HEX("BC002D"), G.C.WHITE, 1)
+    end,
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.multgain, card.ability.extra.mult}}
@@ -394,7 +398,7 @@ SMODS.Joker{ --Lava Lamp H
         h = 95 * 1
     },
     cost = 7,
-    rarity = "sp_h_uncommon",
+    rarity = 2,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
@@ -402,6 +406,10 @@ SMODS.Joker{ --Lava Lamp H
     discovered = false,
     atlas = 'lavalamph',
     pools = { ["H"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("H", HEX("BC002D"), G.C.WHITE, 1)
+    end,
 
     calculate = function(self, card, context)
         if context.cardarea == G.jokers and context.joker_main  then
@@ -447,7 +455,7 @@ SMODS.Joker{ --H of The H
         h = 95 * 1
     },
     cost = 15,
-    rarity = "sp_h_rare",
+    rarity = 3,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
@@ -455,6 +463,10 @@ SMODS.Joker{ --H of The H
     discovered = false,
     atlas = 'hoftheh',
     pools = { ["H"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("H", HEX("BC002D"), G.C.WHITE, 1)
+    end,
 
 	loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
@@ -516,7 +528,7 @@ SMODS.Joker{ --Hegative
     pos = {x = 0, y = 0},
     display_size = {w = 71, h = 95},
     cost = 16,
-    rarity = "sp_h_rare",
+    rarity = 3,
     blueprint_compat = true,
     eternal_compat = true,
     perishable_compat = true,
@@ -524,6 +536,10 @@ SMODS.Joker{ --Hegative
     discovered = false,
     atlas = 'hegative',
     pools = { ["H"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("H", HEX("BC002D"), G.C.WHITE, 1)
+    end,
 
     loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
@@ -611,6 +627,11 @@ SMODS.Joker{ --HHHHH
     discovered = false,
     atlas = 'hhhhh',
     pools = { ["H"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("H", HEX("BC002D"), G.C.WHITE, 1)
+    end,
+
     loc_vars = function(self, info_queue, center)
 		info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
         info_queue[#info_queue + 1] = G.P_CENTERS.j_crazy
@@ -748,6 +769,11 @@ SMODS.Joker{ --Hedge
     discovered = false,
     atlas = 'hedge',
     pools = { ["H"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("H", HEX("BC002D"), G.C.WHITE, 1)
+    end,
+    
     loc_vars = function(self, info_queue, center)
         info_queue[#info_queue + 1] = G.P_SEALS.Red
 	end,

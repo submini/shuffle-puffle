@@ -1150,56 +1150,56 @@ c_sp_xolotlan = {
     },
 
     Other = {
-        p_sp_minishufflepack = {
+        p_sp_minishufflepack_1 = {
             name = "Mini Shuffle Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
                 '{C:attention}2{} {B:1,V:2}shuffle-puffle{} Jokers',
                 }
         },
-        p_sp_shufflepack = {
+        p_sp_shufflepack_1 = {
             name = "Shuffle Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
                 '{C:attention}3{} {B:1,V:2}shuffle-puffle{} Jokers',
                 }
         },
-        p_sp_jumboshufflepack = {
+        p_sp_jumboshufflepack_1 = {
             name = "Jumbo Shuffle Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
                 '{C:attention}5{} {B:1,V:2}shuffle-puffle{} Jokers',
                 }
         },
-        p_sp_megashufflepack = {
+        p_sp_megashufflepack_1 = {
             name = "Mega Shuffle Pack",
             text = {
                 'Choose {C:attention}2{} of up to',
                 '{C:attention}5{} {B:1,V:2}shuffle-puffle{} Jokers',
                 }
         },
-        p_sp_ultrashufflepack = {
+        p_sp_ultrashufflepack_1 = {
             name = "Ultra Shuffle Pack",
             text = {
                 'Choose {C:attention}2{} of up to',
                 '{C:attention}7{} {B:1,V:2}shuffle-puffle{} Jokers',
                 }
         },
-        p_sp_toomuchshufflepack = {
+        p_sp_toomuchshufflepack_1 = {
             name = "Too-much Shuffle Pack",
             text = {
                 'Choose {C:attention}3{} of up to',
                 '{C:attention}10{} {B:1,V:2}shuffle-puffle{} Jokers',
                 }
         },
-        p_sp_hpack = {
+        p_sp_hpack_1 = {
             name = "H Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
                 '{C:attention}2{} {V:1}H{} Jokers',
                 }
         },
-        p_sp_carcanapack = {
+        p_sp_carcanapack_1 = {
             name = "Carcana Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
@@ -1207,7 +1207,23 @@ c_sp_xolotlan = {
                 'used immediately'
                 }
         },
-        p_sp_exocelestialpack = {
+        p_sp_jumbocarcanapack_1 = {
+            name = "Jumbo Carcana Pack",
+            text = {
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}5{} {V:1}Catarots{} to be',
+                'used immediately'
+                }
+        },
+        p_sp_megacarcanapack_1 = {
+            name = "Mega Carcana Pack",
+            text = {
+                'Choose {C:attention}2{} of up to',
+                '{C:attention}5{} {V:1}Catarots{} to be',
+                'used immediately'
+                }
+        },
+        p_sp_exocelestialpack_1 = {
             name = "Exocelestial Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
@@ -1215,7 +1231,23 @@ c_sp_xolotlan = {
                 'used immediately'
                 }
         },
-        p_sp_crystalpack = {
+        p_sp_jumboexocelestialpack_1 = {
+            name = "Jumbo Exocelestial Pack",
+            text = {
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}5{} {V:1}Exoplanets{} to be',
+                'used immediately'
+                }
+        },
+        p_sp_megaexocelestialpack_1 = {
+            name = "Mega Exocelestial Pack",
+            text = {
+                'Choose {C:attention}2{} of up to',
+                '{C:attention}5{} {V:1}Exoplanets{} to be',
+                'used immediately'
+                }
+        },
+        p_sp_crystalpack_1 = {
             name = "Crystal Pack",
             text = {
                 'Choose {C:attention}1{} of up to',

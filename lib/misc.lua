@@ -40,3 +40,13 @@ Game.main_menu = function(change_context)
 	}))
 	return ret
 end
+
+SMODS.Gradient{
+    key = "sp_spectaclawgrad",
+    colours = {
+        HEX("fecb00"),
+        HEX("bfe1f6"),
+		HEX("0a85d0"),
+    },
+    cycle = 5
+}

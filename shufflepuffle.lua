@@ -25,6 +25,7 @@ local files = {
     "items/decks",
     "items/pokerhands",
     "items/rarities",
+    "items/suits",
     "lib/misc",
 }
 for i, v in pairs(files) do
