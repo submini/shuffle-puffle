@@ -14,6 +14,7 @@ local files = {
     -- ight bro
     "items/jokers/miscjokers",
     "items/jokers/hjokers",
+    "items/jokers/wingdingsjokers",
     "items/consumables/catarot",
     "items/consumables/exoplanet",
     "items/consumables/spectaclaw",

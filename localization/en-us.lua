@@ -806,6 +806,14 @@ return {
             'and draws it to hand'
     }
 },
+    j_sp_et = {
+        name = 'Ampersand 1',
+        text = {
+            '{C:attention}Copies{} the effect of',
+            'the first {C:attention}2{} jokers',
+            'in the jokers slot'
+        },
+    },
 
 },
 

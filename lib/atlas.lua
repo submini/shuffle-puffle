@@ -905,3 +905,11 @@ SMODS.Atlas({
     px = 18,
     py = 18
 })
+
+-- wingdings
+SMODS.Atlas({
+    key = "et",
+    path = "et.png",
+    px = 66,
+    py = 66
+})
