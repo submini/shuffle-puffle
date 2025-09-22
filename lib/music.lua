@@ -81,3 +81,48 @@ SMODS.Sound {
       end
     end
   }
+
+
+
+  SMODS.Sound {
+    key = 'exopack_music',
+    path = 'exopack.ogg',
+    select_music_track = function(self)
+      -- We only check the booster once there are cards in the pack_cards area
+      local booster = G.pack_cards and G.pack_cards.cards and SMODS.OPENED_BOOSTER
+
+      -- If it's a 
+      if booster and booster.config.center_key:find('p_sp_exocelestialpack_1') then
+        return 1e11
+      end
+    end
+  }
+
+  SMODS.Sound {
+    key = 'jumboexopack_music',
+    path = 'exopack.ogg',
+    select_music_track = function(self)
+      -- We only check the booster once there are cards in the pack_cards area
+      local booster = G.pack_cards and G.pack_cards.cards and SMODS.OPENED_BOOSTER
+
+      -- If it's a 
+      if booster and booster.config.center_key:find('p_sp_jumboexocelestialpack_1') then
+        return 1e11
+      end
+    end
+  }
+
+
+  SMODS.Sound {
+    key = 'megaexopack_music',
+    path = 'exopack.ogg',
+    select_music_track = function(self)
+      -- We only check the booster once there are cards in the pack_cards area
+      local booster = G.pack_cards and G.pack_cards.cards and SMODS.OPENED_BOOSTER
+
+      -- If it's a 
+      if booster and booster.config.center_key:find('p_sp_megaexocelestialpack_1') then
+        return 1e11
+      end
+    end
+  }

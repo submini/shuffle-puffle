@@ -806,12 +806,39 @@ return {
             'and draws it to hand'
     }
 },
+    j_sp_pencil = {
+        name = 'Pencil',
+        text = {
+            'If played hand contains',
+            'a {C:attention}Straight{}, give each',
+            'scored card a',
+            'permanent {C:blue}+20{} Chips',
+            'bonus'
+        },
+    },
+    j_sp_scissors1 = {
+        name = 'Scissors 1',
+        text = {
+            '{C:red}X1.5 Blind requirement{}',
+            'at {C:attention}start of round{},',
+            'gains {X:red,C:white}X0.75{} Mult',
+            '{C:inactive}(Currently{} {X:red,C:white}X#1#{} {C:inactive}Mult){}'
+        },
+    },
     j_sp_et = {
         name = 'Ampersand 1',
         text = {
             '{C:attention}Copies{} the effect of',
             'the first {C:attention}2{} jokers',
             'in the jokers slot'
+        },
+    },
+    j_sp_ampersand2 = {
+        name = 'Ampersand 2',
+        text = {
+            'Copies the {C:attention}second{} joker\'s',
+            'effect in the jokers',
+            'slot {C:attention}2{} times'
         },
     },
 

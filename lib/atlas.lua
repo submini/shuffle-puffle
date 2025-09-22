@@ -893,23 +893,58 @@ SMODS.Atlas({
 
 -- suits
 SMODS.Atlas({
-    key = "slopes",
-    path = "slopes.png",
+    key = "slopeshc",
+    path = "slopeshc.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
-    key = "slopesui",
-    path = "slopesui.png",
+    key = "slopeslc",
+    path = "slopeslc.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "slopesuihc",
+    path = "slopesuihc.png",
+    px = 18,
+    py = 18
+})
+
+SMODS.Atlas({
+    key = "slopesuilc",
+    path = "slopesuilc.png",
     px = 18,
     py = 18
 })
 
 -- wingdings
 SMODS.Atlas({
+    key = "pencil",
+    path = "pencil.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "scissors1",
+    path = "scissors1.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
     key = "et",
     path = "et.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "and2",
+    path = "and2.png",
     px = 66,
     py = 66
 })

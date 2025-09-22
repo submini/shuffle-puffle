@@ -2,13 +2,13 @@ SMODS.Suit {
   key = 'Slopes',
   card_key = 'SLOPES',
 
-  lc_atlas = 'slopes',
-  lc_ui_atlas = 'slopesui',
-  lc_colour = HEX("E67E22"),
+  lc_atlas = 'slopeslc',
+  lc_ui_atlas = 'slopesuilc',
+  lc_colour = HEX("F0343D"),
 
-  hc_atlas = 'slopes',
-  hc_ui_atlas = 'slopesui',
-  hc_colour = HEX("E67E22"),
+  hc_atlas = 'slopeshc',
+  hc_ui_atlas = 'slopesuihc',
+  hc_colour = HEX("FD5E2C"),
 
   pos = { y = 0 },
   ui_pos = { x = 0, y = 0 },
