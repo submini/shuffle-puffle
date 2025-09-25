@@ -43,7 +43,8 @@ return {
                 'This Joker gains {X:blue,C:white}+X0.35{} Chips',
                 'for each played {C:attention}#3#{} when scored,',
                 'rank changes at end of round',
-                '{C:inactive}(Currently {X:blue,C:white}X#1#{}{C:inactive} Chips){}{}'
+                '{C:inactive}(Currently gives {X:blue,C:white}X#1#{}{C:inactive} Chips{}',
+                '{C:inactive}for each #3#){}'
             }
         },
 
@@ -451,9 +452,9 @@ return {
         j_sp_twosides = {
             name = "Two Sides",
             text = {
-                'Gains {C:blue}+1{} Chip if scored card',
+                'Gains {C:blue}+5{} Chips if scored card',
                 'is a {C:spades}Spade{} or {C:clubs}Club{} suit,',
-                'gains {C:red}+0.5{} Mult if scored card',
+                'gains {C:red}+5{} Mult if scored card',
                 'is a {C:hearts}Heart{} or {C:diamonds}Diamond{} suit',
                 '{C:inactive}(Currently {}{C:blue}+#1#{} {C:inactive}Chips{} {C:inactive}and{} {C:red}+#2#{} {C:inactive}Mult){}'
             }
@@ -819,10 +820,36 @@ return {
     j_sp_scissors1 = {
         name = 'Scissors 1',
         text = {
-            '{C:red}X1.5 Blind requirement{}',
-            'at {C:attention}start of round{},',
-            'gains {X:red,C:white}X0.75{} Mult',
+            '{C:attention}X0.75{} Blind size'
+        },
+    },
+    j_sp_scissors2 = {
+        name = 'Scissors 2',
+        text = {
+            'If {C:blue}first hand{} of round',
+            'has only {C:attention}2{} scoring cards,',
+            '{C:red}destroy{} both of them and',
+            'gain {X:red,C:white}+X0.5{} Mult',
             '{C:inactive}(Currently{} {X:red,C:white}X#1#{} {C:inactive}Mult){}'
+        },
+    },
+    j_sp_glasses = {
+        name = 'Glasses',
+        text = {
+            'If at least {C:attention}3{} cards of',
+            '{C:spades}Spade{} or {C:clubs}Club{} suit are',
+            'discarded, this joker',
+            'gains {C:red}+8{} Mult',
+            '{C:inactive}(Currently{} {C:red}+#1#{} {C:inactive}Mult){}'
+        },
+    },
+    j_sp_bell = {
+        name = 'Bell',
+        text = {
+            'If played {C:blue}hand{} is the',
+            '{C:attention}first hand{} of round,',
+            'retrigger every card',
+            '{C:attention}2{} times'
         },
     },
     j_sp_et = {

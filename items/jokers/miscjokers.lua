@@ -3587,7 +3587,7 @@ SMODS.Joker{ --Two Sides
         y = 0
     },
     cost = 6,
-    rarity = 2,
+    rarity = 1,
     blueprint_compat = true,
     eternal_compat = true,
     unlocked = true,
@@ -3611,12 +3611,12 @@ end,
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and not context.blueprint then
             if context.other_card:is_suit("Spades") or context.other_card:is_suit("Clubs") then
-                card.ability.extra.chips = (card.ability.extra.chips) + 1
+                card.ability.extra.chips = (card.ability.extra.chips) + 5
                 return {
                     message = "Black!"
                 }
             elseif context.other_card:is_suit("Hearts") or context.other_card:is_suit("Diamonds") then
-                card.ability.extra.mult = (card.ability.extra.mult) + 0.5
+                card.ability.extra.mult = (card.ability.extra.mult) + 5
                 return {
                     message = "Red!"
                 }

@@ -545,7 +545,7 @@ SMODS.Booster {
     config = { extra = 5, choose = 1},
     kind = 'Arcana',
     weight = 1,
-    cost = 4,
+    cost = 6,
     loc_txt = { 
         name = "Carcana Pack",
         text = {
@@ -629,7 +629,7 @@ SMODS.Booster {
     config = { extra = 5, choose = 2},
     kind = 'Arcana',
     weight = 0.25,
-    cost = 4,
+    cost = 8,
     loc_txt = { 
         name = "Carcana Pack",
         text = {
@@ -804,7 +804,7 @@ SMODS.Booster {
     config = { extra = 5, choose = 1},
     kind = 'Celestial',
     weight = 1,
-    cost = 4,
+    cost = 6,
     loc_txt = { 
         name = "Exocelestial Pack",
         text = {
@@ -895,7 +895,7 @@ SMODS.Booster {
     config = { extra = 5, choose = 2},
     kind = 'Celestial',
     weight = 0.25,
-    cost = 4,
+    cost = 8,
     loc_txt = { 
         name = "Exocelestial Pack",
         text = {

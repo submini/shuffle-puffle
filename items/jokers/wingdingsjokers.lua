@@ -59,16 +59,13 @@ SMODS.Joker{ --Scissors
     config = {
         extra = {
             xmult = 1,
-            blind_size = 1.5
+            blind_size = 0.75
         }
     },
     loc_txt = {
         ['name'] = 'Scissors 1',
         ['text'] = {
-            [1] = '{C:red}X1.5 Blind requirement{}',
-            [2] = 'at {C:attention}start of round{},',
-            [3] = 'gains {X:red,C:white}X0.75{} Mult',
-            [4] = '{C:inactive}(Currently{} {X:red,C:white}X#1#{} {C:inactive}Mult){}'
+            [1] = 'X0.75 Blind requirement chips',
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -109,20 +106,208 @@ SMODS.Joker{ --Scissors
         if context.setting_blind  then
                 return {
                     func = function()
-                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "X"..tostring(card.ability.extra.blind_size).." Blind Size", colour = G.C.RED})
+                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Snip!"})
                 G.GAME.blind.chips = G.GAME.blind.chips * card.ability.extra.blind_size
                 G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
                 G.HUD_blind:recalculate()
                 return true
-            end,
-                    extra = {
-                        func = function()
-                    card.ability.extra.xmult = (card.ability.extra.xmult) + 0.75
+            end }
+        end
+    end
+}
+
+SMODS.Joker{ --Scissors 2
+    key = "scissors2",
+    config = {
+        extra = {
+            xmult = 1
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Scissors 2',
+        ['text'] = {
+            [1] = 'If {C:blue}first hand{} of round',
+            [2] = 'has only {C:attention}2{} played cards,',
+            [3] = '{C:red}destroy{} both of them and',
+            [4] = 'gain {X:red,C:white}+X0.5{} Mult',
+            [5] = '{C:inactive}(Currently{} {X:red,C:white}X#1#{} {C:inactive}Mult){}'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 8,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'scissors2',
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.xmult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.destroy_card and context.destroy_card.should_destroy  then
+            return { remove = true }
+        end
+        if context.individual and context.cardarea == G.play  then
+            context.other_card.should_destroy = false
+            if (G.GAME.current_round.hands_played == 0 and #context.scoring_hand == 2) then
+                context.other_card.should_destroy = true
+                card.ability.extra.xmult = (card.ability.extra.xmult) + 0.5
+                return {
+                    message = "Snip!"
+                }
+            end
+        end
+        if context.cardarea == G.jokers and context.joker_main  then
+                return {
+                    Xmult = card.ability.extra.xmult
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Glasses
+    key = "glasses",
+    config = {
+        extra = {
+            mult = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Glasses',
+        ['text'] = {
+            [1] = 'If at least {C:attention}3{} cards of',
+            [2] = '{C:spades}Spade{} or {C:clubs}Club{} suit are',
+            [3] = 'discarded, this joker',
+            [4] = 'gains {C:red}+8{} Mult',
+            [5] = '{C:inactive}(Currently{} {C:red}+#1#{} {C:inactive}Mult){}'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 5,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'glasses',
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.mult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.pre_discard  then
+            if (function()
+    local suitCount = 0
+    for i, c in ipairs(context.full_hand) do
+        if c:is_suit("Spades") or c:is_suit("Clubs") then
+            suitCount = suitCount + 1
+        end
+    end
+    
+    return suitCount >= 3
+end)() then
+                return {
+                    func = function()
+                    card.ability.extra.mult = (card.ability.extra.mult) + 8
                     return true
                 end,
-                        colour = G.C.GREEN
-                        }
+                    message = "Upgrade!"
                 }
+            end
+        end
+        if context.cardarea == G.jokers and context.joker_main  then
+                return {
+                    mult = card.ability.extra.mult
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Bell
+    key = "bell",
+    config = {
+        extra = {
+            repetitions = 2
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Bell',
+        ['text'] = {
+            [1] = 'If played {C:blue}hand{} is the',
+            [2] = '{C:attention}first hand{} of round,',
+            [3] = 'retrigger every card',
+            [4] = '{C:attention}2{} times'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 6,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'bell',
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.play  then
+            if G.GAME.current_round.hands_played == 0 then
+                return {
+                    repetitions = card.ability.extra.repetitions,
+                    message = localize('k_again_ex')
+                }
+            end
         end
     end
 }

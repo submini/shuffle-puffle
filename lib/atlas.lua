@@ -936,6 +936,27 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+    key = "scissors2",
+    path = "scissors2.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "glasses",
+    path = "glasses.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "bell",
+    path = "bell.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
     key = "et",
     path = "et.png",
     px = 66,
@@ -947,4 +968,12 @@ SMODS.Atlas({
     path = "and2.png",
     px = 66,
     py = 66
+})
+
+-- vouchers
+SMODS.Atlas({
+    key = "expansionpermit",
+    path = "expansionpermit.png",
+    px = 71,
+    py = 95
 })
