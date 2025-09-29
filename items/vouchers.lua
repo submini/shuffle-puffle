@@ -38,7 +38,7 @@ SMODS.Voucher {
     pos = { x = 0, y = 0 }, -- position in atlas
     cost = 10,
     config = { extra = 1 },
-    requires = "v_sp_expansionpermit",
+    requires = {"v_sp_expansionpermit"},
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card and card.ability.extra or self.config.extra } }

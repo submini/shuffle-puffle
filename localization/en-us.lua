@@ -852,6 +852,95 @@ return {
             '{C:attention}2{} times'
         },
     },
+    j_sp_book = {
+    name = "Book",
+    text = {
+        "Lets you look at the",
+        "top {C:attention}5 cards{} of your deck",
+        "during the round"
+    }
+},
+j_sp_book_alt = {
+    name = "Book",
+    text = {
+        "{s:0.8}#1##6#{}",
+        "{s:0.8}#2##7#{}",
+        "{s:0.8}#3##8#{}",
+        "{s:0.8}#4##9#{}",
+        "{s:0.8}#5##10#{}",
+    }
+},
+    j_sp_candle = {
+        name = 'Candle',
+        text = {
+            '{C:green}1 in 2{} chance to',
+            '{C:attention}retrigger{} scored card',
+            'from {C:attention}1{} to {C:attention}3{} times'
+        },
+    },
+    j_sp_touchtonetelephone = {
+        name = 'Touchtone Telephone',
+        text = {
+            'This joker gains {C:red}+2{} Mult',
+            'if scored card is {C:attention}not{} an',
+            '{C:attention}Ace{} or a {C:attention}face card{}',
+            '{C:inactive}(Currently{} {C:red}+#1#{} {C:inactive}Mult){}{C:inactive}{}'
+        },
+    },
+    j_sp_envelope = {
+        name = 'Envelope',
+        text = {
+            'When {C:attention}Blind{} is selected,',
+             'add {C:attention}1{} to {C:attention}3{} enhanced',
+            'cards to deck'
+        },
+    },
+    j_sp_stampedenvelope = {
+        name = 'Stamped Envelope',
+        text = {
+            'When {C:attention}Blind{} is selected,',
+            'add {C:attention}1{} to {C:attention}3{} cards with',
+            'a random seal to deck'
+        },
+    },
+    j_sp_mailbox1 = {
+        name = 'Mailbox 1',
+        text = {
+            'This joker gives a',
+            'permanent {C:red}Mult{} {C:attention}bonus{}',
+            'to every scored card',
+            'if hand contains a {C:attention}Straight{},',
+            'bonus is random'
+        },
+    },
+    j_sp_mailbox2 = {
+        name = 'Mailbox 2',
+        text = {
+            'When this joker is sold,',
+            'create {C:attention}2{} jokers',
+            '{C:inactive}(Irrespective of room){}'
+        },
+    },
+    j_sp_closedfolder = {
+        name = 'Closed Folder',
+        text = {
+            'Gains {X:blue,C:white}+X0.5{} Chips when',
+            '{C:attention}Blind{} is selected but',
+            'only gives the chips in',
+            '{C:attention}Boss Blinds{}',
+            '{C:inactive}(Currently{} {X:blue,C:white}X#1#{} {C:inactive}Chips){}'
+        },
+    },
+    j_sp_openfolder = {
+        name = 'Open Folder',
+        text = {
+            'Gains {X:red,C:white}+X0.3{} Mult when',
+            '{C:attention}Blind{} is selected but',
+            'only gives the Mult in',
+            '{C:attention}Boss Blinds{}',
+            '{C:inactive}(Currently{} {X:red,C:white}X#1#{} {C:inactive}Mult){}'
+        },
+    },
     j_sp_et = {
         name = 'Ampersand 1',
         text = {
@@ -1321,8 +1410,8 @@ c_sp_xolotlan = {
     },
 
 
-        misc = {
-            dictionary = {
+    misc = {
+        dictionary = {
                 sp_saved_checkpoint = "Saved by Checkpoint",
 
                 k_sp_unfair = "Unfair",
@@ -1330,11 +1419,20 @@ c_sp_xolotlan = {
                 k_catarot = "Catarot",
                 b_catarot_cards = "Catarot Cards",
 
+                sp_of = " of ",
+			    sp_Spades = "Spades",
+			    sp_Hearts = "Hearts",
+			    sp_Clubs = "Clubs",
+			    sp_Diamonds = "Diamonds",
+                sp_Ace = "Ace",
+			    sp_Jack = "Jack",
+			    sp_Queen = "Queen",
+			    sp_King = "King",
             },
-            labels = {
+        labels = {
                 catarot = "Catarot",
             },
-            v_dictionary = {
+        v_dictionary = {
                 a_chips = "+#1#",
                 a_chips_minus = "-#1#",
                 a_hands = "+#1# Hands",
@@ -1349,7 +1447,7 @@ c_sp_xolotlan = {
                 a_dollars = "$#1#",
                 a_sellboost = "+$#1# Sell",
             },
-            poker_hands = {
+        poker_hands = {
                 sp_plateau = "Plateau",
             }
         }

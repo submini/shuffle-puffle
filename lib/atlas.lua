@@ -957,6 +957,69 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+    key = "book",
+    path = "book.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "candle",
+    path = "candle.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "touchtone",
+    path = "touchtone.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "envelope",
+    path = "envelope.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "stampedenvelope",
+    path = "stampeden.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "mailbox1",
+    path = "mailbox1.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "mailbox2",
+    path = "mailbox2.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "closedfolder",
+    path = "closedfolder.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "openfolder",
+    path = "openfolder.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
     key = "et",
     path = "et.png",
     px = 66,
@@ -976,4 +1039,9 @@ SMODS.Atlas({
     path = "expansionpermit.png",
     px = 71,
     py = 95
+})
+
+SMODS.Shader({
+    key = "shine",
+    path = "shine.fs",
 })

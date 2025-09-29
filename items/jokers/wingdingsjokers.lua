@@ -312,6 +312,617 @@ SMODS.Joker{ --Bell
     end
 }
 
+SMODS.Joker {
+    key = "book",
+    name = "Book",
+    atlas = "book", -- swap this with your Wingdings atlas
+    pos = { x = 0, y = 0 },     -- adjust coords for sprite
+    rarity = 3,                 -- adjust rarity if needed
+    cost = 10,
+    unlocked = true,
+    discovered = false,
+    eternal_compat = true,
+    perishable_compat = true,
+    blueprint_compat = false,
+    in_pool = true,
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+
+    config = {
+        extra = { trank = {}, tsuit = {}, scry = false },
+    },
+
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        if card.ability.extra.scry then
+            return {
+                key = self.key .. "_alt",
+                vars = {
+                    card.ability.extra.trank[1], card.ability.extra.trank[2], card.ability.extra.trank[3],
+                    card.ability.extra.trank[4], card.ability.extra.trank[5],
+                    card.ability.extra.tsuit[1], card.ability.extra.tsuit[2], card.ability.extra.tsuit[3],
+                    card.ability.extra.tsuit[4], card.ability.extra.tsuit[5]
+                }
+            }
+        else
+            return {}
+        end
+    end,
+
+    update = function(self, card, dt)
+    if G.deck and card.ability.extra.scry then
+        for i = 1, 5 do
+            local _card = G.deck.cards[#G.deck.cards-(i-1)]
+            if _card then
+                -- Suit: just take the suit key after underscore if present
+                local suit_key = SMODS.Suits[_card.base.suit].key
+                local underscore_pos = string.find(suit_key, "_")
+                if underscore_pos then
+                    suit_key = string.sub(suit_key, underscore_pos + 1)
+                end
+                card.ability.extra.tsuit[i] = suit_key
+
+                -- Rank: use raw rank key
+                local rank_key = SMODS.Ranks[_card.base.value].key
+                card.ability.extra.trank[i] = rank_key .. " of "
+            end
+        end
+    end
+end,
+
+    add_to_deck = function(self, card, context)
+        if G.STATE == G.STATES.SELECTING_HAND or G.STATE == G.STATES.HAND_PLAYED then
+            card.ability.extra.scry = true
+        end
+    end,
+
+    calculate = function(self, card, context)
+        if context.setting_blind then
+            card.ability.extra.scry = true
+        end
+        if context.end_of_round then
+            card.ability.extra.scry = false
+        end
+    end,
+}
+
+SMODS.Joker{ --Candle
+    key = "candle",
+    config = {
+        extra = {
+            odds = 2,
+            repetitions_min = 1,
+            repetitions_max = 3
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Candle',
+        ['text'] = {
+            [1] = '{C:green}1 in 2{} chance to',
+            [2] = '{C:attention}retrigger{} scored card',
+            [3] = 'from {C:attention}1{} to {C:attention}3{} times'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 7,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'candle',
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.play  then
+                if SMODS.pseudorandom_probability(card, 'group_0_b6ed7cbe', 1, card.ability.extra.odds, 'j_sp_candle', false) then
+              return {repetitions = pseudorandom('repetitions_61d8574d', card.ability.extra.repetitions_min, card.ability.extra.repetitions_max)}
+                        
+          end
+        end
+    end
+}
+
+SMODS.Joker{ --Touchtone Telephone
+    key = "touchtonetelephone",
+    config = {
+        extra = {
+            mult = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Touchtone Telephone',
+        ['text'] = {
+            [1] = 'This joker gains {C:red}+2{} Mult',
+            [2] = 'if scored card is {C:attention}not{} an',
+            [3] = '{C:attention}Ace{} or a {C:attention}face card{}',
+            [4] = '{C:inactive}(Currently{} {C:red}+#1#{} {C:inactive}Mult){}{C:inactive}{}'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 5,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'touchtone',
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.mult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play  then
+            if (not (context.other_card:is_face()) and not (context.other_card:get_id() == 14)) then
+                card.ability.extra.mult = (card.ability.extra.mult) + 2
+                return {
+                    message = "Phone!"
+                }
+            end
+        end
+        if context.cardarea == G.jokers and context.joker_main  then
+                return {
+                    mult = card.ability.extra.mult
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Envelope
+    key = "envelope",
+    config = {
+        extra = {
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Envelope',
+        ['text'] = {
+            [1] = 'When {C:attention}Blind{} is selected,',
+            [2] = 'add {C:attention}1{} to {C:attention}3{} enhanced',
+            [3] = 'cards to deck'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 6,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'envelope',
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    calculate = function(self, card, context)
+        if context.setting_blind  then
+            if true then
+                for i = 1, pseudorandom('repetitions_41af9c6f', 1, 3) do
+              local card_front = pseudorandom_element(G.P_CARDS, pseudoseed('add_card'))
+            local new_card = create_playing_card({
+                front = card_front,
+                center = pseudorandom_element({G.P_CENTERS.m_gold, G.P_CENTERS.m_steel, G.P_CENTERS.m_glass, G.P_CENTERS.m_wild, G.P_CENTERS.m_mult, G.P_CENTERS.m_lucky, G.P_CENTERS.m_stone}, pseudoseed('add_card_enhancement'))
+            }, G.discard, true, false, nil, true)
+            
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    new_card:start_materialize()
+                    G.play:emplace(new_card)
+                    return true
+                end
+            }))
+                        SMODS.calculate_effect({func = function()
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        G.deck.config.card_limit = G.deck.config.card_limit + 1
+                        return true
+                    end
+                }))
+                draw_card(G.play, G.deck, 90, 'up')
+                SMODS.calculate_context({ playing_card_added = true, cards = { new_card } })
+            end}, card)
+                        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Envelope!", colour = G.C.RED})
+          end
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Stamped Envelope
+    key = "stampedenvelope",
+    config = {
+        extra = {
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Stamped Envelope',
+        ['text'] = {
+            [1] = 'When {C:attention}Blind{} is selected,',
+            [2] = 'add {C:attention}1{} to {C:attention}3{} cards with',
+            [3] = 'a random seal to deck'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 6,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'stampedenvelope',
+   pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    calculate = function(self, card, context)
+        if context.setting_blind  then
+            if true then
+                for i = 1, pseudorandom('repetitions_5f441dd0', 1, 3) do
+              local card_front = pseudorandom_element(G.P_CARDS, pseudoseed('add_card'))
+            local new_card = create_playing_card({
+                front = card_front,
+                center = G.P_CENTERS.c_base
+            }, G.discard, true, false, nil, true)
+            new_card:set_seal(pseudorandom_element({"Gold", "Red", "Blue", "Purple"}, pseudoseed('add_card_seal')), true)
+            
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    new_card:start_materialize()
+                    G.play:emplace(new_card)
+                    return true
+                end
+            }))
+                        SMODS.calculate_effect({func = function()
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        G.deck.config.card_limit = G.deck.config.card_limit + 1
+                        return true
+                    end
+                }))
+                draw_card(G.play, G.deck, 90, 'up')
+                SMODS.calculate_context({ playing_card_added = true, cards = { new_card } })
+            end}, card)
+                        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Envelope!", colour = G.C.BLUE})
+          end
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Mailbox 1
+    key = "mailbox1",
+    config = {
+        extra = {
+            mult = 0,
+            perma_mult = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Mailbox 1',
+        ['text'] = {
+            [1] = 'This joker gives a',
+            [2] = 'permanent {C:red}+#1#{} Mult {C:attention}bonus{}',
+            [3] = 'to every scored card',
+            [4] = 'if hand contains a {C:attention}Straight{},',
+            [5] = 'bonus is random'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 7,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'mailbox1',
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.mult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play  then
+            if next(context.poker_hands["Straight"]) then
+                context.other_card.ability.perma_mult = context.other_card.ability.perma_mult or 0
+                context.other_card.ability.perma_mult = context.other_card.ability.perma_mult + card.ability.extra.mult
+                return {
+                    extra = { message = localize('k_upgrade_ex'), colour = G.C.MULT }, card = card
+                }
+            end
+        end
+        if context.before and context.cardarea == G.jokers  then
+                return {
+                    func = function()
+                    card.ability.extra.mult = pseudorandom('mult_892ad783', 0, 10)
+                    return true
+                end
+                }
+        end
+    end
+}
+
+SMODS.Joker{ --Mailbox 2
+    key = "mailbox2",
+    config = {
+        extra = {
+            repetitions = 2
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Mailbox 2',
+        ['text'] = {
+            [1] = 'When this joker is sold,',
+            [2] = 'create {C:attention}2{} jokers',
+            [3] = '{C:inactive}(Irrespective of room){}'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 10,
+    rarity = 3,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'mailbox2',
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    calculate = function(self, card, context)
+        if context.selling_self  then
+            if true then
+                for i = 1, card.ability.extra.repetitions do
+              SMODS.calculate_effect({func = function()
+            local created_joker = true
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    local joker_card = SMODS.add_card({ set = 'Joker' })
+                    if joker_card then
+                        
+                        
+                    end
+                    
+                    return true
+                end
+            }))
+            
+            if created_joker then
+                card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = localize('k_plus_joker'), colour = G.C.BLUE})
+            end
+            return true
+        end}, card)
+          end
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Closed Folder
+    key = "closedfolder",
+    config = {
+        extra = {
+            xchips = 1
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Closed Folder',
+        ['text'] = {
+            [1] = 'Gains {X:blue,C:white}+X0.5{} Chips when',
+            [2] = '{C:attention}Blind{} is selected but',
+            [3] = 'only gives the chips in',
+            [4] = '{C:attention}Boss Blinds{}',
+            [5] = '{C:inactive}(Currently{} {X:blue,C:white}X#1#{} {C:inactive}Chips){}'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 8,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'closedfolder',
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.xchips}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.setting_blind  then
+                return {
+                    func = function()
+                    card.ability.extra.xchips = (card.ability.extra.xchips) + 0.5
+                    return true
+                end,
+                    message = "Folder!"
+                }
+        end
+        if context.cardarea == G.jokers and context.joker_main  then
+            if G.GAME.blind.boss then
+                return {
+                    x_chips = card.ability.extra.xchips
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Open Folder
+    key = "openfolder",
+    config = {
+        extra = {
+            xmult = 1
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Open Folder',
+        ['text'] = {
+            [1] = 'Gains {X:red,C:white}+X0.3{} Mult when',
+            [2] = '{C:attention}Blind{} is selected but',
+            [3] = 'only gives the chips in',
+            [4] = '{C:attention}Boss Blinds{}',
+            [5] = '{C:inactive}(Currently{} {X:red,C:white}X#1#{} {C:inactive}Mult){}'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 8,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'openfolder',
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.xmult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.setting_blind  then
+                return {
+                    func = function()
+                    card.ability.extra.xmult = (card.ability.extra.xmult) + 0.3
+                    return true
+                end,
+                    message = "Folder!"
+                }
+        end
+        if context.cardarea == G.jokers and context.joker_main  then
+            if G.GAME.blind.boss then
+                return {
+                    Xmult = card.ability.extra.xmult
+                }
+            end
+        end
+    end
+}
+
 SMODS.Joker{ --H
     key = "et",
     config = {
