@@ -941,6 +941,31 @@ j_sp_book_alt = {
             '{C:inactive}(Currently{} {X:red,C:white}X#1#{} {C:inactive}Mult){}'
         },
     },
+    j_sp_document = {
+        name = 'Document',
+        text = {
+            '{C:blue}+#1#{} Chips,',
+            '{C:blue}-25{} Chips for every',
+            '{C:attention}reroll{} in shop'
+        },
+    },
+    j_sp_filecabinet = {
+        name = 'File Cabinet',
+        text = {
+            'When {C:attention}Blind{} is selected,',
+            'add {C:attention}1{} to {C:attention}4{} {C:dark_edition}Negative{}',
+            'playing cards to deck'
+        },
+    },
+    j_sp_hourglass = {
+        name = 'Hourglass',
+        text = {
+           'If played hand contains',
+            'a {C:attention}Straight{}, give the first',
+            '{C:attention}3{} cards a permanent',
+            '{X:red,C:white}X2{} Mult bonus'
+        },
+    },
     j_sp_et = {
         name = 'Ampersand 1',
         text = {
@@ -957,7 +982,57 @@ j_sp_book_alt = {
             'slot {C:attention}2{} times'
         },
     },
-
+    j_sp_beatenfrownsafter = {
+        name = "beaten frowns after",
+        text = {
+            'Every {C:attention}number card{} gives {X:blue,C:white}X2{} Chips',
+            'Every {C:attention}face card{} gives {X:red,C:white}X1.5{} Mult',
+            'Every {C:attention}Ace{} gives {C:gold}+$20{}'
+        }
+    },
+    j_sp_ppik = {
+        name = {
+            "pittor pickgown",
+            "in khatheinstersper",
+        },
+        text = {
+            '{X:red,C:white}X#1#{} Mult,',
+            '{C:green}1 in 5{} chance to lose',
+            '{X:red,C:white}-X0.5{} Mult and {C:green}1 in',
+            '3{} chance to gain {X:red,C:white}+X0.5{}',
+            'Mult when {C:attention}Blind{} is selected'
+        }
+    },
+    j_sp_hag = {
+        name = "hag",
+        text = {""}
+    },
+    j_sp_giltsholder = {
+        name = "giltsholder",
+        text = {
+            'Every {C:attention}face card{} gives',
+            '{C:red}+50{} Mult when {C:attention}scored{}',
+            'or {C:attention}held in hand{}'
+        }
+    },
+    j_sp_stage5 = {
+        name = {
+            "eptitranxisticemestionscers",
+            "descending"
+        },
+        text = {
+            'If {C:attention}five cards{} are scored, give every',
+            'card except for the {C:attention}first{} one a',
+            '{X:blue,C:white}X2{} Chips bonus'
+        }
+    },
+    j_sp_necrotomigaud = {
+        name = "necrotomigaud",
+        text = {
+            '{C:attention}+5{} {C:blue}Hands{},{C:attention} +5{} {C:red}Discards{},',
+            '{C:attention}+5{} Hand size'
+        }
+    }
 },
 
     Enhanced = {
@@ -1347,7 +1422,7 @@ c_sp_xolotlan = {
             name = "H Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
-                '{C:attention}2{} {V:1}H{} Jokers',
+                '{C:attention}2{} {B:1,V:2}H{} Jokers',
                 }
         },
         p_sp_carcanapack_1 = {
@@ -1404,6 +1479,13 @@ c_sp_xolotlan = {
                 'Choose {C:attention}1{} of up to',
                 '{C:attention}2{} {V:1}Gems{} to be',
                 'used immediately'
+                }
+        },
+        p_sp_caretakerpack_1 = {
+            name = "Caretaker Pack",
+            text = {
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}2{} {B:1,V:2}EATEOT{} Jokers',
                 }
         },
 

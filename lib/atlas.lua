@@ -624,6 +624,21 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = 'shufflepack1',
+    path = 'shufflepack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'caretakerpack1',
+    path = 'caretakerpack1.png',
+    px = 71,
+    py = 95
+})
+
+
 -- catarots
 SMODS.Atlas({
     key = 'ragdoll',
@@ -1020,6 +1035,34 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+    key = "document",
+    path = "document.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "filecabinet",
+    path = "cabinet.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "hourglass",
+    path = "hourglass.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
+    key = "keyboard",
+    path = "keyboard.png",
+    px = 66,
+    py = 66
+})
+
+SMODS.Atlas({
     key = "et",
     path = "et.png",
     px = 66,
@@ -1041,7 +1084,93 @@ SMODS.Atlas({
     py = 95
 })
 
+--shaders
 SMODS.Shader({
     key = "shine",
     path = "shine.fs",
+})
+
+-- eateots
+SMODS.Atlas({
+    key = "bfa",
+    path = "bfa.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "ppik",
+    path = "ppik.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "hag",
+    path = "hagv2.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "giltsholder",
+    path = "giltsholder.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "edescending",
+    path = "stage5.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "necrotomigaud",
+    path = "necrotomigaud.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "manimatedsluj",
+    path = "sluj.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "hometdumt",
+    path = "hometdumt.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "polotonejackyoulayshons",
+    path = "polotone.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "ciphotacit",
+    path = "cipho.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "cloneddro",
+    path = "cloneddro.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "fifer",
+    path = "fifer.png",
+    px = 71,
+    py = 95
 })

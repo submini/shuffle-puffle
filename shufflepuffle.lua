@@ -15,6 +15,7 @@ local files = {
     "items/jokers/miscjokers",
     "items/jokers/hjokers",
     "items/jokers/wingdingsjokers",
+    "items/jokers/eateotjokers",
     "items/consumables/catarot",
     "items/consumables/exoplanet",
     "items/consumables/spectaclaw",

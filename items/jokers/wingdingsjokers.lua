@@ -923,6 +923,210 @@ SMODS.Joker{ --Open Folder
     end
 }
 
+SMODS.Joker{ --Document
+    key = "document",
+    config = {
+        extra = {
+            chips = 200,
+            start_dissolve = 0,
+            y = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Document',
+        ['text'] = {
+            [1] = '{C:blue}+#1#{} Chips,',
+            [2] = '{C:blue}-25{} Chips for every',
+            [3] = '{C:attention}reroll{} in shop'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 4,
+    rarity = 1,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'document',
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.chips}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main  then
+                return {
+                    chips = card.ability.extra.chips
+                }
+        end
+        if context.reroll_shop  then
+            if (card.ability.extra.chips or 0) <= 25 then
+                return {
+                    func = function()
+                card:start_dissolve()
+                return true
+            end,
+                    message = "Shredded!"
+                }
+            else
+                return {
+                    func = function()
+                    card.ability.extra.chips = math.max(0, (card.ability.extra.chips) - 25)
+                    return true
+                end,
+                    message = "-25", colour = G.C.BLUE
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --File Cabinet
+    key = "filecabinet",
+    config = {
+        extra = {
+        }
+    },
+    loc_txt = {
+        ['name'] = 'File Cabinet',
+        ['text'] = {
+            [1] = 'When {C:attention}Blind{} is selected,',
+            [2] = 'add {C:attention}1{} to {C:attention}4{} {C:dark_edition}Negative{}',
+            [3] = 'playing cards to deck'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 6,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'filecabinet',
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    calculate = function(self, card, context)
+        if context.setting_blind  then
+            if true then
+                for i = 1, pseudorandom('repetitions_626764d5', 1, 4) do
+              local card_front = pseudorandom_element(G.P_CARDS, pseudoseed('add_card'))
+            local new_card = create_playing_card({
+                front = card_front,
+                center = G.P_CENTERS.c_base
+            }, G.discard, true, false, nil, true)
+            new_card:set_edition("e_negative", true)
+            
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    new_card:start_materialize()
+                    G.play:emplace(new_card)
+                    return true
+                end
+            }))
+                        SMODS.calculate_effect({func = function()
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        G.deck.config.card_limit = G.deck.config.card_limit + 1
+                        return true
+                    end
+                }))
+                draw_card(G.play, G.deck, 90, 'up')
+                SMODS.calculate_context({ playing_card_added = true, cards = { new_card } })
+            end}, card)
+                        card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Cabinet!", colour = HEX('808080')})
+          end
+            end
+        end
+    end
+}
+
+SMODS.Joker{ --Hourglass
+    key = "hourglass",
+    config = {
+        extra = {
+            pb_x_mult_7ee02ca0 = 1,
+            perma_x_mult = 0
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Hourglass',
+        ['text'] = {
+            [1] = 'If played hand contains',
+            [2] = 'a {C:attention}Straight{}, give the first',
+            [3] = '{C:attention}3{} cards a permanent',
+            [4] = '{X:red,C:white}X2{} Mult bonus'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 8,
+    rarity = 3,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'hourglass',
+    pools = { ["Wingdings"] = true },
+
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play  then
+            if ((context.other_card == context.scoring_hand[1] or context.other_card == context.scoring_hand[2] or context.other_card == context.scoring_hand[3]) and next(context.poker_hands["Straight"])) then
+                context.other_card.ability.perma_x_mult = context.other_card.ability.perma_x_mult or 0
+                context.other_card.ability.perma_x_mult = context.other_card.ability.perma_x_mult + card.ability.extra.pb_x_mult_7ee02ca0
+                return {
+                    extra = { message = "Hourglass!", colour = G.C.MULT }, card = card
+                }
+            end
+        end
+    end
+}
+
+
+
 SMODS.Joker{ --H
     key = "et",
     config = {

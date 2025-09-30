@@ -53,6 +53,8 @@ SMODS.Booster {
         chosen_key = "j_joker" -- fallback
     end
 
+
+    
     local target_area = G.pack_cards or G.jokers
     return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
 end,
@@ -67,7 +69,7 @@ SMODS.Booster {
     key = "shufflepack_1",
     name = "Shuffle Pack",
 
-    atlas = 'minishufflepack1',
+    atlas = 'shufflepack1',
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1},
     kind = 'Buffoon',
@@ -396,7 +398,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Buffoon',
-    weight = 0.5,
+    weight = 1000,
     cost = 4,
     loc_txt = { 
         name = "H Pack",
@@ -410,6 +412,7 @@ SMODS.Booster {
         vars =  {
         colours = { 
             HEX('bc002d'),
+            HEX('ffffff')
      }
         }
     }
@@ -420,28 +423,29 @@ SMODS.Booster {
     discovered = false,
 
     create_card = function(self, booster_card)
-    -- Build a filtered pool of only jokers with pools["Shuffle"]
-    local h_pool = {}
+    local pool = {}
     for key, center in pairs(G.P_CENTERS) do
         if center.set == "Joker" and center.pools and center.pools["H"] then
-            table.insert(h_pool, key)
+            table.insert(pool, key)
         end
     end
 
-    -- safety: if empty, fallback to normal jokers_pool
-    if #h_pool == 0 then
-        print("WARNING: Shuffle pool empty, falling back to jokers_pool")
-        h_pool = jokers_pool
+    -- safety: fallback
+    if #pool == 0 then
+        pool = { "j_blueprint" }
     end
 
-    local chosen_key = pseudorandom_element(h_pool)
+    -- persistent pool for this booster (prevents duplicates)
+    booster_card.local_pool = booster_card.local_pool or {unpack(pool)}
 
-    -- extra safety
-    if not G.P_CENTERS[chosen_key] then
-        print("WARNING: Missing Joker center for", chosen_key)
-        chosen_key = "j_joker" -- fallback
-    end
+    -- choose index safely
+    local chosen_idx = math.floor(pseudorandom(pseudoseed("h")) * #booster_card.local_pool) + 1
+    local chosen_key = booster_card.local_pool[chosen_idx]
 
+    -- remove chosen one so it can’t repeat
+    table.remove(booster_card.local_pool, chosen_idx)
+
+    -- spawn joker
     local target_area = G.pack_cards or G.jokers
     return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
 end,
@@ -1042,5 +1046,72 @@ end,
     ease_background_colour = function(self)
         ease_colour(G.C.DYN_UI.MAIN, HEX("11734b"))
         ease_background_colour{new_colour = HEX("11734b"), special_colour = HEX("000000"), contrast = 2}
+    end,
+}
+
+SMODS.Booster {
+    key = "caretakerpack_1",
+    name = "Caretaker Pack",
+
+    atlas = 'caretakerpack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 2, choose = 1},
+    kind = 'Buffoon',
+    weight = 0.75,
+    cost = 5,
+    loc_txt = { 
+        name = "Caretaker Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Caretaker Pack', 
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('245570'),
+            HEX('ffffff')
+     }
+        }
+    }
+    end,
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = false,
+    unlocked = true,
+    discovered = false,
+
+    create_card = function(self, booster_card)
+    -- Build a filtered pool of only jokers with pools["EATEOT"]
+    local pool = {}
+    for key, center in pairs(G.P_CENTERS) do
+        if center.set == "Joker" and center.pools and center.pools["EATEOT"] then
+            table.insert(pool, key)
+        end
+    end
+
+    -- safety: fallback
+    if #pool == 0 then
+        pool = { "j_blueprint" }
+    end
+
+    -- persistent pool for this booster (prevents duplicates)
+    booster_card.local_pool = booster_card.local_pool or {unpack(pool)}
+
+    -- choose index safely
+    local chosen_idx = math.floor(pseudorandom(pseudoseed("caretaker")) * #booster_card.local_pool) + 1
+    local chosen_key = booster_card.local_pool[chosen_idx]
+
+    -- remove chosen one so it can’t repeat
+    table.remove(booster_card.local_pool, chosen_idx)
+
+    -- spawn joker
+    local target_area = G.pack_cards or G.jokers
+    return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
+end,
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("245570"))
+        ease_background_colour{new_colour = HEX("245570"), special_colour = G.C.BLACK, contrast = 2}
     end,
 }
