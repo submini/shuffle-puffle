@@ -134,7 +134,7 @@ SMODS.Booster {
     key = "jumboshufflepack_1",
     name = "Jumbo Shuffle Pack",
 
-    atlas = 'minishufflepack1',
+    atlas = 'jumboshufflepack1',
     pos = { x = 0, y = 0 },
     config = { extra = 5, choose = 1},
     kind = 'Buffoon',
@@ -199,7 +199,7 @@ SMODS.Booster {
     key = "megashufflepack_1",
     name = "Mega Shuffle Pack",
 
-    atlas = 'minishufflepack1',
+    atlas = 'megashufflepack1',
     pos = { x = 0, y = 0 },
     config = { extra = 5, choose = 2},
     kind = 'Buffoon',
@@ -264,7 +264,7 @@ SMODS.Booster {
     key = "ultrashufflepack_1",
     name = "Ultra Shuffle Pack",
 
-    atlas = 'minishufflepack1',
+    atlas = 'ultrashufflepack1',
     pos = { x = 0, y = 0 },
     config = { extra = 7, choose = 2},
     kind = 'Buffoon',
@@ -398,8 +398,8 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Buffoon',
-    weight = 1000,
-    cost = 4,
+    weight = 0.5,
+    cost = 5,
     loc_txt = { 
         name = "H Pack",
         text = {
@@ -1057,7 +1057,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Buffoon',
-    weight = 0.75,
+    weight = 0.5,
     cost = 5,
     loc_txt = { 
         name = "Caretaker Pack",

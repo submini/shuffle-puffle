@@ -632,6 +632,27 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+    key = 'jumboshufflepack1',
+    path = 'jumboshufflepack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'megashufflepack1',
+    path = 'megashufflepack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'ultrashufflepack1',
+    path = 'ultrashufflepack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
     key = 'caretakerpack1',
     path = 'caretakerpack1.png',
     px = 71,
