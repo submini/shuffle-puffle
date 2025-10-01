@@ -653,6 +653,63 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+    key = 'exocelestialpack1',
+    path = 'exocelestialpack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'jumboexocelestialpack1',
+    path = 'jumboexocelestialpack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'megaexocelestialpack1',
+    path = 'megaexocelestialpack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'carcanapack1',
+    path = 'carcanapack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'jumbocarcanapack1',
+    path = 'jumbocarcanapack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'megacarcanapack1',
+    path = 'megacarcanapack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'hpack1',
+    path = 'hpack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'wingdingspack1',
+    path = 'wingdingspack1.png',
+    px = 71,
+    py = 95
+})
+
+
+SMODS.Atlas({
     key = 'caretakerpack1',
     path = 'caretakerpack1.png',
     px = 71,
@@ -863,6 +920,27 @@ SMODS.Atlas({
 SMODS.Atlas({
     key = 'j1407b',
     path = 'j1407b.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'toi5573b',
+    path = 'toi5573b.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'noifasui',
+    path = 'noifasui.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'sweeps4b',
+    path = 'sweeps4b.png',
     px = 71,
     py = 95
 })

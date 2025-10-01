@@ -966,6 +966,14 @@ j_sp_book_alt = {
             '{X:red,C:white}X2{} Mult bonus'
         },
     },
+    j_sp_keyboard = {
+        name = 'Keyboard',
+        text = {
+            'Retriggers {C:attention}Aces{} and',
+            '{C:attention}face cards{} from {C:attention}1{} to',
+            '{C:attention}6{} times'
+        }
+    },
     j_sp_et = {
         name = 'Ampersand 1',
         text = {
@@ -1029,8 +1037,8 @@ j_sp_book_alt = {
     j_sp_necrotomigaud = {
         name = "necrotomigaud",
         text = {
-            '{C:attention}+5{} {C:blue}Hands{},{C:attention} +5{} {C:red}Discards{},',
-            '{C:attention}+5{} Hand size'
+            '{C:attention}+2{} {C:blue}Hands{},{C:attention} +2{} {C:red}Discards{},',
+            '{C:attention}+2{} Hand size'
         }
     }
 },
@@ -1238,8 +1246,8 @@ c_sp_noifasui = {
         '{C:red}+#3#{} Mult'
     }
 },
-c_sp_fortiduo = {
-    name = "Fortiduo",
+c_sp_sweeps4b = {
+    name = "SWEEPS-4 b",
     text = {
         '(lvl.#1#) Levels up {C:attention}#2#{}',
         '{C:blue}+#4#{} Chips and',
@@ -1479,6 +1487,13 @@ c_sp_xolotlan = {
                 'Choose {C:attention}1{} of up to',
                 '{C:attention}2{} {V:1}Gems{} to be',
                 'used immediately'
+                }
+        },
+        p_sp_wingdingspack_1 = {
+            name = "Wingdings Pack",
+            text = {
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}3{} {B:1,V:2}Wingdings{} Jokers',
                 }
         },
         p_sp_caretakerpack_1 = {

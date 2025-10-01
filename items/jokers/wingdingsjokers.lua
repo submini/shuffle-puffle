@@ -1125,7 +1125,58 @@ SMODS.Joker{ --Hourglass
     end
 }
 
+SMODS.Joker{ --Keyboard
+    key = "keyboard",
+    config = {
+        extra = {
+            repetitions_min = 1,
+            repetitions_max = 6
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Keyboard',
+        ['text'] = {
+            [1] = 'Retriggers {C:attention}Aces{} and',
+            [2] = '{C:attention}face cards{} from {C:attention}1{} to',
+            [3] = '{C:attention}6{} times'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 66 * 1, 
+        h = 66 * 1
+    },
+    cost = 8,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'keyboard',
+    pools = { ["Wingdings"] = true },
 
+    set_badges = function(self, card, badges)
+        badges[#badges+1] = create_badge("Wingdings", HEX("000000"), G.C.WHITE, 1)
+    end,
+
+    calculate = function(self, card, context)
+        if context.repetition and context.cardarea == G.play  then
+            if (context.other_card:get_id() == 14 or context.other_card:is_face()) then
+                return {
+                    repetitions = pseudorandom('repetitions_83c72ada', card.ability.extra.repetitions_min, card.ability.extra.repetitions_max),
+                    message = "Mash!"
+                }
+            end
+        end
+    end
+}
 
 SMODS.Joker{ --H
     key = "et",

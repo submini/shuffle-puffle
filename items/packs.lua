@@ -394,11 +394,11 @@ SMODS.Booster {
     key = "hpack_1",
     name = "H Pack",
 
-    atlas = 'minishufflepack1',
+    atlas = 'hpack1',
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Buffoon',
-    weight = 0.5,
+    weight = 0.75,
     cost = 5,
     loc_txt = { 
         name = "H Pack",
@@ -460,7 +460,7 @@ SMODS.Booster {
     key = "carcanapack_1",
     name = "Carcana Pack",
 
-    atlas = 'minishufflepack1',
+    atlas = 'carcanapack1',
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1},
     kind = 'Arcana',
@@ -544,7 +544,7 @@ SMODS.Booster {
     key = "jumbocarcanapack_1",
     name = "Jumbo Carcana Pack",
 
-    atlas = 'minishufflepack1',
+    atlas = 'jumbocarcanapack1',
     pos = { x = 0, y = 0 },
     config = { extra = 5, choose = 1},
     kind = 'Arcana',
@@ -628,7 +628,7 @@ SMODS.Booster {
     key = "megacarcanapack_1",
     name = "Mega Carcana Pack",
 
-    atlas = 'minishufflepack1',
+    atlas = 'megacarcanapack1',
     pos = { x = 0, y = 0 },
     config = { extra = 5, choose = 2},
     kind = 'Arcana',
@@ -712,7 +712,7 @@ SMODS.Booster {
     key = "exocelestialpack_1",
     name = "Exocelestial Pack",
 
-    atlas = 'minishufflepack1',
+    atlas = 'exocelestialpack1',
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1},
     kind = 'Celestial',
@@ -803,7 +803,7 @@ SMODS.Booster {
     key = "jumboexocelestialpack_1",
     name = "Jumbo Exocelestial Pack",
 
-    atlas = 'minishufflepack1',
+    atlas = 'jumboexocelestialpack1',
     pos = { x = 0, y = 0 },
     config = { extra = 5, choose = 1},
     kind = 'Celestial',
@@ -894,7 +894,7 @@ SMODS.Booster {
     key = "megaexocelestialpack_1",
     name = "Mega Exocelestial Pack",
 
-    atlas = 'minishufflepack1',
+    atlas = 'megaexocelestialpack1',
     pos = { x = 0, y = 0 },
     config = { extra = 5, choose = 2},
     kind = 'Celestial',
@@ -1050,6 +1050,74 @@ end,
 }
 
 SMODS.Booster {
+    key = "wingdingspack_1",
+    name = "Wingdings Pack",
+
+    atlas = 'wingdingspack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 3, choose = 1},
+    kind = 'Buffoon',
+    weight = 1,
+    cost = 4,
+    loc_txt = { 
+        name = "Wingdings Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Wingdings Pack', 
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('000000'),
+            HEX('ffffff')
+     }
+        }
+    }
+    end,
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = false,
+    unlocked = true,
+    discovered = false,
+
+    create_card = function(self, booster_card)
+    -- Build a filtered pool of only jokers with pools["EATEOT"]
+    local pool = {}
+    for key, center in pairs(G.P_CENTERS) do
+        if center.set == "Joker" and center.pools and center.pools["Wingdings"] then
+            table.insert(pool, key)
+        end
+    end
+
+    -- safety: fallback
+    if #pool == 0 then
+        pool = { "j_joker" }
+    end
+
+    -- persistent pool for this booster (prevents duplicates)
+    booster_card.local_pool = booster_card.local_pool or {unpack(pool)}
+
+    -- choose index safely
+    local chosen_idx = math.floor(pseudorandom(pseudoseed("wingdings")) * #booster_card.local_pool) + 1
+    local chosen_key = booster_card.local_pool[chosen_idx]
+
+    -- remove chosen one so it can’t repeat
+    table.remove(booster_card.local_pool, chosen_idx)
+
+    -- spawn joker
+    local target_area = G.pack_cards or G.jokers
+    return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
+end,
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("FFFFFF"))
+        ease_background_colour{new_colour = G.C.BLACK, special_colour = HEX("FFFFFF"), contrast = 2}
+    end,
+}
+
+
+SMODS.Booster {
     key = "caretakerpack_1",
     name = "Caretaker Pack",
 
@@ -1057,7 +1125,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Buffoon',
-    weight = 0.5,
+    weight = 0.75,
     cost = 5,
     loc_txt = { 
         name = "Caretaker Pack",

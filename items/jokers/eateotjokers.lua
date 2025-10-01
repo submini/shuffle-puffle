@@ -332,15 +332,13 @@ SMODS.Joker{ --necrotomigaud
     key = "necrotomigaud",
     config = {
         extra = {
-            hand_change = 5,
-            discard_change = 5
+            hand_change = 2,
+            discard_change = 2
         }
     },
     loc_txt = {
         ['name'] = 'necrotomigaud',
         ['text'] = {
-            [1] = '{C:attention}+5{} {C:blue}Hands{},{C:attention} +5{} {C:red}Discards{},',
-            [2] = '{C:attention}+5{} Hand size'
         },
         ['unlock'] = {
             [1] = 'Unlocked by default.'
@@ -374,12 +372,12 @@ SMODS.Joker{ --necrotomigaud
     add_to_deck = function(self, card, from_debuff)
         G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.hand_change
         G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.discard_change
-        G.hand:change_size(5)
+        G.hand:change_size(2)
     end,
 
     remove_from_deck = function(self, card, from_debuff)
         G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.hand_change
         G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.discard_change
-        G.hand:change_size(-5)
+        G.hand:change_size(-2)
     end
 }

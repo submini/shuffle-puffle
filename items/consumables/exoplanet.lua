@@ -159,7 +159,7 @@ end,
     discovered = false,
     hidden = false,
     can_repeat_soul = false,
-    atlas = 'placeholder',
+    atlas = 'toi5573b',
 use = function(self, card, area, copier)
     local used_card = copier or card
 
@@ -265,7 +265,7 @@ end,
     discovered = false,
     hidden = false,
     can_repeat_soul = false,
-    atlas = 'placeholder',
+    atlas = 'noifasui',
 use = function(self, card, area, copier)
     local used_card = copier or card
 
@@ -342,7 +342,7 @@ end,
 }
 
 SMODS.Consumable {
-    key = 'fortiduo',
+    key = 'sweeps4b',
     set = 'Exoplanet',
     pos = { x = 0, y = 0 },
     config = { extra = {
@@ -371,7 +371,7 @@ end,
     discovered = false,
     hidden = false,
     can_repeat_soul = false,
-    atlas = 'placeholder',
+    atlas = 'sweeps4b',
 use = function(self, card, area, copier)
     local used_card = copier or card
 
