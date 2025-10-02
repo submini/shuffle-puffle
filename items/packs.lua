@@ -136,7 +136,7 @@ SMODS.Booster {
 
     atlas = 'jumboshufflepack1',
     pos = { x = 0, y = 0 },
-    config = { extra = 5, choose = 1},
+    config = { extra = 4, choose = 1},
     kind = 'Buffoon',
     weight = 0.6,
     cost = 6,
@@ -201,7 +201,7 @@ SMODS.Booster {
 
     atlas = 'megashufflepack1',
     pos = { x = 0, y = 0 },
-    config = { extra = 5, choose = 2},
+    config = { extra = 4, choose = 2},
     kind = 'Buffoon',
     weight = 0.15,
     cost = 8,
@@ -266,7 +266,7 @@ SMODS.Booster {
 
     atlas = 'ultrashufflepack1',
     pos = { x = 0, y = 0 },
-    config = { extra = 7, choose = 2},
+    config = { extra = 6, choose = 2},
     kind = 'Buffoon',
     weight = 0.05,
     cost = 10,
@@ -331,7 +331,7 @@ SMODS.Booster {
 
     atlas = 'minishufflepack1',
     pos = { x = 0, y = 0 },
-    config = { extra = 10, choose = 3},
+    config = { extra = 9, choose = 3},
     kind = 'Buffoon',
     weight = 0.02,
     cost = 12,
@@ -398,7 +398,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Buffoon',
-    weight = 0.75,
+    weight = 0.5,
     cost = 5,
     loc_txt = { 
         name = "H Pack",
@@ -640,6 +640,90 @@ SMODS.Booster {
             "Choose some jokers",
         },
         group_name = 'Mega Carcana Pack', 
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('E8A6BD'),
+     }
+        }
+    }
+    end,
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = true,
+    unlocked = true,
+    discovered = false,
+
+        particles = function(self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.2,
+            initialize = true,
+            lifespan = 1,
+            speed = 1.1,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.WHITE, lighten(HEX('E8A6BD'), 0.4), lighten(HEX('E8A6BD'), 0.2), lighten(HEX('FFFFFF'), 0.2) },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+
+create_card = function(self, booster_card)
+    -- build Catarot pool fresh
+    local pool = {}
+    for k, v in pairs(G.P_CENTERS) do
+        if v.set == 'Catarot' then
+            table.insert(pool, k)
+        end
+    end
+
+    -- fall back if empty
+    if #pool == 0 then
+        return create_card("Consumable", G.consumeables, "c", nil, true, true, "c_fool", nil)
+    end
+
+    -- persistent pool for this booster
+    booster_card.local_pool = booster_card.local_pool or {unpack(pool)}
+
+    -- choose one (safe integer)
+    local chosen_idx = math.floor(pseudorandom(pseudoseed("carcana")) * #booster_card.local_pool) + 1
+    local chosen_key = booster_card.local_pool[chosen_idx]
+
+    -- remove so it won’t repeat
+    table.remove(booster_card.local_pool, chosen_idx)
+
+    -- spawn
+    local chosen_rarity = (G.P_CENTERS[chosen_key] and G.P_CENTERS[chosen_key].rarity) or "c"
+    local target_area = G.pack_cards or G.consumeables
+    return create_card("Consumable", target_area, chosen_rarity, nil, true, true, chosen_key, nil)
+end,
+
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("E8A6BD"))
+        ease_background_colour{new_colour = HEX("E8A6BD"), special_colour = HEX("000000"), contrast = 2}
+    end,
+}
+
+SMODS.Booster {
+    key = "ultracarcanapack_1",
+    name = "Ultra Carcana Pack",
+
+    atlas = 'ultracarcanapack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 7, choose = 2},
+    kind = 'Arcana',
+    weight = 0.15,
+    cost = 10,
+    loc_txt = { 
+        name = "Carcana Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Ultra Carcana Pack', 
     },
     loc_vars = function(self, info_queue, card)
         return {
@@ -1057,7 +1141,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 3, choose = 1},
     kind = 'Buffoon',
-    weight = 1,
+    weight = 0.6,
     cost = 4,
     loc_txt = { 
         name = "Wingdings Pack",
@@ -1112,10 +1196,143 @@ end,
 
     ease_background_colour = function(self)
         ease_colour(G.C.DYN_UI.MAIN, HEX("FFFFFF"))
-        ease_background_colour{new_colour = G.C.BLACK, special_colour = HEX("FFFFFF"), contrast = 2}
+        ease_background_colour{new_colour = HEX("000000"), special_colour = HEX("FFFFFF"), contrast = 2}
     end,
 }
 
+SMODS.Booster {
+    key = "jumbowingdingspack_1",
+    name = "Jumbo Wingdings Pack",
+
+    atlas = 'jumbowingdingspack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 5, choose = 1},
+    kind = 'Buffoon',
+    weight = 0.6,
+    cost = 6,
+    loc_txt = { 
+        name = "Jumbo Wingdings Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Jumbo Wingdings Pack', 
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('000000'),
+            HEX('ffffff')
+     }
+        }
+    }
+    end,
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = false,
+    unlocked = true,
+    discovered = false,
+
+    create_card = function(self, booster_card)
+    -- Build a filtered pool of only jokers with pools["EATEOT"]
+    local pool = {}
+    for key, center in pairs(G.P_CENTERS) do
+        if center.set == "Joker" and center.pools and center.pools["Wingdings"] then
+            table.insert(pool, key)
+        end
+    end
+
+    -- safety: fallback
+    if #pool == 0 then
+        pool = { "j_joker" }
+    end
+
+    -- persistent pool for this booster (prevents duplicates)
+    booster_card.local_pool = booster_card.local_pool or {unpack(pool)}
+
+    -- choose index safely
+    local chosen_idx = math.floor(pseudorandom(pseudoseed("wingdings")) * #booster_card.local_pool) + 1
+    local chosen_key = booster_card.local_pool[chosen_idx]
+
+    -- remove chosen one so it can’t repeat
+    table.remove(booster_card.local_pool, chosen_idx)
+
+    -- spawn joker
+    local target_area = G.pack_cards or G.jokers
+    return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
+end,
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("FFFFFF"))
+        ease_background_colour{new_colour = HEX("000000"), special_colour = HEX("FFFFFF"), contrast = 2}
+    end,
+}
+
+SMODS.Booster {
+    key = "megawingdingspack_1",
+    name = "Mega Wingdings Pack",
+
+    atlas = 'megawingdingspack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 5, choose = 2},
+    kind = 'Buffoon',
+    weight = 0.15,
+    cost = 8,
+    loc_txt = { 
+        name = "Mega Wingdings Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Mega Wingdings Pack', 
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('000000'),
+            HEX('ffffff')
+     }
+        }
+    }
+    end,
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = false,
+    unlocked = true,
+    discovered = false,
+
+    create_card = function(self, booster_card)
+    -- Build a filtered pool of only jokers with pools["EATEOT"]
+    local pool = {}
+    for key, center in pairs(G.P_CENTERS) do
+        if center.set == "Joker" and center.pools and center.pools["Wingdings"] then
+            table.insert(pool, key)
+        end
+    end
+
+    -- safety: fallback
+    if #pool == 0 then
+        pool = { "j_joker" }
+    end
+
+    -- persistent pool for this booster (prevents duplicates)
+    booster_card.local_pool = booster_card.local_pool or {unpack(pool)}
+
+    -- choose index safely
+    local chosen_idx = math.floor(pseudorandom(pseudoseed("wingdings")) * #booster_card.local_pool) + 1
+    local chosen_key = booster_card.local_pool[chosen_idx]
+
+    -- remove chosen one so it can’t repeat
+    table.remove(booster_card.local_pool, chosen_idx)
+
+    -- spawn joker
+    local target_area = G.pack_cards or G.jokers
+    return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
+end,
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("FFFFFF"))
+        ease_background_colour{new_colour = HEX("000000"), special_colour = HEX("FFFFFF"), contrast = 2}
+    end,
+}
 
 SMODS.Booster {
     key = "caretakerpack_1",
@@ -1125,7 +1342,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Buffoon',
-    weight = 0.75,
+    weight = 0.5,
     cost = 5,
     loc_txt = { 
         name = "Caretaker Pack",
@@ -1133,6 +1350,140 @@ SMODS.Booster {
             "Choose some jokers",
         },
         group_name = 'Caretaker Pack', 
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('245570'),
+            HEX('ffffff')
+     }
+        }
+    }
+    end,
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = false,
+    unlocked = true,
+    discovered = false,
+
+    create_card = function(self, booster_card)
+    -- Build a filtered pool of only jokers with pools["EATEOT"]
+    local pool = {}
+    for key, center in pairs(G.P_CENTERS) do
+        if center.set == "Joker" and center.pools and center.pools["EATEOT"] then
+            table.insert(pool, key)
+        end
+    end
+
+    -- safety: fallback
+    if #pool == 0 then
+        pool = { "j_blueprint" }
+    end
+
+    -- persistent pool for this booster (prevents duplicates)
+    booster_card.local_pool = booster_card.local_pool or {unpack(pool)}
+
+    -- choose index safely
+    local chosen_idx = math.floor(pseudorandom(pseudoseed("caretaker")) * #booster_card.local_pool) + 1
+    local chosen_key = booster_card.local_pool[chosen_idx]
+
+    -- remove chosen one so it can’t repeat
+    table.remove(booster_card.local_pool, chosen_idx)
+
+    -- spawn joker
+    local target_area = G.pack_cards or G.jokers
+    return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
+end,
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("245570"))
+        ease_background_colour{new_colour = HEX("245570"), special_colour = G.C.BLACK, contrast = 2}
+    end,
+}
+
+SMODS.Booster {
+    key = "jumbocaretakerpack_1",
+    name = "Jumbo Caretaker Pack",
+
+    atlas = 'jumbocaretakerpack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 4, choose = 1},
+    kind = 'Buffoon',
+    weight = 0.5,
+    cost = 5,
+    loc_txt = { 
+        name = "Jumbo Caretaker Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Jumbo Caretaker Pack', 
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('245570'),
+            HEX('ffffff')
+     }
+        }
+    }
+    end,
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = false,
+    unlocked = true,
+    discovered = false,
+
+    create_card = function(self, booster_card)
+    -- Build a filtered pool of only jokers with pools["EATEOT"]
+    local pool = {}
+    for key, center in pairs(G.P_CENTERS) do
+        if center.set == "Joker" and center.pools and center.pools["EATEOT"] then
+            table.insert(pool, key)
+        end
+    end
+
+    -- safety: fallback
+    if #pool == 0 then
+        pool = { "j_blueprint" }
+    end
+
+    -- persistent pool for this booster (prevents duplicates)
+    booster_card.local_pool = booster_card.local_pool or {unpack(pool)}
+
+    -- choose index safely
+    local chosen_idx = math.floor(pseudorandom(pseudoseed("caretaker")) * #booster_card.local_pool) + 1
+    local chosen_key = booster_card.local_pool[chosen_idx]
+
+    -- remove chosen one so it can’t repeat
+    table.remove(booster_card.local_pool, chosen_idx)
+
+    -- spawn joker
+    local target_area = G.pack_cards or G.jokers
+    return create_card("Joker", target_area, nil, nil, true, true, chosen_key, nil)
+end,
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("245570"))
+        ease_background_colour{new_colour = HEX("245570"), special_colour = G.C.BLACK, contrast = 2}
+    end,
+}
+
+SMODS.Booster {
+    key = "megacaretakerpack_1",
+    name = "Mega Caretaker Pack",
+
+    atlas = 'megacaretakerpack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 4, choose = 2},
+    kind = 'Buffoon',
+    weight = 0.3,
+    cost = 5,
+    loc_txt = { 
+        name = "Mega Caretaker Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Mega Caretaker Pack', 
     },
     loc_vars = function(self, info_queue, card)
         return {

@@ -1402,28 +1402,28 @@ c_sp_xolotlan = {
             name = "Jumbo Shuffle Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
-                '{C:attention}5{} {B:1,V:2}shuffle-puffle{} Jokers',
+                '{C:attention}4{} {B:1,V:2}shuffle-puffle{} Jokers',
                 }
         },
         p_sp_megashufflepack_1 = {
             name = "Mega Shuffle Pack",
             text = {
                 'Choose {C:attention}2{} of up to',
-                '{C:attention}5{} {B:1,V:2}shuffle-puffle{} Jokers',
+                '{C:attention}4{} {B:1,V:2}shuffle-puffle{} Jokers',
                 }
         },
         p_sp_ultrashufflepack_1 = {
             name = "Ultra Shuffle Pack",
             text = {
                 'Choose {C:attention}2{} of up to',
-                '{C:attention}7{} {B:1,V:2}shuffle-puffle{} Jokers',
+                '{C:attention}6{} {B:1,V:2}shuffle-puffle{} Jokers',
                 }
         },
         p_sp_toomuchshufflepack_1 = {
             name = "Too-much Shuffle Pack",
             text = {
                 'Choose {C:attention}3{} of up to',
-                '{C:attention}10{} {B:1,V:2}shuffle-puffle{} Jokers',
+                '{C:attention}9{} {B:1,V:2}shuffle-puffle{} Jokers',
                 }
         },
         p_sp_hpack_1 = {
@@ -1454,6 +1454,14 @@ c_sp_xolotlan = {
             text = {
                 'Choose {C:attention}2{} of up to',
                 '{C:attention}5{} {V:1}Catarots{} to be',
+                'used immediately'
+                }
+        },
+        p_sp_ultracarcanapack_1 = {
+            name = "Ultra Carcana Pack",
+            text = {
+                'Choose {C:attention}2{} of up to',
+                '{C:attention}7{} {V:1}Catarots{} to be',
                 'used immediately'
                 }
         },
@@ -1496,11 +1504,39 @@ c_sp_xolotlan = {
                 '{C:attention}3{} {B:1,V:2}Wingdings{} Jokers',
                 }
         },
+        p_sp_jumbowingdingspack_1 = {
+            name = "Jumbo Wingdings Pack",
+            text = {
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}5{} {B:1,V:2}Wingdings{} Jokers',
+                }
+        },
+        p_sp_megawingdingspack_1 = {
+            name = "Mega Wingdings Pack",
+            text = {
+                'Choose {C:attention}2{} of up to',
+                '{C:attention}5{} {B:1,V:2}Wingdings{} Jokers',
+                }
+        },
         p_sp_caretakerpack_1 = {
             name = "Caretaker Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
                 '{C:attention}2{} {B:1,V:2}EATEOT{} Jokers',
+                }
+        },
+        p_sp_jumbocaretakerpack_1 = {
+            name = "Jumbo Caretaker Pack",
+            text = {
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}4{} {B:1,V:2}EATEOT{} Jokers',
+                }
+        },
+        p_sp_megacaretakerpack_1 = {
+            name = "Mega Caretaker Pack",
+            text = {
+                'Choose {C:attention}2{} of up to',
+                '{C:attention}4{} {B:1,V:2}EATEOT{} Jokers',
                 }
         },
 

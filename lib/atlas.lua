@@ -450,14 +450,14 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "jackfruit",
-    path = "placeholder.png",
+    path = "jackfruit.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
     key = "doublebongcloud",
-    path = "placeholder.png",
+    path = "doublebongcloud.png",
     px = 71,
     py = 95
 })
@@ -695,6 +695,13 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+    key = 'ultracarcanapack1',
+    path = 'ultracarcanapack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
     key = 'hpack1',
     path = 'hpack1.png',
     px = 71,
@@ -708,10 +715,37 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = 'jumbowingdingspack1',
+    path = 'jumbowingdingspack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'megawingdingspack1',
+    path = 'megawingdingspack1.png',
+    px = 71,
+    py = 95
+})
 
 SMODS.Atlas({
     key = 'caretakerpack1',
     path = 'caretakerpack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'jumbocaretakerpack1',
+    path = 'jumbocaretakerpack1.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'megacaretakerpack1',
+    path = 'megacaretakerpack1.png',
     px = 71,
     py = 95
 })
