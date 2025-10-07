@@ -202,6 +202,7 @@ SMODS.Joker {
     },
     pools = { ["H"] = true },
     pos = {x = 0, y = 0},
+    soul_pos = {x = 1, y = 0},
     display_size = {w = 71, h = 95},
     cost = 8,
     rarity = 2,

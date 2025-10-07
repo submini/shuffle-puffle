@@ -494,3 +494,40 @@ SMODS.Enhancement {
         end
     end
 }
+
+SMODS.Enhancement {
+    key = 'igorcard',
+    pos = { x = 0, y = 0 },
+    config = {
+        p_dollars = 4,
+        mult = 4,
+        extra = {
+            odds = 7,
+            x_mult = 4
+        }
+    },
+    loc_txt = {
+        name = 'IGOR Card',
+        text = {
+        [1] = '{C:gold}+$4{}, {C:red}+4{} Mult, {C:green}1 in 7{}',
+        [2] = 'chance {X:red,C:white}X4{} Mult'
+    }
+    },
+    atlas = 'igorcard',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 1.5,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            if SMODS.pseudorandom_probability(card, 'group_0_9f4e12fc', 1, card.ability.extra.odds, 'm_sp_igorcard') then
+                SMODS.calculate_effect({x_mult = card.ability.extra.x_mult}, card)
+            end
+        end
+    end
+}

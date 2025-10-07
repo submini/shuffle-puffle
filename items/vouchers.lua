@@ -7,8 +7,8 @@ SMODS.Voucher {
             "available in shop"
         }
     },
-    atlas = "expansionpermit", -- or your custom atlas
-    pos = { x = 0, y = 0 }, -- position in atlas
+    atlas = "expansionpermit",
+    pos = { x = 0, y = 0 }, 
     cost = 10,
     config = { extra = 1 },
 
@@ -34,8 +34,8 @@ SMODS.Voucher {
             "available in shop"
         }
     },
-    atlas = "expansionpermit", -- or your custom atlas
-    pos = { x = 0, y = 0 }, -- position in atlas
+    atlas = "prestigepermit", 
+    pos = { x = 0, y = 0 },
     cost = 10,
     config = { extra = 1 },
     requires = {"v_sp_expansionpermit"},

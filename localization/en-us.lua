@@ -795,7 +795,8 @@ return {
             'If played hand contains an',
             '{C:attention}8{} and a {C:attention}7{}, create #1#',
             '{C:dark_edition}Negative{} {C:attention}Freddy Fazbears{}',
-            'and increase number by {C:attention}5{}'
+            'and increase number by {C:attention}5{}',
+            '{C:inactive,s:0.6}yes we know this is the bite of \'83 shut up{}'
         }
     },
     j_sp_sealedpackage = {
@@ -1006,8 +1007,8 @@ j_sp_book_alt = {
         text = {
             '{X:red,C:white}X#1#{} Mult,',
             '{C:green}1 in 5{} chance to lose',
-            '{X:red,C:white}-X0.5{} Mult and {C:green}1 in',
-            '3{} chance to gain {X:red,C:white}+X0.5{}',
+            '{X:red,C:white}-X0.5{} Mult and {C:green}1 in{}',
+            '{C:green}3{} chance to gain {X:red,C:white}+X0.5{}',
             'Mult when {C:attention}Blind{} is selected'
         }
     },
@@ -1115,7 +1116,83 @@ j_sp_book_alt = {
             '{C:purple}^1.2{} Mult'
     }
     },
+    m_sp_igorcard = {
+        name = 'IGOR Card',
+        text = {
+            '{C:gold}+$4{}, {C:red}+4{} Mult, {C:green}1 in 7{}',
+            'chance {X:red,C:white}X4{} Mult'
+        }
+    }
     },
+
+    Lenormand = {
+        c_sp_theship = {
+                name = "The Ship",
+                text = {
+                    "Gives {C:gold}$3{} for",
+                    "each Joker owned {C:inactive}",
+                    "(Max of {C:gold}$#2#{C:inactive})",
+                    "{C:inactive}(Currently {C:gold}$#1#{C:inactive})"
+                },
+            },
+        c_sp_thehouse = {
+                name = "The House",
+                text = {
+                    "Creates up to {C:attention}#1#{}",
+                    "random {V:1}Exoplanet{} cards",
+                    "{C:inactive}(Must have room)",
+                },
+            },
+        c_sp_thewhip = {
+                name = "The Whip",
+                text = {
+                    "Destroys up to",
+                    "{C:attention}#1#{} selected cards",
+                },
+            },
+        c_sp_thetower = {
+                name = "The Tower",
+                text = {
+                    "Applies {C:dark_edition}Foil{} to",
+                    "a maximum of",
+                    "{C:attention}5{} Jokers without",
+                    "an edition"
+                },
+            },
+        c_sp_themountain = {
+                name = "The Mountain",
+                text = {
+                    "Enhances {C:attention}1{} selected",
+                    "card into an {C:attention}Upward Card{}",
+                    "and {C:red}destroys{} {C:attention}5{} random",
+                    "cards in hand"
+                },
+            },
+        c_sp_mice = {
+                name = "Mice",
+                text = {
+                    "Destroys {C:attention}3{}",
+                    "selected cards, earn {C:gold}$8{}"
+                },
+            },
+        c_sp_theheart = {
+                name = "The Heart",
+                text = {
+                    "Converts up to",
+                    "{C:attention}#1#{} selected cards",
+                    "to {V:1}#2#{}",
+                },
+            },
+        c_sp_theletter = {
+                name = "The Letter",
+                text = {
+                    "Creates {C:attention}2{} of the last",
+                    "{C:tarot}Tarot{} or {C:planet}Planet{} card",
+                    "used during this run",
+                    "{s:0.8,C:tarot}The Fool{s:0.8} excluded",
+                },
+            },
+},
 
     Catarot = {
         c_sp_birman = {

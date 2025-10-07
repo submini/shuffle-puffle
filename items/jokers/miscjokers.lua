@@ -4631,7 +4631,7 @@ end,
 
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play  then
-            if (#context.scoring_hand == 5 and context.other_card == context.scoring_hand[1]) then
+            if (#context.scoring_hand == 5 and context.other_card == context.scoring_hand[5]) then
                 card.ability.extra.xmult = (card.ability.extra.xmult) + 0.5
                 return {
                     message = "Chica!"
@@ -5028,6 +5028,10 @@ SMODS.Joker{ --LeBron James
     },
     pos = {
         x = 0,
+        y = 0
+    },
+    soul_pos = {
+        x = 1,
         y = 0
     },
     display_size = {

@@ -1410,7 +1410,7 @@ SMODS.Booster {
     config = { extra = 4, choose = 1},
     kind = 'Buffoon',
     weight = 0.5,
-    cost = 5,
+    cost = 7,
     loc_txt = { 
         name = "Jumbo Caretaker Pack",
         text = {
@@ -1477,7 +1477,7 @@ SMODS.Booster {
     config = { extra = 4, choose = 2},
     kind = 'Buffoon',
     weight = 0.3,
-    cost = 5,
+    cost = 9,
     loc_txt = { 
         name = "Mega Caretaker Pack",
         text = {
