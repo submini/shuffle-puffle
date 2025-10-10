@@ -611,7 +611,7 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "sealedpackage",
-    path = "placeholder.png",
+    path = "sealedpackage.png",
     px = 71,
     py = 95
 })
@@ -749,6 +749,14 @@ SMODS.Atlas({
     px = 71,
     py = 95
 })
+
+SMODS.Atlas({
+    key = 'lenormanapack1',
+    path = 'lenormanapack.png',
+    px = 71,
+    py = 95
+})
+
 
 
 -- catarots
@@ -955,6 +963,21 @@ SMODS.Atlas({
     px = 71,
     py = 95
 })
+
+SMODS.Atlas({
+    key = 'fazbearseal',
+    path = 'fazbearseal.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'treeseal',
+    path = 'treeseal.png',
+    px = 71,
+    py = 95
+})
+
 
 
 -- exoplanets
@@ -1382,6 +1405,48 @@ SMODS.Atlas({
 SMODS.Atlas({
     key = "lecross",
     path = "thecross.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "leclover",
+    path = "theclover.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lecoffin",
+    path = "thecoffin.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lebouquet",
+    path = "thebouquet.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lechild",
+    path = "thechild.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lebear",
+    path = "thebear.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "letree",
+    path = "thetree.png",
     px = 71,
     py = 95
 })

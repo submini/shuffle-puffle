@@ -143,3 +143,62 @@ SMODS.Seal {
         end
     end
 }
+
+SMODS.Seal {
+    key = 'fazbearseal',
+    pos = { x = 0, y = 0 },
+    atlas = 'fazbearseal',
+    config = {
+        extra = {
+            mult = 19,
+            chips = 87
+        }
+    },
+    badge_colour = HEX('d7925b'),
+   loc_txt = {
+        name = 'Fazbear Seal',
+        label = 'Fazbear Seal',
+        text = {
+        [1] = '{C:red}+19{} Mult,',
+        [2] = '{C:blue}+87{} extra chips'
+    }
+    },
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            return { mult = card.ability.seal.extra.mult, chips = card.ability.seal.extra.chips }
+        end
+    end
+}
+
+SMODS.Seal {
+    key = 'treeseal',
+    pos = { x = 0, y = 0 },
+    config = {
+        extra = {
+            chips = 15,
+            mult = 5,
+            dollars = 1
+        }
+    },
+    badge_colour = HEX('54994f'),
+   loc_txt = {
+        name = 'Tree Seal',
+        label = 'Tree Seal',
+        text = {
+        [1] = '{C:blue}+15{} extra chips,',
+        [2] = '{C:red}+5{} Mult, {C:money}+$1{}'
+    }
+    },
+    atlas = 'treeseal',
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            return { chips = card.ability.seal.extra.chips, mult = card.ability.seal.extra.mult, dollars = lenient_bignum(card.ability.seal.extra.dollars) }
+        end
+    end
+}

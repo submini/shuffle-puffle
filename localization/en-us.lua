@@ -1126,6 +1126,14 @@ j_sp_book_alt = {
     },
 
     Lenormand = {
+        c_sp_theclover = {
+                name = "The Clover",
+                text = {
+                    "Enhances up to {C:attention}4{}",
+                    "selected cards to",
+                    "{C:attention}Lucky Cards",
+                },
+            },
         c_sp_theship = {
                 name = "The Ship",
                 text = {
@@ -1143,6 +1151,22 @@ j_sp_book_alt = {
                     "{C:inactive}(Must have room)",
                 },
             },
+        c_sp_thecoffin = {
+                name = "The Coffin",
+                text = {
+                    "Creates a {C:dark_edition}Negative{}",
+                    "{V:1}Catarot{} or {V:2}Exoplanet{} card",
+                },
+        },
+        c_sp_thebouquet = {
+                name = "The Bouquet",
+                text = {
+                    "Creates {C:attention}2{} copies",
+                    "of {C:attention}1{} selected",
+                    "card, each copy",
+                    "having a random suit"
+                },
+            },
         c_sp_thewhip = {
                 name = "The Whip",
                 text = {
@@ -1150,6 +1174,23 @@ j_sp_book_alt = {
                     "{C:attention}#1#{} selected cards",
                 },
             },
+        c_sp_thechild = {
+                name = "The Child",
+                text = {
+                    "Creates a random",
+                    "{C:uncommon}Uncommon{} Joker at",
+                    "the cost of {C:gold}$6{}",
+                    "{C:inactive}(Must have room){}"
+                },
+        },
+        c_sp_thebear = {
+                name = "The Bear",
+                text = {
+                    "Applies a",
+                    "{C:attention}Fazbear Seal{} on",
+                    "{C:attention}1{} selected card"
+                },
+        },
         c_sp_thetower = {
                 name = "The Tower",
                 text = {
@@ -1159,6 +1200,14 @@ j_sp_book_alt = {
                     "an edition"
                 },
             },
+        c_sp_thetree = {
+                name = "The Tree",
+                text = {
+                    "Applies a",
+                    "{C:attention}Tree Seal{} on",
+                    "{C:attention}2{} selected cards"
+                },
+        },
         c_sp_themountain = {
                 name = "The Mountain",
                 text = {
@@ -1172,7 +1221,8 @@ j_sp_book_alt = {
                 name = "Mice",
                 text = {
                     "Destroys {C:attention}3{}",
-                    "selected cards, earn {C:gold}$8{}"
+                    "selected cards,",
+                    "earn {C:gold}$8{}"
                 },
             },
         c_sp_theheart = {
@@ -1192,6 +1242,13 @@ j_sp_book_alt = {
                     "{s:0.8,C:tarot}The Fool{s:0.8} excluded",
                 },
             },
+        c_sp_thecross = {
+                name = "The Cross",
+                text = {
+                    "Destroy a random",
+                    "Joker, earn {C:gold}$25{}"
+                }
+        }
 },
 
     Catarot = {
@@ -1614,6 +1671,14 @@ c_sp_xolotlan = {
             text = {
                 'Choose {C:attention}2{} of up to',
                 '{C:attention}4{} {B:1,V:2}EATEOT{} Jokers',
+                }
+        },
+        p_sp_lenormanapack_1 = {
+            name = "Lenormana Pack",
+            text = {
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}3{} {V:1}Lenormands{} to be',
+                'used immediately'
                 }
         },
 

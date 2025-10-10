@@ -398,7 +398,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Buffoon',
-    weight = 0.5,
+    weight = 0.25,
     cost = 5,
     loc_txt = { 
         name = "H Pack",
@@ -1342,7 +1342,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Buffoon',
-    weight = 0.5,
+    weight = 0.25,
     cost = 5,
     loc_txt = { 
         name = "Caretaker Pack",
@@ -1409,7 +1409,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 4, choose = 1},
     kind = 'Buffoon',
-    weight = 0.5,
+    weight = 0.25,
     cost = 7,
     loc_txt = { 
         name = "Jumbo Caretaker Pack",
@@ -1476,7 +1476,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 4, choose = 2},
     kind = 'Buffoon',
-    weight = 0.3,
+    weight = 0.1,
     cost = 9,
     loc_txt = { 
         name = "Mega Caretaker Pack",
@@ -1532,5 +1532,89 @@ end,
     ease_background_colour = function(self)
         ease_colour(G.C.DYN_UI.MAIN, HEX("245570"))
         ease_background_colour{new_colour = HEX("245570"), special_colour = G.C.BLACK, contrast = 2}
+    end,
+}
+
+SMODS.Booster {
+    key = "lenormanapack_1",
+    name = "Lenormana Pack",
+
+    atlas = 'lenormanapack1',
+    pos = { x = 0, y = 0 },
+    config = { extra = 3, choose = 1},
+    kind = 'Arcana',
+    weight = 1,
+    cost = 4,
+    loc_txt = { 
+        name = "Lenormana Pack",
+        text = {
+            "Choose some jokers",
+        },
+        group_name = 'Lenormana Pack', 
+    },
+    loc_vars = function(self, info_queue, card)
+        return {
+        vars =  {
+        colours = { 
+            HEX('b10202'),
+     }
+        }
+    }
+    end,
+    --group_key = "k_sp_shuffle_pack",
+    draw_hand = true,
+    unlocked = true,
+    discovered = false,
+
+        particles = function(self)
+        G.booster_pack_sparkles = Particles(1, 1, 0, 0, {
+            timer = 0.015,
+            scale = 0.2,
+            initialize = true,
+            lifespan = 1,
+            speed = 1.1,
+            padding = -1,
+            attach = G.ROOM_ATTACH,
+            colours = { G.C.WHITE, lighten(HEX('b10202'), 0.4), lighten(HEX('b10202'), 0.2), lighten(HEX('FFFFFF'), 0.2) },
+            fill = true
+        })
+        G.booster_pack_sparkles.fade_alpha = 1
+        G.booster_pack_sparkles:fade(1, 0)
+    end,
+
+create_card = function(self, booster_card)
+    -- build Catarot pool fresh
+    local pool = {}
+    for k, v in pairs(G.P_CENTERS) do
+        if v.set == 'Lenormand' then
+            table.insert(pool, k)
+        end
+    end
+
+    -- fall back if empty
+    if #pool == 0 then
+        return create_card("Consumable", G.consumeables, "c", nil, true, true, "c_fool", nil)
+    end
+
+    -- persistent pool for this booster
+    booster_card.local_pool = booster_card.local_pool or {unpack(pool)}
+
+    -- choose one (safe integer)
+    local chosen_idx = math.floor(pseudorandom(pseudoseed("lenormana")) * #booster_card.local_pool) + 1
+    local chosen_key = booster_card.local_pool[chosen_idx]
+
+    -- remove so it won’t repeat
+    table.remove(booster_card.local_pool, chosen_idx)
+
+    -- spawn
+    local chosen_rarity = (G.P_CENTERS[chosen_key] and G.P_CENTERS[chosen_key].rarity) or "c"
+    local target_area = G.pack_cards or G.consumeables
+    return create_card("Consumable", target_area, chosen_rarity, nil, true, true, chosen_key, nil)
+end,
+
+
+    ease_background_colour = function(self)
+        ease_colour(G.C.DYN_UI.MAIN, HEX("b10202"))
+        ease_background_colour{new_colour = HEX("b10202"), special_colour = HEX("000000"), contrast = 2}
     end,
 }
