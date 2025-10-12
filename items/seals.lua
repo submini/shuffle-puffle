@@ -202,3 +202,32 @@ SMODS.Seal {
         end
     end
 }
+
+SMODS.Seal {
+    key = 'whiteseal',
+    pos = { x = 0, y = 0 },
+    config = {
+        extra = {
+            x_chips = 1.3,
+            mult = 8
+        }
+    },
+    badge_colour = HEX('000000'),
+   loc_txt = {
+        name = 'White Seal',
+        label = 'White Seal',
+        text = {
+        [1] = '{X:blue,C:white}X1.3{} Chips,',
+        [2] = '{C:red}+8{} Mult'
+    }
+    },
+    atlas = 'whiteseal',
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            return { x_chips = card.ability.seal.extra.x_chips, mult = card.ability.seal.extra.mult }
+        end
+    end
+}

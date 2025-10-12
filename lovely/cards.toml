@@ -1,0 +1,32 @@
+[manifest]
+version = "1.2"
+dump_lua = true
+priority = 0
+
+[[patches]]
+[patches.pattern]
+target = "functions/misc_functions.lua"
+pattern = "      G.GAME.consumeable_usage_total = G.GAME.consumeable_usage_total or {tarot = 0, planet = 0, spectral = 0, tarot_planet = 0, all = 0}"
+position = "after"
+payload = """
+G.GAME.consumeable_usage_total.sp_lenormand = G.GAME.consumeable_usage_total.sp_lenormand or 0
+if card.config.center.set == 'Lenormand' then 
+    G.GAME.consumeable_usage_total = G.GAME.consumeable_usage_total or {}
+    G.GAME.consumeable_usage_total.sp_lenormand = (G.GAME.consumeable_usage_total.sp_lenormand or 0) + 1
+    G.E_MANAGER:add_event(Event({
+        trigger = 'immediate',
+        func = function()
+            G.E_MANAGER:add_event(Event({
+                trigger = 'immediate',
+                func = function()
+                    G.GAME.sp_last_lenormand = card.config.center_key
+                    return true
+                end
+            }))
+            return true
+        end
+    }))
+end
+"""
+overwrite = true
+match_indent = true

@@ -1041,6 +1041,17 @@ j_sp_book_alt = {
             '{C:attention}+2{} {C:blue}Hands{},{C:attention} +2{} {C:red}Discards{},',
             '{C:attention}+2{} Hand size'
         }
+    },
+    j_sp_randomwalk = {
+        name = "Random Walk",
+        text = {
+            '{C:red}Decreases{} hand level by {C:attention}1{},',
+            "{C:green}#1# in 40{} chance to level",
+            "up hand by {C:attention}1{} instead.",
+            "Chance goes up by {C:attention}1{}",
+            "for each {C:blue}hand{} or {C:red}discard{}",
+            "{C:green}1 in 4{} chance to drop by {C:red}1{}"
+        }
     }
 },
 
@@ -1151,11 +1162,29 @@ j_sp_book_alt = {
                     "{C:inactive}(Must have room)",
                 },
             },
+        c_sp_clouds = {
+                name = "Clouds",
+                text = {
+                    "Select at least",
+                    "{C:attention}3{} cards,",
+                    "applies a {C:attention}White Seal{}",
+                    "to {C:attention}1{} random card",
+                },
+            },
+        c_sp_thesnake = {
+                name = "The Snake",
+                text = {
+                    "Decreases the rank",
+                    "of up to {C:attention}4{}",
+                    "selected cards by {C:attention}1{}",
+                },
+            },
         c_sp_thecoffin = {
                 name = "The Coffin",
                 text = {
                     "Creates a {C:dark_edition}Negative{}",
-                    "{V:1}Catarot{} or {V:2}Exoplanet{} card",
+                    "{V:1}Catarot{} or",
+                    "{V:2}Exoplanet{} card",
                 },
         },
         c_sp_thebouquet = {
@@ -1174,6 +1203,15 @@ j_sp_book_alt = {
                     "{C:attention}#1#{} selected cards",
                 },
             },
+        c_sp_birds = {
+                name = "Birds",
+                text = {
+                    "Select {C:attention}3{} cards,",
+                    "the {C:attention}2{} rightmost",
+                    "cards copy the",
+                    "leftmost\'s rank"
+                }, 
+        },
         c_sp_thechild = {
                 name = "The Child",
                 text = {
@@ -1181,6 +1219,15 @@ j_sp_book_alt = {
                     "{C:uncommon}Uncommon{} Joker at",
                     "the cost of {C:gold}$6{}",
                     "{C:inactive}(Must have room){}"
+                },
+        },
+        c_sp_thefox = {
+                name = "The Fox",
+                text = {
+                    "Applies a",
+                    "permanent {C:red}+2{} Mult",
+                    "bonus on up to",
+                    "{C:attention}2{} selected cards"
                 },
         },
         c_sp_thebear = {
@@ -1240,6 +1287,15 @@ j_sp_book_alt = {
                     "{C:tarot}Tarot{} or {C:planet}Planet{} card",
                     "used during this run",
                     "{s:0.8,C:tarot}The Fool{s:0.8} excluded",
+                },
+            },
+        c_sp_thekey = {
+                name = "The Key",
+                text = {
+                    "Creates the last",
+                    "{V:1}Lenormand{} card",
+                    "used during this run",
+                    "{s:0.8,V:1}The Key{s:0.8} excluded",
                 },
             },
         c_sp_thecross = {
@@ -1678,6 +1734,30 @@ c_sp_xolotlan = {
             text = {
                 'Choose {C:attention}1{} of up to',
                 '{C:attention}3{} {V:1}Lenormands{} to be',
+                'used immediately'
+                }
+        },
+        p_sp_jumbolenormanapack_1 = {
+            name = "Lenormana Pack",
+            text = {
+                'Choose {C:attention}1{} of up to',
+                '{C:attention}5{} {V:1}Lenormands{} to be',
+                'used immediately'
+                }
+        },
+        p_sp_megalenormanapack_1 = {
+            name = "Lenormana Pack",
+            text = {
+                'Choose {C:attention}2{} of up to',
+                '{C:attention}5{} {V:1}Lenormands{} to be',
+                'used immediately'
+                }
+        },
+        p_sp_ultralenormanapack_1 = {
+            name = "Ultra Lenormana Pack",
+            text = {
+                'Choose {C:attention}2{} of up to',
+                '{C:attention}7{} {V:1}Lenormands{} to be',
                 'used immediately'
                 }
         },

@@ -616,6 +616,13 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "randwalk",
+    path = "randwalk.png",
+    px = 71,
+    py = 95
+})
+
 -- boosters
 SMODS.Atlas({
     key = 'minishufflepack1',
@@ -753,6 +760,27 @@ SMODS.Atlas({
 SMODS.Atlas({
     key = 'lenormanapack1',
     path = 'lenormanapack.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'jumbolenormanapack1',
+    path = 'jumbolenormana.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'megalenormanapack1',
+    path = 'megalenormana.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'ultralenormanapack1',
+    path = 'ultralenormana.png',
     px = 71,
     py = 95
 })
@@ -974,6 +1002,13 @@ SMODS.Atlas({
 SMODS.Atlas({
     key = 'treeseal',
     path = 'treeseal.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'whiteseal',
+    path = 'whiteseal.png',
     px = 71,
     py = 95
 })
@@ -1447,6 +1482,41 @@ SMODS.Atlas({
 SMODS.Atlas({
     key = "letree",
     path = "thetree.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "leclouds",
+    path = "clouds.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lesnake",
+    path = "thesnake.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lekey",
+    path = "thekey.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lebirds",
+    path = "birds.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lefox",
+    path = "thefox.png",
     px = 71,
     py = 95
 })

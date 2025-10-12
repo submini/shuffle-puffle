@@ -3,7 +3,7 @@ SMODS.Rarity {
     pools = {
         ["Joker"] = true
     },
-    default_weight = 0.02,
+    default_weight = 0.005,
     badge_colour = HEX('ffbf00'),
     text_colour = HEX('000000'),
     loc_txt = {

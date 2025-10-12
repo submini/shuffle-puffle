@@ -43,6 +43,83 @@ end
 
 ----------------------------------------------------------------------------------------------------------------------------
 
+SMODS.Joker{ --Black Cat
+    name = "Black Cat",
+    key = "blackcat",
+    config = {
+        extra = {
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Black Cat',
+        ['text'] = {
+            [1] = 'At the {C:attention}start{} of each round,',
+            [2] = 'this cat adds a random {C:attention}Glass{}',
+            [3] = 'card to deck'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    soul_pos = {
+        x = 1,
+        y = 0
+    },
+    cost = 10,
+    rarity = 3,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'blackcat',
+    pools = { ["Shuffle"] = true },
+
+	loc_vars = function(self, info_queue, center)
+		info_queue[#info_queue + 1] = G.P_CENTERS.m_glass
+	end,
+
+    in_pool = function(self, args)
+    for _, j in ipairs(G.jokers.cards) do
+        if j.config.center.key == self.key then
+            return false
+        end
+    end
+    return true
+end,
+
+    calculate = function(self, card, context)
+        if context.setting_blind and not context.blueprint then
+                local card_front = pseudorandom_element(G.P_CARDS, pseudoseed('add_card'))
+            local new_card = create_playing_card({
+                front = card_front,
+                center = G.P_CENTERS.m_glass
+            }, G.discard, true, false, nil, true)
+            
+            G.E_MANAGER:add_event(Event({
+                func = function()
+                    new_card:start_materialize()
+                    G.play:emplace(new_card)
+                    return true
+                end
+            }))
+                return {
+                    func = function()
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        G.deck.config.card_limit = G.deck.config.card_limit + 1
+                        return true
+                    end
+                }))
+                draw_card(G.play, G.deck, 90, 'up')
+                SMODS.calculate_context({ playing_card_added = true, cards = { new_card } })
+            end,
+                    message = "Meow!"
+                }
+        end
+    end
+}
+
 SMODS.Joker{ --Deckhugger
     name = "Deckhugger",
     key = "deckhugger",
@@ -2102,83 +2179,6 @@ end,
                         SMODS.calculate_effect({dollars = card.ability.extra.dollars}, card)
                     end
             end
-        end
-    end
-}
-
-SMODS.Joker{ --Black Cat
-    name = "Black Cat",
-    key = "blackcat",
-    config = {
-        extra = {
-        }
-    },
-    loc_txt = {
-        ['name'] = 'Black Cat',
-        ['text'] = {
-            [1] = 'At the {C:attention}start{} of each round,',
-            [2] = 'this cat adds a random {C:attention}Glass{}',
-            [3] = 'card to deck'
-        }
-    },
-    pos = {
-        x = 0,
-        y = 0
-    },
-    soul_pos = {
-        x = 1,
-        y = 0
-    },
-    cost = 10,
-    rarity = 3,
-    blueprint_compat = true,
-    eternal_compat = true,
-    unlocked = true,
-    discovered = false,
-    atlas = 'blackcat',
-    pools = { ["Shuffle"] = true },
-
-	loc_vars = function(self, info_queue, center)
-		info_queue[#info_queue + 1] = G.P_CENTERS.m_glass
-	end,
-
-    in_pool = function(self, args)
-    for _, j in ipairs(G.jokers.cards) do
-        if j.config.center.key == self.key then
-            return false
-        end
-    end
-    return true
-end,
-
-    calculate = function(self, card, context)
-        if context.setting_blind and not context.blueprint then
-                local card_front = pseudorandom_element(G.P_CARDS, pseudoseed('add_card'))
-            local new_card = create_playing_card({
-                front = card_front,
-                center = G.P_CENTERS.m_glass
-            }, G.discard, true, false, nil, true)
-            
-            G.E_MANAGER:add_event(Event({
-                func = function()
-                    new_card:start_materialize()
-                    G.play:emplace(new_card)
-                    return true
-                end
-            }))
-                return {
-                    func = function()
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        G.deck.config.card_limit = G.deck.config.card_limit + 1
-                        return true
-                    end
-                }))
-                draw_card(G.play, G.deck, 90, 'up')
-                SMODS.calculate_context({ playing_card_added = true, cards = { new_card } })
-            end,
-                    message = "Meow!"
-                }
         end
     end
 }
