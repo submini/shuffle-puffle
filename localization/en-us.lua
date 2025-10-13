@@ -1,5 +1,96 @@
 return {
     descriptions = {
+        Blind = {
+        bl_sp_day = {
+        name = "The Day",
+        text = {
+            "All Hearts and Diamonds",
+            "are drawn face down"
+        }
+    },
+    bl_sp_night = {
+        name = "The Night",
+        text = {
+            "All Clubs and Spades",
+            "are drawn face down"
+        }
+    },
+    bl_sp_tetrad = {
+        name = "The Tetrad",
+        text = {
+            "Must play 4 cards"
+        }
+    },
+    bl_sp_down = {
+        name = "The Down",
+        text = {
+            "Enhanced cards",
+            "are debuffed",
+        }
+    },
+    bl_sp_anti = {
+        name = "The Anti",
+        text = {
+            "The opposite of",
+            "a Boss Blind,",
+            "enjoy your time"
+        }
+    },
+    bl_sp_67 = {
+        name = "The 67",
+        text = {
+            "Debuffs all cards",
+            "with rank 6 or 7",
+        }
+    },
+    bl_sp_face = {
+        name = "The Face",
+        text = {
+            "Debuffs all",
+            "numbered cards"
+        }
+    },
+    bl_sp_derivative = {
+        name = "The Derivative",
+        text = {
+            "Hands that contain",
+            "Straights are not",
+            "allowed to be played"
+        }
+    },
+    bl_sp_integral = {
+        name = "The Integral",
+        text = {
+            "Hands that do not",
+            "contain Straights are",
+            "not allowed to be played"
+        }
+    },
+    bl_sp_sine = {
+        name = "The Sine",
+        text = {
+            "Odd-ranked cards",
+            "are debuffed"
+        }
+    },
+    bl_sp_cosine = {
+        name = "The Cosine",
+        text = {
+            "Even-ranked cards",
+            "are debuffed"
+        }
+    },
+    bl_sp_tangent = {
+        name = "The Tangent",
+        text = {
+            "Only one suit can score,",
+            "suit changes every hand"
+        }
+    },
+   
+
+
+        },
         Joker = {
             j_sp_deckhugger = {
                 name = "Deckhugger",

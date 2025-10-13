@@ -27,6 +27,7 @@ local files = {
     "items/enhancements",
     --"items/editions",
     "items/tags",
+    "items/blinds",
     "items/seals",
     "items/packs",
     "items/decks",
