@@ -4,7 +4,7 @@ SMODS.Blind {
     dollars = 5,
     mult = 2,
     pos = { x = 0, y = 0 },
-    boss = { min = 1 },
+    boss = { min = 1, max = 10 },
     boss_colour = HEX("d6563c"), -- a reddish tint fits the theme
     loc_txt = {
         name = "The Day",
@@ -47,7 +47,7 @@ SMODS.Blind {
     mult = 2,
     atlas = 'blinds1',
     pos = { x = 0, y = 1 },
-    boss = { min = 1 },
+    boss = { min = 1, max = 10 },
     boss_colour = HEX("1f38a6"),
 
     calculate = function(self, blind, context)
@@ -84,7 +84,7 @@ SMODS.Blind {
     atlas = 'blinds1',
     debuff = { h_size_ge = 4, h_size_le = 4 },
     pos = { x = 0, y = 2 },
-    boss = { min = 2 },
+    boss = { min = 2, max = 10 },
     boss_colour = HEX("3a9c6f"),
 }
 
@@ -94,7 +94,7 @@ SMODS.Blind {
     mult = 2,
     atlas = 'blinds1',
     pos = { x = 0, y = 3 },
-    boss = { min = 4 },
+    boss = { min = 4, max = 10 },
     boss_colour = HEX("cf3853"),
     calculate = function(self, blind, context)
         if not blind.disabled then
@@ -118,7 +118,7 @@ SMODS.Blind {
     atlas = 'blinds1',
     mult = 0.5,
     pos = { x = 0, y = 4 },
-    boss = { min = 1 },
+    boss = { min = 1, max = 10 },
     boss_colour = HEX("888888"),
 }
 
@@ -128,7 +128,7 @@ SMODS.Blind {
     mult = 1.67,
     atlas = 'blinds1',
     pos = { x = 0, y = 5 },
-    boss = { min = 1 },
+    boss = { min = 1, max = 10 },
     boss_colour = HEX("444444"),
 
     calculate = function(self, blind, context)
@@ -154,7 +154,7 @@ SMODS.Blind {
     mult = 2,
     atlas = 'blinds1',
     pos = { x = 0, y = 6 },
-    boss = { min = 4 },
+    boss = { min = 4, max = 10 },
     boss_colour = HEX("d19e47"),
     calculate = function(self, blind, context)
         if not blind.disabled and context.debuff_card then
@@ -174,7 +174,7 @@ SMODS.Blind {
     mult = 2,
     atlas = 'blinds2',
     pos = { x = 0, y = 2 },
-    boss = { min = 1 },
+    boss = { min = 1, max = 10 },
     boss_colour = HEX("6aad51"),
 
     calculate = function(self, blind, context)
@@ -198,7 +198,7 @@ SMODS.Blind {
     mult = 1.5,
     atlas = 'blinds2',
     pos = { x = 0, y = 3 },
-    boss = { min = 2 },
+    boss = { min = 2, max = 10 },
     boss_colour = HEX("ad5151"),
 
     calculate = function(self, blind, context)
@@ -222,7 +222,7 @@ SMODS.Blind {
     mult = 1,
     atlas = 'blinds2',
     pos = { x = 0, y = 0 },
-    boss = { min = 1 },
+    boss = { min = 1, max = 10 },
     boss_colour = HEX("30a6d1"),
 
     -- Called during various calculation contexts. We use it to trigger debuff checks
@@ -324,7 +324,7 @@ SMODS.Blind {
     mult = 1,
     atlas = 'blinds2',
     pos = { x = 0, y = 1 },
-    boss = { min = 1 },
+    boss = { min = 1, max = 10 },
     boss_colour = HEX("d1be30"),
 
     calculate = function(self, blind, context)
@@ -401,5 +401,70 @@ SMODS.Blind {
     disable = function(self)
         -- nothing special to clean up here
     end,
+}
+
+SMODS.Blind {
+    key = "distance",
+    dollars = 5,
+    mult = 1,
+    pos = { x = 0, y = 0 },
+    boss = { min = 3, max = 10 },
+    boss_colour = HEX("675497"),
+    atlas = 'blinds3',
+    config = {extra = {multiplier = 1.75}},
+    loc_vars = function(self, info_queue, card)
+        return {vars = {self.config.extra.multiplier}}
+    end,
+    collection_loc_vars = function(self)
+        return {vars = {self.config.extra.multiplier}}
+    end,
+    modify_hand = function(self, cards, poker_hands, text, mult, hand_chips)
+        G.E_MANAGER:add_event(Event({
+            trigger = 'after',
+            func = function()
+                G.GAME.blind.chips = math.floor(G.GAME.blind.chips * self.config.extra.multiplier)
+                G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+                play_sound('tarot2', 1.1, 0.4)
+                SMODS.juice_up_blind()
+                return true
+            end
+        }))
+        return mult, hand_chips, false
+    end
+}
+
+SMODS.Blind {
+    key = "euler",
+    dollars = 5,
+    mult = 1.25,
+    atlas = 'blinds3',
+    pos = { x = 0, y = 1 },
+    boss = { min = 2, max = 10 },
+    boss_colour = HEX("737c99"),
+    calculate = function(self, blind, context)
+        if blind.disabled then return end
+
+        if context.debuff_hand then
+            local scoring_cards = context.scoring_hand or G.hand.cards or {}
+            local count = #scoring_cards
+            blind.triggered = false
+
+            -- Only apply if hand has 3 or more cards
+            if count >= 3 then
+                blind.triggered = true
+                if not context.check then
+                    for i, card in ipairs(scoring_cards) do
+                        if i ~= 1 and i ~= count then
+                            card.debuff = true
+                            card.ability.perma_debuff = true
+                            card.states.debuffed = true
+                            card:juice_up(0.4, 0.4)
+                            play_sound('tarot2', 0.8)
+                        end
+                    end
+                end
+            end
+        end
+    end
 }
 

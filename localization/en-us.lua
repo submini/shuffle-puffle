@@ -80,11 +80,18 @@ return {
             "are debuffed"
         }
     },
-    bl_sp_tangent = {
-        name = "The Tangent",
+    bl_sp_distance = {
+        name = "The Distance",
         text = {
-            "Only one suit can score,",
-            "suit changes every hand"
+            "Score requirement increases",
+            "by x#1# per hand"
+        }
+    },
+    bl_sp_euler = {
+        name = "The Euler",
+        text = {
+            "Only the first and last card",
+            "score when a hand is played"
         }
     },
    

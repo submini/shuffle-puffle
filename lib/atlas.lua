@@ -1032,6 +1032,15 @@ SMODS.Atlas({
     frames = 21,
 })
 
+SMODS.Atlas({
+    key = 'blinds3',
+    path = 'blindspart3.png',
+    px = 34,
+    py = 34,
+    atlas_table = 'ANIMATION_ATLAS',
+    frames = 21,
+})
+
 
 -- exoplanets
 SMODS.Atlas({
