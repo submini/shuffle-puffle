@@ -5157,3 +5157,406 @@ SMODS.Joker{ --Sealed Package
         end
     end
 }
+
+SMODS.Joker{ --Ninety-Seven
+    key = "ninetyseven",
+    config = {
+        extra = {
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Ninety-Seven',
+        ['text'] = {
+            [1] = 'Copies the leftmost',
+            [2] = 'joker {C:attention}97{} times'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
+    },
+    cost = 97,
+    rarity = "sp_exquisite",
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'placeholder',
+    pools = { ["Shuffle"] = true },
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main  then
+            return {
+                Xmult = 97,
+                extra = {
+                    x_chips = 97,
+                    colour = G.C.DARK_EDITION
+                }
+            }
+        end
+    end,
+    
+    add_to_deck = function(self, card, from_debuff)
+        card.ability.extra.original_joker_slots = G.jokers.config.card_limit
+        G.jokers.config.card_limit = 97
+    end,
+    
+    remove_from_deck = function(self, card, from_debuff)
+        if card.ability.extra.original_joker_slots then
+            G.jokers.config.card_limit = card.ability.extra.original_joker_slots
+        end
+    end
+}
+
+
+SMODS.Joker{ --Jackpot
+    key = "jackpot",
+    config = {
+        extra = {
+            dollars0 = 2,
+            odds = 18,
+            odds2 = 135,
+            dollars = 20,
+            dollars2 = 777
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Jackpot',
+        ['text'] = {
+            [1] = 'Scored {C:attention}Jacks{} give {C:money}+$2{},',
+            [2] = '{C:green}1 in 18{} chance to also give {C:money}+$20{},',
+            [3] = '{C:green}1 in 135{} chance to also give {C:money}+$777{}'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
+    },
+    cost = 7,
+    rarity = 2,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'placeholder',
+    pools = { ["Shuffle"] = true },
+    
+    loc_vars = function(self, info_queue, card)
+        
+        local new_numerator, new_denominator = SMODS.get_probability_vars(card, 1, card.ability.extra.odds, 'j_modprefix_jackpot')
+        local new_numerator2, new_denominator2 = SMODS.get_probability_vars(card, 1, card.ability.extra.odds2, 'j_modprefix_jackpot')
+        return {vars = {new_numerator, new_denominator, new_numerator2, new_denominator2}}
+    end,
+    
+    calculate = function(self, card, context)
+    if context.individual and context.cardarea == G.play then
+        -- Jacks = base value 11
+        if context.other_card:get_id() == 11 then
+            
+            return {
+                func = function()
+                    -- +2 dollars always
+                    ease_dollars(2)
+                    card_eval_status_text(
+                        context.blueprint_card or card,
+                        'extra', nil, nil, nil,
+                        {message = "+2", colour = G.C.MONEY}
+                    )
+
+                    -- 1-in-odds → +20
+                    if SMODS.pseudorandom_probability(
+                        card, 'jackpot_group_20',
+                        1, card.ability.extra.odds,
+                        'j_modprefix_jackpot',
+                        false
+                    ) then
+
+                        SMODS.calculate_effect({
+                            func = function()
+                                ease_dollars(20)
+                                card_eval_status_text(
+                                    context.blueprint_card or card,
+                                    'extra', nil, nil, nil,
+                                    {message = "+20", colour = G.C.MONEY}
+                                )
+                                return true
+                            end
+                        }, card)
+                    end
+
+                    -- 1-in-odds2 → +777
+                    if SMODS.pseudorandom_probability(
+                        card, 'jackpot_group_777',
+                        1, card.ability.extra.odds2,
+                        'j_modprefix_jackpot',
+                        false
+                    ) then
+
+                        SMODS.calculate_effect({
+                            func = function()
+                                ease_dollars(777)
+                                card_eval_status_text(
+                                    context.blueprint_card or card,
+                                    'extra', nil, nil, nil,
+                                    {message = "+777", colour = G.C.MONEY}
+                                )
+                                return true
+                            end
+                        }, card)
+                    end
+
+                    return true
+                end
+            }
+        end
+    end
+end
+}
+
+SMODS.Joker{ --All In One
+    key = "allinone",
+    config = {
+        extra = {
+            xmult = 1,
+            count = 0,
+            xmult0 = 1.5
+        }
+    },
+    loc_txt = {
+        ['name'] = 'All In One',
+        ['text'] = {
+            [1] = 'Scored {C:attention}face cards{} give {X:red,C:white}X1.5{} Mult when scored,',
+            [2] = 'this Joker gains {X:red,C:white}+X0.75{} Mult when a {C:attention}face card{}',
+            [3] = 'is {C:red}destroyed{}, this Joker gains {X:red,C:white}+X0.75{} Mult for',
+            [4] = 'every {C:attention}25{} cards discarded, {C:attention}disables{} effect of',
+            [5] = 'every boss blind, creates a {C:dark_edition}Negative{} copy of',
+            [6] = 'a random consumable at the end of the shop',
+            [7] = '{C:inactive}(Currently {}{X:red,C:white}X#1#{} {C:inactive}Mult){}'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
+    },
+    cost = 40,
+    rarity = 'sp_exquisite',
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'placeholder',
+    pools = { ["Shuffle"] = true },
+    
+    loc_vars = function(self, info_queue, card)
+        
+        return {vars = {card.ability.extra.xmult, card.ability.extra.count}}
+    end,
+    
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play  then
+            if context.other_card:is_face() then
+                return {
+                    Xmult = 1.5
+                }
+            end
+        end
+        if context.remove_playing_cards  then
+            if (function()
+                for k, removed_card in ipairs(context.removed) do
+                    if removed_card:is_face() then
+                        return true
+                    end
+                end
+                return false
+            end)() then
+                return {
+                    func = function()
+                        card.ability.extra.xmult = (card.ability.extra.xmult) + 0.75
+                        return true
+                    end,
+                    message = "Upgrade!"
+                }
+            end
+        end
+        if context.discard  then
+            if to_big((card.ability.extra.count or 0)) == to_big(24) then
+                return {
+                    func = function()
+                        card.ability.extra.xmult = (card.ability.extra.xmult) + 0.75
+                        return true
+                    end,
+                    message = "Upgrade!",
+                    extra = {
+                        func = function()
+                            card.ability.extra.count = 0
+                            return true
+                        end,
+                        colour = G.C.BLUE
+                    }
+                }
+            elseif not (to_big((card.ability.extra.count or 0)) == to_big(24)) then
+                return {
+                    func = function()
+                        card.ability.extra.count = (card.ability.extra.count) + 1
+                        return true
+                    end
+                }
+            end
+        end
+        if context.ending_shop  then
+            if to_big(#G.consumeables.cards) >= to_big(1) then
+                return {
+                    func = function()
+                        local target_cards = {}
+                        for i, consumable in ipairs(G.consumeables.cards) do
+                            table.insert(target_cards, consumable)
+                        end
+                        if #target_cards > 0  then
+                            local card_to_copy = pseudorandom_element(target_cards, pseudoseed('copy_consumable'))
+                            
+                            G.E_MANAGER:add_event(Event({
+                                func = function()
+                                    local copied_card = copy_card(card_to_copy)
+                                    copied_card:set_edition("e_negative", true)
+                                    copied_card:add_to_deck()
+                                    G.consumeables:emplace(copied_card)
+                                    
+                                    return true
+                                end
+                            }))
+                            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "Copied!", colour = G.C.GREEN})
+                        end
+                        return true
+                    end
+                }
+            end
+        end
+        
+        if G.GAME.blind and G.GAME.blind.boss and not G.GAME.blind.disabled then
+            G.GAME.blind:disable()
+            play_sound('timpani')
+            SMODS.calculate_effect({ message = "Disabled!" }, card)
+        end
+    end,
+    
+    add_to_deck = function(self, card, from_debuff)
+        
+        if G.GAME.blind and G.GAME.blind.boss and not G.GAME.blind.disabled then
+            G.GAME.blind:disable()
+            play_sound('timpani')
+            SMODS.calculate_effect({ message = "Disabled!" }, card)
+        end
+        
+    end
+}
+
+SMODS.Joker{ --Centennium
+    key = "centennium",
+    config = {
+        extra = {
+            slot_change = '100',
+            hand_size_increase = '10',
+            play_size_increase = '10',
+            xchips0 = 100,
+            xmult0 = 100,
+            dollars0 = 100
+        }
+    },
+    loc_txt = {
+        ['name'] = 'Centennium',
+        ['text'] = {
+            [1] = '{X:blue,C:white}X100{} Chips, {X:red,C:white}X100{} Mult,',
+            [2] = '{X:money,C:white}X$100{}, {C:attention}+100{} Joker slots,',
+            [3] = '{C:attention}+100{} Consumable slots,',
+            [4] = '{C:attention}+10{} Hand size,',
+            [5] = '{C:attention}+10{} card selection limit'
+        },
+        ['unlock'] = {
+            [1] = 'Unlocked by default.'
+        }
+    },
+    pos = {
+        x = 0,
+        y = 0
+    },
+    display_size = {
+        w = 71 * 1, 
+        h = 95 * 1
+    },
+    cost = 50,
+    rarity = 'sp_exquisite',
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = false,
+    atlas = 'placeholder',
+    pools = { ["Shuffle"] = true },
+    
+    calculate = function(self, card, context)
+        if context.cardarea == G.jokers and context.joker_main  then
+            return {
+                x_chips = 100,
+                extra = {
+                    Xmult = 100,
+                    extra = {
+                        
+                        func = function()
+                            
+                            local current_dollars = G.GAME.dollars
+                            local target_dollars = G.GAME.dollars * 100
+                            local dollar_value = target_dollars - current_dollars
+                            ease_dollars(dollar_value)
+                            card_eval_status_text(context.blueprint_card or card, 'extra', nil, nil, nil, {message = "X$"..tostring(100), colour = G.C.MONEY})
+                            return true
+                        end,
+                        colour = G.C.MONEY
+                    }
+                }
+            }
+        end
+    end,
+    
+    add_to_deck = function(self, card, from_debuff)
+        G.jokers.config.card_limit = G.jokers.config.card_limit + 100
+        G.E_MANAGER:add_event(Event({func = function()
+            G.consumeables.config.card_limit = G.consumeables.config.card_limit + 100
+            return true
+        end }))
+        G.hand:change_size(10)
+        SMODS.change_play_limit(10)
+    end,
+    
+    remove_from_deck = function(self, card, from_debuff)
+        G.jokers.config.card_limit = G.jokers.config.card_limit - 100
+        G.E_MANAGER:add_event(Event({func = function()
+            G.consumeables.config.card_limit = G.consumeables.config.card_limit - 100
+            return true
+        end }))
+        G.hand:change_size(-10)
+        SMODS.change_play_limit(-10)
+    end
+}

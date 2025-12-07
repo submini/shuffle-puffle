@@ -660,8 +660,21 @@ use = function(self, card, area, copier)
         end
     end,
     can_use = function(self, card)
-        return (((G.jokers and G.jokers.config.card_limit or 0) - #(G.jokers and G.jokers.cards or {})) >= 1 and G.GAME.dollars >= 6)
+    local dollars = G.GAME.dollars
+    -- Safely convert BigNum or table-like values to a normal number
+    if type(dollars) == "table" then
+        if dollars.to_number then
+            dollars = dollars:to_number()
+        elseif dollars.array then
+            dollars = tonumber(dollars.array[1]) or 0
+        else
+            dollars = 0
+        end
     end
+
+    local space = ((G.jokers and G.jokers.config.card_limit or 0) - #(G.jokers and G.jokers.cards or {}))
+    return space >= 1 and dollars >= 6
+end
 }
 
 SMODS.Consumable {

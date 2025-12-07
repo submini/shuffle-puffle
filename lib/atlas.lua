@@ -623,6 +623,20 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "inaccurateregression",
+    path = "inaccregress.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "einsteintile",
+    path = "einsteintile.png",
+    px = 71,
+    py = 95
+})
+
 -- boosters
 SMODS.Atlas({
     key = 'minishufflepack1',
@@ -1023,25 +1037,6 @@ SMODS.Atlas({
     frames = 21,
 })
 
-SMODS.Atlas({
-    key = 'blinds2',
-    path = 'blindspart2.png',
-    px = 34,
-    py = 34,
-    atlas_table = 'ANIMATION_ATLAS',
-    frames = 21,
-})
-
-SMODS.Atlas({
-    key = 'blinds3',
-    path = 'blindspart3.png',
-    px = 34,
-    py = 34,
-    atlas_table = 'ANIMATION_ATLAS',
-    frames = 21,
-})
-
-
 -- exoplanets
 SMODS.Atlas({
     key = 'j1407b',
@@ -1317,10 +1312,7 @@ SMODS.Atlas({
 })
 
 --shaders
-SMODS.Shader({
-    key = "shine",
-    path = "shine.fs",
-})
+
 
 -- eateots
 SMODS.Atlas({
@@ -1544,6 +1536,64 @@ SMODS.Atlas({
 SMODS.Atlas({
     key = "lefox",
     path = "thefox.png",
+    px = 71,
+    py = 95
+})
+
+-- decks
+
+SMODS.Atlas({
+    key = "permissiondeck",
+    path = "permissiondeck.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "consecutivedeck",
+    path = "consecutivedeck.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "spectacledeck",
+    path = "spectacledeck.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "felinedeck",
+    path = "felinedeck.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "crimsondeck",
+    path = "crimsondeck.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "dingbatdeck",
+    path = "dingbatdeck.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "oinchdeck",
+    path = "oinchdeck.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "decimaldeck",
+    path = "decimaldeck.png",
     px = 71,
     py = 95
 })

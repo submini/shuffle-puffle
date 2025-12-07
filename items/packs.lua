@@ -398,7 +398,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Buffoon',
-    weight = 0.3,
+    weight = 0.25,
     cost = 6,
     loc_txt = { 
         name = "H Pack",
@@ -665,7 +665,7 @@ SMODS.Booster {
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Buffoon',
-    weight = 0.25,
+    weight = 0.1,
     cost = 7,
     loc_txt = { 
         name = "Caretaker Pack",

@@ -172,8 +172,8 @@ SMODS.Blind {
     key = "derivative",
     dollars = 5,
     mult = 2,
-    atlas = 'blinds2',
-    pos = { x = 0, y = 2 },
+    atlas = 'blinds1',
+    pos = { x = 0, y = 7 },
     boss = { min = 1, max = 10 },
     boss_colour = HEX("6aad51"),
 
@@ -196,8 +196,8 @@ SMODS.Blind {
     key = "integral",
     dollars = 5,
     mult = 1.5,
-    atlas = 'blinds2',
-    pos = { x = 0, y = 3 },
+    atlas = 'blinds1',
+    pos = { x = 0, y = 8 },
     boss = { min = 2, max = 10 },
     boss_colour = HEX("ad5151"),
 
@@ -220,8 +220,8 @@ SMODS.Blind {
     key = "sine",
     dollars = 5,
     mult = 1,
-    atlas = 'blinds2',
-    pos = { x = 0, y = 0 },
+    atlas = 'blinds1',
+    pos = { x = 0, y = 9 },
     boss = { min = 1, max = 10 },
     boss_colour = HEX("30a6d1"),
 
@@ -322,8 +322,8 @@ SMODS.Blind {
     key = "cosine",
     dollars = 5,
     mult = 1,
-    atlas = 'blinds2',
-    pos = { x = 0, y = 1 },
+    atlas = 'blinds1',
+    pos = { x = 0, y = 10 },
     boss = { min = 1, max = 10 },
     boss_colour = HEX("d1be30"),
 
@@ -407,10 +407,10 @@ SMODS.Blind {
     key = "distance",
     dollars = 5,
     mult = 1,
-    pos = { x = 0, y = 0 },
+    pos = { x = 0, y = 11 },
     boss = { min = 3, max = 10 },
     boss_colour = HEX("675497"),
-    atlas = 'blinds3',
+    atlas = 'blinds1',
     config = {extra = {multiplier = 1.75}},
     loc_vars = function(self, info_queue, card)
         return {vars = {self.config.extra.multiplier}}
@@ -437,8 +437,8 @@ SMODS.Blind {
     key = "euler",
     dollars = 5,
     mult = 1.25,
-    atlas = 'blinds3',
-    pos = { x = 0, y = 1 },
+    atlas = 'blinds1',
+    pos = { x = 0, y = 12 },
     boss = { min = 2, max = 10 },
     boss_colour = HEX("737c99"),
     calculate = function(self, blind, context)
@@ -467,4 +467,3 @@ SMODS.Blind {
         end
     end
 }
-

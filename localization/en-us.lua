@@ -1,5 +1,87 @@
 return {
     descriptions = {
+        Back={
+        b_sp_consecutive = {
+            name = "Consecutive Deck",
+            text = {
+                "{s:0.85}Start with {C:attention,T:j_order,s:0.85}The Order{},",
+                "{s:0.85}2 {C:planet,T:c_saturn,s:0.85}Saturn{}{s:0.85} consumables,",
+                "{s:0.85}and a {C:tarot,T:v_crystal_ball,s:0.85}Crystal Ball{} {s:0.85}voucher.",
+                "Win on {C:attention}Ante 9{}.",
+                "One extra {C:attention}Jack{}, {C:attention}Queen{}, {C:attention}King{}",
+                "for each suit in deck"
+                }
+            },
+            b_sp_permission = {
+            name = "Permission Deck",
+            text = {
+                "Start run with",
+                "{C:attention,T:v_sp_expansionpermit}Expansion Permit{}",
+                "and {C:attention,T:v_sp_prestigepermit}Prestige Permit{}"
+                }
+            },
+            b_sp_spectacle = {
+            name = "Spectacle Deck",
+            text = {
+                "Start run with a {V:1,T:c_sp_calico}Calico{},",
+                "{V:1}Spectaclaw{} cards may",
+                "appear in shop,",
+                "Win at {C:attention}Ante 10{}"
+                }
+            },
+            b_sp_feline = {
+                name = "Feline Deck",
+                text = {
+                    "Start run with 2 copies of",
+                    "{V:1,T:c_sp_abyssinian}Abyssinian{} and {C:attention}4{} consumable",
+                    "slots. {V:1}Catarots{} appear {B:1,C:white}X3{} as",
+                    "often in shop"
+                }
+            },
+            b_sp_crimson = {
+                name = "Crimson Deck",
+                text = {
+                    "Start with {V:1,T:c_sp_themountain}The Mountain{} and",
+                    "{C:attention}3{} consumable slots.",
+                    "{V:1}Lenormands{} appear {B:1,C:white}X2{}",
+                    "as often in shop"
+                }
+            },
+            b_sp_oinch = {
+                name = "Oinch Deck",
+                text = {
+                    "Start by opening an",
+                    "{V:1,T:p_sp_ultrashufflepack_1}Ultra Shuffle Pack{}"
+                }
+            },
+            b_sp_dingbat = {
+                name = "Dingbat Deck",
+                text = {
+                    "Start by opening a",
+                    "{V:1,T:p_sp_megawingdingspack_1}Mega Wingdings Pack{},",
+                    "{C:attention}+1{} Joker slot"
+                }
+            },
+            b_sp_decimal = {
+                name = "Decimal Deck",
+                text = {
+                    "{X:attention,C:white}X0.75{} all blind requirements,",
+                    "{C:red}-1 Discard{}, {C:red}-1{} {C:blue}Hand{},",
+                    "{C:red}-1{} Joker slot,",
+                    "{C:red}-1{} Consumable slot"
+                }
+            },
+            b_sp_hard = {
+                name = "Hard Deck",
+                text = {
+                    "{X:attention,C:white}X1.2{} all blind requirements,",
+                    "{C:red}-2 Discards{}, {C:red}-1{} {C:blue}Hand{},",
+                    "{C:red}-1{} Joker slot,",
+                    "{C:red}-1{} Consumable slot"
+                }
+            },
+    },
+        
         Blind = {
         bl_sp_day = {
         name = "The Day",
@@ -94,10 +176,28 @@ return {
             "score when a hand is played"
         }
     },
+    bl_sp_secant = {
+        name = "The Secant",
+        text = {
+            "Enhanced cards give X0.5 Mult"
+        }
+    }
    
 
 
         },
+
+
+        Stake = {
+            stake_sp_chroma = {
+                name = "Chroma Stake",
+                text = {
+                    "Jokers with Editions",
+                    "appear X0.1 as often"
+                }
+            },
+        },
+
         Joker = {
             j_sp_deckhugger = {
                 name = "Deckhugger",
@@ -1150,6 +1250,64 @@ j_sp_book_alt = {
             "for each {C:blue}hand{} or {C:red}discard{}",
             "{C:green}1 in 4{} chance to drop by {C:red}1{}"
         }
+    },
+    j_sp_inaccurateregression = {
+        name = "Inaccurate Regression",
+        text = {
+            "When a {C:attention}Non-Ace{} is scored,",
+            "{C:green}7 in 15{} chance to",
+            " increase rank and gain",
+            "{X:red,C:white}+X0.1{} Mult, else decrease rank",
+            "{C:inactive}(Currently {}{X:red,C:white}X#1#{} {C:inactive}Mult){}"
+        }
+    },
+    j_sp_floretpentagonaltiling = {
+        name = "Floret Pentagonal Tiling",
+        text = {
+            'This Joker gains {X:red,C:white}+X1.5{}',
+            'Mult if played hand',
+            'contains at least {C:attention}4{} cards',
+            'each with {C:attention}distinct suits{}',
+            '{C:inactive}(Currently {}{X:red,C:white}X#1#{} {C:inactive}Mult){}'
+        }
+    },
+    j_sp_einsteintile = {
+        name = "Einstein Tile",
+        text = {
+            'This Joker gains {X:red,C:white}XX1.618{}',
+            'Mult for every {C:attention}16{}',
+            'cards scored',
+            '{C:inactive}Cards counted: #1#{}',
+            '{C:inactive}(Currently {}{X:red,C:white}X#2#{} {C:inactive}Mult){}'
+        }
+    },
+    j_sp_ninetyseven = {
+        name = "Ninety-Seven",
+        text = {
+            '{X:blue,C:white}X97{} Chips, {X:red,C:white}X97{} Mult,',
+            'sets joker slots to {C:attention}97{}'
+        }
+    },
+    j_sp_jackpot = {
+        name = "Jackpot",
+        text = {
+            'Scored {C:attention}Jacks{} give {C:money}+$2{},',
+            '{C:green}1 in 18{} chance to also give {C:money}+$20{},',
+            '{C:green}1 in 135{} chance to also give {C:money}+$777{}'
+        }
+    },
+    j_sp_allinone = {
+        name = "All In One",
+        text = {
+            'Scored {C:attention}face cards{} give {X:red,C:white}X1.5{} Mult when scored,',
+            'this Joker gains {X:red,C:white}+X0.75{} Mult when a {C:attention}face card{}',
+            'is {C:red}destroyed{}, this Joker gains {X:red,C:white}+X0.75{} Mult for',
+            'every {C:attention}25{} cards discarded, {C:attention}disables{} effect of',
+            'every boss blind, creates a {C:dark_edition}Negative{} copy of',
+            'a random consumable at the end of the shop',
+            '{C:inactive}(Cards counted: #2#){}',
+            '{C:inactive}(Currently {}{X:red,C:white}X#1#{} {C:inactive}Mult){}'
+        }
     }
 },
 
@@ -1633,6 +1791,14 @@ c_sp_xolotlan = {
                 'Enhances up to 2',
                 'selected cards to',
                 '{C:attention}Upward Cards{}',
+        }
+    },
+    c_sp_calico = {
+        name = 'Calico',
+        text = {
+                'Enhances up to 4',
+                'selected cards to',
+                '{C:attention}Igor Cards{}',
         }
     },
     },
