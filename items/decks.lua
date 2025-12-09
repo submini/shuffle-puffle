@@ -268,7 +268,7 @@ SMODS.Back {
 
 SMODS.Back {
     key = 'hard',
-    --atlas = 'harddeck',
+    atlas = 'harddeck',
     pos = {
         x = 0,
         y = 0

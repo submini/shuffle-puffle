@@ -456,7 +456,7 @@ SMODS.Blind {
                     for i, card in ipairs(scoring_cards) do
                         if i ~= 1 and i ~= count then
                             card.debuff = true
-                            card.ability.perma_debuff = true
+                            card.ability.perma_debuff = false
                             card.states.debuffed = true
                             card:juice_up(0.4, 0.4)
                             play_sound('tarot2', 0.8)
