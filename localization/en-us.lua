@@ -1310,6 +1310,133 @@ j_sp_book_alt = {
         }
     }
 },
+    Voucher = {
+        v_sp_expansionpermit = {
+            name = "Expansion Permit",
+            text = {
+            "{C:attention}+1{} booster slot",
+            "available in shop"
+            }
+        },
+        v_sp_prestigepermit = {
+            name = "Prestige Permit",
+            text = {
+            "{C:attention}+1{} booster slot",
+            "available in shop"
+            }
+        },
+        v_sp_polydactyly = {
+            name = "Polydactyly",
+            text = {
+                '{C:attention}+1{} card selection limit'
+            }
+        },
+        v_sp_hyperdactyly = {
+            name = "Hyperdactyly",
+            text = {
+                '{C:attention}+1{} card selection limit'
+            }
+        },
+        v_sp_fractalfingers = {
+            name = "Fractal Fingers",
+            text = {
+                '{C:attention}+2{} card selection limit'
+            }
+        },
+        v_sp_money_forest = {
+            name = "Money Forest",
+            text = {
+                    "Raise the cap on",
+                    "interest earned in",
+                    "each round to {C:money}$100{}",
+                },
+        },
+        v_sp_felinemerchant = {
+            name = "Feline Merchant",
+            text = {
+                    "{V:1}Catarots{} appear {C:attention}2X{} more",
+                    "frequently in shop",
+                },
+        },
+        v_sp_felinetycoon = {
+            name = "Feline Tycoon",
+            text = {
+                    "{V:1}Catarots{} appear {C:attention}4X{} more",
+                    "frequently in shop",
+                },
+        },
+        v_sp_cat_astrophe = {
+            name = "Cat-astrophe",
+            text = {
+                    "{V:1}Catarots{} appear {C:attention}8X{} more",
+                    "frequently in shop",
+                },
+        },
+        v_sp_parallaxpass = {
+            name = "Parallax Pass",
+            text = {
+                "{V:1}Exoplanets{} appear {C:attention}2X{} more",
+                "frequently in shop",
+            }
+        },
+        v_sp_orbitalsyndicate = {
+            name = "Parallax Pass",
+            text = {
+                "{V:1}Exoplanets{} appear {C:attention}4X{} more",
+                "frequently in shop",
+            }
+        },
+        v_sp_galacticmonopoly = {
+            name = "Galactic Monopoly",
+            text = {
+                "{V:1}Exoplanets{} appear {C:attention}8X{} more",
+                "frequently in shop",
+            }
+        },
+        v_sp_fortuneswhisper = {
+            name = "Fortune's Whisper",
+            text = {
+            "{V:1}Lenormands{} appear {C:attention}2X{} more",
+            "frequently in shop",
+            }
+        },
+        v_sp_riddlecascade = {
+            name = "Riddle Cascade",
+            text = {
+            "{V:1}Lenormands{} appear {C:attention}4X{} more",
+            "frequently in shop",
+            }
+        },
+        v_sp_oracleoverload = {
+            name = "Oracle Overload",
+            text = {
+            "{V:1}Lenormands{} appear {C:attention}8X{} more",
+            "frequently in shop",
+            }
+        },
+        v_sp_expiredvoucher = {
+            name = "Expired Voucher",
+            text = {
+                "{C:inactive}This voucher has",
+                "{C:inactive}expired. Redeem a new one?"
+            }
+        },
+        v_sp_doubledowner = {
+            name = "Double Downer",
+            text = {
+                "{C:attention}+1{} voucher slot available",
+                "in shop"
+            }
+        },
+        v_sp_tripletroper = {
+            name = "Triple Troper",
+            text = {
+            "{C:attention}+1{} voucher slot available",
+            "in shop"
+            }
+        },
+        
+    },
 
     Enhanced = {
     m_sp_francaise={
