@@ -25,7 +25,7 @@ local files = {
     "items/consumables/spectaclaw",
     "items/consumables/gem",
     "items/enhancements",
-    --"items/editions",
+    "items/editions",
     "items/tags",
     "items/stakes",
     "items/blinds",
@@ -38,6 +38,7 @@ local files = {
     "items/vouchers",
     "lib/colors",
     "lib/misc",
+    "lib/ui"
 }
 for i, v in pairs(files) do
 	assert(SMODS.load_file(v..".lua"))()

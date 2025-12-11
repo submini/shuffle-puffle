@@ -250,3 +250,29 @@ local jokers_pool = {
 'j_sp_allwild', 'j_sp_numberline', 'j_sp_lukadoncic', 'j_sp_jackfruit', 'j_sp_freddyfazbear', 'j_sp_bonniebunny',
 'j_sp_chicachicken', 'j_sp_foxy', 'j_sp_noisyjoker'
     }
+
+    SMODS.current_mod.custom_ui = function(mod_nodes)
+    local node = {
+        n = G.UIT.C,
+        config = {align = "cm", padding = 0.3, r = 0.1, colour = {0.15, 0.15, 0.15, 1}, emboss = 0.05},
+        nodes = {
+            -- "This Balatro mod is"
+            {n = G.UIT.R, config = {align = "cm", padding = 0.05}, nodes = {
+                {n = G.UIT.T, config = {text = "This Balatro mod is", scale = 0.5, colour = G.C.WHITE}}
+            }},
+            -- Big floating mod name
+            {n = G.UIT.R, config = {align = "cm", padding = 0.1}, nodes = {
+                {n = G.UIT.T, config = {text = "shuffle-puffle", scale = 0.8, colour = {0.9, 0.49, 0.13, 1}}}
+            }},
+            -- Description
+            {n = G.UIT.R, config = {align = "cm", padding = 0.05}, nodes = {
+                {n = G.UIT.T, config = {text = "The Max Verstappen of unbalanced Balatro mods.", scale = 0.4, colour = G.C.WHITE}}
+            }},
+            -- Created by
+            {n = G.UIT.R, config = {align = "cm", padding = 0.05}, nodes = {
+                {n = G.UIT.T, config = {text = "created by {C:attention}mariopuff{} and subminimal team.", scale = 0.35, colour = G.C.WHITE}}
+            }},
+        }
+    }
+    table.insert(mod_nodes, node)
+end
