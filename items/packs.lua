@@ -329,7 +329,7 @@ SMODS.Booster {
     key = "toomuchshufflepack_1",
     name = "Too-much Shuffle Pack",
 
-    atlas = 'minishufflepack1',
+    atlas = 'toomuchshufflepack1',
     pos = { x = 0, y = 0 },
     config = { extra = 9, choose = 3},
     kind = 'Buffoon',
@@ -1670,27 +1670,27 @@ end,
 }
 
 SMODS.Booster {
-    key = "crystalpack_1",
-    name = "Crystal Pack",
+    key = "trampack_1",
+    name = "Tram Pack",
 
-    atlas = 'minishufflepack1',
+    atlas = 'trampack1',
     pos = { x = 0, y = 0 },
     config = { extra = 2, choose = 1},
     kind = 'Tarot',
     weight = 0.5,
     cost = 4,
     loc_txt = { 
-        name = "Crystal Pack",
+        name = "Tram Pack",
         text = {
             "Choose some jokers",
         },
-        group_name = 'Crystal Pack', 
+        group_name = 'Tram Pack', 
     },
     loc_vars = function(self, info_queue, card)
         return {
         vars =  {
         colours = { 
-            HEX('11734b'),
+            HEX('78BE20'),
      }
         }
     }
@@ -1704,7 +1704,7 @@ create_card = function(self, booster_card)
     -- build Catarot pool fresh
     local pool = {}
     for k, v in pairs(G.P_CENTERS) do
-        if v.set == 'Gem' then
+        if v.set == 'Routes' then
             table.insert(pool, k)
         end
     end
@@ -1732,7 +1732,7 @@ end,
 
 
     ease_background_colour = function(self)
-        ease_colour(G.C.DYN_UI.MAIN, HEX("11734b"))
-        ease_background_colour{new_colour = HEX("11734b"), special_colour = HEX("000000"), contrast = 2}
+        ease_colour(G.C.DYN_UI.MAIN, HEX("78BE20"))
+        ease_background_colour{new_colour = HEX("78BE20"), special_colour = HEX("000000"), contrast = 2}
     end,
 }

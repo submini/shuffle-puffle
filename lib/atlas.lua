@@ -674,6 +674,13 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+    key = 'toomuchshufflepack1',
+    path = 'toomuchshufflepack.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
     key = 'exocelestialpack1',
     path = 'exocelestialpack1.png',
     px = 71,
@@ -795,6 +802,13 @@ SMODS.Atlas({
 SMODS.Atlas({
     key = 'ultralenormanapack1',
     path = 'ultralenormana.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'trampack1',
+    path = 'trampack.png',
     px = 71,
     py = 95
 })
@@ -1073,35 +1087,6 @@ SMODS.Atlas({
     path = "spmodicon.png",
     px = 32,
     py = 32
-})
-
--- gem cards
-SMODS.Atlas({
-    key = "obsidized",
-    path = "obsidized.png",
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "rubified",
-    path = "rubified.png",
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "onyxxified",
-    path = "onyxxified.png",
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
-    key = "topazzified",
-    path = "topazzified.png",
-    px = 71,
-    py = 95
 })
 
 -- tags
@@ -1605,3 +1590,31 @@ SMODS.Atlas({
     py = 95
 })
 
+-- routes
+SMODS.Atlas({
+    key = "route1",
+    path = "route1.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route3",
+    path = "route3.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route5",
+    path = "route5.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route6",
+    path = "route6.png",
+    px = 64,
+    py = 64
+})

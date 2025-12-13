@@ -5371,8 +5371,8 @@ SMODS.Joker{ --All In One
     pools = { ["Shuffle"] = true },
     
     loc_vars = function(self, info_queue, card)
-        
-        return {vars = {card.ability.extra.xmult, card.ability.extra.count}}
+        info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
+        return {vars = {card.ability.extra.xmult, card.ability.extra.count }}
     end,
     
     calculate = function(self, card, context)

@@ -9,9 +9,9 @@ end
 local files = {
     --"config",
     "lib/atlas",
-    --"lib/shaderatlas",
     "lib/init",
     "lib/music",
+    "lib/shaderatlas",
     -- ight bro
     "items/jokers/miscjokers",
     "items/jokers/legendaries",
@@ -23,7 +23,7 @@ local files = {
     "items/consumables/catarot",
     "items/consumables/exoplanet",
     "items/consumables/spectaclaw",
-    "items/consumables/gem",
+    "items/consumables/routes",
     "items/enhancements",
     "items/editions",
     "items/tags",

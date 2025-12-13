@@ -34,7 +34,7 @@ SMODS.Consumable {
 	end,
     cost = 4,
     unlocked = true,
-    discovered = true,
+    discovered = false,
     hidden = false,
     can_repeat_soul = false,
     atlas = 'placeholder',

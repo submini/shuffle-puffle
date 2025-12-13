@@ -1438,6 +1438,49 @@ j_sp_book_alt = {
         
     },
 
+    Edition = {
+        e_sp_gilded = {
+            name = 'Gilded',
+            label = 'Gilded',
+            text = {
+                '{C:money}+$2{} when triggered'
+            }
+        },
+        e_sp_aetherescent = {
+            name = 'Aetherescent',
+            label = 'Aetherescent',
+            text = {
+                '{C:blue}+20{} Chips, {C:red}+10{} Mult',
+                'and {X:red,C:white}X1.1{} Mult'
+            }
+        },
+        e_sp_iridescent = {
+            name = 'Iridescent',
+            label = 'Iridescent',
+            text = {
+                '50% chance to create',
+                '{C:attention}2{} random {C:dark_edition}Negative{} {C:tarot}Tarot{}',
+                'or {C:attention}1{} random {C:dark_edition}Negative{}',
+                '{C:spectral}Spectral{} card'
+            }
+        },
+        e_sp_prismatic = {
+            name = 'Prismatic',
+            label = 'Prismatic',
+            text = {
+                '{C:blue}+42{} Chips, {C:red}+9{} Mult,',
+                '{X:red,C:white}X1.2{} Mult'
+            }
+        },
+        e_sp_wooden = {
+            name = 'Wooden',
+            label = 'Wooden',
+            text = {
+                '{C:attention}+2{} Joker slots'
+            }
+        },
+    },
+
     Enhanced = {
     m_sp_francaise={
         name="Carte Française",
@@ -1929,37 +1972,33 @@ c_sp_xolotlan = {
         }
     },
     },
-    Gem = {
-        c_sp_obsidian = {
-            name = "Obsidian",
+    Routes = {
+        c_sp_route1 = {
+            name = 'Route 1',
             text = {
-                'Turns all cards in hand',
-                'into {C:spades}Spades{} and makes',
-                'them {C:attention}obsidized{}'
+                'Applies a permanent {C:money}+$1{}',
+                'bonus to all cards in hand'
             }
         },
-        c_sp_ruby = {
-            name = "Ruby",
+        c_sp_route3 = {
+            name = 'Route 3',
             text = {
-                'Turns all cards in hand',
-                'into {C:hearts}Hearts{} and makes',
-                'them {C:attention}rubified{}'
+                'Applies a permanent {C:blue}+30{} Chips',
+                'bonus to all cards in hand'
             }
         },
-        c_sp_onyx = {
-            name = "Onyx",
+        c_sp_route5 = {
+            name = 'Route 5',
             text = {
-                'Turns all cards in hand',
-                'into {C:clubs}Clubs{} and makes',
-                'them {C:attention}onyxxified{}'
+                'Applies a permanent {C:red}+3{} Mult',
+                'bonus to all cards in hand'
             }
         },
-        c_sp_topaz = {
-            name = "Topaz",
+        c_sp_route6 = {
+            name = 'Route 6',
             text = {
-                'Turns all cards in hand',
-                'into {C:diamonds}Diamonds{} and makes',
-                'them {C:attention}topazzified{}'
+                'Applies a permanent {X:blue,C:white}X1.2{} Mult',
+                'bonus to all cards in hand'
             }
         },
     },
@@ -2070,11 +2109,11 @@ c_sp_xolotlan = {
                 'used immediately'
                 }
         },
-        p_sp_crystalpack_1 = {
-            name = "Crystal Pack",
+        p_sp_trampack_1 = {
+            name = "Tram Pack",
             text = {
                 'Choose {C:attention}1{} of up to',
-                '{C:attention}2{} {V:1}Gems{} to be',
+                '{C:attention}2{} {V:1}Routes{} to be',
                 'used immediately'
                 }
         },
