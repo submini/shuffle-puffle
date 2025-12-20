@@ -467,3 +467,54 @@ SMODS.Blind {
         end
     end
 }
+
+SMODS.Blind{
+    key = 'imaginary',
+    loc_txt = {
+        name = 'The Imaginary',
+        text = {
+            'All scored face cards',
+            'turn into a random',
+            'number after scoring'
+        }
+    },
+    boss = {min = 1, max = 10},
+    boss_colour = HEX('9B59B6'),
+    dollars = 8,
+    mult = 2,
+    
+    calculate = function(self, context)
+        -- This triggers for each individual scoring card AFTER it scores
+        if context.individual and context.cardarea == G.play and not context.blueprint then
+            local card = context.other_card
+            
+            -- Check if it's a face card (J, Q, K) that just scored
+            if card.ability.effect ~= 'Stone Card' and 
+               (card.base.value == 'Jack' or 
+                card.base.value == 'Queen' or 
+                card.base.value == 'King') then
+                
+                -- Pick a random number rank (2-10)
+                local random_ranks = {'2', '3', '4', '5', '6', '7', '8', '9', '10'}
+                local new_rank = pseudorandom_element(random_ranks, pseudoseed('imaginary'))
+                
+                -- Transform the card
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.2,
+                    func = function()
+                        -- Change the card's rank
+                        card:set_base(G.P_CARDS[card.base.suit..'_'..new_rank])
+                        
+                        -- Show visual feedback
+                        card_eval_status_text(card, 'extra', nil, nil, nil, {
+                            message = 'Imaginary!',
+                            colour = G.C.PURPLE
+                        })
+                        return true
+                    end
+                }))
+            end
+        end
+    end
+}

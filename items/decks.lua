@@ -153,12 +153,16 @@ SMODS.Back {
         x = 0,
         y = 0
     }, 
-    config = { extra = { boosters = 'p_sp_ultrashufflepack_1' } },
+    config = { 
+        extra = { boosters = 'p_sp_ultrashufflepack_1' },
+        sp_slopes = { use_slopes = true },
+    },
     loc_vars = function(self, info_queue, back)
         return {
             vars = { localize { type = 'name_text', key = self.config.extra.boosters, set = 'Booster' },
             colours = { 
             HEX('E67E22'),
+            G.C.SUITS.Slopes
      }
             }
     }

@@ -19,13 +19,23 @@ SMODS.Suit {
   },
 
   in_pool = function(self, args)
-    -- Example rules for when this suit is available:
-    if args and args.initial_deck then
-      -- Allow suit to spawn in starting decks
-      return true
-    else
-      -- Allow suit to spawn everywhere else too
-      return true
+  if args and args.initial_deck then
+    local back = G.GAME.selected_back
+    if back and back.effect and back.effect.center and back.effect.center.config then
+      local config = back.effect.center.config
+      return config.sp_slopes and config.sp_slopes.use_slopes == true
     end
+    return false
+  else
+    -- Mid-game: check if Slopes exist in deck
+    if G.playing_cards then
+      for k, v in pairs(G.playing_cards) do
+        if v.base and v.base.suit == 'sp_Slopes' then
+          return true
+        end
+      end
+    end
+    return false
   end
+end
 }

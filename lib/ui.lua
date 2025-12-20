@@ -233,14 +233,7 @@ SMODS.current_mod.extra_tabs = function()
                             n = G.UIT.R,
                             config = {padding = -2, align = "cm"},
                             nodes = {
-                                {n = G.UIT.T, config = {text = "This mod is non-commercial and unaffiliated", scale = 0.25, colour = G.C.SP_SHUFFYORANGE}}
-                        }
-                        },
-                        {
-                            n = G.UIT.R,
-                            config = {padding = -3, align = "cm"},
-                            nodes = {
-                                {n = G.UIT.T, config = {text = "with LocalThunk, do not redistribute.", scale = 0.25, colour = G.C.SP_SHUFFYORANGE}}
+                                {n = G.UIT.T, config = {text = "This mod is non-commercial and unaffiliated with LocalThunk, do not redistribute.", scale = 0.25, colour = G.C.SP_SHUFFYORANGE}}
                         }
                         },
                     }

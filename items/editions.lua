@@ -1,24 +1,25 @@
 SMODS.Edition {
-    key = 'gilded',
-    shader = 'sp_gilded',
+    key = 'phosphorescent',
+    shader = 'sp_phosphorescent',
     config = {
         extra = {
-            dollars0 = 2
+            mult0 = 10,
+            xchips0 = 3
         }
     },
-    in_shop = false,
-    weight = 0.1,
-    extra_cost = 3,
-    apply_to_float = false,
+    in_shop = true,
+    weight = 0.3,
+    extra_cost = 4,
+    apply_to_float = true,
     disable_shadow = false,
     disable_base_shader = false,
     loc_txt = {
-        name = 'Gilded',
-        label = 'Gilded',
-        text = {
-            [1] = '{C:money}+$2{} when triggered'
-        }
+        label = 'Phosphorescent',
     },
+    pools = {
+        ["Joker"] = true,
+    },
+    sound = { sound = "sp_e_phosphorescent", per = 1, vol = 0.4 },
     unlocked = true,
     discovered = false,
     no_collection = false,
@@ -27,54 +28,16 @@ SMODS.Edition {
     end,
     
     calculate = function(self, card, context)
-        -- Playing cards: trigger when card scores
-        if card.playing_card and (context.pre_joker or (context.main_scoring and context.cardarea == G.play)) then
+        if context.pre_joker or (context.main_scoring and context.cardarea == G.play) then
             return {
-                func = function()
-                    ease_dollars(2)
-                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = "+$2", colour = G.C.MONEY})
-                    return true
-                end
-            }
-        end
-        
-        -- Jokers: trigger during joker scoring
-        if card.ability and card.ability.set == 'Joker' and context.cardarea == G.jokers and context.main_scoring then
-            return {
-                func = function()
-                    ease_dollars(2)
-                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = "+$2", colour = G.C.MONEY})
-                    return true
-                end
+                mult = 10, colour = G.C.DARK_EDITION,
+                extra = {
+                    x_chips = 3,
+                    colour = G.C.DARK_EDITION
+                }
             }
         end
     end
-}
-
-SMODS.Edition {
-    key = 'phosphorescent',
-    shader = 'sp_phosphorescent',
-    config = {
-    },
-    in_shop = false,
-    weight = 0.1,
-    extra_cost = 6,
-    apply_to_float = false,
-    disable_shadow = false,
-    disable_base_shader = false,
-    loc_txt = {
-        name = 'Phosphorescent',
-        label = 'Phosphorescent',
-        text = {
-            [1] = ''
-        }
-    },
-    unlocked = true,
-    discovered = false,
-    no_collection = false,
-    get_weight = function(self)
-        return G.GAME.edition_rate * self.weight
-    end,
 }
 
 SMODS.Edition {
@@ -88,19 +51,18 @@ SMODS.Edition {
         }
     },
     in_shop = true,
+    pools = {
+        ["Joker"] = true,
+    },
     weight = 0.7,
     extra_cost = 7,
     apply_to_float = false,
     disable_shadow = false,
     disable_base_shader = false,
     loc_txt = {
-        name = 'Aetherescent',
         label = 'Aetherescent',
-        text = {
-            [1] = '{C:blue}+20{} Chips, {C:red}+10{} Mult',
-            [2] = 'and {X:red,C:white}X1.1{} Mult'
-        }
     },
+    sound = { sound = "sp_e_aetherescent", per = 1, vol = 0.3 },
     unlocked = true,
     discovered = false,
     no_collection = false,
@@ -111,11 +73,11 @@ SMODS.Edition {
     calculate = function(self, card, context)
         if context.pre_joker or (context.main_scoring and context.cardarea == G.play) then
             return {
-                chips = 20,
+                chips = 20, colour = G.C.DARK_EDITION,
                 extra = {
-                    mult = 10,
+                    mult = 10, colour = G.C.DARK_EDITION,
                     extra = {
-                        Xmult = 1.1
+                        Xmult = 1.1, colour = G.C.DARK_EDITION,
                     }
                 }
             }
@@ -128,27 +90,34 @@ SMODS.Edition {
     shader = 'sp_iridescent',
     config = {
     },
-    in_shop = true,
-    weight = 0.4,
+    in_shop = false,
+    weight = 0.1,
     extra_cost = 10,
     apply_to_float = false,
     disable_shadow = false,
     disable_base_shader = false,
     loc_txt = {
-        name = 'Iridescent',
         label = 'Iridescent',
-        text = {
-            [1] = '50% chance to create',
-            [2] = '{C:attention}2{} random {C:dark_edition}Negative{} {C:tarot}Tarot{}',
-            [3] = 'or {C:attention}1{} random {C:dark_edition}Negative{}',
-            [4] = '{C:spectral}Spectral{} card'
-        }
     },
+    pools = {
+        ["Joker"] = true,
+    },
+    sound = { sound = "sp_e_iridescent", per = 1, vol = 0.4 },
     unlocked = true,
     discovered = false,
     no_collection = false,
     get_weight = function(self)
         return G.GAME.edition_rate * self.weight
+    end,
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS.e_negative
+        return {
+        vars =  {
+        colours = { 
+            HEX('E8A6BD'),
+     }
+        }
+    }
     end,
     
     calculate = function(self, card, context)
@@ -156,10 +125,9 @@ SMODS.Edition {
             local coin_flip = pseudorandom('iridescent_flip') > 0.5
             
             if coin_flip then
-                -- Create 2 negative tarots
                 return {
                     func = function()
-                        for i = 1, math.min(2, G.consumeables.config.card_limit - #G.consumeables.cards) do
+                        for i = 1, math.min(1, G.consumeables.config.card_limit - #G.consumeables.cards) do
                             G.E_MANAGER:add_event(Event({
                                 trigger = 'before',
                                 delay = 0.0,
@@ -173,12 +141,11 @@ SMODS.Edition {
                         end
                         delay(0.6)
                         
-                        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_tarot'), colour = G.C.PURPLE})
+                        card_eval_status_text(card, 'extra', nil, nil, nil, {message = "Added Tarot!", colour = G.C.PURPLE})
                         return true
                     end
                 }
             else
-                -- Create 1 negative spectral
                 return {
                     func = function()
                         for i = 1, math.min(1, G.consumeables.config.card_limit - #G.consumeables.cards) do
@@ -187,7 +154,7 @@ SMODS.Edition {
                                 delay = 0.0,
                                 func = function()
                                     play_sound('timpani')
-                                    SMODS.add_card({ set = 'Spectral', edition = 'e_negative', })                            
+                                    SMODS.add_card({ set = 'Catarot', edition = 'e_negative', })                            
                                     card:juice_up(0.3, 0.5)
                                     return true
                                 end
@@ -195,7 +162,7 @@ SMODS.Edition {
                         end
                         delay(0.6)
                         
-                        card_eval_status_text(card, 'extra', nil, nil, nil, {message = localize('k_plus_spectral'), colour = G.C.SECONDARY_SET.Spectral})
+                        card_eval_status_text(card, 'extra', nil, nil, nil, {message = "Added Catarot!", colour = G.C.SP_CATAROTPINK})
                         return true
                     end
                 }
@@ -221,13 +188,12 @@ SMODS.Edition {
     disable_shadow = false,
     disable_base_shader = false,
     loc_txt = {
-        name = 'Prismatic',
         label = 'Prismatic',
-        text = {
-            [1] = '{C:blue}+42{} Chips, {C:red}+9{} Mult,',
-            [2] = '{X:red,C:white}X1.2{} Mult'
-        }
     },
+    pools = {
+        ["Joker"] = true,
+    },
+    sound = { sound = "sp_e_prismatic", per = 1, vol = 0.4 },
     unlocked = true,
     discovered = false,
     no_collection = false,
@@ -238,11 +204,12 @@ SMODS.Edition {
     calculate = function(self, card, context)
         if context.pre_joker or (context.main_scoring and context.cardarea == G.play) then
             return {
-                chips = 42,
+                chips = 42, colour = G.C.DARK_EDITION,
                 extra = {
-                    mult = 9,
+                    mult = 9, colour = G.C.DARK_EDITION,
                     extra = {
-                        Xmult = 1.2
+                        Xmult = 1.2,
+                        colour = G.C.DARK_EDITION,
                     }
                 }
             }
@@ -255,17 +222,17 @@ SMODS.Edition {
     shader = 'sp_wooden',
     config = { card_limit = 2 },
     in_shop = true,
-    weight = 0.2,
+    weight = 0.5,
     extra_cost = 9,
     apply_to_float = false,
     disable_shadow = false,
     disable_base_shader = false,
     loc_txt = {
-        name = 'Wooden',
         label = 'Wooden',
-        text = {
-            [1] = ''
-        }
+    },
+    pools = {
+        ["Joker"] = true,
+        ["Consumable"] = true,
     },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.edition.card_limit } }
@@ -276,4 +243,72 @@ SMODS.Edition {
     get_weight = function(self)
         return G.GAME.edition_rate * self.weight
     end,
+}
+
+SMODS.Edition {
+    key = 'grainy',
+    shader = 'sp_grainy',
+    config = {},
+    in_shop = true,
+    weight = 0.4,
+    extra_cost = 7,
+    apply_to_float = false,
+    disable_shadow = false,
+    disable_base_shader = false,
+    loc_txt = {
+        label = 'Grainy',
+    },
+    pools = {
+        ["Joker"] = true,
+    },
+    sound = { sound = "sp_e_grainy", per = 1, vol = 1 },
+    unlocked = true,
+    discovered = false,
+    no_collection = false,
+    get_weight = function(self)
+        return G.GAME.edition_rate * self.weight
+    end,
+    calculate = function(self, card, context)
+        if context.pre_joker or (context.main_scoring and context.cardarea == G.play) then
+            return {
+                Xmult = pseudorandom('RANGE:1|3', 1, 3), colour = G.C.DARK_EDITION,
+                extra = {
+                    x_chips = pseudorandom('RANGE:1|15', 1, 15),
+                    colour = G.C.DARK_EDITION
+                }
+            }
+        end
+    end
+}
+
+SMODS.Edition {
+    key = 'deepfried',
+    shader = 'sp_deepfried',
+    config = {},
+    in_shop = true,
+    weight = 0.2,
+    extra_cost = 11,
+    apply_to_float = false,
+    disable_shadow = false,
+    disable_base_shader = false,
+    loc_txt = {
+        label = 'Deep Fried',
+    },
+    pools = {
+        ["Joker"] = true,
+    },
+    sound = { sound = "sp_e_deepfried", per = 1, vol = 1 },
+    unlocked = true,
+    discovered = false,
+    no_collection = false,
+    get_weight = function(self)
+        return G.GAME.edition_rate * self.weight
+    end,
+    calculate = function(self, card, context)
+        if context.pre_joker or (context.main_scoring and context.cardarea == G.play) then
+            return {
+                e_mult = 1.5
+            }
+        end
+    end
 }

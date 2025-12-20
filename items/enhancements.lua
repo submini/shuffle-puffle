@@ -326,109 +326,6 @@ SMODS.Enhancement {
 }
 
 SMODS.Enhancement {
-    key = 'obsidized',
-    pos = { x = 0, y = 0 },
-    config = {
-        bonus = 80
-    },
-    loc_txt = {
-        name = 'Obsidized',
-        text = {
-        [1] = '{C:blue}+80{} extra chips'
-    }
-    },
-    atlas = 'obsidized',
-    any_suit = false,
-    replace_base_card = false,
-    no_rank = false,
-    no_suit = false,
-    always_scores = false,
-    unlocked = true,
-    discovered = true,
-    no_collection = false,
-    weight = 0
-}
-
-SMODS.Enhancement {
-    key = 'rubified',
-    pos = { x = 0, y = 0 },
-    config = {
-        mult = 15
-    },
-    loc_txt = {
-        name = 'Rubified',
-        text = {
-        [1] = '{C:red}+15{} Mult'
-    }
-    },
-    atlas = 'rubified',
-    any_suit = false,
-    replace_base_card = false,
-    no_rank = false,
-    no_suit = false,
-    always_scores = false,
-    unlocked = true,
-    discovered = true,
-    no_collection = false,
-    weight = 0
-}
-
-SMODS.Enhancement {
-    key = 'onyxxified',
-    pos = { x = 0, y = 0 },
-    config = {
-        extra = {
-            x_chips = 1.4
-        }
-    },
-    loc_txt = {
-        name = 'Onyxxified',
-        text = {
-        [1] = '{X:blue,C:white}X1.4{} Chips'
-    }
-    },
-    atlas = 'onyxxified',
-    any_suit = false,
-    replace_base_card = false,
-    no_rank = false,
-    no_suit = false,
-    always_scores = false,
-    unlocked = true,
-    discovered = true,
-    no_collection = false,
-    weight = 0,
-    calculate = function(self, card, context)
-        if context.main_scoring and context.cardarea == G.play then
-            return { x_chips = card.ability.extra.x_chips }
-        end
-    end
-}
-
-SMODS.Enhancement {
-    key = 'topazzified',
-    pos = { x = 0, y = 0 },
-    config = {
-        p_dollars = 5
-    },
-    loc_txt = {
-        name = 'Topazzified',
-        text = {
-        [1] = '{C:money}+$5{}'
-    }
-    },
-    atlas = 'topazzified',
-    any_suit = false,
-    replace_base_card = false,
-    no_rank = false,
-    no_suit = false,
-    always_scores = false,
-    unlocked = true,
-    discovered = true,
-    no_collection = false,
-    weight = 0
-}
-
-SMODS.Enhancement {
     key = 'tuxedo',
     pos = { x = 0, y = 0 },
     config = {
@@ -528,6 +425,142 @@ SMODS.Enhancement {
             if SMODS.pseudorandom_probability(card, 'group_0_9f4e12fc', 1, card.ability.extra.odds, 'm_sp_igorcard') then
                 SMODS.calculate_effect({x_mult = card.ability.extra.x_mult}, card)
             end
+        end
+    end
+}
+
+SMODS.Enhancement {
+    key = 'iron',
+    pos = { x = 0, y = 0 },
+    atlas = 'iron',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 2.75,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            return {
+                x_chips = 1.35
+            }
+        end
+    end
+}
+
+SMODS.Enhancement {
+    key = 'nickel',
+    pos = { x = 0, y = 0 },
+    config = {
+        bonus = 18,
+        extra = {
+            jokercount = 0,
+            consumablesheld = 0,
+            cardsinhand = 0,
+            one = 0
+        }
+    },
+    atlas = 'nickel',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 3,
+    loc_vars = function(self, info_queue, card)
+        return {vars = {18, card.ability.extra.one, #(G.jokers and (G.jokers and G.jokers.cards or {}) or {}), (#(G.consumeables and G.consumeables.cards or {}) or 0)}}
+    end,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            local one_value = card.ability.extra.one
+            card.ability.extra.one = #(G.jokers and G.jokers.cards or {})
+            card.ability.extra.one = (card.ability.extra.one) + #(G.consumeables and G.consumeables.cards or {})
+            card.ability.extra.one = (card.ability.extra.one) * 18
+        end
+        if context.main_scoring and context.cardarea == G.play then
+            return {
+                chips = card.ability.extra.one,
+                extra = {
+                    chips = (#(G.hand and G.hand.cards or {})) * 20,
+                    colour = G.C.CHIPS
+                }
+            }
+        end
+    end
+}
+
+SMODS.Enhancement {
+    key = 'aluminium',
+    pos = { x = 0, y = 0 },
+    atlas = 'aluminium',
+    config = { bonus = 30 },
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = true,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 4,
+}
+
+
+SMODS.Enhancement {
+    key = 'floral',
+    pos = { x = 0, y = 0 },
+    config = {
+        extra = {
+            xmult = 1,
+            xchips = 1,
+            dollars0 = 1
+        }
+    },
+    atlas = 'floralcard',
+    any_suit = false,
+    replace_base_card = false,
+    no_rank = false,
+    no_suit = false,
+    always_scores = false,
+    unlocked = true,
+    discovered = true,
+    no_collection = false,
+    weight = 2,
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.xmult, card.ability.extra.xchips}}
+    end,
+    calculate = function(self, card, context)
+        if context.main_scoring and context.cardarea == G.play then
+            card.ability.extra.xmult = (card.ability.extra.xmult) + 0.07
+            card.ability.extra.xchips = (card.ability.extra.xchips) + 0.1
+            return {
+                message = "Bloom!", colour = G.C.DARK_EDITION,
+                    extra = {
+                        Xmult = card.ability.extra.xmult,
+                        extra = {
+                            x_chips = card.ability.extra.xchips,
+                            extra = {
+                                
+                                func = function()
+                                    
+                                    local current_dollars = G.GAME.dollars
+                                    local target_dollars = G.GAME.dollars + 1
+                                    local dollar_value = target_dollars - current_dollars
+                                    ease_dollars(dollar_value)
+                                    card_eval_status_text(card, 'extra', nil, nil, nil, {message = "+"..tostring(1), colour = G.C.MONEY})
+                                    return true
+                                end,
+                                colour = G.C.MONEY
+                            }
+                        }
+                    }
+                }
         end
     end
 }

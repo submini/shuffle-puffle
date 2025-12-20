@@ -6,7 +6,7 @@
 
 // !! CHANGE THIS to your shader name
 // YOU MUST USE THIS VARIABLE IN vec4 effect AT LEAST ONCE
-extern PRECISION vec2 prismatic;
+extern PRECISION vec2 deepfried;
 
 extern PRECISION number dissolve;
 extern PRECISION number time;
@@ -19,71 +19,67 @@ extern PRECISION vec4 burn_colour_2;
 // [Required] 
 vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv);
 
+// Random noise for JPEG artifacts
+number random(vec2 st) {
+    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
 {
     vec4 tex = Texel(texture, texture_coords);
     vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
-    // Shimmer base
-    number low = min(tex.r, min(tex.g, tex.b));
-    number high = max(tex.r, max(tex.g, tex.b));
-    number delta = high-low -0.1;
-
-    number fac = 0.8 + 0.9*sin(11.*uv.x+4.32*uv.y + prismatic.r*12. + cos(prismatic.r*5.3 + uv.y*4.2 - uv.x*4.));
-    number fac2 = 0.5 + 0.5*sin(8.*uv.x+2.32*uv.y + prismatic.r*5. - cos(prismatic.r*2.3 + uv.x*8.2));
-    number fac3 = 0.5 + 0.5*sin(10.*uv.x+5.32*uv.y + prismatic.r*6.111 + sin(prismatic.r*5.3 + uv.y*3.2));
-    number fac4 = 0.5 + 0.5*sin(3.*uv.x+2.32*uv.y + prismatic.r*8.111 + sin(prismatic.r*1.3 + uv.y*11.2));
-    number fac5 = sin(0.9*16.*uv.x+5.32*uv.y + prismatic.r*12. + cos(prismatic.r*5.3 + uv.y*4.2 - uv.x*4.));
-
-    number maxfac = 0.7*max(max(fac, max(fac2, max(fac3,0.0))) + (fac+fac2+fac3*fac4), 0.);
-
-    // Full rainbow spectrum gradient - Red Orange Yellow Green Blue Cyan Violet
-    // Diagonal gradient across the card
-    number spectrum_pos = (uv.x + uv.y) * 3.5 + time * 0.4 + prismatic.r * 2.0;
+    // EXTREME contrast boost
+    tex.rgb = (tex.rgb - 0.5) * 2.5 + 0.5;
     
-    // Create 7 color bands with sharp transitions
-    number phase = mod(spectrum_pos, 7.0);
+    // MAXIMUM saturation
+    number gray = (tex.r + tex.g + tex.b) / 3.0;
+    tex.r = mix(gray, tex.r, 3.5);
+    tex.g = mix(gray, tex.g, 3.5);
+    tex.b = mix(gray, tex.b, 3.5);
     
-    vec3 rainbow_color;
+    // Clamp to prevent overflow but allow some bleeding
+    tex.r = clamp(tex.r, 0.0, 1.2);
+    tex.g = clamp(tex.g, 0.0, 1.2);
+    tex.b = clamp(tex.b, 0.0, 1.2);
     
-    if (phase < 1.0) {
-        // Red to Orange
-        rainbow_color = mix(vec3(1.0, 0.0, 0.0), vec3(1.0, 0.5, 0.0), phase);
-    } else if (phase < 2.0) {
-        // Orange to Yellow
-        rainbow_color = mix(vec3(1.0, 0.5, 0.0), vec3(1.0, 1.0, 0.0), phase - 1.0);
-    } else if (phase < 3.0) {
-        // Yellow to Green
-        rainbow_color = mix(vec3(1.0, 1.0, 0.0), vec3(0.0, 1.0, 0.0), phase - 2.0);
-    } else if (phase < 4.0) {
-        // Green to Blue
-        rainbow_color = mix(vec3(0.0, 1.0, 0.0), vec3(0.0, 0.0, 1.0), phase - 3.0);
-    } else if (phase < 5.0) {
-        // Blue to Cyan
-        rainbow_color = mix(vec3(0.0, 0.0, 1.0), vec3(0.0, 1.0, 1.0), phase - 4.0);
-    } else if (phase < 6.0) {
-        // Cyan to Violet
-        rainbow_color = mix(vec3(0.0, 1.0, 1.0), vec3(0.5, 0.0, 1.0), phase - 5.0);
-    } else {
-        // Violet to Red (loop back)
-        rainbow_color = mix(vec3(0.5, 0.0, 1.0), vec3(1.0, 0.0, 0.0), phase - 6.0);
-    }
+    // JPEG compression artifacts - blocky
+    vec2 pixelated = floor(uv * 40.0) / 40.0;
+    number artifact = random(pixelated + deepfried.x * 0.1);
+    tex.rgb += vec3((artifact - 0.5) * 0.15);
     
-    // Reduce original texture colors significantly to let rainbow show through
-    tex.r = tex.r * 0.3;
-    tex.g = tex.g * 0.3;
-    tex.b = tex.b * 0.3;
+    // Color banding like over-compressed image
+    tex.r = floor(tex.r * 12.0) / 12.0;
+    tex.g = floor(tex.g * 12.0) / 12.0;
+    tex.b = floor(tex.b * 12.0) / 12.0;
     
-    // Apply strong rainbow gradient overlay
-    tex.r += rainbow_color.r * 0.7 + delta*maxfac*rainbow_color.r*0.2;
-    tex.g += rainbow_color.g * 0.7 + delta*maxfac*rainbow_color.g*0.2;
-    tex.b += rainbow_color.b * 0.7 + delta*maxfac*rainbow_color.b*0.2;
+    // Oversharpening effect - edge detection
+    number edge_h = abs(tex.r - 0.5) + abs(tex.g - 0.5) + abs(tex.b - 0.5);
+    tex.rgb += vec3(edge_h * 0.3);
     
-    // Add shimmer that follows the rainbow colors
-    tex.rgb += rainbow_color * maxfac * 0.15;
+    // Add crusty noise
+    number crusty = random(uv * 100.0 + deepfried.y);
+    tex.rgb += vec3((crusty - 0.5) * 0.2);
     
-    // Apply transparency for glass prism effect
-    tex.a = tex.a * 0.8;
+    // Color shift artifacts (RGB misalignment)
+    number shift_amount = 0.01;
+    vec2 uv_r = uv + vec2(shift_amount, 0.0);
+    vec2 uv_b = uv - vec2(shift_amount, 0.0);
+    vec4 tex_r = Texel(texture, texture_coords + vec2(shift_amount * 0.1, 0.0));
+    vec4 tex_b = Texel(texture, texture_coords - vec2(shift_amount * 0.1, 0.0));
+    tex.r = max(tex.r, tex_r.r * 0.3);
+    tex.b = max(tex.b, tex_b.b * 0.3);
+    
+    // Halo glow effect from oversharpening
+    number halo = sin(uv.x * 30.0 + deepfried.x * 3.0) * cos(uv.y * 30.0 + deepfried.y * 3.0);
+    tex.rgb += vec3(max(0.0, halo) * 0.15);
+    
+    // Final brightness boost - BLOWN OUT
+    tex.rgb = tex.rgb * 1.4;
+    
+    // Slight vignette from compression
+    number vignette = 1.0 - length(uv - 0.5) * 0.3;
+    tex.rgb *= vignette;
 
     return dissolve_mask(tex*colour, texture_coords, uv);
 }

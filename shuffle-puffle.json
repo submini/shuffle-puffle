@@ -1,7 +1,7 @@
 {
   "id": "ShufflePuffle",
   "name": "Shuffle-Puffle",
-  "display_name": "SHFL-PFL",
+  "display_name": "shfl-pfl",
   "author": [
     "mariopuff",
     "UN4YA",
@@ -13,8 +13,8 @@
   "prefixcomment":"ryrtyrty",
   "main_file": "shufflepuffle.lua",
   "priority": 9999,
-  "badge_colour": "E67E22",
-  "badge_text_colour": "000000",
+  "badge_colour": "000000",
+  "badge_text_colour": "E67E22",
   "version": "1",
   "requires-steamodded": true,
   "requires-talisman": true,

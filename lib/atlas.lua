@@ -998,6 +998,34 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = 'nickel',
+    path = 'nickelcard.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'iron',
+    path = 'ironcard.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'aluminium',
+    path = 'aluminiumcard.png',
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = 'floralcard',
+    path = 'floralcard.png',
+    px = 71,
+    py = 95
+})
+
 -- seals
 SMODS.Atlas({
     key = 'chartreuseseal',
@@ -1107,6 +1135,76 @@ SMODS.Atlas({
 SMODS.Atlas({
     key = "carcanatag",
     path = "carcanatag.png",
+    px = 32,
+    py = 32
+})
+
+SMODS.Atlas({
+    key = "phosphytag",
+    path = "phosphytag.png",
+    px = 32,
+    py = 32
+})
+
+SMODS.Atlas({
+    key = "aethertag",
+    path = "aethertag.png",
+    px = 32,
+    py = 32
+})
+
+SMODS.Atlas({
+    key = "prismtag",
+    path = "prismtag.png",
+    px = 32,
+    py = 32
+})
+
+SMODS.Atlas({
+    key = "woodtag",
+    path = "woodtag.png",
+    px = 32,
+    py = 32
+})
+
+SMODS.Atlas({
+    key = "statictag",
+    path = "statictag.png",
+    px = 32,
+    py = 32
+})
+
+SMODS.Atlas({
+    key = "sumeabletag",
+    path = "sumeabletag.png",
+    px = 32,
+    py = 32
+})
+
+SMODS.Atlas({
+    key = "fancytag",
+    path = "fancytag.png",
+    px = 32,
+    py = 32
+})
+
+SMODS.Atlas({
+    key = "fixytag",
+    path = "fixytag.png",
+    px = 32,
+    py = 32
+})
+
+SMODS.Atlas({
+    key = "temphandy",
+    path = "temphandy.png",
+    px = 32,
+    py = 32
+})
+
+SMODS.Atlas({
+    key = "temptrashy",
+    path = "temptrashy.png",
     px = 32,
     py = 32
 })
@@ -1525,6 +1623,117 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "ledog",
+    path = "thedog.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lerider",
+    path = "therider.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lefish",
+    path = "thefish.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "leman",
+    path = "theman.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lelady",
+    path = "thelady.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lestork",
+    path = "thestork.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lesun",
+    path = "thesun.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lemoon",
+    path = "themoon.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lescythe",
+    path = "thescythe.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "leanchor",
+    path = "theanchor.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lering",
+    path = "thering.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lebook",
+    path = "thebook.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lestars",
+    path = "stars.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lecrossroads",
+    path = "crossroads.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "lelily",
+    path = "thelily.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "legarden",
+    path = "thegarden.png",
+    px = 71,
+    py = 95
+})
 -- decks
 
 SMODS.Atlas({
@@ -1617,4 +1826,35 @@ SMODS.Atlas({
     path = "route6.png",
     px = 64,
     py = 64
+})
+
+-- sounds
+SMODS.Sound({
+	key = "e_aetherescent",
+	path = "e_aetherescent.ogg",
+})
+
+SMODS.Sound({
+	key = "e_deepfried",
+	path = "e_deepfried.ogg",
+})
+
+SMODS.Sound({
+	key = "e_phosphorescent",
+	path = "e_phosphorescent.ogg",
+})
+
+SMODS.Sound({
+	key = "e_grainy",
+	path = "e_grainy.ogg",
+})
+
+SMODS.Sound({
+	key = "e_iridescent",
+	path = "e_iridescent.ogg",
+})
+
+SMODS.Sound({
+	key = "e_prismatic",
+	path = "e_prismatic.ogg",
 })

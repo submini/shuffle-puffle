@@ -27,3 +27,13 @@ SMODS.Shader{
     key = 'wooden',
     path = 'wooden.fs'
 }
+
+SMODS.Shader{
+    key = 'grainy',
+    path = 'grainy.fs'
+}
+
+SMODS.Shader{
+    key = 'deepfried',
+    path = 'deepfried.fs'
+}

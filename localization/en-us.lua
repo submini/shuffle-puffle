@@ -51,7 +51,8 @@ return {
                 name = "Oinch Deck",
                 text = {
                     "Start by opening an",
-                    "{V:1,T:p_sp_ultrashufflepack_1}Ultra Shuffle Pack{}"
+                    "{V:1,T:p_sp_ultrashufflepack_1}Ultra Shuffle Pack{},",
+                    "deck contains {C:sp_slopes}Slopes{} suit"
                 }
             },
             b_sp_dingbat = {
@@ -1437,13 +1438,13 @@ j_sp_book_alt = {
         },
         
     },
-
-    Edition = {
-        e_sp_gilded = {
-            name = 'Gilded',
-            label = 'Gilded',
+    Edition={
+        e_sp_phosphorescent = {
+            name = 'Phosphorescent',
+            label = 'Phosphorescent',
             text = {
-                '{C:money}+$2{} when triggered'
+                '{C:red}+10{} Mult,',
+                '{X:blue,C:white}X3{} Chips'
             }
         },
         e_sp_aetherescent = {
@@ -1458,10 +1459,10 @@ j_sp_book_alt = {
             name = 'Iridescent',
             label = 'Iridescent',
             text = {
-                '50% chance to create',
-                '{C:attention}2{} random {C:dark_edition}Negative{} {C:tarot}Tarot{}',
-                'or {C:attention}1{} random {C:dark_edition}Negative{}',
-                '{C:spectral}Spectral{} card'
+                'Creates {C:attention}either{} a',
+                'random {C:dark_edition}Negative{} {C:tarot}Tarot{}',
+                'or {V:1}Catarot{} card',
+                'when triggered'
             }
         },
         e_sp_prismatic = {
@@ -1479,6 +1480,21 @@ j_sp_book_alt = {
                 '{C:attention}+2{} Joker slots'
             }
         },
+        e_sp_grainy = {
+            name = 'Grainy',
+            label = 'Grainy',
+            text = {
+                '{X:red,C:white}X1-3{} Mult,',
+                '{X:blue,C:white}X1-15{} Chips'
+            }
+        },
+        e_sp_deepfried = {
+            name = 'Deep Fried',
+            label = 'Deep Fried',
+            text = {
+                '{C:purple}^1.5{} Mult',
+            }
+        }
     },
 
     Enhanced = {
@@ -1559,10 +1575,50 @@ j_sp_book_alt = {
             '{C:gold}+$4{}, {C:red}+4{} Mult, {C:green}1 in 7{}',
             'chance {X:red,C:white}X4{} Mult'
         }
+    },
+    m_sp_iron = {
+        name = 'Iron Card',
+        text = {
+            '{X:blue,C:white}X1.35{} Chips'
+        }
+    },
+    m_sp_nickel = {
+        name = 'Nickel Card',
+        text = {
+                '{C:blue}+18{} extra chips,',
+                '{C:blue}+18{} chips for every Joker',
+                'and consumable owned,',
+                'and {C:blue}+20{} chips for each',
+                'playing card held in hand'
+        }
+    },
+    m_sp_aluminium = {
+        name = 'Aluminium Card',
+        text = {
+                '{C:blue}+30{} extra chips,',
+                'always scores'
+        }
+    },
+    m_sp_floral = {
+        name = 'Floral Card',
+        text = {
+                '{X:red,C:white}X#1#{} Mult',
+                '{X:blue,C:white}X#2#{} chips, {C:money}+$1{}',
+                '{C:inactive,s:0.8}(When scored,',
+                '{X:red,C:white,s:0.8}+X0.07{} {C:inactive,s:0.8}Mult and{} {X:blue,C:white,s:0.8}+X0.1{} {C:inactive,s:0.8}Chips){}'
+        }
     }
     },
 
     Lenormand = {
+        c_sp_therider = {
+                name = "The Rider",
+                text = {
+                    "Creates up to {C:attention}2{}",
+                    "{V:1}Lenormand{} cards",
+                    "{C:inactive}(Must have room)",
+                },
+            },
         c_sp_theclover = {
                 name = "The Clover",
                 text = {
@@ -1575,8 +1631,8 @@ j_sp_book_alt = {
                 name = "The Ship",
                 text = {
                     "Gives {C:gold}$3{} for",
-                    "each Joker owned {C:inactive}",
-                    "(Max of {C:gold}$#2#{C:inactive})",
+                    "each Joker owned",
+                    "{C:inactive}(Max of {C:gold}$#2#{C:inactive})",
                     "{C:inactive}(Currently {C:gold}$#1#{C:inactive})"
                 },
             },
@@ -1622,6 +1678,13 @@ j_sp_book_alt = {
                     "having a random suit"
                 },
             },
+        c_sp_thescythe = {
+                name = "The Scythe",
+                text = {
+                    'Applies {C:dark_edition}Negative{} to',
+                    '{C:attention}1{} selected card'
+                    },
+            },
         c_sp_thewhip = {
                 name = "The Whip",
                 text = {
@@ -1664,8 +1727,31 @@ j_sp_book_alt = {
                     "{C:attention}1{} selected card"
                 },
         },
+        c_sp_stars = {
+                name = "Stars",
+                text = {
+                    "{C:green}1 in 4{} chance to add",
+                    "{C:dark_edition}Phosphorescent{}, {C:dark_edition}Aetherescent{},",
+                    "or {C:dark_edition}Prismatic{} edition to",
+                    "a random {C:attention}Joker{}"
+                },
+        },
+        c_sp_thestork = {
+                name = "The Stork",
+                text = {
+                    "Increases two ranks of",
+                    "up to {C:attention}3{} selected cards"
+                },
+        },
+        c_sp_thedog = {
+                name = "The Dog",
+                text = {
+                    "Duplicates {C:attention}1{} selected",
+                    "card in hand"
+                },
+        },
         c_sp_thetower = {
-                name = "The Tower",
+                name = "Tower",
                 text = {
                     "Applies {C:dark_edition}Foil{} to",
                     "a maximum of",
@@ -1678,9 +1764,19 @@ j_sp_book_alt = {
                 text = {
                     "Applies a",
                     "{C:attention}Tree Seal{} on",
-                    "{C:attention}2{} selected cards"
+                    "up to {C:attention}2{}",
+                    "selected cards"
                 },
         },
+        c_sp_thegarden = {
+                name = "The Garden",
+                text = {
+                    "{C:inactive}{}Gives {C:money}$0.25{} for",
+                    "every card in deck",
+                    "{C:inactive} (Max of{} {C:money}$30{}{C:inactive}){}",
+                    "{C:inactive} (Currently{} {C:money}$#1#{}{C:inactive}){}"
+                },
+            },
         c_sp_themountain = {
                 name = "The Mountain",
                 text = {
@@ -1688,6 +1784,15 @@ j_sp_book_alt = {
                     "card into an {C:attention}Upward Card{}",
                     "and {C:red}destroys{} {C:attention}5{} random",
                     "cards in hand"
+                },
+            },
+        c_sp_crossroads = {
+                name = "Crossroads",
+                text = {
+                    "Either applies a",
+                    "permanent {C:red}+20{} Mult",
+                    " or {C:blue}+80{} chips bonus",
+                    "to {C:attention}1{} selected card"
                 },
             },
         c_sp_mice = {
@@ -1706,6 +1811,21 @@ j_sp_book_alt = {
                     "to {V:1}#2#{}",
                 },
             },
+        c_sp_thering = {
+                name = "The Ring",
+                text = {
+                    "Sets money to triple the",
+                    "amount of current money",
+                    "{C:inactive}(Max of {C:money}$80{C:inactive})",
+                }
+        },
+        c_sp_thebook = {
+                name = "The Book",
+                text = {
+                    "{C:attention}Levels up{} one",
+                    "random hand"
+                }
+        },
         c_sp_theletter = {
                 name = "The Letter",
                 text = {
@@ -1715,6 +1835,45 @@ j_sp_book_alt = {
                     "{s:0.8,C:tarot}The Fool{s:0.8} excluded",
                 },
             },
+        c_sp_theman = {
+                name = "The Man",
+                text = {
+                    "Enhances {C:attention}1{} selected",
+                    "card into an {C:attention}Iron Card{}",
+                }
+        },
+        c_sp_thelady = {
+                name = "The Lady",
+                text = {
+                    "Enhances {C:attention}1{} selected",
+                    "card into a {C:attention}Nickel Card{}",
+                }
+        },
+        c_sp_thelily = {
+                name = "The Lily",
+                text = {
+                    "Enhances {C:attention}1{} selected",
+                    "card into a {C:attention}Floral Card{}",
+                }
+        },
+        c_sp_sun = {
+                name = "Sun",
+                text = {
+                    "Applies a",
+                    "permanent {C:red}+10{} Mult",
+                    "bonus on {C:attention}1{}",
+                    "selected card"
+                }
+        },
+        c_sp_moon = {
+                name = "Moon",
+                text = {
+                    "Applies a",
+                    "permanent {C:blue}+50{} chips",
+                    "bonus on {C:attention}1{}",
+                    "selected card"
+                }
+        },
         c_sp_thekey = {
                 name = "The Key",
                 text = {
@@ -1722,6 +1881,21 @@ j_sp_book_alt = {
                     "{V:1}Lenormand{} card",
                     "used during this run",
                     "{s:0.8,V:1}The Key{s:0.8} excluded",
+                },
+            },
+        c_sp_thefish = {
+                name = "The Fish",
+                text = {
+                    "{X:money,C:white}X$1.6{}",
+                    "{C:inactive}(Max of {C:money}$50{C:inactive})",
+                }
+        },
+        c_sp_theanchor = {
+                name = "The Anchor",
+                text = {
+                    "Enhances up to {C:attention}2{}",
+                    "selected cards to",
+                    "{C:attention}Aluminium Cards",
                 },
             },
         c_sp_thecross = {
@@ -2192,6 +2366,106 @@ c_sp_xolotlan = {
                 }
         },
 
+    },
+    Tag = {
+        tag_sp_shuffytag = {
+            name = "Shuffy Tag",
+            text = {
+                "Opens a free",
+                "{C:attention}Mega Shuffle Pack{}",
+            }
+        },
+        tag_sp_carcanatag = {
+            name = "Carcana Tag",
+            text = {
+                "Opens a free",
+                "{C:attention}Mega Carcana Pack{}",
+            }
+        },
+        tag_sp_exotag = {
+            name = "Exo Tag",
+            text = {
+                "Opens a free",
+                "{C:attention}Mega Exocelestial Pack{}",
+            }
+        },
+        tag_sp_phosphytag = {
+            name = "Phosphy Tag",
+            text = {
+                "Next base edition shop",
+                "Joker is free and",
+                "becomes {C:dark_edition}Phosphorescent{}",
+            }
+        },
+        tag_sp_aethertag = {
+            name = "Aether Tag",
+            text = {
+                "Next base edition shop",
+                "Joker is free and",
+                "becomes {C:dark_edition}Aetherescent{}",
+            }
+        },
+        tag_sp_prismtag = {
+            name = "Prism Tag",
+            text = {
+                "Next base edition shop",
+                "Joker is free and",
+                "becomes {C:dark_edition}Prismatic{}",
+            }
+        },
+        tag_sp_woodtag = {
+            name = "Wood Tag",
+            text = {
+                "Next base edition shop",
+                "Joker is free and",
+                "becomes {C:dark_edition}Wooden{}",
+            }
+        },
+        tag_sp_statictag = {
+            name = "Static Tag",
+            text = {
+                "Next base edition shop",
+                "Joker is free and",
+                "becomes {C:dark_edition}Grainy{}",
+            }
+        },
+        tag_sp_sumeable = {
+            name = "Sumeable Tag",
+            text = {
+                "Adds {C:attention}2{} random",
+                "consumables to slot",
+                "{C:inactive}(Irrespective of space)"
+            }
+        },
+        tag_sp_fancy = {
+            name = "Fancy Tag",
+            text = {
+                "Add {C:attention}3{} random",
+                "{C:attention}Enhanced{} cards",
+                "to deck"
+            }
+        },
+        tag_sp_fixy = {
+            name = "Fixy Tag",
+            text = {
+                "Remove {C:attention}5-7{} random",
+                "cards from deck",
+            }
+        },
+        tag_sp_temporahandy = {
+            name = 'Temporahandy Tag',
+            text = {
+                "Gain {C:blue}+1{} temporary",
+                "hand next round"
+            }
+        },
+        tag_sp_temporatrashy = {
+            name = 'Temporatrashy Tag',
+            text = {
+                "Gain {C:red}+1{} temporary",
+                "discard next round"
+            }
+        },
     },
 
 

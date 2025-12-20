@@ -6,7 +6,7 @@
 
 // !! CHANGE THIS to your shader name
 // YOU MUST USE THIS VARIABLE IN vec4 effect AT LEAST ONCE
-extern PRECISION vec2 prismatic;
+extern PRECISION vec2 grainy;
 
 extern PRECISION number dissolve;
 extern PRECISION number time;
@@ -19,71 +19,62 @@ extern PRECISION vec4 burn_colour_2;
 // [Required] 
 vec4 dissolve_mask(vec4 tex, vec2 texture_coords, vec2 uv);
 
+// Random noise function
+number random(vec2 st) {
+    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+}
+
 vec4 effect( vec4 colour, Image texture, vec2 texture_coords, vec2 screen_coords )
 {
     vec4 tex = Texel(texture, texture_coords);
     vec2 uv = (((texture_coords)*(image_details)) - texture_details.xy*texture_details.ba)/texture_details.ba;
 
-    // Shimmer base
-    number low = min(tex.r, min(tex.g, tex.b));
-    number high = max(tex.r, max(tex.g, tex.b));
-    number delta = high-low -0.1;
-
-    number fac = 0.8 + 0.9*sin(11.*uv.x+4.32*uv.y + prismatic.r*12. + cos(prismatic.r*5.3 + uv.y*4.2 - uv.x*4.));
-    number fac2 = 0.5 + 0.5*sin(8.*uv.x+2.32*uv.y + prismatic.r*5. - cos(prismatic.r*2.3 + uv.x*8.2));
-    number fac3 = 0.5 + 0.5*sin(10.*uv.x+5.32*uv.y + prismatic.r*6.111 + sin(prismatic.r*5.3 + uv.y*3.2));
-    number fac4 = 0.5 + 0.5*sin(3.*uv.x+2.32*uv.y + prismatic.r*8.111 + sin(prismatic.r*1.3 + uv.y*11.2));
-    number fac5 = sin(0.9*16.*uv.x+5.32*uv.y + prismatic.r*12. + cos(prismatic.r*5.3 + uv.y*4.2 - uv.x*4.));
-
-    number maxfac = 0.7*max(max(fac, max(fac2, max(fac3,0.0))) + (fac+fac2+fac3*fac4), 0.);
-
-    // Full rainbow spectrum gradient - Red Orange Yellow Green Blue Cyan Violet
-    // Diagonal gradient across the card
-    number spectrum_pos = (uv.x + uv.y) * 3.5 + time * 0.4 + prismatic.r * 2.0;
+    // HEAVY film grain noise - changes over time
+    number grain_time = floor(time * 30.0); // Flickering grain
+    number grain = random(uv + grain_time * 0.1);
     
-    // Create 7 color bands with sharp transitions
-    number phase = mod(spectrum_pos, 7.0);
+    // Multiple layers of HEAVY noise
+    number grain2 = random(uv * 2.0 + grain_time * 0.2);
+    number grain3 = random(uv * 4.0 + grain_time * 0.15);
+    number grain4 = random(uv * 8.0 + grain_time * 0.25);
+    number grain5 = random(uv * 16.0 + grain_time * 0.3);
     
-    vec3 rainbow_color;
+    // Combine grain layers with HEAVY weight
+    number combined_grain = (grain + grain2 * 0.8 + grain3 * 0.6 + grain4 * 0.4 + grain5 * 0.3) / 3.1;
     
-    if (phase < 1.0) {
-        // Red to Orange
-        rainbow_color = mix(vec3(1.0, 0.0, 0.0), vec3(1.0, 0.5, 0.0), phase);
-    } else if (phase < 2.0) {
-        // Orange to Yellow
-        rainbow_color = mix(vec3(1.0, 0.5, 0.0), vec3(1.0, 1.0, 0.0), phase - 1.0);
-    } else if (phase < 3.0) {
-        // Yellow to Green
-        rainbow_color = mix(vec3(1.0, 1.0, 0.0), vec3(0.0, 1.0, 0.0), phase - 2.0);
-    } else if (phase < 4.0) {
-        // Green to Blue
-        rainbow_color = mix(vec3(0.0, 1.0, 0.0), vec3(0.0, 0.0, 1.0), phase - 3.0);
-    } else if (phase < 5.0) {
-        // Blue to Cyan
-        rainbow_color = mix(vec3(0.0, 0.0, 1.0), vec3(0.0, 1.0, 1.0), phase - 4.0);
-    } else if (phase < 6.0) {
-        // Cyan to Violet
-        rainbow_color = mix(vec3(0.0, 1.0, 1.0), vec3(0.5, 0.0, 1.0), phase - 5.0);
-    } else {
-        // Violet to Red (loop back)
-        rainbow_color = mix(vec3(0.5, 0.0, 1.0), vec3(1.0, 0.0, 0.0), phase - 6.0);
-    }
+    // Heavy static noise overlay
+    number static_noise = random(uv * 15.0 + grainy.r);
+    number static_noise2 = random(uv * 25.0 - grainy.y);
     
-    // Reduce original texture colors significantly to let rainbow show through
-    tex.r = tex.r * 0.3;
-    tex.g = tex.g * 0.3;
-    tex.b = tex.b * 0.3;
+    // Apply HEAVY grain to all channels
+    tex.r += (combined_grain - 0.5) * 0.35;
+    tex.g += (combined_grain - 0.5) * 0.35;
+    tex.b += (combined_grain - 0.5) * 0.35;
     
-    // Apply strong rainbow gradient overlay
-    tex.r += rainbow_color.r * 0.7 + delta*maxfac*rainbow_color.r*0.2;
-    tex.g += rainbow_color.g * 0.7 + delta*maxfac*rainbow_color.g*0.2;
-    tex.b += rainbow_color.b * 0.7 + delta*maxfac*rainbow_color.b*0.2;
+    // Add more flickering static
+    tex.rgb += vec3((static_noise - 0.5) * 0.2);
+    tex.rgb += vec3((static_noise2 - 0.5) * 0.15);
     
-    // Add shimmer that follows the rainbow colors
-    tex.rgb += rainbow_color * maxfac * 0.15;
+    // Extra large grain particles
+    number large_grain = random(uv * 0.5 + grain_time * 0.05);
+    tex.rgb += vec3((large_grain - 0.5) * 0.25);
     
-    // Apply transparency for glass prism effect
-    tex.a = tex.a * 0.8;
+    // Desaturation for old film look
+    number avg = (tex.r + tex.g + tex.b) / 3.0;
+    tex.r = mix(avg, tex.r, 0.75);
+    tex.g = mix(avg, tex.g, 0.75);
+    tex.b = mix(avg, tex.b, 0.75);
+    
+    // Reduce brightness
+    tex.rgb = tex.rgb * 0.92;
+    
+    // Heavy scan lines
+    number scanline = sin(uv.y * 200.0 + time * 5.0);
+    tex.rgb += vec3(scanline * 0.05);
+    
+    // Add visible noise clusters
+    number cluster = random(floor(uv * 20.0) + grain_time);
+    tex.rgb += vec3((cluster - 0.5) * 0.12);
 
     return dissolve_mask(tex*colour, texture_coords, uv);
 }
