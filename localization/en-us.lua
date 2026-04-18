@@ -180,9 +180,25 @@ return {
     bl_sp_secant = {
         name = "The Secant",
         text = {
-            "Enhanced cards give X0.5 Mult"
+            "Enhanced cards give X0.7 Mult"
         }
-    }
+    },
+    bl_sp_cosecant = {
+        name = "The Cosecant",
+        text = {
+            "Base cards give X0.7 Mult"
+        }
+    },
+
+    bl_sp_final_floret = {
+        name = "Forbidden Floret",
+        text = {
+            "Score at least ^2.6 Base and",
+            "combines the effect of all",
+            "Vanilla Ante 8 showdown and",
+            "all regular boss blinds altogether"
+        }
+    },
    
 
 
@@ -1539,7 +1555,7 @@ j_sp_book_alt = {
             '{C:blue}+50{} extra chips,',
             '{C:red}+20{} Mult, {C:money}+$5{}, {C:green}1 in 10{}',
             'chance {X:blue,C:white}X3{} Chips, {C:green}1 in',
-            '20{} chance {X:red,C:white}X2.5{} Mult'
+            '{C:green}20{} chance {X:red,C:white}X2.5{} Mult'
     }
     },
     m_sp_patriotic = {
@@ -2175,6 +2191,80 @@ c_sp_xolotlan = {
                 'bonus to all cards in hand'
             }
         },
+        c_sp_route11 = {
+            name = 'Route 11',
+            text = {
+                'Enhances {C:attention}all{} cards',
+                'in hand to {C:attention}Nature Cards{}'
+            }
+        },
+        c_sp_route12 = {
+            name = 'Route 12',
+            text = {
+                'Enhances {C:attention}all{} cards',
+                'in hand to {C:attention}Steel Cards{}'
+            }
+        },
+        c_sp_route16 = {
+            name = 'Route 16',
+            text = {
+                'Enhances {C:attention}all{} cards',
+                'in hand to {C:attention}Gold Cards{}'
+            }
+        },
+        c_sp_route19 = {
+            name = 'Night Route 19',
+            text = {
+                'Applies a permanent {C:blue}+130{} Chips',
+                'bonus to all cards in hand'
+            }
+        },
+        c_sp_route30 = {
+            name = 'Route 30',
+            text = {
+                'Applies a permanent {X:red,C:white}X1.8{} Mult',
+                'bonus to all cards in hand'
+            }
+        },
+        c_sp_route35 = {
+            name = 'Route 35',
+            text = {
+                'Applies a permanent {C:blue}+100{}',
+                'chips and {X:red,C:white}X1.55{} Mult bonus',
+                'to all cards in hand'
+            }
+        },
+        c_sp_route48 = {
+            name = 'Route 48',
+            text = {
+                'Applies a {C:attention}White{}',
+                '{C:attention}Seal{} to all cards',
+                'in hand'
+            }
+        },
+        c_sp_route57 = {
+            name = 'Route 57',
+            text = {
+                'Destroys {C:attention}2{} random',
+                'Jokers and creates a',
+                '{C:legendary}Legendary{} Joker'
+            }
+        },
+        c_sp_route58 = {
+            name = 'Route 58',
+            text = {
+                'Creates {C:attention}5{}',
+                '{C:dark_edition}Negative{} Consumables'
+            }
+        },
+        c_sp_route59 = {
+            name = 'Route 59',
+            text = {
+                'Creates {C:attention}4{}',
+                '{C:dark_edition}Negative{} {V:1}Catarots',
+                'or {V:2}Spectaclaws{}'
+            }
+        }
     },
 
     Other = {

@@ -1828,6 +1828,118 @@ SMODS.Atlas({
     py = 64
 })
 
+SMODS.Atlas({
+    key = "route11",
+    path = "route11.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route12",
+    path = "route12.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route16",
+    path = "route16.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route19",
+    path = "route19n.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route30",
+    path = "route30.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route35",
+    path = "route35.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route48",
+    path = "route48.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route57",
+    path = "route57.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route58",
+    path = "route58.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route59",
+    path = "route59.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route64",
+    path = "route64.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route67",
+    path = "route67n.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route70",
+    path = "route70.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route72",
+    path = "route72.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route75",
+    path = "route75n.png",
+    px = 64,
+    py = 64
+})
+
+SMODS.Atlas({
+    key = "route78",
+    path = "route78.png",
+    px = 64,
+    py = 64
+})
+
 -- sounds
 SMODS.Sound({
 	key = "e_aetherescent",

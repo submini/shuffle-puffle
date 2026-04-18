@@ -468,53 +468,556 @@ SMODS.Blind {
     end
 }
 
-SMODS.Blind{
-    key = 'imaginary',
-    loc_txt = {
-        name = 'The Imaginary',
-        text = {
-            'All scored face cards',
-            'turn into a random',
-            'number after scoring'
-        }
-    },
-    boss = {min = 1, max = 10},
-    boss_colour = HEX('9B59B6'),
+SMODS.Blind {
+    key = "secant",
     dollars = 8,
-    mult = 2,
+    mult = 1.7,
+    boss_colour = HEX('eb8334'),
+    debuff = {
+        mult_penalty = 0.7
+    },
+    loc_vars = function (self)
+        return {
+            vars = {self.debuff.mult_penalty}
+        }
+    end,
+    collection_loc_vars = function (self)
+        return {
+            vars = {0.7}
+        }
+    end,
+    in_pool = function (self)
+        return G.GAME.round_resets.ante >= 2
+    end,
+    boss = {min = 3, max = 12},
+    pos = { x = 0, y = 0 },  -- change coords for your sprite
     
-    calculate = function(self, context)
-        -- This triggers for each individual scoring card AFTER it scores
-        if context.individual and context.cardarea == G.play and not context.blueprint then
-            local card = context.other_card
-            
-            -- Check if it's a face card (J, Q, K) that just scored
-            if card.ability.effect ~= 'Stone Card' and 
-               (card.base.value == 'Jack' or 
-                card.base.value == 'Queen' or 
-                card.base.value == 'King') then
+    calculate = function (self, blind, context)
+        if context.individual and context.cardarea == G.play then
+            -- Check if card has an enhancement (not base)
+            if context.other_card.config.center.key and 
+               context.other_card.config.center.key ~= 'c_base' then
                 
-                -- Pick a random number rank (2-10)
-                local random_ranks = {'2', '3', '4', '5', '6', '7', '8', '9', '10'}
-                local new_rank = pseudorandom_element(random_ranks, pseudoseed('imaginary'))
-                
-                -- Transform the card
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.2,
-                    func = function()
-                        -- Change the card's rank
-                        card:set_base(G.P_CARDS[card.base.suit..'_'..new_rank])
-                        
-                        -- Show visual feedback
-                        card_eval_status_text(card, 'extra', nil, nil, nil, {
-                            message = 'Imaginary!',
-                            colour = G.C.PURPLE
-                        })
-                        return true
-                    end
-                }))
+                return {
+                    x_mult = blind.debuff.mult_penalty,
+                    card = context.other_card
+                }
             end
         end
     end
+}
+
+SMODS.Blind {
+    key = "cosecant",
+    dollars = 9,
+    mult = 1.7,
+    boss_colour = HEX('34ed81'),
+    debuff = {
+        mult_penalty = 0.7
+    },
+    loc_vars = function (self)
+        return {
+            vars = {self.debuff.mult_penalty}
+        }
+    end,
+    collection_loc_vars = function (self)
+        return {
+            vars = {0.7}
+        }
+    end,
+    in_pool = function (self)
+        return G.GAME.round_resets.ante >= 2
+    end,
+    boss = {min = 4, max = 10},
+    pos = { x = 0, y = 0 },  -- change coords for your sprite
+    
+    calculate = function (self, blind, context)
+        if context.individual and context.cardarea == G.play then
+            if context.other_card.config.center.key and 
+               context.other_card.config.center.key == 'c_base' then
+                
+                return {
+                    x_mult = blind.debuff.mult_penalty,
+                    card = context.other_card
+                }
+            end
+        end
+    end
+}
+
+SMODS.Blind {
+	key = "final_floret",
+	boss = {
+		min = 24,
+		max = 100,
+		showdown = true
+	},
+	boss_colour = HEX("3d0a47"),
+	dollars = 10,
+	mult = 1,
+	--atlas = "blinds",
+	pos = { x = 0, y = 10 },
+	-- Define which boss blinds to combine
+	combined_bosses = {
+		"bl_small", "bl_big", "bl_hook",
+		"bl_eye", "bl_mouth", "bl_plant",
+		"bl_fish", "bl_psychic", "bl_goad",
+		"bl_water", "bl_needle", "bl_head",
+		"bl_tooth", "bl_wall", "bl_wheel",
+		"bl_arm", "bl_club", "bl_window",
+		"bl_house", "bl_mark", "bl_ox",
+		"bl_final_leaf", "bl_final_vessel",
+		"bl_final_heart", "bl_final_bell", "bl_final_acorn"
+	},
+	
+	set_blind = function(self, reset, silent)
+		if not reset then
+			local ante = G.GAME.round_resets.ante
+			local base = get_blind_amount(ante) * G.GAME.starting_params.ante_scaling
+			G.GAME.blind.chips = math.floor(base ^ 2.6)
+			G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+			
+			-- Loop through our specific boss array
+			for _, boss_key in ipairs(self.combined_bosses) do
+				local boss = G.P_BLINDS[boss_key]
+				if boss and boss.set_blind then
+					boss:set_blind(reset, silent)
+				end
+				
+				-- Handle specific vanilla boss mechanics
+				if boss then
+					-- The Eye - disable all hands
+					if boss.name == "The Eye" then
+						G.GAME.blind.hands = {
+							["Flush Five"] = false,
+							["Flush House"] = false,
+							["Five of a Kind"] = false,
+							["Straight Flush"] = false,
+							["Four of a Kind"] = false,
+							["Full House"] = false,
+							["Flush"] = false,
+							["Straight"] = false,
+							["Three of a Kind"] = false,
+							["Two Pair"] = false,
+							["Pair"] = false,
+							["High Card"] = false,
+						}
+					end
+					
+					-- The Mouth - clear hand type
+					if boss.name == "The Mouth" then
+						G.GAME.blind.only_hand = false
+					end
+					
+					-- The Fish - prep state
+					if boss.name == "The Fish" then
+						G.GAME.blind.prepped = nil
+					end
+					
+					-- The Water - remove discards
+					if boss.name == "The Water" then
+						G.GAME.blind.discards_sub = G.GAME.current_round.discards_left
+						ease_discard(-G.GAME.blind.discards_sub)
+					end
+					
+					-- The Needle - remove hands
+					if boss.name == "The Needle" then
+						G.GAME.blind.hands_sub = G.GAME.round_resets.hands - 1
+						ease_hands_played(-G.GAME.blind.hands_sub)
+					end
+					
+					-- The Manacle - reduce hand size
+					if boss.name == "The Manacle" then
+						G.hand:change_size(-1)
+					end
+					
+					-- Amber Acorn - flip and shuffle jokers
+					if boss.name == "Amber Acorn" and #G.jokers.cards > 0 then
+						G.jokers:unhighlight_all()
+						for k, v in ipairs(G.jokers.cards) do
+							v:flip()
+						end
+						if #G.jokers.cards > 1 then
+							G.E_MANAGER:add_event(Event({
+								trigger = "after",
+								delay = 0.2,
+								func = function()
+									for i = 1, 3 do
+										G.E_MANAGER:add_event(Event({
+											func = function()
+												G.jokers:shuffle("aajk")
+												play_sound("cardSlide1", 0.85 + i * 0.15)
+												return true
+											end,
+										}))
+										delay(0.15)
+									end
+									delay(0.5)
+									return true
+								end,
+							}))
+						end
+					end
+				end
+			end
+			
+			-- Apply debuffs to all cards
+			for _, v in ipairs(G.playing_cards) do
+				self:recalc_debuff(v)
+			end
+			for _, v in ipairs(G.jokers.cards) do
+				self:recalc_debuff(v, true)
+			end
+		end
+	end,
+	
+	defeat = function(self, silent)
+		for _, boss_key in ipairs(self.combined_bosses) do
+			local boss = G.P_BLINDS[boss_key]
+			if boss and boss.defeat then
+				boss:defeat(silent)
+			end
+			if boss and boss.name == "The Manacle" and not self.disabled then
+				G.hand:change_size(1)
+			end
+		end
+	end,
+	
+	disable = function(self, silent)
+		for _, boss_key in ipairs(self.combined_bosses) do
+			local boss = G.P_BLINDS[boss_key]
+			if boss and boss.disable then
+				boss:disable(silent)
+			end
+			
+			-- Revert specific mechanics
+			if boss then
+				if boss.name == "The Water" then
+					ease_discard(G.GAME.blind.discards_sub)
+				end
+				
+				if boss.name == "The Wheel" or boss.name == "The House" or 
+				   boss.name == "The Mark" or boss.name == "The Fish" then
+					for i = 1, #G.hand.cards do
+						if G.hand.cards[i].facing == "back" then
+							G.hand.cards[i]:flip()
+						end
+					end
+					for k, v in pairs(G.playing_cards) do
+						v.ability.wheel_flipped = nil
+					end
+				end
+				
+				if boss.name == "The Needle" then
+					ease_hands_played(G.GAME.blind.hands_sub)
+				end
+				
+				if boss.name == "The Wall" then
+					G.GAME.blind.chips = G.GAME.blind.chips / 2
+					G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+				end
+				
+				if boss.name == "Cerulean Bell" then
+					for k, v in ipairs(G.playing_cards) do
+						v.ability.forced_selection = nil
+					end
+				end
+				
+				if boss.name == "The Manacle" then
+					G.hand:change_size(1)
+					G.FUNCS.draw_from_deck_to_hand(1)
+				end
+				
+				if boss.name == "Violet Vessel" then
+					G.GAME.blind.chips = G.GAME.blind.chips / 3
+					G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+				end
+			end
+		end
+	end,
+	
+	press_play = function(self)
+		for _, boss_key in ipairs(self.combined_bosses) do
+			local boss = G.P_BLINDS[boss_key]
+			if boss and boss.press_play then
+				boss:press_play()
+			end
+			
+			-- Handle specific press_play mechanics
+			if boss then
+				if boss.name == "The Hook" then
+					G.E_MANAGER:add_event(Event({
+						func = function()
+							local _cards = {}
+							for k, v in ipairs(G.hand.cards) do
+								_cards[#_cards + 1] = v
+							end
+							for i = 1, 2 do
+								if G.hand.cards[i] then
+									local selected_card, card_key = pseudorandom_element(_cards, pseudoseed("combined_terror"))
+									G.hand:add_to_highlighted(selected_card, true)
+									table.remove(_cards, card_key)
+									play_sound("card1", 1)
+								end
+							end
+							G.FUNCS.discard_cards_from_highlighted(nil, true)
+							return true
+						end,
+					}))
+					G.GAME.blind.triggered = true
+					delay(0.7)
+				end
+				
+				if boss.name == "Crimson Heart" and G.jokers.cards[1] then
+					G.GAME.blind.triggered = true
+					G.GAME.blind.prepped = true
+				end
+				
+				if boss.name == "The Fish" then
+					G.GAME.blind.prepped = true
+				end
+				
+				if boss.name == "The Tooth" then
+					G.E_MANAGER:add_event(Event({
+						trigger = "after",
+						delay = 0.2,
+						func = function()
+							for i = 1, #G.play.cards do
+								G.E_MANAGER:add_event(Event({
+									func = function()
+										G.play.cards[i]:juice_up()
+										return true
+									end,
+								}))
+								ease_dollars(-1)
+								delay(0.23)
+							end
+							return true
+						end,
+					}))
+					G.GAME.blind.triggered = true
+				end
+			end
+		end
+	end,
+	
+	modify_hand = function(self, cards, poker_hands, text, mult, hand_chips)
+		local new_mult = mult
+		local new_chips = hand_chips
+		local trigger = false
+		
+		for _, boss_key in ipairs(self.combined_bosses) do
+			local boss = G.P_BLINDS[boss_key]
+			if boss and boss.modify_hand then
+				local this_trigger = false
+				new_mult, new_chips, this_trigger = boss:modify_hand(cards, poker_hands, text, new_mult, new_chips)
+				trigger = trigger or this_trigger
+			end
+			
+			if boss and boss.name == "The Flint" then
+				G.GAME.blind.triggered = true
+				new_mult = math.max(math.floor(new_mult * 0.5 + 0.5), 1)
+				new_chips = math.max(math.floor(new_chips * 0.5 + 0.5), 0)
+				trigger = true
+			end
+		end
+		
+		return new_mult, new_chips, trigger
+	end,
+	
+	debuff_hand = function(self, cards, hand, handname, check)
+		G.GAME.blind.debuff_boss = nil
+		
+		for _, boss_key in ipairs(self.combined_bosses) do
+			local boss = G.P_BLINDS[boss_key]
+			if boss and boss.debuff_hand and boss:debuff_hand(cards, hand, handname, check) then
+				G.GAME.blind.debuff_boss = boss
+				return true
+			end
+			
+			if boss and boss.debuff then
+				G.GAME.blind.triggered = false
+				
+				if boss.debuff.hand and next(hand[boss.debuff.hand]) then
+					G.GAME.blind.triggered = true
+					G.GAME.blind.debuff_boss = boss
+					return true
+				end
+				
+				if boss.debuff.h_size_ge and #cards < boss.debuff.h_size_ge then
+					G.GAME.blind.triggered = true
+					G.GAME.blind.debuff_boss = boss
+					return true
+				end
+				
+				if boss.debuff.h_size_le and #cards > boss.debuff.h_size_le then
+					G.GAME.blind.triggered = true
+					G.GAME.blind.debuff_boss = boss
+					return true
+				end
+				
+				if boss.name == "The Eye" then
+					if G.GAME.blind.hands[handname] then
+						G.GAME.blind.triggered = true
+						G.GAME.blind.debuff_boss = boss
+						return true
+					end
+					if not check then
+						G.GAME.blind.hands[handname] = true
+					end
+				end
+				
+				if boss.name == "The Mouth" then
+					if boss.only_hand and boss.only_hand ~= handname then
+						G.GAME.blind.triggered = true
+						G.GAME.blind.debuff_boss = boss
+						return true
+					end
+					if not check then
+						boss.only_hand = handname
+					end
+				end
+			end
+			
+			if boss and boss.name == "The Arm" then
+				G.GAME.blind.triggered = false
+				if to_big(G.GAME.hands[handname].level) > to_big(1) then
+					G.GAME.blind.triggered = true
+					if not check then
+						level_up_hand(G.GAME.blind.children.animatedSprite, handname, nil, -1)
+						G.GAME.blind:wiggle()
+					end
+				end
+			end
+			
+			if boss and boss.name == "The Ox" then
+				G.GAME.blind.triggered = false
+				if handname == G.GAME.current_round.most_played_poker_hand then
+					G.GAME.blind.triggered = true
+					if not check then
+						ease_dollars(-G.GAME.dollars, true)
+						G.GAME.blind:wiggle()
+					end
+				end
+			end
+		end
+		
+		return false
+	end,
+	
+	drawn_to_hand = function(self)
+		for _, boss_key in ipairs(self.combined_bosses) do
+			local boss = G.P_BLINDS[boss_key]
+			if boss and boss.drawn_to_hand then
+				boss:drawn_to_hand()
+			end
+			
+			if boss and boss.name == "Cerulean Bell" then
+				local any_forced = nil
+				for k, v in ipairs(G.hand.cards) do
+					if v.ability.forced_selection then
+						any_forced = true
+					end
+				end
+				if not any_forced then
+					G.hand:unhighlight_all()
+					local forced_card = pseudorandom_element(G.hand.cards, pseudoseed("combined_terror"))
+					forced_card.ability.forced_selection = true
+					G.hand:add_to_highlighted(forced_card)
+				end
+			end
+			
+			if boss and boss.name == "Crimson Heart" and G.GAME.blind.prepped and G.jokers.cards[1] then
+				local jokers = {}
+				for i = 1, #G.jokers.cards do
+					if not G.jokers.cards[i].debuff or #G.jokers.cards < 2 then
+						jokers[#jokers + 1] = G.jokers.cards[i]
+					end
+					G.jokers.cards[i]:set_debuff(false)
+				end
+				local _card = pseudorandom_element(jokers, pseudoseed("combined_terror"))
+				if _card then
+					_card:set_debuff(true)
+					_card:juice_up()
+					G.GAME.blind:wiggle()
+				end
+			end
+		end
+	end,
+	
+	stay_flipped = function(self, area, card)
+		for _, boss_key in ipairs(self.combined_bosses) do
+			local boss = G.P_BLINDS[boss_key]
+			if boss and boss.stay_flipped and boss:stay_flipped(area, card) then
+				return true
+			end
+			
+			if boss and area == G.hand then
+				if boss.name == "The Wheel" and pseudorandom("combined_terror" .. G.GAME.round_resets.ante) < 1/7 then
+					return true
+				end
+				
+				if boss.name == "The House" and G.GAME.current_round.hands_played == 0 and 
+				   G.GAME.current_round.discards_used == 0 then
+					return true
+				end
+				
+				if boss.name == "The Mark" and card:is_face(true) then
+					return true
+				end
+				
+				if boss.name == "The Fish" and G.GAME.blind.prepped then
+					return true
+				end
+			end
+		end
+		return false
+	end,
+	
+	recalc_debuff = function(self, card, from_blind)
+		if card and card.area then
+			for _, boss_key in ipairs(self.combined_bosses) do
+				local boss = G.P_BLINDS[boss_key]
+				if boss and boss.recalc_debuff then
+					boss:recalc_debuff(card, from_blind)
+				end
+				
+				if boss and boss.debuff and not G.GAME.blind.disabled and card.area ~= G.jokers then
+					if boss.debuff.suit and card:is_suit(boss.debuff.suit, true) then
+						card:set_debuff(true)
+						return
+					end
+					
+					if boss.debuff.is_face == "face" and card:is_face(true) then
+						card:set_debuff(true)
+						return
+					end
+					
+					if boss.name == "The Pillar" and card.ability.played_this_ante then
+						card:set_debuff(true)
+						return
+					end
+					
+					if boss.debuff.value and boss.debuff.value == card.base.value then
+						card:set_debuff(true)
+						return
+					end
+					
+					if boss.debuff.nominal and boss.debuff.nominal == card.base.nominal then
+						card:set_debuff(true)
+						return
+					end
+				end
+				
+				if boss and boss.name == "Crimson Heart" and not G.GAME.blind.disabled and card.area == G.jokers then
+					return
+				end
+				
+				if boss and boss.name == "Verdant Leaf" and not G.GAME.blind.disabled and card.area ~= G.jokers then
+					card:set_debuff(true)
+					return
+				end
+			end
+		end
+	end,
 }
